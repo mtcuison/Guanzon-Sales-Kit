@@ -49,7 +49,7 @@ public class Activity_CategorySelection extends AppCompatActivity {
                 Intent intent1 = new Intent(Activity_CategorySelection.this, Activity_BrandSelection.class);
                 intent1.putExtra("background", R.drawable.img_category_mp);
                 startActivity(intent1);
-                overridePendingTransition(R.anim.anim_intent_slide_in_left, R.anim.anim_intent_slide_out_right);
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
                 finish();
             }
         });
@@ -62,7 +62,7 @@ public class Activity_CategorySelection extends AppCompatActivity {
                 Intent intent1 = new Intent(Activity_CategorySelection.this, Activity_BrandSelection.class);
                 intent1.putExtra("background", R.drawable.img_category_mc);
                 startActivity(intent1);
-                overridePendingTransition(R.anim.anim_intent_slide_in_left, R.anim.anim_intent_slide_out_right);
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
                 finish();
             }
         });
@@ -79,7 +79,7 @@ public class Activity_CategorySelection extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            overridePendingTransition(R.anim.anim_intent_slide_in_left, R.anim.anim_intent_slide_out_right);
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -87,7 +87,7 @@ public class Activity_CategorySelection extends AppCompatActivity {
 
     @Override
     public void onBackPressed () {
-        overridePendingTransition(R.anim.anim_intent_slide_in_left, R.anim.anim_intent_slide_out_right);
+        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
         finish();
     }
 

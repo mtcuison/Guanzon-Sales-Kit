@@ -62,7 +62,7 @@ public class Activity_ProductSelection extends AppCompatActivity {
                         intent.putExtra("bgbrandimage", backgroundResId);
                         intent.putExtra("backgroundold", backgroundResIdCat);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.anim_intent_slide_in_right, R.anim.anim_intent_slide_out_left);
+                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
                     }
                 });
 
@@ -104,7 +104,7 @@ public class Activity_ProductSelection extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.anim_intent_slide_in_left, R.anim.anim_intent_slide_out_right);
+        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Activity_ProductSelection extends AppCompatActivity {
             case "M0W1009":
                 return R.drawable.img_kawasaki_brand_header; // Replace with your actual image resource
             default:
-                return R.drawable.img_imageview_place_holder; // Replace with your default image resource
+                return org.rmj.g3appdriver.R.drawable.img_imageview_place_holder; // Replace with your default image resource
         }
     }
 }
