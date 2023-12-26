@@ -63,7 +63,7 @@ public class RecyclerViewAdapter_BrandSelection extends RecyclerView.Adapter<Rec
             case "M0W1009":
                 return R.drawable.img_mc_kawasaki; // Replace with your actual image resource
             default:
-                return R.drawable.ic_image_place_holder; // Replace with your default image resource
+                return org.rmj.g3appdriver.R.drawable.ic_image_place_holder; // Replace with your default image resource
         }
 
     }
