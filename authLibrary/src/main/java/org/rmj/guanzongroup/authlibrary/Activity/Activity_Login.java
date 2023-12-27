@@ -18,8 +18,8 @@ import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.UserAuthInfo;
 import org.rmj.guanzongroup.authlibrary.R;
-import org.rmj.guanzongroup.authlibrary.UserInterface.Login.LoginCallback;
-import org.rmj.guanzongroup.authlibrary.UserInterface.Login.VMLogin;
+import org.rmj.guanzongroup.authlibrary.Callbacks.LoginCallback;
+import org.rmj.guanzongroup.authlibrary.ViewModels.VMLogin;
 
 import java.util.Objects;
 
@@ -29,7 +29,6 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
     private TextInputEditText tie_mobileno;
     private MaterialTextView lblVersion;
     private MaterialTextView mtv_createaccount;
-    private MaterialTextView mtv_forgotpassw;
     private MaterialButton btn_log;
     private VMLogin mViewModel;
     private LoadDialog podialog;
@@ -49,7 +48,6 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         tie_mobileno = findViewById(R.id.mobileno);
         lblVersion = findViewById(R.id.lbl_versionInfo);
         mtv_createaccount = findViewById(R.id.mtv_createaccount);
-        mtv_forgotpassw = findViewById(R.id.mtv_forgotpassw);
         btn_log = findViewById(R.id.btn_log);
 
         tie_mobileno.setText(mViewModel.getMobileNo());
@@ -71,13 +69,6 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_Login.this, Activity_CreateAccount.class);
-                startActivity(intent);
-            }
-        });
-        mtv_forgotpassw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Activity_Login.this, Activity_ForgotPassword.class);
                 startActivity(intent);
             }
         });
@@ -104,7 +95,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         podialog.dismiss();
         MessageBox loMessage = new MessageBox(this);
         loMessage.initDialog();
-        loMessage.setTitle("G-Sec");
+        loMessage.setTitle("Guanzon Sales Kit");
         loMessage.setMessage(message);
         loMessage.setPositiveButton("Okay", (view, dialog) -> dialog.dismiss());
         loMessage.show();

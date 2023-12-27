@@ -14,7 +14,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserInterface.Terms.Fragment_TermsAndConditions"
+    tools:context=".Fragments.Fragment_TermsAndConditions"
     android:orientation="vertical"
     android:theme="@style/GhostRiderMaterialTheme.NoActionBar">
 

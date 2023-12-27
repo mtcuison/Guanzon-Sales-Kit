@@ -16,8 +16,8 @@ import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.AccountInfo;
 import org.rmj.guanzongroup.authlibrary.R;
-import org.rmj.guanzongroup.authlibrary.UserInterface.CreateAccount.CreateAccountCallBack;
-import org.rmj.guanzongroup.authlibrary.UserInterface.CreateAccount.VMCreateAccount;
+import org.rmj.guanzongroup.authlibrary.Callbacks.CreateAccountCallBack;
+import org.rmj.guanzongroup.authlibrary.ViewModels.VMCreateAccount;
 
 import java.util.Objects;
 
@@ -45,7 +45,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
         tieLastname = findViewById(R.id.lastname);
         tieFirstname = findViewById(R.id.tie_ca_firstName);
         tieMiddname = findViewById(R.id.tie_ca_middleName);
-        tie_suffix = findViewById(R.id.tie_suffix);
+        tie_suffix = findViewById(R.id.tie_ca_suffix);
         tieEmail = findViewById(R.id.tie_ca_email);
         tiePassword = findViewById(R.id.tie_ca_password);
         tiecPassword = findViewById(R.id.tie_ca_confirmPass);

@@ -9,7 +9,7 @@
  * project file last modified : 4/24/21 3:17 PM
  */
 
-package org.rmj.guanzongroup.authlibrary.UserInterface.ForgotPassword;
+package org.rmj.guanzongroup.authlibrary.ViewModels;
 
 import android.app.Application;
 import android.text.TextUtils;

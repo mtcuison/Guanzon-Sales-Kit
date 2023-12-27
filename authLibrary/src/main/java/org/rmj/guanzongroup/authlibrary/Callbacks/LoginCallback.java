@@ -9,7 +9,7 @@
  * project file last modified : 4/24/21 3:17 PM
  */
 
-package org.rmj.guanzongroup.authlibrary.UserInterface.Login;
+package org.rmj.guanzongroup.authlibrary.Callbacks;
 
 public interface LoginCallback {
     void OnAuthenticationLoad(String Title, String Message);

@@ -9,7 +9,7 @@
  * project file last modified : 6/10/21 2:53 PM
  */
 
-package org.rmj.guanzongroup.authlibrary.UserInterface.Terms;
+package org.rmj.guanzongroup.authlibrary.Fragments;
 
 import android.os.Bundle;
 

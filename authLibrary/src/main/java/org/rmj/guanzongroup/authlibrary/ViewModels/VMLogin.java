@@ -8,15 +8,12 @@
  * project file created : 4/24/21 3:19 PM
  * project file last modified : 4/24/21 3:17 PM
  */
-package org.rmj.guanzongroup.authlibrary.UserInterface.Login;
+package org.rmj.guanzongroup.authlibrary.ViewModels;
 
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
-import static org.rmj.g3appdriver.lib.Firebase.CrashReportingUtil.reportException;
-
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -30,6 +27,7 @@ import org.rmj.g3appdriver.lib.Account.Model.iAuth;
 import org.rmj.g3appdriver.lib.Account.pojo.UserAuthInfo;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
+import org.rmj.guanzongroup.authlibrary.Callbacks.LoginCallback;
 
 public class VMLogin extends AndroidViewModel {
     public static final String TAG =  VMLogin.class.getSimpleName();

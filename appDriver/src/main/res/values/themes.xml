@@ -243,4 +243,10 @@
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
+
+    <style name="Kay_BannerMode" parent="">
+        <item name="android:src">@drawable/img_header_background_light</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>
