@@ -40,8 +40,8 @@ public class VMLogin extends AndroidViewModel {
     public VMLogin(@NonNull Application application) {
         super(application);
         this.poSys = new AccountMaster(application).initGuanzonApp().getInstance(Auth.AUTHENTICATE);
-        poConfig = AppConfigPreference.getInstance(application);
-        poTlphony = new Telephony(application);
+        this.poConfig = AppConfigPreference.getInstance(application);
+        this.poTlphony = new Telephony(application);
     }
 
     @SuppressLint("NewApi")
@@ -72,7 +72,7 @@ public class VMLogin extends AndroidViewModel {
         TaskExecutor.Execute(authInfo, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {
-                callback.OnAuthenticationLoad("Guanzon Circle", "Authenticating to ghostrider app. Please wait...");
+                callback.OnAuthenticationLoad("Guanzon Sales Kit", "Authenticating to GCircle App. Please Wait . . .");
             }
 
             @Override
@@ -84,7 +84,7 @@ public class VMLogin extends AndroidViewModel {
                         return false;
                     }
 
-                    if(lnResult == 2){
+                    if(lnResult == 0 || lnResult == 2){
                         message = poSys.getMessage();
                         return false;
                     }

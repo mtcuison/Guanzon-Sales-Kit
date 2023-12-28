@@ -42,6 +42,8 @@ public class VMCompleteAccount extends AndroidViewModel {
                     message = poClMaster.getMessage();
                     return false;
                 }
+
+                poClMaster.ImportAccountInfo(); //after saving details, import to local device
                 return true;
             }
 

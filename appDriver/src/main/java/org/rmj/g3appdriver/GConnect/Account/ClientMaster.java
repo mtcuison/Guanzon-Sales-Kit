@@ -85,11 +85,11 @@ public class ClientMaster {
             loDetail.setTownIDx2(loResponse.getString("sTownIDx2"));
             loDetail.setMobileNo(loResponse.getString("sMobileNo"));
             loDetail.setEmailAdd(loResponse.getString("sEmailAdd"));
+            loDetail.setVerified(loResponse.getInt("cVerified"));
+            poDao.update(loDetail);
 //                    loDetail.setImgeStat(loResponse.getString("cImgeStat"));
 //                    loDetail.setImagePth(loResponse.getString("sImagePth"));
 //                    loDetail.setImgeDate(loResponse.getString("dImgeDate"));
-            loDetail.setVerified(loResponse.getInt("cVerified"));
-            poDao.update(loDetail);
 //                    AccountInfo loAcc = new AccountInfo(mContext);
 //                    loAcc.setClientID(loResponse.getString("sClientID"));
 //                    loAcc.setLastname(loResponse.getString("sLastName"));

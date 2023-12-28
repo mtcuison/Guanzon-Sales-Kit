@@ -30,10 +30,8 @@ import org.rmj.guanzongroup.authlibrary.Callbacks.CreateAccountCallBack;
 public class VMCreateAccount extends AndroidViewModel{
     public static final String TAG = VMCreateAccount.class.getSimpleName();
     private final Application instance;
-
     private final iAuth poSys;
     private final ConnectionUtil poConn;
-
     private String message;
 
     public VMCreateAccount(@NonNull Application application) {
@@ -60,11 +58,10 @@ public class VMCreateAccount extends AndroidViewModel{
 
                     int lnResult = poSys.DoAction(args);
 
-                    if(lnResult == 0){
+                    if(lnResult == 0 || lnResult == 2){
                         message = poSys.getMessage();
                         return false;
                     }
-
                     return true;
                 } catch (Exception e){
                     e.printStackTrace();

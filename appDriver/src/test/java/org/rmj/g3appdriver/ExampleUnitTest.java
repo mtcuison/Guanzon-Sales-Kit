@@ -11,21 +11,28 @@
 
 package org.rmj.g3appdriver;
 
+import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
+import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
+import org.rmj.g3appdriver.utils.SQLUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import android.util.Log;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -33,61 +40,41 @@ import java.util.Locale;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+    private String TAG = getClass().getSimpleName();
+    private Map<String, String> headers;
+    @Before
+    public void SetUp(){
+        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+         * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
+         * REQUIRED: Change 'dLogInxxx' column date to current date.*/
 
-    private boolean isSuccess = false;
+        Calendar calendar = Calendar.getInstance();
+        //Create the header section needed by the API
+        headers = new HashMap<String, String>();
+        headers.put("Accept", "application/json");
+        headers.put("Content-Type", "application/json");
+        headers.put("g-api-id", "gRider");
+        headers.put("g-api-client", "GGC_BM001");
+        headers.put("g-api-log", "GAP023110901");
+        headers.put("g-api-imei", "GMC_SEG09");
+        headers.put("g-api-key", SQLUtil.dateFormat(calendar.getTime(), "yyyyMMddHHmmss"));
+        headers.put("g-api-hash", org.apache.commons.codec.digest.DigestUtils.md5Hex((String)headers.get("g-api-imei") + (String)headers.get("g-api-key")));
+        headers.put("g-api-user", "GAP0190004");
+        headers.put("g-api-mobile", "09260375777");
+        headers.put("g-api-token", "12312312");
 
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
     }
-
     @Test
-    public void test01MonthlyDue() throws Exception{
-        String lsSampleD = "2022-08-10";
-        String lsDayOfMn = lsSampleD.split("-")[2];
-        String lsCrtYear = new SimpleDateFormat("yyyy", Locale.getDefault()).format(Calendar.getInstance().getTime());
-        String lsCrtMnth = new SimpleDateFormat("MM", Locale.getDefault()).format(Calendar.getInstance().getTime());
-        String lsDueDate = lsCrtYear + "-" + lsCrtMnth + "-" + lsDayOfMn;
-        SimpleDateFormat loFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date loDueDate = loFormatter.parse(lsDueDate);
-        Date loCrtDate = loFormatter.parse(AppConstants.CURRENT_DATE());
-        Log.d("TESTING", lsDueDate + " is equal to " + AppConstants.CURRENT_DATE());
-        int lnResult = loCrtDate.compareTo(loDueDate);
-        assertEquals(-1, lnResult);
-    }
+    public void TestOTP(){
+        String sURL = "http://192.168.10.68:8080/security/OTPGenerator.php";
+        try {
+            JSONObject params = new JSONObject();
+            params.put("mobile_number", "09993095066");
 
-    @Test
-    public void test02GetLastDayOfMonth() {
-        String date = "2022-10-03";
-        LocalDate lastDayOfMonth = LocalDate.parse(AppConstants.CURRENT_DATE(), DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                .with(TemporalAdjusters.lastDayOfMonth());
-        String lsDay = String.valueOf(lastDayOfMonth.getDayOfMonth());
-        Log.d("TESTING", lsDay);
-        assertNotNull(lastDayOfMonth.toString());
-    }
-
-    @Test
-    public void testConnectionLogic(){
-        boolean isBackUp = false;
-        String lsAddress1 = "address1";
-        String lsAddress2 = "address2";
-
-        if(isBackUp){
-            if(isReachable(lsAddress1)){
-                isSuccess = true;
-            } else {
-                if(isReachable(lsAddress2)){
-                    isSuccess = true;
-                } else {
-
-                }
-            }
-        } else {
-
+            String response = WebClient.sendRequest(sURL, params.toString(), (HashMap<String, String>) headers);
+            System.out.println(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-    }
-
-    private boolean isReachable(String fsVal){
-        return fsVal.equalsIgnoreCase("address1");
     }
 }

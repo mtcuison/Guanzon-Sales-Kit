@@ -102,9 +102,10 @@ public class GCircleApi extends WebApi {
     private static final String GET_PACITA_RULES = "gcircle/pacita/import_pacita_rules.php";
     private static final String GET_PACITA_EVALUATIONS = "gcircle/pacita/import_pacita_evaluations.php";
     private static final String SUBMIT_PACITA_RESULT = "gcircle/pacita/submit_pacita_result.php";
-
     private static final String URL_SUBMIT_INQUIRY = "gcircle/ganado/submit_inquiry.php";
     private static final String URL_DOWNLOAD_INQUIRIES = "gcircle/ganado/import_inquiries.php";
+    private static final String URL_NEWCHANGE_PASSWORD = "security/changepassword";
+    private static final String URL_SEND_OTP_MOBILE = "security/OTPGenerator";
 
     public GCircleApi(Application instance) {
         super(instance);
@@ -872,6 +873,22 @@ public class GCircleApi extends WebApi {
         }
         Log.d(TAG, "Initialize api:" + LIVE + URL_DOWNLOAD_INQUIRIES);
         return LIVE + URL_DOWNLOAD_INQUIRIES;
+    }
+    public String getUrlNewChangePassword() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_PASSWORD);
+            return LOCAL + URL_NEWCHANGE_PASSWORD;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_PASSWORD);
+        return LIVE + URL_NEWCHANGE_PASSWORD;
+    }
+    public String getUrlSendOtpMobile() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_SEND_OTP_MOBILE);
+            return LOCAL + URL_SEND_OTP_MOBILE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_SEND_OTP_MOBILE);
+        return LIVE + URL_SEND_OTP_MOBILE;
     }
 
 }
