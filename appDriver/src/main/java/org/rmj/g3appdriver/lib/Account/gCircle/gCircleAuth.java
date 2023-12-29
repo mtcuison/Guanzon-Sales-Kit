@@ -6,6 +6,8 @@ import android.util.Log;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
 import org.rmj.g3appdriver.lib.Account.Model.iAccount;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
+import org.rmj.g3appdriver.lib.Account.gCircle.obj.ChangeAddress;
+import org.rmj.g3appdriver.lib.Account.gCircle.obj.ChangeMobile;
 import org.rmj.g3appdriver.lib.Account.gCircle.obj.ChangePassword;
 import org.rmj.g3appdriver.lib.Account.gCircle.obj.EmployeeAuthentication;
 import org.rmj.g3appdriver.lib.Account.gCircle.obj.ForgotPassword;
@@ -36,6 +38,12 @@ public class gCircleAuth implements iAccount {
             case DEACTIVATE:
                 Log.d(TAG, "Initialize account deactivate.");
                 return new TerminateAccount(instance);
+            case CHANGE_ADDRESS:
+                Log.d(TAG, "Initialize address update.");
+                return new ChangeAddress(instance);
+            case CHANGE_MOBILE:
+                Log.d(TAG, "Initialize mobile update.");
+                return new ChangeMobile(instance);
             default:
                 Log.d(TAG, "Initialize forgot password.");
                 return new ForgotPassword(instance);

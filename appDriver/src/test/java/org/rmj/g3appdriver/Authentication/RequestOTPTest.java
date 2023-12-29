@@ -9,29 +9,21 @@
  * project file last modified : 4/24/21 3:18 PM
  */
 
-package org.rmj.g3appdriver;
+package org.rmj.g3appdriver.Authentication;
 
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.rmj.g3appdriver.dev.Api.WebClient;
-import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.utils.SQLUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import android.util.Log;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -39,7 +31,8 @@ import java.util.Map;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+@RunWith(JUnit4.class)
+public class RequestOTPTest {
     private String TAG = getClass().getSimpleName();
     private Map<String, String> headers;
     @Before
@@ -73,6 +66,10 @@ public class ExampleUnitTest {
 
             String response = WebClient.sendRequest(sURL, params.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
+
+            JSONObject loRes = new JSONObject(response);
+            assertEquals("success", loRes.get("result")); //result should be success
+            assertNotNull(loRes.get("otp")); //otp returned should not be null
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
