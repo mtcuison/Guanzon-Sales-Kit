@@ -105,6 +105,8 @@ public class GCircleApi extends WebApi {
     private static final String URL_SUBMIT_INQUIRY = "gcircle/ganado/submit_inquiry.php";
     private static final String URL_DOWNLOAD_INQUIRIES = "gcircle/ganado/import_inquiries.php";
     private static final String URL_NEWCHANGE_PASSWORD = "security/changepassword";
+    private static final String URL_NEWCHANGE_ADDRESS = "security/request_address_update";
+    private static final String URL_NEWCHANGE_MOBILE = "security/request_mobile_update";
     private static final String URL_SEND_OTP_MOBILE = "security/OTPGenerator";
 
     public GCircleApi(Application instance) {
@@ -881,6 +883,22 @@ public class GCircleApi extends WebApi {
         }
         Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_PASSWORD);
         return LIVE + URL_NEWCHANGE_PASSWORD;
+    }
+    public String getUrlNewChangeMobile() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_MOBILE);
+            return LOCAL + URL_NEWCHANGE_MOBILE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_MOBILE);
+        return LIVE + URL_NEWCHANGE_MOBILE;
+    }
+    public String getUrlNewChangeAddress() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_ADDRESS);
+            return LOCAL + URL_NEWCHANGE_ADDRESS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_ADDRESS);
+        return LIVE + URL_NEWCHANGE_ADDRESS;
     }
     public String getUrlSendOtpMobile() {
         if(isUnitTest()) {

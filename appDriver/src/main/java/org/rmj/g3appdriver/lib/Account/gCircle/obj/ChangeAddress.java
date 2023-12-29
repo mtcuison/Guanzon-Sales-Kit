@@ -47,7 +47,7 @@ public class ChangeAddress implements iAuth {
             loParams.put("sSourceCD", "");
             loParams.put("sSourceNo", "");
 
-            String sResponse = WebClient.sendRequest(poApi.getUrlUpdateMobile(), loParams.toString(), poHeaders.getHeaders());
+            String sResponse = WebClient.sendRequest(poApi.getUrlNewChangeAddress(), loParams.toString(), poHeaders.getHeaders());
             if(sResponse == null){
                 message = SERVER_NO_RESPONSE;
                 return 0;
