@@ -3,13 +3,9 @@ package org.rmj.g3appdriver.Authentication;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import android.util.Log;
-
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.utils.SQLUtil;
 
@@ -20,14 +16,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@RunWith(JUnit4.class)
-public class ChangeAddressTest {
+public class ChangeMobileTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
         /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
-         * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
-         * REQUIRED: Change 'dLogInxxx' column date to current date.*/
+         * EXECUTE SQL: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
+         * ACTION: Change 'dLogInxxx' column date to current date.*/
 
         Calendar calendar = Calendar.getInstance();
         //Create the header section needed by the API
@@ -44,38 +39,30 @@ public class ChangeAddressTest {
         headers.put("g-api-user", "GAP0190004"); //USER ID
         headers.put("g-api-mobile", "09260375777"); //USER MOBILE
         headers.put("g-api-token", "12312312"); //USER TOKEN
-
     }
-
     @Test
     public void TestUpdateAddress(){
-        String sURL = "http://192.168.10.68:8080/security/request_address_update.php";
+        String sURL = "http://192.168.10.68:8080/security/request_mobile_update.php";
         try {
             JSONObject loParams = new JSONObject();
 
             loParams.put("sTransNox", CreateUniqueID());
             loParams.put("sClientID", "GGC_BM001");
             loParams.put("cReqstCDe", "0");
-            loParams.put("cAddrssTp", "1");
-            loParams.put("sHouseNox", "10");
-            loParams.put("sAddressx", "Ilang-Ilang St.");
-            loParams.put("sTownIDxx", "0343");
-            loParams.put("sBrgyIDxx", "01");
+            loParams.put("sMobileNo", "09275408234");
             loParams.put("cPrimaryx", "1");
-            loParams.put("nLatitude", "0.0");
-            loParams.put("nLongitud", "0.0");
             loParams.put("sRemarksx", "");
             loParams.put("sSourceCD", "NULL");
             loParams.put("sSourceNo", "NULL");
 
-            /*IF SUCCESSFUL, SEARCH RETURNED TRANSACTION NO TO TABLE--> ADDRESS_UPDATE_REQUEST*/
+            /*IF SUCCESSFUL REQUEST, SEARCH RETURNED TRANSACTION NO TO TABLE--> MOBILE_UPDATE_REQUEST*/
             String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
 
             JSONObject loRes = new JSONObject(response);
             assertEquals("success", loRes.get("result")); //result should be success
             assertNotNull(loRes.get("sTransNox")); //transaction no returned should not be null
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
@@ -91,6 +78,8 @@ public class ChangeAddressTest {
             String lsPadNumx = String.format("%05d", lnLocalID);
             loBuilder.append(lsPadNumx);
             lsUniqIDx = loBuilder.toString();
+
+            System.out.println(lsUniqIDx);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

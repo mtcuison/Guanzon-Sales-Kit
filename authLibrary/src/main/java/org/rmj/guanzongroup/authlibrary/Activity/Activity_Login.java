@@ -43,6 +43,9 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         podialog = new LoadDialog(this);
         poConfigx = AppConfigPreference.getInstance(this);
 
+        poConfigx.setProductID("gRider");
+        poConfigx.setTestCase(true);
+
         tie_username = findViewById(R.id.username);
         tie_password = findViewById(R.id.password);
         tie_mobileno = findViewById(R.id.mobileno);
@@ -84,7 +87,6 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
     public void OnSuccessLoginResult() {
         podialog.dismiss();
 
-        Log.d("ACTIVITY_LOGIN", "SUCCESSFUL");
         Intent loIntent = new Intent();
         this.setResult(Activity.RESULT_OK, loIntent);
         this.finish();

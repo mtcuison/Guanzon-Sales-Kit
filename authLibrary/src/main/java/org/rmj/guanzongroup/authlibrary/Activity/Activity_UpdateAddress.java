@@ -128,11 +128,19 @@ public class Activity_UpdateAddress extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ChangeUserAddress loAddress = new ChangeUserAddress();
+
                 loAddress.setsHouseNox(tie_ca_houseno.getText().toString());
                 loAddress.setsAddressx(tie_ca_street.getText().toString());
                 loAddress.setcAddrssTp(tie_ca_prov.getText().toString());
                 loAddress.setsTownIDx(tie_ca_town.getText().toString());
                 loAddress.setsBrgyIdx(tie_ca_brgy.getText().toString());
+                loAddress.setcPrimary("1");
+                loAddress.setnLatitude("");
+                loAddress.setnLongitude("");
+                loAddress.setsRemarks("");
+                loAddress.setsRqstCd("");
+                loAddress.setsSourceCd("");
+                loAddress.setsSourceNo("");
 
                 mViewModel.ChangeAccountAddress(loAddress, new VMUpdateAddress.SubmitChanges() {
                     @Override

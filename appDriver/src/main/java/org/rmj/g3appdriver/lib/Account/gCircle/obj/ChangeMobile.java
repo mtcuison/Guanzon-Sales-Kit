@@ -10,9 +10,15 @@ import android.util.Log;
 import org.json.JSONObject;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DMobileRequest;
+import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChangeMobile implements iAuth {
     private static final String TAG = ChangePassword.class.getSimpleName();
@@ -20,18 +26,21 @@ public class ChangeMobile implements iAuth {
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
     private EmployeeSession poSession;
+    private DMobileRequest poDao;
     private String message;
     public ChangeMobile(Application instance){
         this.instance = instance;
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poSession = EmployeeSession.getInstance(instance);
+        this.poDao = GGC_GCircleDB.getInstance(instance).MobileRequestDao();
     }
 
     @Override
     public int DoAction(Object params) {
         try{
             JSONObject loParams = new JSONObject();
+            loParams.put("sTransNox", CreateUniqueID());
             loParams.put("sClientID", poSession.getClientId());
             loParams.put("cReqstCDe", "");
             loParams.put("cReqstCDe", "");
@@ -64,7 +73,25 @@ public class ChangeMobile implements iAuth {
             return 0;
         }
     }
+    private String CreateUniqueID() {
+        String lsUniqIDx = "";
+        try {
+            String lsBranchCd = "MX01";
+            String lsCrrYear = new SimpleDateFormat("yy", Locale.getDefault()).format(new Date());
+            StringBuilder loBuilder = new StringBuilder(lsBranchCd);
+            loBuilder.append(lsCrrYear);
 
+            int lnLocalID = poDao.GetRowsCountForID() + 1;
+            String lsPadNumx = String.format("%05d", lnLocalID);
+            loBuilder.append(lsPadNumx);
+            lsUniqIDx = loBuilder.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage());
+        }
+        Log.d(TAG, lsUniqIDx);
+        return lsUniqIDx;
+    }
     @Override
     public String getMessage() {
         return message;

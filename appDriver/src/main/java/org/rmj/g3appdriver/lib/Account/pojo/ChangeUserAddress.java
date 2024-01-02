@@ -1,13 +1,26 @@
 package org.rmj.g3appdriver.lib.Account.pojo;
 
 public class ChangeUserAddress {
+    private String cPrimary;
     private String cAddrssTp;
     private String sHouseNox;
     private String sAddressx;
     private String sTownIDx;
     private String sBrgyIdx;
+    private String nLatitude;
+    private String nLongitude;
+    private String sRemarks;
+    private String sRqstCd;
+    private String sSourceCd;
+    private String sSourceNo;
     private String message;
 
+    public String getcPrimary() {
+        return cPrimary;
+    }
+    public void setcPrimary(String cPrimary) {
+        this.cPrimary = cPrimary;
+    }
     public String getsHouseNox() {
         return sHouseNox;
     }
@@ -23,9 +36,6 @@ public class ChangeUserAddress {
     public String getsTownIDx() {
         return sTownIDx;
     }
-    private String getMessage(){
-        return message;
-    }
     public String getcAddrssTp() {
         return cAddrssTp;
     }
@@ -40,6 +50,46 @@ public class ChangeUserAddress {
     }
     public void setsBrgyIdx(String sBrgyIdx) {
         this.sBrgyIdx = sBrgyIdx;
+    }
+    public String getnLatitude() {
+        return nLatitude;
+    }
+    public void setnLatitude(String nLatitude) {
+        this.nLatitude = nLatitude;
+    }
+    public String getnLongitude() {
+        return nLongitude;
+    }
+    public void setnLongitude(String nLongitude) {
+        this.nLongitude = nLongitude;
+    }
+    public String getsRemarks() {
+        return sRemarks;
+    }
+    public void setsRemarks(String sRemarks) {
+        this.sRemarks = sRemarks;
+    }
+    public String getsRqstCd() {
+        return sRqstCd;
+    }
+    public void setsRqstCd(String sRqstCd) {
+        this.sRqstCd = sRqstCd;
+    }
+    public String getsSourceCd() {
+        return sSourceCd;
+    }
+    public void setsSourceCd(String sSourceCd) {
+        this.sSourceCd = sSourceCd;
+    }
+    public String getsSourceNo() {
+        return sSourceNo;
+    }
+    public void setsSourceNo(String sSourceNo) {
+        this.sSourceNo = sSourceNo;
+    }
+
+    private String getMessage(){
+        return message;
     }
 
     public Boolean isDataValid(){
