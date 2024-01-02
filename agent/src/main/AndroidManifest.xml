@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity
+            android:name=".Activities.Activity_AgentInfo"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Activity_AgentList"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Activity_AgentEnroll"
+            android:exported="false"
+            android:label="@string/title_activity_agent_enroll"
+            android:theme="@style/GhostRiderMaterialTheme" />
+    </application>
+
+</manifest>
