@@ -4,13 +4,13 @@
     <application>
         <activity
             android:name=".Activities.Activity_AgentInfo"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Activities.Activity_AgentList"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Activities.Activity_AgentEnroll"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_agent_enroll"
             android:theme="@style/GhostRiderMaterialTheme" />
     </application>

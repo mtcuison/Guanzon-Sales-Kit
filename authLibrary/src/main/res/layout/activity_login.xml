@@ -92,12 +92,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
+        style="@style/DescriptionHeaderStyle"
         android:id="@+id/mtv_createaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="Not Registered? Click Here"
-        android:textStyle="bold|italic"
+        android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@+id/mobno_layout"
         app:layout_constraintStart_toStartOf="@+id/mobno_layout"
         app:layout_constraintEnd_toEndOf="@+id/mobno_layout"/>

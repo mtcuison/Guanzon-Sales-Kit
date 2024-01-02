@@ -11,19 +11,19 @@ public class EAgentRole {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "nRoleIDxx")
-    protected String RoleIDxx;
+    public String RoleIDxx;
     @ColumnInfo(name = "sRoleDesc")
-    protected String RoleDesc;
+    public String RoleDesc;
     @ColumnInfo(name = "cRecdStat")
-    protected String RecdStat;
+    public String RecdStat;
     @ColumnInfo(name = "sModified")
-    protected String sModified;
+    public String sModified;
 
     @ColumnInfo(name = "dModified")
-    protected String dModified;
+    public String dModified;
 
     @ColumnInfo(name = "dTimeStmp")
-    protected String TimeStmp;
+    public String TimeStmp;
 
 
     public EAgentRole() {

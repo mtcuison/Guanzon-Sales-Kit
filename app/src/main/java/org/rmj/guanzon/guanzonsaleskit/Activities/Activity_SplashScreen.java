@@ -28,7 +28,6 @@ import org.rmj.g3appdriver.utils.AppDirectoryCreator;
 import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
-import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 
@@ -62,23 +61,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
         lblVrsion = findViewById(R.id.lbl_versionInfo);
         lblVrsion.setText(BuildConfig.VERSION_NAME);
 
-        startService(new Intent(Activity_SplashScreen.this, GMessagingService.class));
-        Log.e(TAG, "Firebase messaging service started.");
-
         InitializeAppContentDisclosure();
-//        FirebaseMessaging.getInstance().getToken()
-//                .addOnCompleteListener(task -> {
-//                    if (!task.isSuccessful()) {
-//                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-//                        return;
-//                    }
-//
-//                    // Get new FCM registration token
-//                    String token = task.getResult();
-//
-//                    mViewModel.SaveFirebaseToken(token);
-//                    AppConfigPreference.getInstance(Activity_SplashScreen.this).setAppToken(token);
-//                });
 
         AppDirectoryCreator loCreator = new AppDirectoryCreator();
         if(loCreator.createAppDirectory(Activity_SplashScreen.this)){
@@ -105,7 +88,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
                 finish();
             });
             loMessage.show();
-//            findViewById(R.id.lblFirstLaunchNotice).setVisibility(View.VISIBLE);
         } else {
             CheckPermissions();
         }
@@ -157,8 +139,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
             @Override
             public void OnHasDCP() {
-//                startService(new Intent(Activity_SplashScreen.this, GLocatorService.class));
-                Log.d(TAG, "Location tracking service started.");
             }
 
             @Override
@@ -194,7 +174,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
         poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
-                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
                 finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
                 finish();
