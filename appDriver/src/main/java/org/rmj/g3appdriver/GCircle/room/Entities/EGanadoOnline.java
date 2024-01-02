@@ -22,6 +22,8 @@ public class EGanadoOnline {
     private String ClientNm = "";
     @ColumnInfo(name = "sClntInfo")
     private String ClntInfo = "";
+    @ColumnInfo(name = "sFinancex")
+    private String Financex = "";
     @ColumnInfo(name = "sProdInfo")
     private String ProdInfo = "";
     @ColumnInfo(name = "sPaymInfo")
@@ -234,4 +236,13 @@ public class EGanadoOnline {
     public void setPricexxx(String pricexxx) {
         Pricexxx = pricexxx;
     }
+
+    public String getFinancex() {
+        return Financex;
+    }
+
+    public void setFinancex(String financex) {
+        Financex = financex;
+    }
+
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -178,7 +179,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
             mViewModel.SaveData(new VMPersonalInfo.OnSaveInquiry() {
                 @Override
                 public void OnSave() {
-                    poDialogx.initDialog("Ganado", "Saving inquiry. Please wait...", false);
+                    poDialogx.initDialog("Ganado", "Saving Client Info. Please wait...", false);
                     poDialogx.show();
                 }
 
@@ -190,6 +191,11 @@ public class Activity_ClientInfo extends AppCompatActivity {
                     poMessage.setMessage(args);
                     poMessage.setPositiveButton("Okay", (view, dialog) -> {
                         dialog.dismiss();
+                        Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_ClientInfo.class);
+                        loIntent.putExtra("sTransNox", args);
+                        startActivity(loIntent);
+                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+
                         finish();
                     });
                     poMessage.show();
