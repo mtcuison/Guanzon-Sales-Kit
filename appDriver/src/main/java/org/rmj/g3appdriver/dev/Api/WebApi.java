@@ -16,7 +16,7 @@ import android.util.Log;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 
-public abstract class WebApi {
+public  class WebApi {
     private static final String TAG = WebApi.class.getSimpleName();
 
     private final AppConfigPreference poConfig;

@@ -15,14 +15,17 @@ import org.rmj.apprdiver.util.SQLUtil;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
+import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
+import org.rmj.g3appdriver.lib.Etc.Country;
 import org.rmj.g3appdriver.lib.Etc.Relation;
 import org.rmj.g3appdriver.lib.Ganado.pojo.ClientInfo;
+import org.rmj.g3appdriver.lib.Ganado.pojo.FinancierInfo;
 import org.rmj.g3appdriver.lib.Ganado.pojo.InquiryInfo;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +42,7 @@ public class Ganado {
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
+    private final Country poCountry;
 
     private String message;
 
@@ -49,6 +53,7 @@ public class Ganado {
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
+        this.poCountry = new Country(instance);
     }
 
     public String getMessage() {
@@ -57,6 +62,9 @@ public class Ganado {
 
     public LiveData<List<ERelation>> GetRelations(){
         return poRelate.GetRelations();
+    }
+    public LiveData<List<ECountryInfo>> GetCountry(){
+        return poCountry.getAllCountryInfo();
     }
 
     public String CreateInquiry(InquiryInfo loInfo){
@@ -169,6 +177,46 @@ public class Ganado {
         }
     }
 
+
+    public boolean SaveFinancierInfo(FinancierInfo loInfo){
+        try {
+            if(!loInfo.isDataValid()){
+                message = loInfo.getMessage();
+                return false;
+            }
+
+            EGanadoOnline loDetail = poDao.GetInquiry(loInfo.getsTransNox());
+
+            if(loDetail == null){
+                message = "Unable to find record to update.";
+                return false;
+            }
+
+            JSONObject joFinancier = new JSONObject();
+            joFinancier.put("sLastName", loInfo.getLastName());
+            joFinancier.put("sFrstName", loInfo.getFrstName());
+            joFinancier.put("sMiddName", loInfo.getMiddName());
+            joFinancier.put("sSuffixNm", loInfo.getSuffixNm());
+            joFinancier.put("sAddressx", loInfo.getAddressx());
+            joFinancier.put("sCntryCde", loInfo.getAddressx());
+            joFinancier.put("sMobileNo", loInfo.getMobileNo());
+            joFinancier.put("sWhatsApp", loInfo.getsWhatsApp());
+            joFinancier.put("sFbAccntx", loInfo.getsFbAccntx());
+            joFinancier.put("sEmailAdd", loInfo.getEmailAdd());
+            joFinancier.put("sFIncomex", loInfo.getRangeOfIncome());
+            joFinancier.put("sReltionx", loInfo.getsReltionx());
+
+            loDetail.setFinancex(joFinancier.toString());
+            poDao.Update(loDetail);
+
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            message = getLocalMessage(e);
+            return false;
+        }
+    }
+
     public boolean SaveInquiry(String TransNox){
         try{
             EGanadoOnline loDetail = poDao.GetInquiry(TransNox);
@@ -266,6 +314,7 @@ public class Ganado {
                     loInfo.setPaymForm(loJson.getString("cPaymForm"));
                     loInfo.setClientNm(loJson.getString("sClientNm"));
                     loInfo.setClntInfo(loJson.getString("sCltInfox"));
+                    loInfo.setFinancex(loJson.getString("sFinancex"));
                     loInfo.setProdInfo(loJson.getString("sPrdctInf"));
                     loInfo.setPaymInfo(loJson.getString("sPaymInfo"));
                     loInfo.setTargetxx(loJson.getString("dTargetxx"));
@@ -289,6 +338,7 @@ public class Ganado {
                         loDetail.setPaymForm(loJson.getString("cPaymForm"));
                         loDetail.setClientNm(loJson.getString("sClientNm"));
                         loDetail.setClntInfo(loJson.getString("sCltInfox"));
+                        loDetail.setFinancex(loJson.getString("sFinancex"));
                         loDetail.setProdInfo(loJson.getString("sPrdctInf"));
                         loDetail.setPaymInfo(loJson.getString("sPaymInfo"));
                         loDetail.setTargetxx(loJson.getString("dTargetxx"));
