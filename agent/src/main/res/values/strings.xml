@@ -1,0 +1,7 @@
+<resources>
+    <string name="title_activity_agent_enroll">Activity_AgentEnroll</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+</resources>
