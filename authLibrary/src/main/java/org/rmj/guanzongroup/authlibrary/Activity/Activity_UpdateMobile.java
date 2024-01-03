@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -22,6 +23,7 @@ public class Activity_UpdateMobile extends AppCompatActivity {
     private TextInputEditText tie_ca_otp;
     private MaterialButton btn_sendotp;
     private MaterialButton btn_submit;
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,17 @@ public class Activity_UpdateMobile extends AppCompatActivity {
         poDialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
+        toolbar = findViewById(R.id.toolbar);
         tie_ca_mobileNumber = findViewById(R.id.tie_ca_mobileNumber);
         tie_ca_otp = findViewById(R.id.tie_ca_otp);
         btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
+
+        setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
+
+        getSupportActionBar().setTitle("Account Mobile"); //set default title for action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
             @Override

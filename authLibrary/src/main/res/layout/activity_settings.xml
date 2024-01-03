@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                style="@style/Kay_BannerMode"
+                style="@style/Activity_HeaderBackground"
                 android:id="@+id/img_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                         android:textStyle="bold"
                         android:drawableStart="@drawable/baseline_system_security_update_good_24"
                         android:drawableEnd="@drawable/ic_chevron_right_24"
-                        android:visibility="gone"/>
+                        android:visibility="visible"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvUpdateMobile"
@@ -113,7 +113,7 @@
                         android:textStyle="bold"
                         android:drawableStart="@drawable/baseline_dialpad_24"
                         android:drawableEnd="@drawable/ic_chevron_right_24"
-                        android:visibility="gone"/>
+                        android:visibility="visible"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvUpdateAddr"
@@ -125,7 +125,7 @@
                         android:textStyle="bold"
                         android:drawableStart="@drawable/baseline_edit_location_alt_24"
                         android:drawableEnd="@drawable/ic_chevron_right_24"
-                        android:visibility="gone"/>
+                        android:visibility="visible"/>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

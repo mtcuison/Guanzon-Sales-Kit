@@ -15,6 +15,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -224,7 +225,7 @@ import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
         EPromo.class,
         EMCModelCashPrice.class,
         EKPOPAgentRole.class,
-        EAgentRole.class}, version = 40, exportSchema = false)
+        EAgentRole.class}, version = 41, exportSchema = false)
 public abstract class GGC_GCircleDB extends RoomDatabase {
     private static final String TAG = "GhostRider_DB_Manager";
     private static GGC_GCircleDB instance;
@@ -307,7 +308,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
                      GGC_GCircleDB.class, "GGC_ISysDBF.db")
                     .allowMainThreadQueries()
                     .addCallback(roomCallBack)
-                    .addMigrations(MIGRATION_V40)
+                    .addMigrations(MIGRATION_V41)
                     .build();
         }
         return instance;
@@ -321,7 +322,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
         }
     };
 
-    static final Migration MIGRATION_V40 = new Migration(39, 40) {
+    public static final Migration MIGRATION_V41 = new Migration(40, 41) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // Add the new column

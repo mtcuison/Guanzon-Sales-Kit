@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,6 +33,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
     private TextInputEditText tie_ca_town;
     private TextInputEditText tie_ca_brgy;
     private MaterialButton btn_submit;
+    private MaterialToolbar toolbar;
     private VMCompleteAccount poAccount;
     private LoadDialog poDialog;
     private MessageBox poMessage;
@@ -53,6 +55,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
             }
         });
 
+        toolbar = findViewById(R.id.toolbar);
         tie_ca_fname = findViewById(R.id.tie_ca_fname);
         tie_ca_lname = findViewById(R.id.tie_ca_lname);
         tie_ca_mname = findViewById(R.id.tie_ca_mname);
@@ -69,6 +72,12 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         tie_ca_brgy = findViewById(R.id.tie_ca_brgy);
 
         btn_submit = findViewById(R.id.btn_submit);
+
+        setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
+
+        getSupportActionBar().setTitle("Account Info"); //set default title for action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
         EClientInfo eClientInfo = new EClientInfo();
         //Personal Info

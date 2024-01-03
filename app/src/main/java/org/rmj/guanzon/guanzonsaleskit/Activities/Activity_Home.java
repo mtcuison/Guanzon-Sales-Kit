@@ -19,6 +19,7 @@ import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.databinding.ActivityHomeBinding;
 import org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll;
 import org.rmj.guanzongroup.agent.Activities.Activity_AgentList;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 public class Activity_Home extends AppCompatActivity {
 
@@ -40,13 +41,9 @@ public class Activity_Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_agent_enroll, R.id.nav_agent_list,R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_agent_enroll, R.id.nav_agent_list,R.id.nav_profile)
                 .setOpenableLayout(drawer)
                 .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_activity_home);
-//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
-
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -70,6 +67,9 @@ public class Activity_Home extends AppCompatActivity {
             startActivity(loIntent);
         }else if (item.getItemId() == R.id.nav_agent_enroll) {
             loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_profile) {
+            loIntent = new Intent(Activity_Home.this, Activity_Settings.class);
             startActivity(loIntent);
         }
         return super.onOptionsItemSelected(item);

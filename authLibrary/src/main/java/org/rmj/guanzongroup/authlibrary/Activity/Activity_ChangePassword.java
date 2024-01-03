@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,6 +29,7 @@ public class Activity_ChangePassword extends AppCompatActivity {
     private TextInputEditText tie_ca_otp;
     private MaterialButton btn_sendotp;
     private  MaterialButton btn_submit;
+    private MaterialToolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +48,19 @@ public class Activity_ChangePassword extends AppCompatActivity {
             }
         });
 
+        toolbar = findViewById(R.id.toolbar);
         password = findViewById(R.id.password);
         conf_password = findViewById(R.id.conf_password);
         tie_ca_otp = findViewById(R.id.tie_ca_otp);
         btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
+
+        setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
+
+        getSupportActionBar().setTitle("Account Password"); //set default title for action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
+
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
