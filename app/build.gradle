@@ -89,5 +89,6 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
     implementation project(path: ':authLibrary')
     implementation project(path: ':appDriver')
+    implementation project(path: ':agent')
     implementation project(':ganado')
 }

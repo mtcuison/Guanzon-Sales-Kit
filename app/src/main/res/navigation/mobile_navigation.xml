@@ -6,20 +6,32 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_dashboard"
         android:name="org.rmj.guanzon.guanzonsaleskit.Fragment.FragmentHome"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="org.rmj.guanzon.guanzonsaleskit.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+    <activity
+        android:id="@+id/nav_enrollagent"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll"
+        android:label="Enroll Agent"
+        tools:layout="@layout/activity_agent_enroll"/>
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="org.rmj.guanzon.guanzonsaleskit.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+    <activity
+        android:id="@+id/nav_agentlist"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentList"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_list"/>
+
+    <activity
+        android:id="@+id/nav_profile"
+        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings"
+        android:label="Profile Settings"
+        tools:layout="@layout/activity_settings"/>
+
+    <activity
+        android:id="@+id/nav_signout"
+        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Login"
+        android:label="Signout"
+        tools:layout="@layout/activity_login"/>
 </navigation>
