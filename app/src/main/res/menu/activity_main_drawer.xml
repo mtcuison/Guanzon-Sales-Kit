@@ -36,7 +36,7 @@
             <item
                 android:id="@+id/nav_signout"
                 android:icon="@drawable/baseline_login_24"
-                android:title="Agent List"/>
+                android:title="Signout"/>
         </menu>
     </item>
 </menu>
