@@ -224,7 +224,7 @@ import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
         EPromo.class,
         EMCModelCashPrice.class,
         EKPOPAgentRole.class,
-        EAgentRole.class}, version = 41, exportSchema = false)
+        EAgentRole.class}, version = 40, exportSchema = false)
 public abstract class GGC_GCircleDB extends RoomDatabase {
     private static final String TAG = "GhostRider_DB_Manager";
     private static GGC_GCircleDB instance;
@@ -321,7 +321,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
         }
     };
 
-    static final Migration MIGRATION_V40 = new Migration(40, 41) {
+    static final Migration MIGRATION_V40 = new Migration(39, 40) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // Add the new column

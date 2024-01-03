@@ -16,10 +16,10 @@ public class EAgentRole {
     @ColumnInfo(name = "cRecdStat")
     protected String RecdStat;
     @ColumnInfo(name = "sModified")
-    protected String sModified;
+    protected String Modifieds;
 
     @ColumnInfo(name = "dModified")
-    protected String dModified;
+    protected String Modifiedd;
 
     @ColumnInfo(name = "dTimeStmp")
     protected String TimeStmp;
@@ -54,20 +54,20 @@ public class EAgentRole {
         RecdStat = recdStat;
     }
 
-    public String getsModified() {
-        return sModified;
+    public String getModifieds() {
+        return Modifieds;
     }
 
-    public void setsModified(String sModified) {
-        this.sModified = sModified;
+    public void setModifieds(String sModified) {
+        this.Modifieds = sModified;
     }
 
-    public String getdModified() {
-        return dModified;
+    public String getModifiedd() {
+        return Modifiedd;
     }
 
-    public void setdModified(String dModified) {
-        this.dModified = dModified;
+    public void setModifiedd(String dModified) {
+        this.Modifiedd = dModified;
     }
 
     public String getTimeStmp() {

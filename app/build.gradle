@@ -90,4 +90,5 @@ dependencies {
     implementation project(path: ':authLibrary')
     implementation project(path: ':appDriver')
     implementation project(':ganado')
+    implementation project(':agent')
 }

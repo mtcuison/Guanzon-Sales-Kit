@@ -107,13 +107,13 @@ public class SalesKit {
                     EKPOPAgentRole loInfo = new EKPOPAgentRole();
                     loInfo.setUserIDxx(loJson.getString("sUserIDxx"));
                     loInfo.setEnrollBy(loJson.getString("sEnrollBy"));
-                    loInfo.setdEnrolled(loJson.getString("dEnrolled"));
+                    loInfo.setEnrolled(loJson.getString("dEnrolled"));
                     loInfo.setRoleIDxx(loJson.getString("nRoleIDxx"));
                     loInfo.setUpprNdID(loJson.getString("sUpprNdID"));
                     loInfo.setRecdStat(loJson.getString("cTranStat"));
                     loInfo.setTimeStmp(loJson.getString("dTimeStmp"));
                     poDao.Save(loInfo);
-                    Log.d(TAG, "Inquiry record has been saved!");
+                    Log.d(TAG, "KPOP Agent record has been saved!");
                 } else {
 
                     Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
@@ -121,7 +121,7 @@ public class SalesKit {
                     if (!ldDate1.equals(ldDate2)) {
                         loDetail.setUserIDxx(loJson.getString("sUserIDxx"));
                         loDetail.setEnrollBy(loJson.getString("sEnrollBy"));
-                        loDetail.setdEnrolled(loJson.getString("dEnrolled"));
+                        loDetail.setEnrolled(loJson.getString("dEnrolled"));
                         loDetail.setRoleIDxx(loJson.getString("nRoleIDxx"));
                         loDetail.setUpprNdID(loJson.getString("sUpprNdID"));
                         loDetail.setRecdStat(loJson.getString("cTranStat"));
@@ -179,11 +179,11 @@ public class SalesKit {
                     loInfo.setRoleIDxx(loJson.getString("sUserIDxx"));
                     loInfo.setRoleDesc(loJson.getString("sRoleDesc"));
                     loInfo.setRecdStat(loJson.getString("cRecdStat"));
-                    loInfo.setsModified(loJson.getString("sModified"));
-                    loInfo.setdModified(loJson.getString("dModified"));
+                    loInfo.setModifieds(loJson.getString("sModified"));
+                    loInfo.setModifiedd(loJson.getString("dModified"));
                     loInfo.setTimeStmp(loJson.getString("dTimeStmp"));
                     poAgentDao.Save(loInfo);
-                    Log.d(TAG, "Inquiry record has been saved!");
+                    Log.d(TAG, "Agent role record has been saved!");
                 } else {
 
                     Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
@@ -192,11 +192,11 @@ public class SalesKit {
                         loDetail.setRoleIDxx(loJson.getString("sUserIDxx"));
                         loDetail.setRoleDesc(loJson.getString("sRoleDesc"));
                         loDetail.setRecdStat(loJson.getString("cRecdStat"));
-                        loDetail.setsModified(loJson.getString("sModified"));
-                        loDetail.setdModified(loJson.getString("dModified"));
+                        loDetail.setModifieds(loJson.getString("sModified"));
+                        loDetail.setModifiedd(loJson.getString("dModified"));
                         loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
                         poAgentDao.Update(loDetail);
-                        Log.d(TAG, "KPOP Agent record has been updated!");
+                        Log.d(TAG, "Agent role record has been updated!");
                     }
                 }
             }

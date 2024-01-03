@@ -15,7 +15,7 @@ public class EKPOPAgentRole {
     @ColumnInfo(name = "sEnrollBy")
     protected String EnrollBy;
     @ColumnInfo(name = "dEnrolled")
-    protected String dEnrolled;
+    protected String Enrolled;
     @ColumnInfo(name = "nRoleIDxx")
     protected String RoleIDxx;
 
@@ -50,12 +50,12 @@ public class EKPOPAgentRole {
         EnrollBy = enrollBy;
     }
 
-    public String getdEnrolled() {
-        return dEnrolled;
+    public String getEnrolled() {
+        return Enrolled;
     }
 
-    public void setdEnrolled(String dEnrolled) {
-        this.dEnrolled = dEnrolled;
+    public void setEnrolled(String dEnrolled) {
+        this.Enrolled = dEnrolled;
     }
 
     public String getRoleIDxx() {

@@ -11,6 +11,23 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+
+    <activity
+        android:id="@+id/nav_agent_enroll"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_enroll" />
+
+    <activity
+        android:id="@+id/nav_agent_list"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentList"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_list" />
+<!--    <activity-->
+<!--        android:id="@+id/nav_profile"-->
+<!--        android:name="org.rmj.guanzongroup.agent.Activities.Activity_"-->
+<!--        android:label="Agent List"-->
+<!--        tools:layout="@layout/activity_agent_list" />-->
     <fragment
         android:id="@+id/nav_gallery"
         android:name="org.rmj.guanzon.guanzonsaleskit.ui.gallery.GalleryFragment"

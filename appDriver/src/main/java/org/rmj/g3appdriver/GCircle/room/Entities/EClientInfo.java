@@ -29,6 +29,7 @@ public class EClientInfo {
     protected String UserName;
     @ColumnInfo(name = "dLoginxxx")
     protected String Loginxxx;
+
     @ColumnInfo(name = "sMobileNo")
     protected String MobileNo;
     @ColumnInfo(name = "dDateMmbr")
