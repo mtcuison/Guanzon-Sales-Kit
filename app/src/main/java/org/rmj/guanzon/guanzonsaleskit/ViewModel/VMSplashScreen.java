@@ -27,6 +27,7 @@ import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.Entities.ETokenInfo;
 import org.rmj.g3appdriver.GCircle.room.Repositories.AppTokenManager;
+import org.rmj.g3appdriver.GCircle.room.Repositories.RClient;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcBrand;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcCategory;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcModel;
@@ -186,7 +187,7 @@ public class VMSplashScreen extends AndroidViewModel {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
 
-                        loTask.publishProgress(75);
+                        loTask.publishProgress(70);
                         Thread.sleep(500);
 
 
@@ -194,13 +195,33 @@ public class VMSplashScreen extends AndroidViewModel {
                             Log.d(TAG, "MC Category imported successfully...");
                         }
 
-                        loTask.publishProgress(85);
+                        loTask.publishProgress(80);
                         Thread.sleep(500);
+
                         if (new RMcTermCategory(instance).ImportMcTermCategory()) {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
-                        loTask.publishProgress(95);
+                        loTask.publishProgress(85);
                         Thread.sleep(500);
+                        if (new RClient(instance).ImportClientInfo()) {
+                            Log.d(TAG, "Client Info imported successfully...");
+                        }
+                        loTask.publishProgress(90);
+                        Thread.sleep(500);
+
+
+//                        if (!new SalesKit(instance).ImportKPOPAgent()) {
+//                            Log.d(TAG, "KPOP Agent imported successfully...");
+//                        }
+//                        loTask.publishProgress(94);
+//                        Thread.sleep(500);
+//
+//
+//                        if (!new SalesKit(instance).ImportAgent()) {
+//                            Log.d(TAG, "Agent role imported successfully...");
+//                        }
+//                        loTask.publishProgress(99);
+//                        Thread.sleep(500);
 
 
                         if(!poSession.isLoggedIn()){

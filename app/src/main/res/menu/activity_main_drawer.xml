@@ -5,38 +5,35 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_dashboard"
-            android:icon="@drawable/baseline_dashboard_24"
-            android:title="Dashboard" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+
         <item
-            android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_notification_24"
-            android:title="Notificaiton" />
+            android:title="Agents">
+            <menu>
+                <item
+                    android:id="@+id/nav_agent_enroll"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Agent Enroll" />
+                <item
+                    android:id="@+id/nav_agent_list"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Agent List" />
+            </menu>
+        </item>
+        <item
+            android:title="Account">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Agent Enroll" />
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="Sign Out" />
+            </menu>
+        </item>
     </group>
-
-    <item android:title="Agents">
-        <menu>
-            <item
-                android:id="@+id/nav_enrollagent"
-                android:icon="@drawable/baseline_person_add_24"
-                android:title="Enroll Agent"/>
-            <item
-                android:id="@+id/nav_agentlist"
-                android:icon="@drawable/baseline_view_list_24"
-                android:title="Agent List"/>
-        </menu>
-    </item>
-
-    <item android:title="Account">
-        <menu>
-            <item
-                android:id="@+id/nav_profile"
-                android:icon="@drawable/baseline_person_24"
-                android:title="Profile"/>
-            <item
-                android:id="@+id/nav_signout"
-                android:icon="@drawable/baseline_login_24"
-                android:title="Signout"/>
-        </menu>
-    </item>
 </menu>

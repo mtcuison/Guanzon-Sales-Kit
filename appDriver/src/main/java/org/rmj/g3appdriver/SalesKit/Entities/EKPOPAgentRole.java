@@ -11,22 +11,22 @@ public class EKPOPAgentRole {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "sUserIDxx")
-    public String UserIDxx;
+    protected String UserIDxx;
     @ColumnInfo(name = "sEnrollBy")
-    public String EnrollBy;
+    protected String EnrollBy;
     @ColumnInfo(name = "dEnrolled")
-    public String dEnrolled;
+    protected String Enrolled;
     @ColumnInfo(name = "nRoleIDxx")
-    public String RoleIDxx;
+    protected String RoleIDxx;
 
     @ColumnInfo(name = "sUpprNdID")
-    public String UpprNdID;
+    protected String UpprNdID;
 
     @ColumnInfo(name = "cRecdStat")
-    public String RecdStat;
+    protected String RecdStat;
 
     @ColumnInfo(name = "dTimeStmp")
-    public String TimeStmp;
+    protected String TimeStmp;
 
 
     public EKPOPAgentRole() {
@@ -50,12 +50,12 @@ public class EKPOPAgentRole {
         EnrollBy = enrollBy;
     }
 
-    public String getdEnrolled() {
-        return dEnrolled;
+    public String getEnrolled() {
+        return Enrolled;
     }
 
-    public void setdEnrolled(String dEnrolled) {
-        this.dEnrolled = dEnrolled;
+    public void setEnrolled(String dEnrolled) {
+        this.Enrolled = dEnrolled;
     }
 
     public String getRoleIDxx() {

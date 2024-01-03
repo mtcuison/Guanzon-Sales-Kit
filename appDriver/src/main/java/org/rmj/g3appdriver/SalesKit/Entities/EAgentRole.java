@@ -7,26 +7,74 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Agent_Role")
 public class EAgentRole {
-
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "nRoleIDxx")
-    public String RoleIDxx;
+    protected String RoleIDxx;
     @ColumnInfo(name = "sRoleDesc")
-    public String RoleDesc;
+    protected String RoleDesc;
     @ColumnInfo(name = "cRecdStat")
-    public String RecdStat;
+    protected String RecdStat;
     @ColumnInfo(name = "sModified")
-    public String sModified;
+    protected String Modifieds;
 
     @ColumnInfo(name = "dModified")
-    public String dModified;
+    protected String Modifiedd;
 
     @ColumnInfo(name = "dTimeStmp")
-    public String TimeStmp;
+    protected String TimeStmp;
 
 
     public EAgentRole() {
     }
 
+
+    @NonNull
+    public String getRoleIDxx() {
+        return RoleIDxx;
+    }
+
+    public void setRoleIDxx(@NonNull String roleIDxx) {
+        RoleIDxx = roleIDxx;
+    }
+
+    public String getRoleDesc() {
+        return RoleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        RoleDesc = roleDesc;
+    }
+
+    public String getRecdStat() {
+        return RecdStat;
+    }
+
+    public void setRecdStat(String recdStat) {
+        RecdStat = recdStat;
+    }
+
+    public String getModifieds() {
+        return Modifieds;
+    }
+
+    public void setModifieds(String sModified) {
+        this.Modifieds = sModified;
+    }
+
+    public String getModifiedd() {
+        return Modifiedd;
+    }
+
+    public void setModifiedd(String dModified) {
+        this.Modifiedd = dModified;
+    }
+
+    public String getTimeStmp() {
+        return TimeStmp;
+    }
+
+    public void setTimeStmp(String timeStmp) {
+        TimeStmp = timeStmp;
+    }
 }

@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
+import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.lib.Ganado.Obj.ProductInquiry;
 import org.rmj.guanzongroup.agent.R;
 
@@ -32,17 +32,17 @@ import java.util.List;
 
 public class AgentListAdapter extends RecyclerView.Adapter<AgentListAdapter.ApplicationViewHolder> {
 
-    private List<EGanadoOnline> poModel;
+    private List<EKPOPAgentRole> poModel;
     private ProductInquiry poApp;
-    private OnModelClickListener listener;
+    private OnAgentClickListener listener;
     private boolean forViewing = false;
 
     private Application mContex;
-    public interface OnModelClickListener{
-        void OnClick(String TransNox);
+    public interface OnAgentClickListener{
+        void OnClick(String sUserIDxx);
     }
 
-    public AgentListAdapter(Application mContex, List<EGanadoOnline> poModel, OnModelClickListener listener) {
+    public AgentListAdapter(List<EKPOPAgentRole> poModel, OnAgentClickListener listener) {
         this.poModel = poModel;
         this.mContex = mContex;
         this.listener = listener;
@@ -61,11 +61,11 @@ public class AgentListAdapter extends RecyclerView.Adapter<AgentListAdapter.Appl
     @Override
     public void onBindViewHolder(@NonNull ApplicationViewHolder holder, int position) {
         try {
-            EGanadoOnline loModel = poModel.get(position);
-            holder.itemName01.setText(loModel.getClientNm());
+            EKPOPAgentRole loModel = poModel.get(position);
+            holder.itemName01.setText(loModel.getUserIDxx());
             holder.itemView.setOnClickListener(v -> {
                 if(listener != null){
-                    listener.OnClick(loModel.getTransNox());
+                    listener.OnClick(loModel.getUserIDxx());
                 }
             });
         } catch (Exception e) {

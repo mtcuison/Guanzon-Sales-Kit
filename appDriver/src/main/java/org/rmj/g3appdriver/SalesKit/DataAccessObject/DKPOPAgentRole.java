@@ -19,21 +19,29 @@ import androidx.room.Update;
 
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 
+import java.util.List;
+
 @Dao
 public interface DKPOPAgentRole {
 
     @Insert
-    void insert(EKPOPAgentRole agentRole);
+    void Save(EKPOPAgentRole foVal);
 
     @Update
-    void update(EKPOPAgentRole agentRole);
-
+    void Update(EKPOPAgentRole foVal);
     @Query("SELECT * FROM KPOP_Agent_Role")
-    LiveData<EKPOPAgentRole> getKPopAgentRole();
+    LiveData<List<EKPOPAgentRole>> getKPopAgentRole();
 
     @Query("SELECT sUserIDxx FROM KPOP_Agent_Role")
     String getUserID();
 
     @Query("SELECT COUNT(sUserIDxx) FROM KPOP_Agent_Role")
     int GetRowsCountForID();
+
+
+    @Query("SELECT * FROM KPOP_Agent_Role ORDER BY dTimeStmp DESC LIMIT 1")
+    EKPOPAgentRole GetLatestData();
+
+    @Query("SELECT * FROM KPOP_Agent_Role WHERE sUserIDxx =:UserIDxx")
+    EKPOPAgentRole GetKPOPAget(String UserIDxx);
 }
