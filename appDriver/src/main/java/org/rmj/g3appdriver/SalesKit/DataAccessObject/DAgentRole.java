@@ -19,18 +19,24 @@ import androidx.room.Update;
 
 import org.rmj.g3appdriver.SalesKit.Entities.EAgentRole;
 
+import java.util.List;
+
 @Dao
 public interface DAgentRole {
 
     @Insert
-    void insert(EAgentRole agentRole);
+    void Save(EAgentRole foVal);
 
     @Update
-    void update(EAgentRole agentRole);
+    void Update(EAgentRole foVal);
 
     @Query("SELECT * FROM Agent_Role")
-    LiveData<EAgentRole> getAgentRole();
+    LiveData<List<EAgentRole>> getAgentRole();
 
     @Query("SELECT nRoleIDxx FROM Agent_Role")
     String getRoleID();
+    @Query("SELECT * FROM Agent_Role WHERE nRoleIDxx =:RoleIDxx")
+    EAgentRole GetAgentRole(String RoleIDxx);
+    @Query("SELECT * FROM Agent_Role ORDER BY dTimeStmp DESC LIMIT 1")
+    EAgentRole GetLatestData();
 }
