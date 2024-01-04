@@ -1,0 +1,357 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "58007a9fd66e824bde847a2d732e6552",
+    "entities": [
+      {
+        "tableName": "User_Info_Master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sClientID` TEXT NOT NULL, `sBranchCD` TEXT, `sBranchNm` TEXT, `sLogNoxxx` TEXT, `sUserIDxx` TEXT, `sEmailAdd` TEXT, `sUserName` TEXT, `nUserLevl` TEXT, `sDeptIDxx` TEXT, `sPositnID` TEXT, `sEmpLevID` INTEGER, `cSlfieLog` TEXT, `cAllowUpd` TEXT, `dLoginxxx` TEXT, `sMobileNo` TEXT, `dSessionx` TEXT, `sEmployID` TEXT, `cPrivatex` TEXT, `sDeviceID` TEXT, `sModelIDx` TEXT, PRIMARY KEY(`sClientID`))",
+        "fields": [
+          {
+            "fieldPath": "ClientID",
+            "columnName": "sClientID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchCD",
+            "columnName": "sBranchCD",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BranchNm",
+            "columnName": "sBranchNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LogNoxxx",
+            "columnName": "sLogNoxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmailAdd",
+            "columnName": "sEmailAdd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserName",
+            "columnName": "sUserName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserLevl",
+            "columnName": "nUserLevl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DeptIDxx",
+            "columnName": "sDeptIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PositnID",
+            "columnName": "sPositnID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmpLevID",
+            "columnName": "sEmpLevID",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SlfieLog",
+            "columnName": "cSlfieLog",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AllowUpd",
+            "columnName": "cAllowUpd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Loginxxx",
+            "columnName": "dLoginxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MobileNo",
+            "columnName": "sMobileNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sessionx",
+            "columnName": "dSessionx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmployID",
+            "columnName": "sEmployID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Privatex",
+            "columnName": "cPrivatex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DeviceID",
+            "columnName": "sDeviceID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ModelIDx",
+            "columnName": "sModelIDx",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sClientID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Facility_Personnel",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `sUserName` TEXT, PRIMARY KEY(`sUserIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UserName",
+            "columnName": "sUserName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Warehouse",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sWHouseID` TEXT NOT NULL, `sWHouseNm` TEXT, `sBranchCd` TEXT, `dLastChck` TEXT, `cRecdStat` TEXT, `sModified` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sWHouseID`))",
+        "fields": [
+          {
+            "fieldPath": "WHouseID",
+            "columnName": "sWHouseID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "WHouseNm",
+            "columnName": "sWHouseNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BranchCd",
+            "columnName": "sBranchCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastChck",
+            "columnName": "dLastChck",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "sModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateMdfy",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sWHouseID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Building_Visit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sWHouseID` TEXT NOT NULL, `dTransact` TEXT NOT NULL, `sUserIDxx` TEXT, `sRemarksx` TEXT, `cSendStat` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sWHouseID`, `dTransact`))",
+        "fields": [
+          {
+            "fieldPath": "WHouseID",
+            "columnName": "sWHouseID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remarksx",
+            "columnName": "sRemarksx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SendStat",
+            "columnName": "cSendStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sWHouseID",
+            "dTransact"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Building_Visit_Request",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sNFCIDxxx` TEXT NOT NULL, `sUserIDxx` TEXT NOT NULL, `dSchedule` TEXT NOT NULL, `dVisitedx` TEXT, `cTranStat` TEXT, `sModified` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sNFCIDxxx`, `sUserIDxx`, `dSchedule`))",
+        "fields": [
+          {
+            "fieldPath": "NFCIDxxx",
+            "columnName": "sNFCIDxxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Schedule",
+            "columnName": "dSchedule",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Visitedx",
+            "columnName": "dVisitedx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "sModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateMdfy",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sNFCIDxxx",
+            "sUserIDxx",
+            "dSchedule"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '58007a9fd66e824bde847a2d732e6552')"
+    ]
+  }
+}
