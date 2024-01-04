@@ -1,26 +1,23 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.appbar.MaterialToolbar;
 
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
-import org.rmj.guanzongroup.ganado.Adapter.InquiryListAdapter;
-import org.rmj.guanzongroup.ganado.Adapter.RecyclerViewAdapter_BrandSelection;
+import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
 import org.rmj.guanzongroup.ganado.R;
-import org.rmj.guanzongroup.ganado.ViewModel.VMBrandList;
 import org.rmj.guanzongroup.ganado.ViewModel.VMInquiry;
 
 import java.util.Objects;

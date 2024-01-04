@@ -27,7 +27,6 @@ import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.Entities.ETokenInfo;
 import org.rmj.g3appdriver.GCircle.room.Repositories.AppTokenManager;
-import org.rmj.g3appdriver.GCircle.room.Repositories.RClient;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcBrand;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcCategory;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcModel;
@@ -201,13 +200,13 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (new RMcTermCategory(instance).ImportMcTermCategory()) {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
-                        loTask.publishProgress(85);
+                        loTask.publishProgress(95);
                         Thread.sleep(500);
-                        if (new RClient(instance).ImportClientInfo()) {
-                            Log.d(TAG, "Client Info imported successfully...");
-                        }
-                        loTask.publishProgress(90);
-                        Thread.sleep(500);
+//                        if (new RClient(instance).ImportClientInfo()) {
+//                            Log.d(TAG, "Client Info imported successfully...");
+//                        }
+//                        loTask.publishProgress(90);
+//                        Thread.sleep(500);
 
 
 //                        if (!new SalesKit(instance).ImportKPOPAgent()) {

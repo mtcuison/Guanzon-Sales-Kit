@@ -44,4 +44,7 @@ public interface DKPOPAgentRole {
 
     @Query("SELECT * FROM KPOP_Agent_Role WHERE sUserIDxx =:UserIDxx")
     EKPOPAgentRole GetKPOPAget(String UserIDxx);
+
+    @Query("SELECT * FROM KPOP_Agent_Role WHERE sUpprNdID =:UserIDxx")
+    LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserIDxx);
 }

@@ -48,6 +48,9 @@ public interface DGanadoOnline {
     @Query("SELECT * FROM Ganado_Online " +
             "WHERE sReferdBy = (SELECT sUserIDxx FROM User_Info_Master)")
     LiveData<List<EGanadoOnline>> GetInquiries();
+    @Query("SELECT * FROM Ganado_Online " +
+            "WHERE sReferdBy =:UserIDxx")
+    LiveData<List<EGanadoOnline>> GetByAgentInquiries(String UserIDxx);
 
 
     @Query("SELECT " +

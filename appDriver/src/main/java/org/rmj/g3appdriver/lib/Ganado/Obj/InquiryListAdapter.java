@@ -9,37 +9,26 @@
  * project file last modified : 9/16/21, 10:47 AM
  */
 
-package org.rmj.guanzongroup.ganado.Adapter;
+package org.rmj.g3appdriver.lib.Ganado.Obj;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
-import org.rmj.g3appdriver.GCircle.room.Entities.EMCColor;
-import org.rmj.g3appdriver.GCircle.room.Entities.EMcBrand;
-import org.rmj.g3appdriver.GCircle.room.Entities.EMcModel;
-import org.rmj.g3appdriver.lib.Ganado.Obj.Ganado;
-import org.rmj.g3appdriver.lib.Ganado.Obj.ProductInquiry;
+import org.rmj.g3appdriver.R;
 import org.rmj.g3appdriver.lib.Ganado.model.GConstants;
-import org.rmj.g3appdriver.lib.Ganado.pojo.ClientInfo;
-import org.rmj.g3appdriver.lib.Panalo.Panalo;
-import org.rmj.guanzongroup.ganado.R;
 
 import java.util.List;
 
