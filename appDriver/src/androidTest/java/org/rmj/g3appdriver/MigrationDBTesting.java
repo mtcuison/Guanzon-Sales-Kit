@@ -24,7 +24,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
-import static org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB.MIGRATION_V41;
+import static org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB.MIGRATION_V42;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ import java.io.IOException;
 @RunWith(AndroidJUnit4.class)
 public class MigrationDBTesting {
     private static final Migration[] ALL_MIGRATIONS = new Migration[]{
-            MIGRATION_V41};
+            MIGRATION_V42};
     @Rule
     public MigrationTestHelper helper;
     @Before

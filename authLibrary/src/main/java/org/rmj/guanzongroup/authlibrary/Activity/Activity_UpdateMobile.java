@@ -46,6 +46,13 @@ public class Activity_UpdateMobile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

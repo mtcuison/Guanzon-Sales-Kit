@@ -36,6 +36,7 @@ import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DBranchPerformance;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DCIEvaluation;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DCashCount;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfo;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientUpdate;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DCountryInfo;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DCreditApplicantInfo;
@@ -100,6 +101,7 @@ import org.rmj.g3appdriver.GCircle.room.Entities.EBranchPerformance;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECIEvaluation;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECashCount;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientUpdate;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECodeApproval;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
@@ -225,7 +227,8 @@ import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
         EPromo.class,
         EMCModelCashPrice.class,
         EKPOPAgentRole.class,
-        EAgentRole.class}, version = 41, exportSchema = false)
+        EAgentRole.class,
+        EClientInfoSalesKit.class}, version = 42, exportSchema = false)
 public abstract class GGC_GCircleDB extends RoomDatabase {
     private static final String TAG = "GhostRider_DB_Manager";
     private static GGC_GCircleDB instance;
@@ -301,6 +304,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
     public abstract DNotification notificationDao();
     public abstract DPacita pacitaDao();
     public abstract DGanadoOnline ganadoDao();
+    public abstract DClientInfoSalesKit ciSKDAO();
 
     public static synchronized GGC_GCircleDB getInstance(Context context){
         if(instance == null){
@@ -308,7 +312,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
                      GGC_GCircleDB.class, "GGC_ISysDBF.db")
                     .allowMainThreadQueries()
                     .addCallback(roomCallBack)
-                    .addMigrations(MIGRATION_V41)
+                    .addMigrations(MIGRATION_V42)
                     .build();
         }
         return instance;
@@ -322,7 +326,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
         }
     };
 
-    public static final Migration MIGRATION_V41 = new Migration(40, 41) {
+    public static final Migration MIGRATION_V42 = new Migration(41, 42) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // Add the new column
