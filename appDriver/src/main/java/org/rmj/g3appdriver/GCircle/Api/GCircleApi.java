@@ -108,7 +108,10 @@ public class GCircleApi extends WebApi {
     private static final String URL_NEWCHANGE_ADDRESS = "security/request_address_update";
     private static final String URL_NEWCHANGE_MOBILE = "security/request_mobile_update";
     private static final String URL_SEND_OTP_MOBILE = "security/OTPGenerator";
-    private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline";
+    private static final String URL_COMPLETE_ACCOUNT = "integsys/marketplace/complete_account_detail.php";
+    private static final String URL_IMPORT_SKAGENTS = "saleskit/importagents.php";
+    private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline.php";
+    private static final String URL_SKAGENTS_PERFORMANCE = "saleskit/importagentprfrmnc.php";
 
     public GCircleApi(Application instance) {
         super(instance);
@@ -909,9 +912,23 @@ public class GCircleApi extends WebApi {
         Log.d(TAG, "Initialize api:" + LIVE + URL_SEND_OTP_MOBILE);
         return LIVE + URL_SEND_OTP_MOBILE;
     }
-
-
-    public String getSubmitUpline() {
+    public String getUrlCompleteAccount(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_COMPLETE_ACCOUNT);
+            return LOCAL + URL_COMPLETE_ACCOUNT;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_COMPLETE_ACCOUNT);
+        return LIVE + URL_COMPLETE_ACCOUNT;
+    }
+    public String getUrlImportSKAgents(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_SKAGENTS);
+            return LOCAL + URL_IMPORT_SKAGENTS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_SKAGENTS);
+        return LIVE + URL_IMPORT_SKAGENTS;
+    }
+    public String getUrlSubmitSKUpline(){
         if(isUnitTest()) {
             Log.d(TAG, "Initialize api:" + LOCAL + URL_SUBMIT_UPLINE);
             return LOCAL + URL_SUBMIT_UPLINE;
@@ -919,5 +936,12 @@ public class GCircleApi extends WebApi {
         Log.d(TAG, "Initialize api:" + LIVE + URL_SUBMIT_UPLINE);
         return LIVE + URL_SUBMIT_UPLINE;
     }
-
+    public String getUrlImportSKPerformance(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_SKAGENTS_PERFORMANCE);
+            return LOCAL + URL_SKAGENTS_PERFORMANCE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_SKAGENTS_PERFORMANCE);
+        return LIVE + URL_SKAGENTS_PERFORMANCE;
+    }
 }

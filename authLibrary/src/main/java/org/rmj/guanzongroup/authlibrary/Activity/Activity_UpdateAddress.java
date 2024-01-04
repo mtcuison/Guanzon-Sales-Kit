@@ -3,19 +3,29 @@ package org.rmj.guanzongroup.authlibrary.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EAddressUpdate;
+import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.ChangeUserAddress;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMUpdateAddress;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_UpdateAddress extends AppCompatActivity {
     private VMUpdateAddress mViewModel;
@@ -23,13 +33,14 @@ public class Activity_UpdateAddress extends AppCompatActivity {
     private MessageBox poMessage;
     private TextInputEditText tie_ca_houseno;
     private TextInputEditText tie_ca_street;
-    private TextInputEditText tie_ca_town;
-    private TextInputEditText tie_ca_brgy;
-    private TextInputEditText tie_ca_prov;
+    private MaterialAutoCompleteTextView tie_ca_town;
+    private MaterialAutoCompleteTextView tie_ca_brgy;
+    private MaterialAutoCompleteTextView tie_ca_prov;
     private TextInputEditText tie_ca_otp;
     private MaterialButton btn_sendotp;
     private MaterialButton btn_submit;
     private MaterialToolbar toolbar;
+    private EAddressUpdate loAddrUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +50,9 @@ public class Activity_UpdateAddress extends AppCompatActivity {
         mViewModel = new ViewModelProvider(Activity_UpdateAddress.this).get(VMUpdateAddress.class);
         poDialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
+        loAddrUpdate = new EAddressUpdate();
 
+        poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
         poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
             @Override
@@ -51,9 +64,9 @@ public class Activity_UpdateAddress extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         tie_ca_houseno = findViewById(R.id.tie_ca_houseno);
         tie_ca_street = findViewById(R.id.tie_ca_street);
+        tie_ca_prov = findViewById(R.id.tie_ca_prov);
         tie_ca_town = findViewById(R.id.tie_ca_town);
         tie_ca_brgy = findViewById(R.id.tie_ca_brgy);
-        tie_ca_prov = findViewById(R.id.tie_ca_prov);
         tie_ca_otp = findViewById(R.id.tie_ca_otp);
         btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
@@ -63,6 +76,84 @@ public class Activity_UpdateAddress extends AppCompatActivity {
         getSupportActionBar().setTitle("Account Address"); //set default title for action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        mViewModel.GetTownProvinceList().observe(Activity_UpdateAddress.this, new Observer<List<DTownInfo.TownProvinceInfo>>() {
+            @Override
+            public void onChanged(List<DTownInfo.TownProvinceInfo> loList) {
+                try {
+                    ArrayList<String> town = new ArrayList<>();
+                    ArrayList<String> prov = new ArrayList<>();
+                    for (int x = 0; x < loList.size(); x++) {
+                        String lsTown = loList.get(x).sTownName;
+                        String lsProv = loList.get(x).sProvName;
+
+                        town.add(lsTown);
+                        prov.add(lsProv);
+                    }
+                    ArrayAdapter<String> adaptersTown = new ArrayAdapter<>(Activity_UpdateAddress.this, android.R.layout.simple_spinner_dropdown_item, town.toArray(new String[0]));
+                    tie_ca_town.setAdapter(adaptersTown);
+                    tie_ca_town.setOnItemClickListener((parent, view, position, id) -> {
+                        for (int x = 0; x < loList.size(); x++) {
+                            String lsLabel = loList.get(x).sTownName;
+
+                            String lsSlctd = tie_ca_town.getText().toString().trim();
+                            if (lsSlctd.equalsIgnoreCase(lsLabel)) {
+                                loAddrUpdate.setTownIDxx(loList.get(x).sTownIDxx);
+                                break;
+                            }
+                        }
+                    });
+                    ArrayAdapter<String> adaptersProv = new ArrayAdapter<>(Activity_UpdateAddress.this, android.R.layout.simple_spinner_dropdown_item, prov.toArray(new String[0]));
+                    tie_ca_prov.setAdapter(adaptersProv);
+                    tie_ca_prov.setOnItemClickListener((parent, view, position, id) -> {
+                        for (int x = 0; x < loList.size(); x++) {
+                            String lsLabel = loList.get(x).sProvName;
+
+                            String lsSlctd = tie_ca_prov.getText().toString().trim();
+                            if (lsSlctd.equalsIgnoreCase(lsLabel)) {
+                                loAddrUpdate.setAddrssTp(loList.get(x).sTownIDxx);
+                                break;
+                            }
+                        }
+                    });
+
+                    mViewModel.GetBarangayList(loAddrUpdate.getTownIDxx()).observe(Activity_UpdateAddress.this, new Observer<List<EBarangayInfo>>() {
+                        @Override
+                        public void onChanged(List<EBarangayInfo> BrgyList) {
+                            ArrayList<String> arrBrgy = new ArrayList<>();
+                            for (int x = 0; x < BrgyList.size(); x++) {
+                                String lsBrgy = BrgyList.get(x).getBrgyName();
+                                arrBrgy.add(lsBrgy);
+                            }
+                            ArrayAdapter<String> adapters = new ArrayAdapter<>(Activity_UpdateAddress.this,
+                                    android.R.layout.simple_spinner_dropdown_item, arrBrgy.toArray(new String[0]));
+                            tie_ca_brgy.setAdapter(adapters);
+                            tie_ca_brgy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    for (int x = 0; x < BrgyList.size(); x++) {
+                                        String lsLabel = BrgyList.get(x).getBrgyName();
+                                        String lsSlctd = tie_ca_brgy.getText().toString().trim();
+                                        if (lsSlctd.equalsIgnoreCase(lsLabel)) {
+                                            loAddrUpdate.setBrgyIDxx(BrgyList.get(x).getBrgyIDxx());
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
             @Override

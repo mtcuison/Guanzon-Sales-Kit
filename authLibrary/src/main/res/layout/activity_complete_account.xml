@@ -326,45 +326,47 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputStyle"
+                style="@style/CustomDropDownDialogStyle"
                 android:id="@+id/til_ca_town"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Town/City"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_ca_street"
-                app:layout_constraintWidth_percent=".900">
+                app:layout_constraintStart_toStartOf="@+id/til_ca_houseno"
+                app:layout_constraintEnd_toEndOf="@+id/til_ca_street">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/tie_ca_town"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="true"
+                    android:inputType="textAutoComplete"
+                    android:padding="16dp"
+                    android:textStyle="bold"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputStyle"
+                style="@style/CustomDropDownDialogStyle"
                 android:id="@+id/til_ca_brgy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Barangay"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_ca_town"
-                app:layout_constraintWidth_percent=".900">
+                app:layout_constraintStart_toStartOf="@+id/til_ca_houseno"
+                app:layout_constraintEnd_toEndOf="@+id/til_ca_street">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/tie_ca_brgy"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="true"
+                    android:inputType="textAutoComplete"
+                    android:padding="16dp"
+                    android:textStyle="bold"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

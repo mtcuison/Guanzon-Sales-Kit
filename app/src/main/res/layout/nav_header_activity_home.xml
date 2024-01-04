@@ -22,7 +22,7 @@
             android:src="@drawable/kay_wave"
             app:layout_constraintDimensionRatio="15:4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".250"
+            app:layout_constraintHeight_percent=".200"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".5" />

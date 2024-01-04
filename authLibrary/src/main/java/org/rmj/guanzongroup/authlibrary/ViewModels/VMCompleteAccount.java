@@ -4,27 +4,44 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
-import org.rmj.g3appdriver.GConnect.Account.ClientMaster;
-import org.rmj.g3appdriver.GConnect.room.Entities.EClientInfo;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.lib.Etc.Barangay;
+import org.rmj.g3appdriver.lib.Etc.Town;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
 
+import java.util.List;
+
 public class VMCompleteAccount extends AndroidViewModel {
     private String message;
     private final ConnectionUtil poConn;
-    private final ClientMaster poClMaster;
+    private final ClientMasterSalesKit poClMaster;
+    private final Town poTown;
+    private final Barangay poBrgy;
     public VMCompleteAccount(@NonNull Application application) {
         super(application);
 
         this.poConn = new ConnectionUtil(application);
-        this.poClMaster = new ClientMaster(application);
+        this.poClMaster = new ClientMasterSalesKit(application);
+        this.poTown = new Town(application);
+        this.poBrgy = new Barangay(application);
+    }
+    public LiveData<List<DTownInfo.TownProvinceInfo>> GetTownProvinceList() {
+        return poTown.getTownProvinceInfo();
+    }
+    public LiveData<List<EBarangayInfo>> GetBarangayList(String args) {
+        return poBrgy.getAllBarangayFromTown(args);
     }
     public String getMessage(){
         return message;
     }
-    public void CompleteAccount(EClientInfo foClient, SubmitCallback callback){
+    public void CompleteAccount(EClientInfoSalesKit foClient, SubmitCallback callback){
         TaskExecutor.Execute(foClient, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {
@@ -38,12 +55,11 @@ public class VMCompleteAccount extends AndroidViewModel {
                     return false;
                 }
 
-                if (!poClMaster.CompleteClientInfo((EClientInfo) args)){
+                if (!poClMaster.CompleteClientInfo((EClientInfoSalesKit) args)){
                     message = poClMaster.getMessage();
                     return false;
                 }
 
-                poClMaster.ImportAccountInfo(); //after saving details, import to local device
                 return true;
             }
 

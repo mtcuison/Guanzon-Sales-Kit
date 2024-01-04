@@ -6,15 +6,22 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.lib.Account.AccountMaster;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
 import org.rmj.g3appdriver.lib.Account.OTPSender;
 import org.rmj.g3appdriver.lib.Account.pojo.ChangeUserAddress;
+import org.rmj.g3appdriver.lib.Etc.Barangay;
+import org.rmj.g3appdriver.lib.Etc.Town;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
+
+import java.util.List;
 
 public class VMUpdateAddress extends AndroidViewModel {
     public static final String TAG =  VMLogin.class.getSimpleName();
@@ -22,14 +29,23 @@ public class VMUpdateAddress extends AndroidViewModel {
     private final ConnectionUtil poConn;
     private OTPSender poOTPRqst;
     private String message;
+    private final Town poTown;
+    private final Barangay poBrgy;
     public VMUpdateAddress(@NonNull Application application) {
         super(application);
 
         this.poSys = new AccountMaster(application).initGuanzonApp().getInstance(Auth.CHANGE_ADDRESS);
         this.poConn = new ConnectionUtil(application);
         this.poOTPRqst = new OTPSender(application);
+        this.poTown = new Town(application);
+        this.poBrgy = new Barangay(application);
     }
-
+    public LiveData<List<DTownInfo.TownProvinceInfo>> GetTownProvinceList() {
+        return poTown.getTownProvinceInfo();
+    }
+    public LiveData<List<EBarangayInfo>> GetBarangayList(String args) {
+        return poBrgy.getAllBarangayFromTown(args);
+    }
     public void ChangeAccountAddress(ChangeUserAddress loAddress, SubmitChanges callback){
         TaskExecutor.Execute(loAddress, new OnTaskExecuteListener() {
             @Override

@@ -12,10 +12,14 @@
         <item
             android:title="Agents">
             <menu>
+<!--                <item-->
+<!--                    android:id="@+id/nav_agent_enroll"-->
+<!--                    android:icon="@drawable/baseline_person_add_24"-->
+<!--                    android:title="Agent Enroll" />-->
                 <item
-                    android:id="@+id/nav_agent_enroll"
-                    android:icon="@drawable/baseline_person_add_24"
-                    android:title="Agent Enroll" />
+                    android:id="@+id/nav_setupline"
+                    android:icon="@drawable/baseline_view_list_24"
+                    android:title="Set Upline" />
                 <item
                     android:id="@+id/nav_agent_list"
                     android:icon="@drawable/baseline_view_list_24"
