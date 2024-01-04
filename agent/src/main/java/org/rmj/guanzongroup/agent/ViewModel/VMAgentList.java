@@ -76,7 +76,8 @@ public class VMAgentList extends AndroidViewModel {
                 listener.OnSuccess();
             }
         });
-    }public void ImportKPOPAgent(OnTaskExecute listener){
+    }
+    public void ImportKPOPAgent(OnTaskExecute listener){
         TaskExecutor.Execute(null, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {

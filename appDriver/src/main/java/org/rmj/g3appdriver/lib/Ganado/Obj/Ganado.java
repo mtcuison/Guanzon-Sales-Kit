@@ -366,6 +366,9 @@ public class Ganado {
     public LiveData<List<EGanadoOnline>> GetInquiries(){
         return poDao.GetInquiries();
     }
+    public LiveData<List<EGanadoOnline>> GetByAgentInquiries(String UserID){
+        return poDao.GetByAgentInquiries(UserID);
+    }
 
     private String CreateUniqueID(){
         String lsUniqIDx = "";

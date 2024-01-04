@@ -108,6 +108,7 @@ public class GCircleApi extends WebApi {
     private static final String URL_NEWCHANGE_ADDRESS = "security/request_address_update";
     private static final String URL_NEWCHANGE_MOBILE = "security/request_mobile_update";
     private static final String URL_SEND_OTP_MOBILE = "security/OTPGenerator";
+    private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline";
 
     public GCircleApi(Application instance) {
         super(instance);
@@ -907,6 +908,16 @@ public class GCircleApi extends WebApi {
         }
         Log.d(TAG, "Initialize api:" + LIVE + URL_SEND_OTP_MOBILE);
         return LIVE + URL_SEND_OTP_MOBILE;
+    }
+
+
+    public String getSubmitUpline() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_SUBMIT_UPLINE);
+            return LOCAL + URL_SUBMIT_UPLINE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_SUBMIT_UPLINE);
+        return LIVE + URL_SUBMIT_UPLINE;
     }
 
 }

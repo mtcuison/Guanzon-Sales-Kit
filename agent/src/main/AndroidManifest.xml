@@ -3,6 +3,9 @@
 
     <application>
         <activity
+            android:name=".Activities.Activity_SelectUpLine"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Activity_AgentInfo"
             android:exported="true" />
         <activity

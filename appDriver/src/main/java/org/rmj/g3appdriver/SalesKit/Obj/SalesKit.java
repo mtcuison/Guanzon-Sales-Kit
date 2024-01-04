@@ -42,6 +42,7 @@ public class SalesKit {
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
     private final Country poCountry;
+    private final SalesKit poSalesKit;
 
     private String message;
 
@@ -50,6 +51,7 @@ public class SalesKit {
         this.poDao = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
         this.poAgentDao = GGC_GCircleDB.getInstance(instance).AgentDao();
         this.poSession = EmployeeSession.getInstance(instance);
+        this.poSalesKit = new SalesKit(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
@@ -65,6 +67,9 @@ public class SalesKit {
     }
     public LiveData<List<ECountryInfo>> GetCountry(){
         return poCountry.getAllCountryInfo();
+    }
+    public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserID){
+        return poSalesKit.poDao.GetKPOPAgent(UserID);
     }
 
 
@@ -212,6 +217,52 @@ public class SalesKit {
         return poDao.getKPopAgentRole();
     }
     public LiveData<List<EAgentRole>> getAgentRole(){ return poAgentDao.getAgentRole(); }
+
+    public boolean SubmitUpLine(String UserIDxx){
+        try{
+
+            JSONObject params = new JSONObject();
+            params.put("sUserIDxx", UserIDxx);
+            String lsResponse = WebClient.sendRequest(
+                    poApi.getSubmitUpline(),
+                    params.toString(),
+                    poHeaders.getHeaders());
+
+            if(lsResponse == null){
+                message = SERVER_NO_RESPONSE;
+                return false;
+            }
+
+            JSONObject loResponse = new JSONObject(lsResponse);
+            String lsResult = loResponse.getString("result");
+            if(lsResult.equalsIgnoreCase("error")){
+                JSONObject loError = loResponse.getJSONObject("error");
+                message = getErrorMessage(loError);
+                return false;
+            }
+
+            JSONObject loJson = loResponse.getJSONObject("detail");
+
+
+
+            EKPOPAgentRole loInfo = new EKPOPAgentRole();
+            loInfo.setUserIDxx(loJson.getString("sUserIDxx"));
+            loInfo.setEnrollBy(loJson.getString("sEnrollBy"));
+            loInfo.setEnrolled(loJson.getString("dEnrolled"));
+            loInfo.setRoleIDxx(loJson.getString("nRoleIDxx"));
+            loInfo.setUpprNdID(loJson.getString("sUpprNdID"));
+            loInfo.setRecdStat(loJson.getString("cTranStat"));
+            loInfo.setTimeStmp(loJson.getString("dTimeStmp"));
+            poDao.Save(loInfo);
+            Log.d(TAG, "KPOP Agent record has been saved!");
+
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            message = getLocalMessage(e);
+            return false;
+        }
+    }
     private String CreateUniqueID(){
         String lsUniqIDx = "";
         try{
