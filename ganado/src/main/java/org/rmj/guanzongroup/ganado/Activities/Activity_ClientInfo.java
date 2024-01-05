@@ -1,10 +1,5 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -14,6 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -186,19 +186,26 @@ public class Activity_ClientInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-                    poMessage.initDialog();
-                    poMessage.setTitle("Ganado");
-                    poMessage.setMessage(args);
-                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
-                        dialog.dismiss();
-                        Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_ClientInfo.class);
-                        loIntent.putExtra("sTransNox", args);
-                        startActivity(loIntent);
-                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+//                    dialog.dismiss();
+                    Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_FinancierInfo.class);
+                    loIntent.putExtra("sTransNox", args);
+                    startActivity(loIntent);
+                    overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
 
-                        finish();
-                    });
-                    poMessage.show();
+                    finish();
+//                    poMessage.initDialog();
+//                    poMessage.setTitle("Ganado");
+//                    poMessage.setMessage("Custe");
+//                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
+//                        dialog.dismiss();
+//                        Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_ClientInfo.class);
+//                        loIntent.putExtra("sTransNox", args);
+//                        startActivity(loIntent);
+//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+//
+//                        finish();
+//                    });
+//                    poMessage.show();
                 }
 
 

@@ -54,6 +54,10 @@ public class VMFinancierInfo extends AndroidViewModel implements GanadoUI {
         return poApp.GetRelations();
     }
 
+    public LiveData<List<ECountryInfo>> GetCountryList() {
+        return poApp.GetCountry();
+    }
+
     @Override
     public void InitializeApplication(Intent params) {
         TransNox = params.getStringExtra("sTransNox");
@@ -85,9 +89,6 @@ public class VMFinancierInfo extends AndroidViewModel implements GanadoUI {
         return poTown.getTownProvinceInfo();
     }
 
-    public LiveData<List<ECountryInfo>> GetCountryList() {
-        return poApp.GetCountry();
-    }
     public void SaveData(OnSaveInquiry listener) {
 //        new SaveDetailTask(listener).execute(poModel);
         TaskExecutor.Execute(poModel, new OnTaskExecuteListener() {

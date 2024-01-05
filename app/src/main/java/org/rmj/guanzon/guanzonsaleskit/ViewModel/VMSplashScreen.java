@@ -32,11 +32,15 @@ import org.rmj.g3appdriver.GCircle.room.Repositories.RMcCategory;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcModel;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcModelPrice;
 import org.rmj.g3appdriver.GCircle.room.Repositories.RMcTermCategory;
+import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.lib.Etc.Barangay;
 import org.rmj.g3appdriver.lib.Etc.Branch;
+import org.rmj.g3appdriver.lib.Etc.Country;
 import org.rmj.g3appdriver.lib.Etc.Province;
+import org.rmj.g3appdriver.lib.Etc.Relation;
 import org.rmj.g3appdriver.lib.Etc.Town;
+import org.rmj.g3appdriver.lib.Ganado.Obj.Ganado;
 import org.rmj.g3appdriver.lib.Promotions.GPromos;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
@@ -120,9 +124,17 @@ public class VMSplashScreen extends AndroidViewModel {
                 try{
                     if(poConn.isDeviceConnected()){
 
+                        if(!new Relation(instance).ImportRelations()){
+                            Log.e(TAG, "Unable to import relationship");
+                        }
+
+                        loTask.publishProgress(0);
+
+                        Thread.sleep(500);
                         if(!new Branch(instance).ImportBranches()){
                             Log.e(TAG, "Unable to import branches");
                         }
+
                         loTask.publishProgress(1);
 
                         Thread.sleep(1000);
@@ -143,6 +155,13 @@ public class VMSplashScreen extends AndroidViewModel {
                         Log.d(TAG, "Initializing barangay data.");
                         if(!new Barangay(instance).ImportBarangay()){
                             Log.e(TAG, "Unable to import barangay");
+                        }
+                        loTask.publishProgress(4);
+                        Thread.sleep(1000);
+
+                        Log.d(TAG, "Initializing country data.");
+                        if(!new Country(instance).ImportCountry()){
+                            Log.e(TAG, "Unable to import country");
                         }
                         loTask.publishProgress(4);
                         Thread.sleep(1000);
@@ -202,6 +221,19 @@ public class VMSplashScreen extends AndroidViewModel {
                         }
                         loTask.publishProgress(95);
                         Thread.sleep(500);
+                        if (poSession.isLoggedIn()){
+                            if (new Ganado(instance).ImportInquiries()) {
+                                Log.d(TAG, "Inquiries imported successfully...");
+                            }
+                            loTask.publishProgress(98);
+                            Thread.sleep(500);
+
+                        if (!new SalesKit(instance).ImportKPOPAgent()) {
+                            Log.d(TAG, "KPOP Agent imported successfully...");
+                        }
+                        loTask.publishProgress(94);
+                        Thread.sleep(500);
+                        }
 //                        if (new RClient(instance).ImportClientInfo()) {
 //                            Log.d(TAG, "Client Info imported successfully...");
 //                        }

@@ -8,6 +8,10 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/baseline_dashboard_24"
             android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_inquiry"
+            android:icon="@drawable/baseline_view_list_24"
+            android:title="Inquiries" />
 
         <item
             android:title="Agents">
