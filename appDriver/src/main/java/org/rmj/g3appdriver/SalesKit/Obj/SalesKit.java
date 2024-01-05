@@ -264,7 +264,7 @@ public class SalesKit {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
-
+            Log.e("lsResponse",lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){
@@ -281,7 +281,10 @@ public class SalesKit {
             loInfo.setEnrolled(loJson.getString("dEnrolled"));
             loInfo.setRoleIDxx(loJson.getString("nRoleIDxx"));
             loInfo.setUpprNdID(loJson.getString("sUpprNdID"));
-            loInfo.setRecdStat(loJson.getString("cTranStat"));
+            loInfo.setRecdStat(loJson.getString("cRecdStat"));
+            loInfo.setsEmailAdd(loJson.getString("sEmailAdd"));
+            loInfo.setsMobileNo(loJson.getString("sMobileNo"));
+            loInfo.setsUserName(loJson.getString("sUserName"));
             loInfo.setTimeStmp(loJson.getString("dTimeStmp"));
             poDao.Save(loInfo);
             Log.d(TAG, "KPOP Agent record has been saved!");
