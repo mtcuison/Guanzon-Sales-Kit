@@ -237,6 +237,7 @@ public class Ganado {
             params.put("nLongitud", 2.00);
 
             params.put("sClntInfo", loDetail.getClntInfo());
+            params.put("sFinancex", loDetail.getFinancex());
             params.put("sProdInfo", loDetail.getProdInfo());
             params.put("sPaymInfo", loDetail.getPaymInfo());
 
@@ -276,12 +277,16 @@ public class Ganado {
             JSONObject params = new JSONObject();
             EGanadoOnline loGanado = poDao.GetLatestData();
 
-            if(loGanado != null){
+            /*if(loGanado != null){
                 params.put("timestamp", loGanado.getTimeStmp());
-            }
+            }*/
 
+//            String lsResponse = WebClient.sendRequest(
+//                    poApi.getDownloadInquiries(),
+//                    params.toString(),
+//                    poHeaders.getHeaders());
             String lsResponse = WebClient.sendRequest(
-                    poApi.getDownloadInquiries(),
+                    poApi.getUrlImportSKPerformance(),
                     params.toString(),
                     poHeaders.getHeaders());
 
@@ -331,6 +336,7 @@ public class Ganado {
 
                     Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
                     Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
+
                     if (!ldDate1.equals(ldDate2)) {
                         loDetail.setTransNox(loJson.getString("sTransNox"));
                         loDetail.setTransact(loJson.getString("dTransact"));

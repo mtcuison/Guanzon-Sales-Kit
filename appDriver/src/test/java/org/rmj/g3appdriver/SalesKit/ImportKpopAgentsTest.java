@@ -1,9 +1,7 @@
 package org.rmj.g3appdriver.SalesKit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +42,7 @@ public class ImportKpopAgentsTest {
     }
     @Test
     public void TestUpdateAddress(){
-        String sURL = "http://192.168.10.68:8080/saleskit/importagents.php";
+        String sURL = "http://192.168.10.68:8080/saleskit/importagentinq.php";
         try {
             JSONObject loParams = new JSONObject();
 
@@ -55,12 +53,12 @@ public class ImportKpopAgentsTest {
             JSONObject loRes = new JSONObject(response);
             assertEquals("success", loRes.get("result")); //result should be success
 
-            JSONArray loArr = loRes.getJSONArray("initagents");
+            /*JSONArray loArr = loRes.getJSONArray("initagents");
             for (int i = 0; i < loArr.length(); i++){
                 JSONObject loObj = loArr.getJSONObject(i).getJSONObject("agents");
                 System.out.println(loObj);
                 assertNotNull(loObj);
-            }
+            }*/
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

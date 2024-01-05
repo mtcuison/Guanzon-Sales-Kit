@@ -71,8 +71,8 @@ public class VMSplashScreen extends AndroidViewModel {
         this.poSession = EmployeeSession.getInstance(instance);
         this.poConfig.setPackageName(BuildConfig.APPLICATION_ID);
         this.poConfig.setProductID("gRider");
-        this.poConfig.setUpdateLocally(false);
-        this.poConfig.setTestCase(false);
+        this.poConfig.setUpdateLocally(true);
+        this.poConfig.setTestCase(true);
         this.poConfig.setupAppVersionInfo(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME, "");
         ETokenInfo loToken = new ETokenInfo();
         loToken.setTokenInf("temp_token");
@@ -220,7 +220,18 @@ public class VMSplashScreen extends AndroidViewModel {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
                         loTask.publishProgress(95);
-                        Thread.sleep(500);
+//                        Thread.sleep(500);
+//                            if (new Ganado(instance).ImportInquiries()) {
+//                                Log.d(TAG, "Inquiries imported successfully...");
+//                            }
+//                            loTask.publishProgress(98);
+//                            Thread.sleep(500);
+//
+//                            if (!new SalesKit(instance).ImportKPOPAgent()) {
+//                                Log.d(TAG, "KPOP Agent imported successfully...");
+//                            }
+//                            loTask.publishProgress(94);
+//                            Thread.sleep(500);
                         if (poSession.isLoggedIn()){
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
@@ -231,7 +242,7 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (!new SalesKit(instance).ImportKPOPAgent()) {
                             Log.d(TAG, "KPOP Agent imported successfully...");
                         }
-                        loTask.publishProgress(94);
+                        loTask.publishProgress(99);
                         Thread.sleep(500);
                         }
 //                        if (new RClient(instance).ImportClientInfo()) {
