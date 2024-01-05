@@ -38,6 +38,10 @@
                     android:icon="@drawable/baseline_person_24"
                     android:title="Profile" />
                 <item
+                    android:id="@+id/nav_userperform"
+                    android:icon="@drawable/baseline_rate_review_24"
+                    android:title="Profile" />
+                <item
                     android:id="@+id/nav_log_out"
                     android:icon="@drawable/baseline_login_24"
                     android:title="Sign Out" />

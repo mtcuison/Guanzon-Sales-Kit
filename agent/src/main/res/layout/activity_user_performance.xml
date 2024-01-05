@@ -12,36 +12,20 @@
         android:layout_height="wrap_content"
         app:popupTheme="@style/GhostRiderMaterialTheme.AppBarOverlay"/>
 
-    <com.google.android.material.card.MaterialCardView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/cardview_shadow_start_color"
-        app:layout_constraintHeight_percent=".2"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/PrimaryHeaderStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gutoman, Guillier A."
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/kay"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent=".3"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcv_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-70dp"
+        android:layout_marginTop="-75dp"
         app:cardElevation="10dp"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
@@ -58,16 +42,36 @@
                 android:id="@+id/totalsales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="31"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView
                 style="@style/DescriptionHeaderStyle"
+                android:id="@+id/lbl_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Entries"
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@+id/totalsales"/>
+
+            <View
+                android:id="@+id/vline"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/guanzon_digital_grey"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_total"
+                app:layout_constraintHeight_percent=".015"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/DescriptionHeaderStyle"
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/vline"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -93,7 +97,7 @@
                 android:id="@+id/totalopen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -133,7 +137,7 @@
                 android:id="@+id/totalextr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="6"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -174,7 +178,7 @@
                 android:id="@+id/totaleng"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -215,7 +219,7 @@
                 android:id="@+id/totallost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -255,7 +259,7 @@
                 android:id="@+id/totalsold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="0"
                 android:gravity="center"/>
 
             <com.google.android.material.textview.MaterialTextView

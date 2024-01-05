@@ -34,6 +34,11 @@
         android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings"
         android:label="Agent List"
         tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/nav_userperform"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_UserPerformance"
+        android:label="User Performance"
+        tools:layout="@layout/activity_user_performance" />
 
     <activity
         android:id="@+id/nav_inquiry"
