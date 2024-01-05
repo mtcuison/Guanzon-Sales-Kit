@@ -19,6 +19,12 @@
         tools:layout="@layout/activity_agent_enroll" />
 
     <activity
+        android:id="@+id/nav_setupline"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_SelectUpLine"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_enroll" />
+
+    <activity
         android:id="@+id/nav_agent_list"
         android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentList"
         android:label="Agent List"

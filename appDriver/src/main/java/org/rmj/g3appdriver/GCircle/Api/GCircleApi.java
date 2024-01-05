@@ -111,7 +111,7 @@ public class GCircleApi extends WebApi {
     private static final String URL_COMPLETE_ACCOUNT = "integsys/marketplace/complete_account_detail.php";
     private static final String URL_IMPORT_SKAGENTS = "saleskit/importagents.php";
     private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline.php";
-    private static final String URL_SKAGENTS_PERFORMANCE = "saleskit/importagentprfrmnc.php";
+    private static final String URL_SKAGENTS_PERFORMANCE = "saleskit/importagentinq.php";
 
     public GCircleApi(Application instance) {
         super(instance);
