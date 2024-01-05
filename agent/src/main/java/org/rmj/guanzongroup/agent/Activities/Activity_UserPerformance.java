@@ -49,7 +49,7 @@ public class Activity_UserPerformance extends AppCompatActivity {
 
         setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
 
-        getSupportActionBar().setTitle("Account Password"); //set default title for action bar
+        getSupportActionBar().setTitle("User Performance"); //set default title for action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
