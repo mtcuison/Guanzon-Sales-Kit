@@ -11,22 +11,28 @@ public class EKPOPAgentRole {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "sUserIDxx")
-    protected String UserIDxx;
+    public String UserIDxx;
     @ColumnInfo(name = "sEnrollBy")
-    protected String EnrollBy;
+    public String EnrollBy;
     @ColumnInfo(name = "dEnrolled")
-    protected String Enrolled;
+    public String Enrolled;
     @ColumnInfo(name = "nRoleIDxx")
-    protected String RoleIDxx;
-
+    public String RoleIDxx;
     @ColumnInfo(name = "sUpprNdID")
-    protected String UpprNdID;
-
+    public String UpprNdID;
+    @ColumnInfo(name = "sRoleDesc")
+    public String sRoleDesc;
+    @ColumnInfo(name = "sEmailAdd")
+    public String sEmailAdd;
+    @ColumnInfo(name = "sMobileNo")
+    public String sMobileNo;
+    @ColumnInfo(name = "sUserName")
+    public String sUserName;
     @ColumnInfo(name = "cRecdStat")
-    protected String RecdStat;
-
+    public String RecdStat;
     @ColumnInfo(name = "dTimeStmp")
-    protected String TimeStmp;
+    public String TimeStmp;
+
 
 
     public EKPOPAgentRole() {
@@ -72,6 +78,38 @@ public class EKPOPAgentRole {
 
     public void setUpprNdID(String upprNdID) {
         UpprNdID = upprNdID;
+    }
+
+    public String getsRoleDesc() {
+        return sRoleDesc;
+    }
+
+    public void setsRoleDesc(String sRoleDesc) {
+        this.sRoleDesc = sRoleDesc;
+    }
+
+    public String getsEmailAdd() {
+        return sEmailAdd;
+    }
+
+    public void setsEmailAdd(String sEmailAdd) {
+        this.sEmailAdd = sEmailAdd;
+    }
+
+    public String getsMobileNo() {
+        return sMobileNo;
+    }
+
+    public void setsMobileNo(String sMobileNo) {
+        this.sMobileNo = sMobileNo;
+    }
+
+    public String getsUserName() {
+        return sUserName;
+    }
+
+    public void setsUserName(String sUserName) {
+        this.sUserName = sUserName;
     }
 
     public String getRecdStat() {

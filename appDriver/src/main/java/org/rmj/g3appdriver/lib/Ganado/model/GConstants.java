@@ -46,6 +46,12 @@ public class GConstants {
             "12 Months/1 Year",
             "6 Months"
     };
+    public static String[] INQUIRY_STATUS = {
+            "Open",
+            "Extracted",
+            "Engaged",
+            "Lost Sales",
+            "Bought"};
     public static String[] PAYMENT_FORM = {"Cash", "Installment"};
 
     public static ArrayAdapter<String> getAdapter(Context mContext, String[] data) {

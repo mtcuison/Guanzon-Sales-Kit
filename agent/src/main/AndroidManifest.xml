@@ -3,6 +3,12 @@
 
     <application>
         <activity
+            android:name=".Activities.Activity_UserPerformance"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Activity_AgentPerformance"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Activity_SelectUpLine"
             android:exported="false" />
         <activity
