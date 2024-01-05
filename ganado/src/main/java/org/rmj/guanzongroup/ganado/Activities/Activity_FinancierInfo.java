@@ -1,18 +1,16 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RadioGroup;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -25,12 +23,8 @@ import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.ganado.R;
 import org.rmj.guanzongroup.ganado.ViewModel.VMFinancierInfo;
-import org.rmj.guanzongroup.ganado.ViewModel.VMPersonalInfo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -178,7 +172,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
         txtFrstNm = findViewById(R.id.txt_firstname);
         txtMiddNm = findViewById(R.id.txt_middname);
         txtSuffixx = findViewById(R.id.txt_suffix);
-        txtCountry = findViewById(R.id.txtCountry);
+        txtCountry = findViewById(R.id.txt_financierCntry);
         txtMobileNo = findViewById(R.id.txt_mobile);
         txtEmailAdd = findViewById(R.id.txt_emailAdd);
         txt_facebookAccount = findViewById(R.id.txt_facebookAccount);

@@ -42,7 +42,7 @@ public class SalesKit {
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
     private final Country poCountry;
-    private final SalesKit poSalesKit;
+//    private final SalesKit poSalesKit;
 
     private String message;
 
@@ -51,7 +51,7 @@ public class SalesKit {
         this.poDao = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
         this.poAgentDao = GGC_GCircleDB.getInstance(instance).AgentDao();
         this.poSession = EmployeeSession.getInstance(instance);
-        this.poSalesKit = new SalesKit(instance);
+//        this.poSalesKit = new SalesKit(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
@@ -69,7 +69,7 @@ public class SalesKit {
         return poCountry.getAllCountryInfo();
     }
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserID){
-        return poSalesKit.poDao.GetKPOPAgent(UserID);
+        return poDao.GetKPOPAgent(UserID);
     }
 
 
@@ -224,7 +224,7 @@ public class SalesKit {
             JSONObject params = new JSONObject();
             params.put("sUserIDxx", UserIDxx);
             String lsResponse = WebClient.sendRequest(
-                    poApi.getSubmitUpline(),
+                    poApi.getUrlSubmitSKUpline(),
                     params.toString(),
                     poHeaders.getHeaders());
 

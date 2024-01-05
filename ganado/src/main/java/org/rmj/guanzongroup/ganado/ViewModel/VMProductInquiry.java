@@ -23,6 +23,7 @@ import org.rmj.g3appdriver.lib.Ganado.pojo.InstallmentInfo;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
+
 import java.util.List;
 
 public class VMProductInquiry extends AndroidViewModel implements GanadoUI {

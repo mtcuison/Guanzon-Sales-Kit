@@ -223,26 +223,60 @@
                         android:nextFocusForward="@+id/txtCountry" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    style="@style/TextInputStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:hint="Country">-->
+
+<!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+<!--                        android:id="@+id/txtCountry"-->
+<!--                        style="@style/AutoCompleteStyleTheme"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:inputType="textCapWords|textAutoComplete"-->
+<!--                        android:maxLength="50"-->
+<!--                        tools:ignore="LabelFor"-->
+<!--                        android:imeOptions="actionNext"-->
+<!--                        android:nextFocusForward="@+id/txt_mobile"/>-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/TextInputStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Country">
+                    android:hint="Country Name">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/txtCountry"
+                        android:id="@+id/txt_financierCntry"
                         style="@style/AutoCompleteStyleTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textCapWords|textAutoComplete"
-                        android:maxLength="50"
-                        tools:ignore="LabelFor"
                         android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:maxLength="20"
                         android:nextFocusForward="@+id/txt_mobile"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    style="@style/TextInputStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="Country"-->
+<!--                    android:layout_marginBottom="20dp">-->
+
+<!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+<!--                        android:id="@+id/txt_country"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:imeOptions="actionNext"-->
+<!--                        android:nextFocusForward="@+id/txt_mobile"-->
+<!--                        android:inputType="textCapWords|textAutoComplete"-->
+<!--                        style="@style/AutoCompleteStyleTheme" />-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
