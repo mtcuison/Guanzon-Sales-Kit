@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.rmj.apprdiver.util.SQLUtil;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
@@ -36,6 +37,7 @@ public class SalesKit {
     private final Application instance;
     private final DKPOPAgentRole poDao;
     private final DAgentRole poAgentDao;
+    private final DGanadoOnline poGanadoDao;
     private final EmployeeSession poSession;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
@@ -47,6 +49,7 @@ public class SalesKit {
         this.instance = instance;
         this.poDao = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
         this.poAgentDao = GGC_GCircleDB.getInstance(instance).AgentDao();
+        this.poGanadoDao = GGC_GCircleDB.getInstance(instance).ganadoDao();
         this.poSession = EmployeeSession.getInstance(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
@@ -71,6 +74,9 @@ public class SalesKit {
         return poDao.getKPopAgentRole();
     }
     public LiveData<List<EAgentRole>> getAgentRole(){ return poAgentDao.getAgentRole(); }
+    public LiveData<DGanadoOnline.CountEntries> GetCountEntries(){
+        return poGanadoDao.GetEntryCounts(poSession.getUserID());
+    }
     public boolean ImportAgent(){
         try{
             JSONObject params = new JSONObject();

@@ -21,10 +21,10 @@ import org.rmj.g3appdriver.etc.AppConfigPreference;
 public class ImportKpopAgentTest {
     private Application instance;
     private String TAG = getClass().getSimpleName();
-    private EmployeeMaster.UserAuthInfo loAuth;
-    private EmployeeMaster poUser;
     private AppConfigPreference loConfig;
     private SalesKit poSalesKit;
+    private EmployeeMaster poUser;
+
     @Rule
     public TestRule rule = new InstantTaskExecutorRule();
     @Before
@@ -35,18 +35,23 @@ public class ImportKpopAgentTest {
 
         AppConfigPreference.getInstance(instance).setTestCase(true); //use this to test api on device local ip
 
-        poUser = new EmployeeMaster(instance);
         poSalesKit = new SalesKit(instance);
+        poUser = new EmployeeMaster(instance);
 
-        //WIPE DATA AND RUN TestLoginAccount BEFORE RUNNING THIS TEST, FOR VALID LOGIN AND SUCCESS
-        //"INVALID LOG / INVALID AUTH DETECTED" - WIPE EMULATOR DATA
-        //"INVALID MOBILE NUMBER DETECTED" - CHANGE lsMobileN VALUE TO SPECIFIC NUMBER
-        loAuth = new EmployeeMaster.UserAuthInfo("mikegarcia8748@gmail.com", "123456", "09171870011");
+        EmployeeMaster.UserAuthInfo loAuth = new EmployeeMaster.UserAuthInfo("mikegarcia8748@gmail.com", "123456", "09171870011");
+        poUser.AuthenticateUser(loAuth);
     }
+    /*RUNNING TEST SHOULD BE ONCE ONLY, RUN ONE TEST ONLY AT A TIME*/
     @Test
-    public void TestImportAgents(){
+    public void TestImportKPopAgents(){
         Boolean isImported = poSalesKit.ImportKPOPAgent();
         System.out.println(poSalesKit.getMessage());
-        assertTrue(isImported);
+        assertTrue(isImported); //if no printed error and is successfully asserted, import is successful
+    }
+    @Test
+    public void TestImportGanadoAgents(){
+        Boolean isImported = poSalesKit.ImportAgent();
+        System.out.println(poSalesKit.getMessage());
+        assertTrue(isImported); //if no printed error and is successfully asserted, import is successful
     }
 }

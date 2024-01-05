@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RunWith(JUnit4.class)
-public class ImportKpopAgentsTest {
+public class ImportGanadoAgents {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
@@ -44,8 +44,8 @@ public class ImportKpopAgentsTest {
 
     }
     @Test
-    public void TestUpdateAddress(){
-        String sURL = "http://192.168.10.68:8080/saleskit/importagents.php";
+    public void TestImportGanadoAgents(){
+        String sURL = "http://192.168.10.68:8080/saleskit/importagentinq.php";
         try {
             JSONObject loParams = new JSONObject();
 
@@ -56,15 +56,15 @@ public class ImportKpopAgentsTest {
             JSONObject loRes = new JSONObject(response);
             assertEquals("success", loRes.get("result")); //result should be success
 
-            JSONArray loArr = loRes.getJSONArray("initagents");
+            JSONArray loArr = loRes.getJSONArray("detail");
             assertTrue(loArr.length() > 0);
 
             for (int i = 0; i < loArr.length(); i++){
-                JSONObject loObj = loArr.getJSONObject(i).getJSONObject("agents");
+                JSONObject loObj = loArr.getJSONObject(i);
                 System.out.println(loObj);
                 assertNotNull(loObj);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

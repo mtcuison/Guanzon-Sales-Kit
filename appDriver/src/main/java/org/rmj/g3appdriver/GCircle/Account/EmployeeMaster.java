@@ -127,6 +127,11 @@ public class EmployeeMaster {
             params.put("user", foVal.getEmail());
             params.put("pswd", foVal.getPassword());
 
+            //added set of mobile no before authenticating, for header initialization
+            if (poConfig.getMobileNo().equals("")){
+                poConfig.setMobileNo(foVal.getMobileNo());
+            }
+
             String lsResponse = WebClient.sendRequest(
                     webApi.getUrlAuthEmployee(),
                     params.toString(),
@@ -156,6 +161,7 @@ public class EmployeeMaster {
                     employeeInfo.setEmployID(loResponse.getString("sEmployID"));
                     employeeInfo.setDeviceID(poDevID.getDeviceID());
                     employeeInfo.setModelIDx(Build.MODEL);
+                    employeeInfo.setMobileNo(poConfig.getMobileNo());
                     employeeInfo.setMobileNo(poConfig.getMobileNo());
                     employeeInfo.setLoginxxx(AppConstants.DATE_MODIFIED());
                     employeeInfo.setSessionx(AppConstants.CURRENT_DATE());
