@@ -105,6 +105,16 @@ public interface DGanadoOnline {
             "FROM MC_Cash_Price WHERE sModelIDx=:ModelID")
     LiveData<CashPrice> GetCashInfo(String ModelID);
 
+    @Query("SELECT " +
+            "COUNT(CASE WHEN cTranStat = '0' THEN sTransNox END) AS nOpen, " +
+            "COUNT(CASE WHEN cTranStat = '1' THEN sTransNox END) AS nExtracted, " +
+            "COUNT(CASE WHEN cTranStat = '2' THEN sTransNox END) AS nEngaged, " +
+            "COUNT(CASE WHEN cTranStat = '3' THEN sTransNox END) AS nLost, " +
+            "COUNT(CASE WHEN cTranStat = '4' THEN sTransNox END) AS nSold " +
+            "FROM Ganado_Online " +
+            "WHERE sReferdBy= :sUserIDxx")
+    LiveData<CountEntries> GetEntryCounts(String sUserIDxx);
+
     class McDownpayment{
         public String ModelIDx;
         public String ModelNme;
@@ -137,5 +147,13 @@ public interface DGanadoOnline {
     class CashPrice{
         public Double CashPrce;
         public String Pricedxx;
+    }
+
+    class CountEntries{
+        public int nOpen;
+        public int nExtracted;
+        public int nEngaged;
+        public int nLost;
+        public int nSold;
     }
 }

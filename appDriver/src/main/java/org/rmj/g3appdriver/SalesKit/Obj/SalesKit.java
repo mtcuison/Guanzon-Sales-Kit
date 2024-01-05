@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.rmj.apprdiver.util.SQLUtil;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
@@ -36,13 +37,13 @@ public class SalesKit {
 
     private final Application instance;
     private final DKPOPAgentRole poDao;
+    private final DGanadoOnline poDaoGanado;
     private final DAgentRole poAgentDao;
     private final EmployeeSession poSession;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
     private final Country poCountry;
-//    private final SalesKit poSalesKit;
 
     private String message;
 
@@ -50,8 +51,8 @@ public class SalesKit {
         this.instance = instance;
         this.poDao = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
         this.poAgentDao = GGC_GCircleDB.getInstance(instance).AgentDao();
+        this.poDaoGanado = GGC_GCircleDB.getInstance(instance).ganadoDao();
         this.poSession = EmployeeSession.getInstance(instance);
-//        this.poSalesKit = new SalesKit(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
@@ -71,8 +72,9 @@ public class SalesKit {
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserID){
         return poDao.GetKPOPAgent(UserID);
     }
-
-
+    public LiveData<DGanadoOnline.CountEntries> GetEntries(){
+        return poDaoGanado.GetEntryCounts(poSession.getUserID());
+    }
     public boolean ImportKPOPAgent(){
         try{
             JSONObject params = new JSONObject();
