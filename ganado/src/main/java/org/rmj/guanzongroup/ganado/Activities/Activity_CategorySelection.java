@@ -70,7 +70,6 @@ public class Activity_CategorySelection extends AppCompatActivity {
     }
     private void initWidgets(){
         MaterialToolbar toolbar = findViewById(R.id.toolbar_category);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 

@@ -29,12 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/lbl_clientName"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Valencia, Maynard"
+                android:text=""
                 android:layout_weight=".5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lbl_applicantName" />
@@ -43,8 +43,7 @@
                 android:id="@+id/lbl_status"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Sent"
+                android:text=""
                 android:gravity="center"
                 android:layout_weight="1.5"
                 android:textColor="@color/check_green"
@@ -55,12 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/lbl_mobileNo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="09123456789"
+                android:text=""
                 android:layout_weight=".5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lbl_applicantName" />
@@ -69,8 +68,7 @@
                 android:id="@+id/lbl_recorStats"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Lost Sales"
+                android:text=""
                 android:gravity="center"
                 android:layout_weight="1.5"
                 android:textColor="@color/check_green"
@@ -81,8 +79,7 @@
             android:id="@+id/lbl_modelDesc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:text="HONDA Click 160 (BLACK)"
+            android:text=""
             android:layout_weight=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_applicantName" />
@@ -91,8 +88,7 @@
             android:id="@+id/lbl_InquiryType"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Installment"
+            android:text=""
             android:layout_weight=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbl_applicantName" />

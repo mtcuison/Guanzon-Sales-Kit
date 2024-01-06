@@ -14,6 +14,7 @@ public class FinancierInfo {
     private String sMobileNo = "";
     private String sEmailAdd = "";
     private String sWhatsApp = "";
+    private String sWeChatApp = "";
     private String sFbAccntx = "";
     private long sFIncomex = 0;
     private String sReltionx = "";
@@ -125,6 +126,14 @@ public class FinancierInfo {
         this.sWhatsApp = sWhatsApp;
     }
 
+    public String getsWeChatApp() {
+        return sWeChatApp;
+    }
+
+    public void setsWeChatApp(String sWeChatApp) {
+        this.sWeChatApp = sWeChatApp;
+    }
+
     public String getsFbAccntx() {
         return sFbAccntx;
     }
@@ -160,11 +169,16 @@ public class FinancierInfo {
             message = "Please enter first name.";
             return false;
         }
-        if(sAddressx.isEmpty()){
-            message = "Please enter address.";
+
+        if(sWhatsApp.isEmpty() && sWeChatApp.isEmpty()){
+            message = "Please enter atleast one account from WhatsApp or Wechat.";
             return false;
         }
 
+        /*if(sAddressx.isEmpty()){
+            message = "Please enter address.";
+            return false;
+        }
 
         if(sCntryCde.isEmpty()){
             message = "Please select country.";
@@ -179,7 +193,7 @@ public class FinancierInfo {
         if(sReltionx.isEmpty()){
             message = "Please select relationship.";
             return false;
-        }
+        }*/
 
         return true;
     }

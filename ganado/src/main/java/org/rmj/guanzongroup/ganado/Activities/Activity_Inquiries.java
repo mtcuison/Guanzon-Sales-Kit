@@ -90,6 +90,8 @@ public class Activity_Inquiries extends AppCompatActivity {
     private void intWidgets(){
         MaterialToolbar toolbar = findViewById(R.id.toolbar_Inquiries);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         rvInquiries = findViewById(R.id.rvInquiries);
     }

@@ -43,6 +43,7 @@
             android:layout_marginBottom="20dp">
 
             <com.google.android.material.textview.MaterialTextView
+                style="@style/DescriptionHeaderStyle"
                 android:id="@+id/textView0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,12 +51,8 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/select_category"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.059"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/DescriptionHeaderStyle"/>
+                app:layout_constraintStart_toStartOf="@+id/materialCardView"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.card.MaterialCardView
@@ -98,17 +95,16 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/HeaderLabelBlack"
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/auto"
-                        android:textSize="24sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="100dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.05"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.87" />
+                        app:layout_constraintTop_toTopOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -154,76 +150,19 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/HeaderLabelBlack"
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/motorcycle"
-                        android:textSize="24sp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="100dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.05"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.87" />
+                        app:layout_constraintTop_toTopOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
-
-            <!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:id="@+id/materialCardView1"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:layout_marginVertical="10dp"-->
-<!--                android:checkable="false"-->
-<!--                app:cardCornerRadius="10dp"-->
-<!--                app:cardPreventCornerOverlap="true"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHeight_percent=".30"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView"-->
-<!--                app:layout_constraintWidth_percent=".92">-->
-
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent">-->
-
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="0dp"-->
-<!--                        android:adjustViewBounds="true"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/img_category_mc"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="0dp"-->
-<!--                        android:src="@drawable/bg_category_layout"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-<!--                    <com.google.android.material.textview.MaterialTextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/motorcycle"-->
-<!--                        android:textSize="24sp"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintHorizontal_bias="0.05"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:layout_constraintVertical_bias="0.87" />-->
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--            </com.google.android.material.card.MaterialCardView>-->
-
 
             <LinearLayout
                 android:id="@+id/layout_content"
@@ -237,39 +176,14 @@
                 android:layout_marginVertical="10dp">
 
                 <com.google.android.material.textview.MaterialTextView
+                    style="@style/DescriptionHeaderStyle"
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/news_feed"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    style="@style/DescriptionHeaderStyle"/>
-
-
-<!--                <com.smarteist.autoimageslider.SliderView-->
-<!--                    android:id="@+id/imgSlider"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintDimensionRatio="4:3"-->
-<!--                    app:sliderAnimationDuration="600"-->
-<!--                    app:sliderAutoCycleDirection="back_and_forth"-->
-<!--                    app:sliderAutoCycleEnabled="true"-->
-<!--                    app:sliderIndicatorAnimationDuration="600"-->
-<!--                    app:sliderIndicatorGravity="center_horizontal|bottom"-->
-<!--                    app:sliderIndicatorMargin="15dp"-->
-<!--                    app:sliderIndicatorOrientation="horizontal"-->
-<!--                    app:sliderIndicatorPadding="3dp"-->
-<!--                    app:sliderIndicatorRadius="2dp"-->
-<!--                    app:sliderIndicatorSelectedColor="#5A5A5A"-->
-<!--                    app:sliderIndicatorUnselectedColor="#FFF"-->
-<!--                    app:sliderScrollTimeInSec="1"-->
-<!--                    app:sliderStartAutoCycle="true"-->
-<!--                    android:layout_marginVertical="10dp"/>-->
-
-
+                    android:text="@string/news_feed"/>
             </LinearLayout>
 
             <com.smarteist.autoimageslider.SliderView
@@ -300,40 +214,6 @@
                 app:sliderStartAutoCycle="true"
                 app:layout_constraintHeight_percent=".24"
                 app:layout_constraintWidth_percent=".92"/>
-
-
-            <!--            <com.google.android.material.card.MaterialCardView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:layout_marginVertical="10dp"-->
-<!--                android:checkable="false"-->
-<!--                app:cardCornerRadius="10dp"-->
-<!--                app:cardPreventCornerOverlap="true"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHeight_percent=".50"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/layout_content"-->
-<!--                app:layout_constraintWidth_percent=".92">-->
-
-<!--                <com.smarteist.autoimageslider.SliderView-->
-<!--                    android:id="@+id/imgSlider"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    app:layout_constraintDimensionRatio="4:3"-->
-<!--                    app:sliderAnimationDuration="600"-->
-<!--                    app:sliderAutoCycleDirection="back_and_forth"-->
-<!--                    app:sliderAutoCycleEnabled="true"-->
-<!--                    app:sliderIndicatorAnimationDuration="600"-->
-<!--                    app:sliderIndicatorGravity="center_horizontal|bottom"-->
-<!--                    app:sliderIndicatorMargin="15dp"-->
-<!--                    app:sliderIndicatorOrientation="horizontal"-->
-<!--                    app:sliderIndicatorPadding="3dp"-->
-<!--                    app:sliderIndicatorRadius="2dp"-->
-<!--                    app:sliderIndicatorSelectedColor="#5A5A5A"-->
-<!--                    app:sliderIndicatorUnselectedColor="#FFF"-->
-<!--                    app:sliderScrollTimeInSec="1"-->
-<!--                    app:sliderStartAutoCycle="true" />-->
-<!--            </com.google.android.material.card.MaterialCardView>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

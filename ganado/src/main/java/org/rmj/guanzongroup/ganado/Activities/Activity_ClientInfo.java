@@ -186,26 +186,12 @@ public class Activity_ClientInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-//                    dialog.dismiss();
                     Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_FinancierInfo.class);
                     loIntent.putExtra("sTransNox", args);
                     startActivity(loIntent);
                     overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
 
                     finish();
-//                    poMessage.initDialog();
-//                    poMessage.setTitle("Ganado");
-//                    poMessage.setMessage("Custe");
-//                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
-//                        dialog.dismiss();
-//                        Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_ClientInfo.class);
-//                        loIntent.putExtra("sTransNox", args);
-//                        startActivity(loIntent);
-//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
-//
-//                        finish();
-//                    });
-//                    poMessage.show();
                 }
 
 
@@ -227,6 +213,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
         mViewModel = new ViewModelProvider(Activity_ClientInfo.this).get(VMPersonalInfo.class);
         poMessage = new MessageBox(Activity_ClientInfo.this);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         txtLastNm = findViewById(R.id.txt_lastname);
