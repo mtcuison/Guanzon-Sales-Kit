@@ -48,6 +48,7 @@ public class FragmentHome extends Fragment {
         loMessage = new MessageBox(getActivity());
         initViews(view);
         displayData();
+
         return view;
     }
 

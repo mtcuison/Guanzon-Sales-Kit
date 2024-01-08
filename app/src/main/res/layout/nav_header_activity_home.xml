@@ -5,14 +5,23 @@
     android:layout_height="@dimen/nav_header_height"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:background="@drawable/side_nav_bar">
+    android:paddingBottom="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Orange_Bg_Light"
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            style="@style/Orange_Bg_Light"
+            android:id="@+id/logoBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgLogo"
@@ -24,19 +33,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".200"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/logoBg"
+            app:layout_constraintBottom_toBottomOf="@+id/logoBg"
             app:layout_constraintWidth_percent=".5" />
 
         <TextView
+            style="@style/HeaderLabelBlack"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/app_name"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/imgLogo"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

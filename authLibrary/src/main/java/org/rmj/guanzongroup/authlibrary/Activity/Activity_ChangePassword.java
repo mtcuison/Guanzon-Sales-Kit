@@ -57,14 +57,14 @@ public class Activity_ChangePassword extends AppCompatActivity {
 
         setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
 
-        getSupportActionBar().setTitle("Account Password"); //set default title for action bar
+        getSupportActionBar().setTitle(" "); //set default title for action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                finish();
             }
         });
 
@@ -169,5 +169,13 @@ public class Activity_ChangePassword extends AppCompatActivity {
                 });
             }
         });
+
+        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
     }
 }

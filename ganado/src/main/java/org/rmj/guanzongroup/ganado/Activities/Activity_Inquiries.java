@@ -22,7 +22,6 @@ import org.rmj.guanzongroup.ganado.ViewModel.VMInquiry;
 import java.util.Objects;
 
 public class Activity_Inquiries extends AppCompatActivity {
-
     private VMInquiry mViewModel;
     private RecyclerView rvInquiries;
     private InquiryListAdapter inquiryList;
@@ -92,7 +91,7 @@ public class Activity_Inquiries extends AppCompatActivity {
         });
     }
     private void intWidgets(){
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_Inquiries);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(" ");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
