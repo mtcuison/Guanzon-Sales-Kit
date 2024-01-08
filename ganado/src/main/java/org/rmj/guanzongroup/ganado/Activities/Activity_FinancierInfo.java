@@ -1,6 +1,7 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +56,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
         initWidgets();
         mViewModel.InitializeApplication(getIntent());
 
-        mViewModel.getRelation().observe(Activity_FinancierInfo.this, eRelations->{
+        /*mViewModel.getRelation().observe(Activity_FinancierInfo.this, eRelations->{
             try {
                 ArrayList<String> string = new ArrayList<>();
                 for (int x = 0; x < eRelations.size(); x++) {
@@ -74,7 +75,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
             }
         });
 
-        spinner_relation.setOnItemClickListener(new Activity_FinancierInfo.OnItemClickListener(spinner_relation));
+        spinner_relation.setOnItemClickListener(new Activity_FinancierInfo.OnItemClickListener(spinner_relation));*/
 
 
         mViewModel.GetCountryList().observe(Activity_FinancierInfo.this, new Observer<List<ECountryInfo>>() {
@@ -145,6 +146,9 @@ public class Activity_FinancierInfo extends AppCompatActivity {
                         finish();
                     });
                     poMessage.show();
+
+                    Intent intent = new Intent(Activity_FinancierInfo.this, Activity_ClientInfo.class);
+                    startActivity(intent);
                 }
 
 
@@ -165,7 +169,9 @@ public class Activity_FinancierInfo extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_PersonalInfo);
         mViewModel = new ViewModelProvider(Activity_FinancierInfo.this).get(VMFinancierInfo.class);
         poMessage = new MessageBox(Activity_FinancierInfo.this);
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         txtLastNm = findViewById(R.id.txt_lastname);
@@ -199,7 +205,6 @@ public class Activity_FinancierInfo extends AppCompatActivity {
     }
 
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
-
         private final View loView;
 
         public OnItemClickListener(View loView) {

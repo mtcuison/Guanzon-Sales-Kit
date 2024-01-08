@@ -245,6 +245,6 @@
     </style>
 
     <style name="Orange_Bg_Light">
-        <item name="background">@drawable/orange_bg_light</item>
+        <item name="android:src">@drawable/orange_bg_light</item>
     </style>
 </resources>

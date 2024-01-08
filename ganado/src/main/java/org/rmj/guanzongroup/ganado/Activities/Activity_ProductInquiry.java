@@ -69,9 +69,9 @@ public class Activity_ProductInquiry extends AppCompatActivity {
 
         mViewModel.GetModelBrand(lsBrandID, lsModelID).observe(Activity_ProductInquiry.this, eMcModel -> {
             try {
-                txtModelCd.setText(eMcModel.getModelCde());
-                txtModelNm.setText(eMcModel.getModelNme());
-                txtBrandNm.setText(getIntent().getStringExtra("lsBrandNm"));
+                txtBrandNm.setText("Brand: " + getIntent().getStringExtra("lsBrandNm"));
+                txtModelNm.setText("Model: " + eMcModel.getModelNme());
+                txtModelCd.setText("Code: " + eMcModel.getModelCde());
                 ImageFileManager.LoadImageToView(lsImgLink, imgMC);
             }catch (NullPointerException e){
                 e.printStackTrace();
@@ -187,7 +187,8 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             mViewModel.SaveData(new OnSaveInfoListener() {
                 @Override
                 public void OnSave(String args) {
-                    Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_ClientInfo.class);
+                    //Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_ClientInfo.class);
+                    Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_FinancierInfo.class);
                     loIntent.putExtra("sTransNox", args);
                     startActivity(loIntent);
                     overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);

@@ -206,7 +206,8 @@ public class Ganado {
             joFinancier.put("sFIncomex", loInfo.getRangeOfIncome());
             joFinancier.put("sReltionx", loInfo.getsReltionx());
 
-            loDetail.setFinancex(joFinancier.toString());
+            String loFinancier = joFinancier.toString();
+            loDetail.setFinancex(loFinancier);
             poDao.Update(loDetail);
 
             return true;

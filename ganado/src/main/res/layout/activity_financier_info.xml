@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
+        style="@style/Activity_HeaderBackground"
         android:id="@+id/shapeableImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -35,26 +36,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lbl_CustomerInfo"
-        style="@style/PrimaryHeaderStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="FINANCIER INFO"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="40dp"
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="10dp"
         app:cardPreventCornerOverlap="true"
@@ -62,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_CustomerInfo" >
+        app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -80,38 +65,38 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="30dp"
                 android:orientation="vertical">
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lbl_Relationship"
-                    style="@style/DescriptionHeaderStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Relationship"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:id="@+id/lbl_Relationship"-->
+<!--                    style="@style/DescriptionHeaderStyle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/roboto"-->
+<!--                    android:text="Relationship"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_bias="0.5" />-->
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/background_dark"
-                    android:layout_marginVertical="2dp"/>
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/CustomDropDownTilStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <com.google.android.material.divider.MaterialDivider-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/background_dark"-->
+<!--                    android:layout_marginVertical="2dp"/>-->
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    style="@style/CustomDropDownTilStyle"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/spinner_relation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/DropdownStyleTheme"
-                        android:hint="Relationship"
-                        android:padding="16dp" />
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+<!--                        android:id="@+id/spinner_relation"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        style="@style/DropdownStyleTheme"-->
+<!--                        android:hint="Relationship"-->
+<!--                        android:padding="16dp" />-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
@@ -307,27 +292,27 @@
                     style="@style/TextInputStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Mobile No">
+                    android:hint="WhatsApp Account"
+                    android:layout_marginBottom="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_mobile"
+                        android:id="@+id/txt_whatsAppAccount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
-                        android:inputType="number|none"
-                        android:maxLength="11"
-                        android:nextFocusForward="@+id/txt_emailAdd" />
+                        android:inputType="text"
+                        android:maxLength="50" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/TextInputStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="WhatsApp Account"
+                    android:hint="WeChat Account"
                     android:layout_marginBottom="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_whatsAppAccount"
+                        android:id="@+id/txt_weChatAccount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
@@ -348,6 +333,22 @@
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:maxLength="50"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile No">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="number|none"
+                        android:maxLength="11"
+                        android:nextFocusForward="@+id/txt_emailAdd" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

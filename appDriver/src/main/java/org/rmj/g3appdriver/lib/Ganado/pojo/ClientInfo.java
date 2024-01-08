@@ -184,6 +184,11 @@ public class ClientInfo {
             message = "Please enter first name.";
         }
 
+        if(sReltionx.isEmpty()){
+            message = "Please select relationship.";
+            return false;
+        }
+
         if(cGenderCd.isEmpty()){
             message = "Please select gender";
             return false;
@@ -218,10 +223,6 @@ public class ClientInfo {
 
         if(sEmailAdd.isEmpty()){
             message = "Please enter email address.";
-            return false;
-        }
-        if(sReltionx.isEmpty()){
-            message = "Please select relationship.";
             return false;
         }
 

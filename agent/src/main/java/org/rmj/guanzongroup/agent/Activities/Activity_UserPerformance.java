@@ -1,14 +1,19 @@
 package org.rmj.guanzongroup.agent.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
+import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.guanzongroup.agent.R;
 
 public class Activity_UserPerformance extends AppCompatActivity {
@@ -25,16 +30,21 @@ public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialCardView mcv_totalsold;
     private MaterialCardView mcv_totaleng;
     private MaterialCardView mcv_totallost;
+    private SalesKit poSalesKit;
+    private EmployeeSession poSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_performance);
 
+        poSalesKit = new SalesKit(getApplication());
+        poSession = EmployeeSession.getInstance(this);
+
         toolbar = findViewById(R.id.toolbar);
 
-        totalsales = findViewById(R.id.totalsales);
         username = findViewById(R.id.username);
+        totalsales = findViewById(R.id.totalsales);
         totalopen = findViewById(R.id.totalopen);
         totalextr = findViewById(R.id.totalextr);
         totalsold = findViewById(R.id.totalsold);
@@ -57,6 +67,20 @@ public class Activity_UserPerformance extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        poSalesKit.GetCountEntries().observe(this, new Observer<DGanadoOnline.CountEntries>() {
+            @Override
+            public void onChanged(DGanadoOnline.CountEntries countEntries) {
+                Log.d("User Performance", String.valueOf(countEntries.nOpen));
+                /*totalopen.setText(countEntries.nOpen);
+                totalextr.setText(countEntries.nExtracted);
+                totalsold.setText(countEntries.nSold);
+                totaleng.setText(countEntries.nEngaged);
+                totallost.setText(countEntries.nLost);
+
+                username.setText(poSession.getUserName());*/
             }
         });
     }

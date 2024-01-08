@@ -31,10 +31,8 @@ import java.util.List;
 
 public class FragmentHome extends Fragment {
     private static final String TAG = FragmentHome.class.getSimpleName();
-
     private VMHome mViewModel;
     private SliderView poSliderx;
-
     private MaterialCardView selectAuto;
     private MaterialCardView selectMC;
     private MessageBox loMessage;

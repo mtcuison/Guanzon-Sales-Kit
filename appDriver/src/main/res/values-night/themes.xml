@@ -186,6 +186,6 @@
     </style>
 
     <style name="Orange_Bg_Light">
-        <item name="background">@drawable/orange_bg_dark</item>
+        <item name="android:src">@drawable/orange_bg_dark</item>
     </style>
 </resources>
