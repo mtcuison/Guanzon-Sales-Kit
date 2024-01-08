@@ -1,7 +1,7 @@
 package org.rmj.guanzongroup.agent.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +20,6 @@ import org.rmj.guanzongroup.agent.Adapter.AgentListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
-import org.rmj.guanzongroup.ganado.Activities.Activity_ProductSelection;
 
 public class Activity_AgentInfo extends AppCompatActivity {
 
@@ -47,7 +46,6 @@ public class Activity_AgentInfo extends AppCompatActivity {
 
 
 
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -71,6 +69,8 @@ public class Activity_AgentInfo extends AppCompatActivity {
 
             }
         });
+
+        importInquiries();
     }
     private void initView(){
         tabLayout = findViewById(R.id.tab_layout);
@@ -87,7 +87,6 @@ public class Activity_AgentInfo extends AppCompatActivity {
         LinearLayoutManager loManager = new LinearLayoutManager(Activity_AgentInfo.this);
         loManager.setOrientation(RecyclerView.VERTICAL);
         rvAgents.setLayoutManager(loManager);
-        rvInquiries.setLayoutManager(loManager);
     }
 
     private void importAgent(){
@@ -145,10 +144,10 @@ public class Activity_AgentInfo extends AppCompatActivity {
                 agentAdapter = new AgentListAdapter(ekpopAgentRoles, new AgentListAdapter.OnAgentClickListener() {
                     @Override
                     public void OnClick(String sUserIDxx) {
-                        Intent intent = new Intent(Activity_AgentInfo.this, Activity_AgentInfo.class);
-                        intent.putExtra("sUserIDxx", sUserIDxx);
-                        startActivity(intent);
-                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+//                        Intent intent = new Intent(Activity_AgentInfo.this, Activity_AgentInfo.class);
+//                        intent.putExtra("sUserIDxx", sUserIDxx);
+//                        startActivity(intent);
+//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
                     }
 
                 });
@@ -161,26 +160,29 @@ public class Activity_AgentInfo extends AppCompatActivity {
         });
     }
     private void LoadInquiries(){
-
+        Log.e("lsUserId",lsUserId);
+        lnInquiries.setVisibility(View.VISIBLE);
         mViewModel.GetInquiries(lsUserId).observe(Activity_AgentInfo.this, inquiries -> {
+
+            Log.e("inquiries", String.valueOf(inquiries.size()));
             if (inquiries.size() > 0){
 
                 lblInquiryNoData.setVisibility(View.GONE);
-                inquiryAdapter = new InquiryListAdapter(getApplication(),inquiries, new InquiryListAdapter.OnModelClickListener() {
+                InquiryListAdapter adapter= new InquiryListAdapter(getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
-
-                        Intent intent = new Intent(Activity_AgentInfo.this, Activity_ProductSelection.class);
-                        intent.putExtra("TransNox",TransNox);
-                        startActivity(intent);
-                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
-                        finish();
+//                        Intent intent = new Intent(Activity_Inquiries.this, Activity_ProductSelection.class);
+//                        intent.putExtra("TransNox",TransNox);
+//                        startActivity(intent);
+//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+//                        finish();
 
                     }
 
                 });
 
-                rvAgents.setAdapter(agentAdapter);
+                rvInquiries.setAdapter(adapter);
+                rvInquiries.setLayoutManager(new LinearLayoutManager(Activity_AgentInfo.this,RecyclerView.VERTICAL,false));
 
             }else{
                 lblInquiryNoData.setVisibility(View.VISIBLE);

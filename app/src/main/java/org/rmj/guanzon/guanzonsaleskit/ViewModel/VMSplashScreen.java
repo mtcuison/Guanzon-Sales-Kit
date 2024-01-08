@@ -77,6 +77,7 @@ public class VMSplashScreen extends AndroidViewModel {
         ETokenInfo loToken = new ETokenInfo();
         loToken.setTokenInf("temp_token");
         CheckConnection();
+        Log.e("userid",poSession.getUserID());
     }
 
     public void SaveFirebaseToken(String fsVal){

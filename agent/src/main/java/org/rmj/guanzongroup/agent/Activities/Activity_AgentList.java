@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -81,7 +82,7 @@ public class Activity_AgentList extends AppCompatActivity {
                 });
 
                 rvAgentList.setAdapter(adapter);
-//                rvAgentList.setLayoutManager(new GridLayoutManager(Activity_ProductSelection.this, 2, RecyclerView.VERTICAL, false));
+                rvAgentList.setLayoutManager(new LinearLayoutManager(Activity_AgentList.this,  RecyclerView.VERTICAL, false));
 
             }
         });

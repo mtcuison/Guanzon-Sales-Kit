@@ -67,6 +67,9 @@ public class SalesKit {
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserID){
         return poDao.GetKPOPAgent(UserID);
     }
+    public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(){
+        return poDao.GetKPOPAgent();
+    }
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgentRole(){
         return poDao.getKPopAgentRole();
     }
@@ -156,6 +159,7 @@ public class SalesKit {
 
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
+            Log.e("TAG", lsResult);
             if(lsResult.equalsIgnoreCase("error")){
                 JSONObject loError = loResponse.getJSONObject("error");
                 message = getErrorMessage(loError);
