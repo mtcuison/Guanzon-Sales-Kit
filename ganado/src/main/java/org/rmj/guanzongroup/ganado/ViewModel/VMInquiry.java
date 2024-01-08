@@ -1,18 +1,15 @@
 package org.rmj.guanzongroup.ganado.ViewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
-import org.rmj.g3appdriver.GCircle.room.Entities.EMcBrand;
 import org.rmj.g3appdriver.lib.Ganado.Obj.Ganado;
-import org.rmj.g3appdriver.lib.Ganado.Obj.ProductInquiry;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
-import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
 
@@ -23,6 +20,7 @@ public class VMInquiry extends AndroidViewModel {
 
     private final Ganado poSys;
     private final ConnectionUtil poConn;
+    private final EmployeeSession poSession;
 
     private String message;
 
@@ -37,10 +35,17 @@ public class VMInquiry extends AndroidViewModel {
 
         poSys = new Ganado(application);
         poConn = new ConnectionUtil(application);
+        this.poSession = EmployeeSession.getInstance(application);
     }
 
-    public LiveData<List<EGanadoOnline>> GetInquiries(){
-        return poSys.GetInquiries();
+    public LiveData<List<EGanadoOnline>> GetInquiries(String UserID){
+        return poSys.GetByAgentInquiries(UserID);
+    }
+//    public LiveData<List<EGanadoOnline>> GetInquiries(){
+//        return poSys.GetInquiries();
+//    }
+    public LiveData<List<EGanadoOnline>> GetByAgentInquiries(){
+        return poSys.GetByAgentInquiries(poSession.getUserID());
     }
 
     public void ImportCriteria(OnTaskExecute listener){

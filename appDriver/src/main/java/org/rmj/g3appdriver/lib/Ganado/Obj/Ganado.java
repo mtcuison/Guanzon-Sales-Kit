@@ -237,6 +237,7 @@ public class Ganado {
             params.put("nlatitude", 1.00);
             params.put("nLongitud", 2.00);
 
+            params.put("sReferdBy", poSession.getUserID());
             params.put("sClntInfo", loDetail.getClntInfo());
             params.put("sFinancex", loDetail.getFinancex());
             params.put("sProdInfo", loDetail.getProdInfo());
@@ -251,7 +252,7 @@ public class Ganado {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
-
+//            Log.e("")
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){

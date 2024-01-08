@@ -37,8 +37,11 @@ public class VMAgentList extends AndroidViewModel {
     }
 
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgentRole(){
-        return poSys.GetKPOPAgentRole();
+        return poSys.GetKPOPAgent();
     }
+//    public LiveData<List<EKPOPAgentRole>> GetKPOPAgentRole(){
+//        return poSys.GetKPOPAgentRole();
+//    }
     public LiveData<List<EAgentRole>> GetAgentRole(){
         return poSys.getAgentRole();
     }

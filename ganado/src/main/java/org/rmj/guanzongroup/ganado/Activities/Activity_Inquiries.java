@@ -49,6 +49,7 @@ public class Activity_Inquiries extends AppCompatActivity {
             @Override
             public void OnSuccess() {
                 poLoad.dismiss();
+                LoadInquiries();
             }
 
             @Override
@@ -66,7 +67,10 @@ public class Activity_Inquiries extends AppCompatActivity {
                 poMessage.show();
             }
         });
-        mViewModel.GetInquiries().observe(Activity_Inquiries.this, inquiries ->{
+
+    }
+    private void LoadInquiries(){
+        mViewModel.GetByAgentInquiries().observe(Activity_Inquiries.this, inquiries ->{
             if (inquiries.size() > 0){
                 InquiryListAdapter adapter= new InquiryListAdapter(getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override

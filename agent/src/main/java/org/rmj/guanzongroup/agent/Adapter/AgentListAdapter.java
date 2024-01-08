@@ -62,7 +62,7 @@ public class AgentListAdapter extends RecyclerView.Adapter<AgentListAdapter.Appl
     public void onBindViewHolder(@NonNull ApplicationViewHolder holder, int position) {
         try {
             EKPOPAgentRole loModel = poModel.get(position);
-            holder.itemName01.setText(loModel.getUserIDxx());
+            holder.itemName01.setText(loModel.getsUserName());
             holder.itemView.setOnClickListener(v -> {
                 if(listener != null){
                     listener.OnClick(loModel.getUserIDxx());
