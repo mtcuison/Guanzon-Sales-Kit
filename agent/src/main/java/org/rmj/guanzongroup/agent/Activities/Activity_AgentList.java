@@ -31,12 +31,14 @@ public class Activity_AgentList extends AppCompatActivity {
 
     private LoadDialog poLoading;
     private MessageBox poMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(Activity_AgentList.this).get(VMAgentList.class);
         setContentView(R.layout.activity_agent_list);
         initView();
+
         mViewModel.ImportKPOPAgent(new VMAgentList.OnTaskExecute() {
             @Override
             public void OnExecute() {

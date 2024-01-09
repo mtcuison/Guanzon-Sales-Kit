@@ -24,6 +24,7 @@ public class VMAgentInfo extends AndroidViewModel {
     private final ConnectionUtil poConn;
 
     private String message;
+    private String lsUserID;
 
     public interface OnTaskExecute{
         void OnExecute();
@@ -42,12 +43,18 @@ public class VMAgentInfo extends AndroidViewModel {
     public LiveData<List<EGanadoOnline>> GetInquiries(String UserID){
         return poGanado.GetByAgentInquiries(UserID);
     }
+    public String GetUserID(){
+        return lsUserID;
+    }
+    public void setUserID(String UserID){
+         lsUserID = UserID;
+    }
 
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserIDxx){
         return poSys.GetKPOPAgent(UserIDxx);
     }
 
-    public void ImportKPOPAgent(VMAgentList.OnTaskExecute listener){
+    public void ImportKPOPAgent(VMAgentInfo.OnTaskExecute listener){
         TaskExecutor.Execute(null, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {
@@ -82,7 +89,7 @@ public class VMAgentInfo extends AndroidViewModel {
         });
     }
 
-    public void ImportInquiries(VMAgentList.OnTaskExecute listener){
+    public void ImportInquiries(VMAgentInfo.OnTaskExecute listener){
         TaskExecutor.Execute(null, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {

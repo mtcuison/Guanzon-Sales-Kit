@@ -178,35 +178,35 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (!poPromoEvents.ImportEventsLinks()){
                             Log.d(TAG, "Unable to import events link");
                         }
-                        loTask.publishProgress(20);
+                        loTask.publishProgress(15);
                         Thread.sleep(1000);
 
                         if (new RMcModel(instance).ImportMCModel()) {
                             Log.d(TAG, "MC Model imported successfully...");
                         }
-                        loTask.publishProgress(30);
+                        loTask.publishProgress(25);
                         Thread.sleep(500);
                         if (new RMcModel(instance).ImportCashPrices()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
-                        loTask.publishProgress(40);
+                        loTask.publishProgress(35);
                         Thread.sleep(500);
                         if (new RMcModel(instance).ImportModelColor()) {
                             Log.d(TAG, "MC Model Color imported successfully...");
                         }
-                        loTask.publishProgress(50);
+                        loTask.publishProgress(45);
                         Thread.sleep(500);
 
                         if (new RMcBrand(instance).ImportMCBrands()) {
                             Log.d(TAG, "MC Brand imported successfully...");
                         }
-                        loTask.publishProgress(60);
+                        loTask.publishProgress(55);
                         Thread.sleep(500);
                         if (new RMcModelPrice(instance).ImportMcModelPrice()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
 
-                        loTask.publishProgress(70);
+                        loTask.publishProgress(65);
                         Thread.sleep(500);
 
 
@@ -214,14 +214,14 @@ public class VMSplashScreen extends AndroidViewModel {
                             Log.d(TAG, "MC Category imported successfully...");
                         }
 
-                        loTask.publishProgress(80);
+                        loTask.publishProgress(75);
                         Thread.sleep(500);
 
                         if (new RMcTermCategory(instance).ImportMcTermCategory()) {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
-                        loTask.publishProgress(95);
-//                        Thread.sleep(500);
+                        loTask.publishProgress(85);
+                        Thread.sleep(500);
 //                            if (new Ganado(instance).ImportInquiries()) {
 //                                Log.d(TAG, "Inquiries imported successfully...");
 //                            }
@@ -237,7 +237,7 @@ public class VMSplashScreen extends AndroidViewModel {
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
-                            loTask.publishProgress(98);
+                            loTask.publishProgress(90);
                             Thread.sleep(500);
 
                         if (!new SalesKit(instance).ImportKPOPAgent()) {
