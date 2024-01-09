@@ -66,21 +66,22 @@ public class Activity_UserPerformance extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                finish();
             }
         });
 
         poSalesKit.GetCountEntries().observe(this, new Observer<DGanadoOnline.CountEntries>() {
             @Override
             public void onChanged(DGanadoOnline.CountEntries countEntries) {
-                Log.d("User Performance", String.valueOf(countEntries.nOpen));
-                /*totalopen.setText(countEntries.nOpen);
-                totalextr.setText(countEntries.nExtracted);
-                totalsold.setText(countEntries.nSold);
-                totaleng.setText(countEntries.nEngaged);
-                totallost.setText(countEntries.nLost);
+                Log.d("User Performance", String.valueOf(poSession.getUserName()));
 
-                username.setText(poSession.getUserName());*/
+                totalopen.setText(String.valueOf(countEntries.nOpen));
+                totalextr.setText(String.valueOf(countEntries.nExtracted));
+                totalsold.setText(String.valueOf(countEntries.nSold));
+                totaleng.setText(String.valueOf(countEntries.nEngaged));
+                totallost.setText(String.valueOf(countEntries.nLost));
+
+                username.setText(poSession.getUserName());
             }
         });
     }

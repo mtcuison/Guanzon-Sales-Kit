@@ -1,5 +1,6 @@
 package org.rmj.guanzongroup.authlibrary.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -26,12 +28,13 @@ import java.util.Objects;
 public class Activity_Login extends AppCompatActivity implements LoginCallback {
     private TextInputEditText tie_username;
     private TextInputEditText tie_password;
-    private TextInputEditText tie_mobileno;
     private MaterialTextView lblVersion;
     private MaterialTextView mtv_createaccount;
+    private MaterialCheckBox cbAgree;
     private MaterialButton btn_log;
     private VMLogin mViewModel;
     private LoadDialog podialog;
+    private MessageBox poMessage;
     private AppConfigPreference poConfigx;
 
     @Override
@@ -40,28 +43,50 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         setContentView(R.layout.activity_login);
 
         mViewModel = new ViewModelProvider(this).get(VMLogin.class);
-        podialog = new LoadDialog(this);
         poConfigx = AppConfigPreference.getInstance(this);
+        podialog = new LoadDialog(this);
+        poMessage = new MessageBox(this);
 
         poConfigx.setProductID("gRider");
         poConfigx.setTestCase(true);
 
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", (view, dialog) -> dialog.dismiss());
+
         tie_username = findViewById(R.id.username);
         tie_password = findViewById(R.id.password);
-        tie_mobileno = findViewById(R.id.mobileno);
         lblVersion = findViewById(R.id.lbl_versionInfo);
         mtv_createaccount = findViewById(R.id.mtv_createaccount);
+        cbAgree = findViewById(R.id.cbAgree);
         btn_log = findViewById(R.id.btn_log);
 
-        tie_mobileno.setText(mViewModel.getMobileNo());
-        tie_mobileno.setVisibility(mViewModel.hasMobileNo());
+        cbAgree.setChecked(poConfigx.isAgreedOnTermsAndConditions());
+        cbAgree.addOnCheckedStateChangedListener(new MaterialCheckBox.OnCheckedStateChangedListener() {
+            @Override
+            public void onCheckedStateChangedListener(@NonNull MaterialCheckBox checkBox, int state) {
+                if (state == 0){
+                    mViewModel.setAgreedOnTerms(false);
+                } else if (state == 1) {
+                    mViewModel.setAgreedOnTerms(true);
+                }
+            }
+        });
 
         btn_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = Objects.requireNonNull(tie_username.getText()).toString();
                 String password = Objects.requireNonNull(tie_password.getText()).toString();
-                String mobileno = Objects.requireNonNull(tie_mobileno.getText()).toString();
+                String mobileno = poConfigx.getMobileNo();
+                
+                if (!mViewModel.isAgreed()){
+                    poMessage.setMessage("Please agree to terms and conditions");
+                    poMessage.show();
+                    
+                    return;
+                }
+
                 mViewModel.Login(new UserAuthInfo(email,password, mobileno), Activity_Login.this);
             }
         });
@@ -95,11 +120,8 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
     @Override
     public void OnFailedLoginResult(String message) {
         podialog.dismiss();
-        MessageBox loMessage = new MessageBox(this);
-        loMessage.initDialog();
-        loMessage.setTitle("Guanzon Sales Kit");
-        loMessage.setMessage(message);
-        loMessage.setPositiveButton("Okay", (view, dialog) -> dialog.dismiss());
-        loMessage.show();
+
+        poMessage.setMessage(message);
+        poMessage.show();
     }
 }

@@ -109,6 +109,7 @@ public class EmployeeAuthentication implements iAuth {
             employeeInfo.setMobileNo(poConfig.getMobileNo());
             employeeInfo.setLoginxxx(AppConstants.DATE_MODIFIED());
             employeeInfo.setSessionx(AppConstants.CURRENT_DATE());
+
             poDao.RemoveSessions();
             poDao.SaveNewEmployeeSession(employeeInfo);
 
@@ -122,6 +123,7 @@ public class EmployeeAuthentication implements iAuth {
             String lsEmpIDxx = loResponse.getString("sEmployID");
             String lsPostIDx = loResponse.getString("sPositnID");
             String lsEmpLvlx = loResponse.getString("sEmpLevID");
+
             poSession.initUserSession(lsUserIDx, lsUserNme, lsClientx, lsLogNoxx, lsBranchx, lsBranchN, lsDeptIDx, lsEmpIDxx, lsPostIDx, lsEmpLvlx, "1");
             message = "Login success";
 

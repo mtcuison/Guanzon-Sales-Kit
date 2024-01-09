@@ -77,6 +77,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
             accountInfo.setPassword(Objects.requireNonNull(tiePassword.getText()).toString());
             accountInfo.setcPasswrd(Objects.requireNonNull(tiecPassword.getText()).toString());
             accountInfo.setMobileNo(Objects.requireNonNull(tieMobileno.getText()).toString());
+
             mViewModel.SubmitInfo(accountInfo, Activity_CreateAccount.this);
         });
 

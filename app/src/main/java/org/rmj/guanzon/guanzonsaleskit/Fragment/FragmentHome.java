@@ -22,6 +22,7 @@ import com.smarteist.autoimageslider.SliderView;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Promotions.Adapter_ImageSlider;
 import org.rmj.g3appdriver.lib.Promotions.model.HomeImageSliderModel;
+import org.rmj.guanzon.guanzonsaleskit.Activities.Activity_Home;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
 import org.rmj.guanzongroup.ganado.Activities.Activity_BrandSelection;
@@ -46,6 +47,15 @@ public class FragmentHome extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         loMessage = new MessageBox(getActivity());
+        loMessage.initDialog();
+        loMessage.setTitle("Under Development");
+        loMessage.setPositiveButton("Dismiss", new MessageBox.DialogButton() {
+            @Override
+            public void OnButtonClick(View view, AlertDialog dialog) {
+                dialog.dismiss();
+            }
+        });
+
         initViews(view);
         displayData();
 
@@ -68,38 +78,33 @@ public class FragmentHome extends Fragment {
     }
 
     private void displayData() {
+        Activity_Home parent = (Activity_Home) getActivity();
+        Boolean isComplete = parent.IsCompleteAccount();
+
         setSliderImages();
         selectAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loMessage.initDialog();
-                loMessage.setTitle("Under Development");
-                loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
-                loMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
-                    @Override
-                    public void OnButtonClick(View view, AlertDialog dialog) {
-                        dialog.dismiss();
-                    }
-                });
-                loMessage.show();
-
-//                Intent intent1 = new Intent(requireActivity(), Activity_BrandSelection.class);
-//                intent1.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
-//                startActivity(intent1);
-////                requireActivity().finish();
+                if (isComplete){ //allow to use feature
+                    loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
+                    loMessage.show();
+                }else { //must complete first account
+                    loMessage.setMessage("Must complete account to access this feature");
+                    loMessage.show();
+                }
             }
         });
         selectMC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Perform the action you want for button 1
-                // For example, switch to a new activity
-
-                Intent intent1 = new Intent(requireActivity(), Activity_BrandSelection.class);
-                intent1.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
-                startActivity(intent1);
-//                requireActivity().finish();
-
+                if (isComplete){ //allow to use feature
+                    Intent intent = new Intent(requireActivity(), Activity_BrandSelection.class);
+                    intent.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
+                    startActivity(intent);
+                }else { //must complete first account
+                    loMessage.setMessage("Must complete account to access this feature");
+                    loMessage.show();
+                }
             }
         });
     }

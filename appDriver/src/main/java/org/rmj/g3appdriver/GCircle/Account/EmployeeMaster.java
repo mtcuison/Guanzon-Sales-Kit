@@ -177,6 +177,7 @@ public class EmployeeMaster {
                     String lsEmpIDxx = loResponse.getString("sEmployID");
                     String lsPostIDx = loResponse.getString("sPositnID");
                     String lsEmpLvlx = loResponse.getString("sEmpLevID");
+
                     poSession.initUserSession(lsUserIDx, lsUserNme, lsClientx, lsLogNoxx, lsBranchx, lsBranchN, lsDeptIDx, lsEmpIDxx, lsPostIDx, lsEmpLvlx, "1");
                     message = "Login success";
                     return true;
