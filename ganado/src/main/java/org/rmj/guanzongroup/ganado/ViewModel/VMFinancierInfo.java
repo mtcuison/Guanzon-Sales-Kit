@@ -97,6 +97,11 @@ public class VMFinancierInfo extends AndroidViewModel implements GanadoUI {
                 listener.OnSave();
             }
 
+
+
+
+
+
             @Override
             public Object DoInBackground(Object args) {
                 FinancierInfo lsInfo = (FinancierInfo) poModel;
@@ -107,13 +112,8 @@ public class VMFinancierInfo extends AndroidViewModel implements GanadoUI {
                     message = poApp.getMessage();
                     return null;
                 }
-                String lsResult1 = (poApp.SaveInquiry(lsInfo.getsTransNox())) ? "" : null;
-;                if (lsResult1 == null) {
-                    message = poApp.getMessage();
-                    return null;
-                }
 
-                return "Motorcycle inquiry saved successfully!";
+                return TransNox;
             }
 
             @Override
