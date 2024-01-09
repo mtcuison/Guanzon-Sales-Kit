@@ -89,7 +89,7 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         poMessage = new MessageBox(Activity_SelectUpLine.this);
         poLoading = new LoadDialog(Activity_SelectUpLine.this);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_agentUpline);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

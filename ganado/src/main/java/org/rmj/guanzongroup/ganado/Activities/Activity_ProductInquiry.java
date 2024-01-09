@@ -211,6 +211,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         poMessage = new MessageBox(Activity_ProductInquiry.this);
         MaterialToolbar toolbar = findViewById(R.id.toolbar_Inquiry);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 //
         txtBrandNm = findViewById(R.id.lblBrand);

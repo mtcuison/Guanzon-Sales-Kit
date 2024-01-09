@@ -94,11 +94,12 @@ public class Activity_AgentList extends AppCompatActivity {
         rvAgentList = findViewById(R.id.rvAgentList);
 //        searchView = findViewById(R.id.searchview);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_agent);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
+
 
     @Override
     public void finish() {

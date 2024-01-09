@@ -7,245 +7,277 @@
     tools:context=".Activities.Activity_ProductInquiry"
     android:theme="@style/GhostRiderMaterialTheme">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-15dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent=".3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/Orange_Bg_Light"
+                android:id="@+id/shapeableImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_Inquiry"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/GhostRiderMaterialTheme.PopupOverlay" />
+        android:layout_height="wrap_content"
+        android:elevation="25dp"/>
 
     <com.google.android.material.imageview.ShapeableImageView
-        style="@style/Activity_HeaderBackground"
-        android:id="@+id/shapeableImageView"
+        android:id="@+id/logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".85"
-        app:layout_constraintStart_toStartOf="parent"
+        android:adjustViewBounds="true"
+        android:src="@drawable/kay_wave"
+        android:elevation="20dp"
+        app:layout_constraintWidth_percent=".5"
+        app:layout_constraintHeight_percent=".2"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_Inquiry"
-        app:layout_constraintVertical_bias="0.95"
-        app:layout_constraintWidth_percent=".95">
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvImage"
-            android:layout_width="0dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="50dp"
-            app:cardCornerRadius="10dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".4">
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/HeaderLabelBlack"
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Product Inquiry"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:elevation="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="@+id/logo"/>
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imgMC"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_image_place_holder" />
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/DescriptionHeaderStyle"
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Choose Variant, Mode of Payment, Date of Purchase"
+        android:paddingStart="10dp"
+        android:elevation="20dp"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
 
-        </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desc"
+        app:layout_constraintHeight_percent=".2"
+        app:layout_constraintWidth_percent=".3">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/lblBrand"
-            android:layout_width="0dp"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgMC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_image_place_holder" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/mcv_header"
+        app:layout_constraintStart_toEndOf="@+id/cvImage"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblModelCde"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lblModelNme"
+        app:layout_constraintStart_toStartOf="@+id/lblBrand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblBrand" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblModelNme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintStart_toStartOf="@+id/lblModelCde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblModelCde" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:padding="3dp"
+        android:scrollbars="none"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/cvImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="70dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cvImage"
-            app:layout_constraintStart_toEndOf="@+id/cvImage"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/lblModelCde"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/lblModelNme"
-            app:layout_constraintStart_toStartOf="@+id/lblBrand"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblBrand" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/lblModelNme"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:layout_constraintStart_toStartOf="@+id/lblModelCde"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblModelCde" />
-
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            android:fitsSystemWindows="true"
+            android:layout_marginHorizontal="5dp"
             android:orientation="vertical"
-            android:padding="3dp"
-            android:scrollbars="none"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/cvImage"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:paddingVertical="10dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/CustomDropDownTilStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="Select Variant">
 
-                <LinearLayout
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/spn_color"
+                    style="@style/DropdownStyleTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:orientation="vertical"
-                    android:paddingVertical="10dp">
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/CustomDropDownTilStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/CustomDropDownTilStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Payment Method">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/spn_paymentMethod"
+                    style="@style/DropdownStyleTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cash Price">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_cashPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/CustomDropDownTilStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Installment Term">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/spn_installmentTerm"
+                    style="@style/DropdownStyleTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:hint="Downpayment">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_downpayment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Select Variant">
+                        android:imeOptions="actionDone"
+                        android:inputType="number|none"
+                        android:maxLength="50" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/spn_color"
-                            style="@style/DropdownStyleTheme"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCalculate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1.2"
+                    android:text="Calculate" />
+            </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/CustomDropDownTilStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Payment Method">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Monthly Payment">
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/spn_paymentMethod"
-                            style="@style/DropdownStyleTheme"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_monthlyAmort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:focusedByDefault="false"
+                    android:inputType="number|none"
+                    android:maxLength="50" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Cash Price">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Target Date">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txt_cashPrice"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_targetDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:focusedByDefault="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="number|none"
+                    android:maxLength="20"
+                    android:nextFocusForward="@+id/txt_bpProvince" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/CustomDropDownTilStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Installment Term">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="40dp"
+                android:text="Continue" />
 
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/spn_installmentTerm"
-                            style="@style/DropdownStyleTheme"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/TextInputStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".8"
-                            android:hint="Downpayment">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_downpayment"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:imeOptions="actionDone"
-                                android:inputType="number|none"
-                                android:maxLength="50" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCalculate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_weight="1.2"
-                            android:text="Calculate" />
-                    </LinearLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Monthly Payment">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txt_monthlyAmort"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:focusedByDefault="false"
-                            android:inputType="number|none"
-                            android:maxLength="50" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/TextInputStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Target Date">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txt_targetDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:focusedByDefault="false"
-                            android:imeOptions="actionNext"
-                            android:inputType="number|none"
-                            android:maxLength="20"
-                            android:nextFocusForward="@+id/txt_bpProvince" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnContinue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginVertical="40dp"
-                        android:text="Continue" />
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
