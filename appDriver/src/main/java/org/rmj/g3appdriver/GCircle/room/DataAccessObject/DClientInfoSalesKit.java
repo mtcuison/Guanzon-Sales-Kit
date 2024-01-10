@@ -28,4 +28,6 @@ public interface DClientInfoSalesKit {
     String GetUserID();
     @Query("SELECT * FROM Client_Profile_Info")
     EClientInfoSalesKit GetClientInfo();
+    @Query("DELETE FROM Client_Profile_Info")
+    void DeleteProfile();
 }

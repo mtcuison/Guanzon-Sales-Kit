@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzon.guanzonsaleskit.R;
@@ -47,11 +48,10 @@ public class Activity_Home extends AppCompatActivity {
 
         /*VERIFY FIRST USER IF COMPLETED ITS ACCOUNT*/
         mviewModel = new ViewModelProvider(this).get(VMHome.class);
-        mviewModel.GetPoEmpInfo().observe(Activity_Home.this, new Observer<EEmployeeInfo>() {
+        mviewModel.GetCompleteProfile().observe(Activity_Home.this, new Observer<EClientInfoSalesKit>() {
             @Override
-            public void onChanged(EEmployeeInfo eEmployeeInfo) {
-                String sClientID = eEmployeeInfo.getClientID();
-                if (sClientID.isEmpty()){
+            public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
+                if (eClientInfoSalesKit == null){
                     isCompleteAccount = false;
                 }else {
                     isCompleteAccount = true;
@@ -98,38 +98,28 @@ public class Activity_Home extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent loIntent;
-        if(item.getItemId() == android.R.id.home){
+        if (isCompleteAccount){
+            Intent loIntent;
+            if(item.getItemId() == android.R.id.home){
 
-        } else if (item.getItemId() == R.id.nav_agent_list) {
-            if (isCompleteAccount){
+            } else if (item.getItemId() == R.id.nav_agent_list) {
                 loIntent = new Intent(Activity_Home.this, Activity_AgentList.class);
                 startActivity(loIntent);
-                return false;
-            }
-        }else if (item.getItemId() == R.id.nav_agent_enroll) {
-            if (isCompleteAccount){
+            }else if (item.getItemId() == R.id.nav_agent_enroll) {
                 loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);
                 startActivity(loIntent);
-                return true;
-            }
-        }else if (item.getItemId() == R.id.nav_profile) {
-            if (isCompleteAccount){
+            }else if (item.getItemId() == R.id.nav_profile) {
                 loIntent = new Intent(Activity_Home.this, Activity_Settings.class);
                 startActivity(loIntent);
-                return true;
             }
-        }
-        else if (item.getItemId() == R.id.nav_inquiry) {
-            if (isCompleteAccount){
+            else if (item.getItemId() == R.id.nav_inquiry) {
                 loIntent = new Intent(Activity_Home.this, Activity_Inquiries.class);
                 startActivity(loIntent);
-                return true;
             }
+        }else {
+            poMessage.setMessage(String.valueOf(isCompleteAccount));
+            poMessage.show();
         }
-
-        poMessage.setMessage(String.valueOf(isCompleteAccount));
-        poMessage.show();
 
         return super.onOptionsItemSelected(item);
     }

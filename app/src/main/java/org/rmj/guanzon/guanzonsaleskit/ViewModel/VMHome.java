@@ -8,8 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DEmployeeInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.GConnect.room.Entities.EEvents;
@@ -28,21 +30,20 @@ public class VMHome extends AndroidViewModel {
     private String lsEvent, lsEvUrl;
     private final AppConfigPreference poConfig;
     private final GPromos poPromoEvent;
-    private final EmployeeMaster poEmpInfo;
+    private final ClientMasterSalesKit poClientSK;
 
     public VMHome(@NonNull Application application) {
         super(application);
         this.poPromoEvent = new GPromos(application);
-        this.poEmpInfo = new EmployeeMaster(application);
+        this.poClientSK = new ClientMasterSalesKit(application);
 
         this.poConfig = AppConfigPreference.getInstance(application);
         this.poConfig.setIsAppFirstLaunch(false);
     }
 
-    public LiveData<EEmployeeInfo> GetPoEmpInfo(){
-        return poEmpInfo.getUserInfo();
+    public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
+        return poClientSK.GetProfileAccount();
     }
-
     public LiveData<List<EPromo>> GetPromoLinkList(){
         return poPromoEvent.GetPromotions();
     }
