@@ -49,8 +49,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passw_layout"
         style="@style/TextInputStyle"
+        android:id="@+id/passw_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_password"
@@ -69,7 +69,7 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+<!--     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/mobno_layout"
         style="@style/TextInputStyle"
         android:layout_width="0dp"
@@ -89,7 +89,7 @@
             android:inputType="number|none"
             android:maxLines="1"
             android:maxLength="11"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout> -->
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/DescriptionHeaderStyle"
@@ -99,9 +99,9 @@
         android:layout_marginTop="6dp"
         android:text="Not Registered? Click Here"
         android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@+id/mobno_layout"
-        app:layout_constraintStart_toStartOf="@+id/mobno_layout"
-        app:layout_constraintEnd_toEndOf="@+id/mobno_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/passw_layout"
+        app:layout_constraintStart_toStartOf="@+id/passw_layout"
+        app:layout_constraintEnd_toEndOf="@+id/passw_layout"/>
 
     <LinearLayout
         android:id="@+id/ln_Terms"
@@ -116,7 +116,7 @@
             android:id="@+id/cbAgree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:fontFamily="@font/roboto"
             android:padding="0dp"
             android:text="@string/agree"

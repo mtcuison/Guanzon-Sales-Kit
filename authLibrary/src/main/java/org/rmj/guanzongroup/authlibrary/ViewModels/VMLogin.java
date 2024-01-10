@@ -32,7 +32,6 @@ import org.rmj.guanzongroup.authlibrary.Callbacks.LoginCallback;
 public class VMLogin extends AndroidViewModel {
     public static final String TAG =  VMLogin.class.getSimpleName();
     private final AppConfigPreference poConfig;
-    private final Telephony poTlphony;
     private final iAuth poSys;
 
     private String message;
@@ -41,31 +40,13 @@ public class VMLogin extends AndroidViewModel {
         super(application);
         this.poSys = new AccountMaster(application).initGuanzonApp().getInstance(Auth.AUTHENTICATE);
         this.poConfig = AppConfigPreference.getInstance(application);
-        this.poTlphony = new Telephony(application);
-    }
-
-    @SuppressLint("NewApi")
-    public String getMobileNo(){
-        if(poConfig.getMobileNo().isEmpty()) {
-            return poTlphony.getMobilNumbers();
-        } else {
-            return poConfig.getMobileNo();
-        }
-    }
-
-    public int hasMobileNo(){
-        if(poConfig.getMobileNo().equalsIgnoreCase("")) {
-            return View.VISIBLE;
-        }
-        return View.GONE;
-    }
-
-    public boolean isAgreed(){
-        return poConfig.isAgreedOnTermsAndConditions();
     }
 
     public void setAgreedOnTerms(boolean isAgreed){
         poConfig.setAgreement(isAgreed);
+    }
+    public boolean isAgreed(){
+        return poConfig.isAgreedOnTermsAndConditions();
     }
 
     public void Login(UserAuthInfo authInfo, LoginCallback callback){
