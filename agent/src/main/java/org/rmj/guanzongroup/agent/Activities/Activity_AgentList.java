@@ -19,34 +19,57 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.Adapter.AgentListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 import java.util.Objects;
 
 public class Activity_AgentList extends AppCompatActivity {
-
     private VMAgentList mViewModel;
+    private MaterialToolbar toolbar;
     private RecyclerView rvAgentList;
     private AgentListAdapter adapter;
-//    private SearchView searchView;
-
     private LoadDialog poLoading;
     private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(Activity_AgentList.this).get(VMAgentList.class);
         setContentView(R.layout.activity_agent_list);
-        initView();
 
+        poMessage = new MessageBox(Activity_AgentList.this);
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+            @Override
+            public void OnButtonClick(View view, AlertDialog dialog) {
+                dialog.dismiss();
+
+                Intent loIntent = new Intent(Activity_AgentList.this, Activity_Settings.class);
+                startActivity(loIntent);
+                finish();
+            }
+        });
+
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == false){
+            poMessage.setMessage("Must complete account to use this feature");
+            poMessage.show();
+        }
+
+        rvAgentList = findViewById(R.id.rvAgentList);
+        toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        mViewModel = new ViewModelProvider(Activity_AgentList.this).get(VMAgentList.class);
         mViewModel.ImportKPOPAgent(new VMAgentList.OnTaskExecute() {
             @Override
             public void OnExecute() {
                 poLoading = new LoadDialog(Activity_AgentList.this);
                 poLoading.initDialog("Agent List", "Please wait for a while.", false);
                 poLoading.show();
-
-
             }
 
             @Override
@@ -58,15 +81,7 @@ public class Activity_AgentList extends AppCompatActivity {
             public void OnFailed(String message) {
                 poLoading.dismiss();
 
-                poMessage = new MessageBox(Activity_AgentList.this);
-                poMessage.initDialog();
                 poMessage.setMessage(message);
-                poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
-                    @Override
-                    public void OnButtonClick(View view, AlertDialog dialog) {
-                        dialog.dismiss();
-                    }
-                });
                 poMessage.show();
             }
         });
@@ -90,16 +105,6 @@ public class Activity_AgentList extends AppCompatActivity {
         });
 
     }
-    private void initView() {
-        rvAgentList = findViewById(R.id.rvAgentList);
-//        searchView = findViewById(R.id.searchview);
-
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-    }
-
 
     @Override
     public void finish() {

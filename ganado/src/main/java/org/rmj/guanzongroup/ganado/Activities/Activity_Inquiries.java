@@ -1,6 +1,7 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.R;
 import org.rmj.guanzongroup.ganado.ViewModel.VMInquiry;
 
@@ -23,21 +25,47 @@ import java.util.Objects;
 
 public class Activity_Inquiries extends AppCompatActivity {
     private VMInquiry mViewModel;
+    private MaterialToolbar toolbar;
     private RecyclerView rvInquiries;
-    private InquiryListAdapter inquiryList;
     private LoadDialog poLoad;
     private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(VMInquiry.class);
         setContentView(R.layout.activity_inquiries);
-        intWidgets();
 
         poLoad = new LoadDialog(Activity_Inquiries.this);
         poMessage = new MessageBox(Activity_Inquiries.this);
 
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+            @Override
+            public void OnButtonClick(View view, AlertDialog dialog) {
+                dialog.dismiss();
+
+                Intent loIntent = new Intent(Activity_Inquiries.this, Activity_Settings.class);
+                startActivity(loIntent);
+                finish();
+            }
+        });
+
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == false){
+            poMessage.setMessage("Must complete account to use this feature");
+            poMessage.show();
+        }
+
+        toolbar = findViewById(R.id.toolbar);
+        rvInquiries = findViewById(R.id.rvInquiries);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        mViewModel = new ViewModelProvider(this).get(VMInquiry.class);
         mViewModel.ImportCriteria(new VMInquiry.OnTaskExecute() {
             @Override
             public void OnExecute() {
@@ -54,15 +82,8 @@ public class Activity_Inquiries extends AppCompatActivity {
             @Override
             public void OnFailed(String message) {
                 poLoad.dismiss();
-                poMessage.initDialog();
-                poMessage.setTitle("Product Inquiry");
+
                 poMessage.setMessage(message);
-                poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
-                    @Override
-                    public void OnButtonClick(View view, AlertDialog dialog) {
-                        dialog.dismiss();
-                    }
-                });
                 poMessage.show();
             }
         });
@@ -74,11 +95,6 @@ public class Activity_Inquiries extends AppCompatActivity {
                 InquiryListAdapter adapter= new InquiryListAdapter(getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
-//                        Intent intent = new Intent(Activity_Inquiries.this, Activity_ProductSelection.class);
-//                        intent.putExtra("TransNox",TransNox);
-//                        startActivity(intent);
-//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
-//                        finish();
 
                     }
 
@@ -90,22 +106,11 @@ public class Activity_Inquiries extends AppCompatActivity {
             }
         });
     }
-    private void intWidgets(){
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" ");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        rvInquiries = findViewById(R.id.rvInquiries);
-    }
-
-
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){

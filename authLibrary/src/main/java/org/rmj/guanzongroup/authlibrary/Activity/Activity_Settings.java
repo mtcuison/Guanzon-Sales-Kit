@@ -51,6 +51,17 @@ public class Activity_Settings extends AppCompatActivity {
         tvUpdateAddr = findViewById(R.id.tvUpdateAddr);
         btn_back = findViewById(R.id.btn_back);
 
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == true){
+            tvChangePass.setVisibility(View.VISIBLE);
+            tvUpdateMobile.setVisibility(View.VISIBLE);
+            tvUpdateAddr.setVisibility(View.VISIBLE);
+        }else {
+            tvChangePass.setVisibility(View.GONE);
+            tvUpdateMobile.setVisibility(View.GONE);
+            tvUpdateAddr.setVisibility(View.GONE);
+        }
+
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

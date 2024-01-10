@@ -57,7 +57,6 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_account);
 
-        mViewModel = new ViewModelProvider(this).get(VMCompleteAccount.class);
         poDialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
@@ -96,6 +95,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
+        mViewModel = new ViewModelProvider(this).get(VMCompleteAccount.class);
         mViewModel.GetTownProvinceList().observe(Activity_CompleteAccount.this, new Observer<List<DTownInfo.TownProvinceInfo>>() {
             @Override
             public void onChanged(List<DTownInfo.TownProvinceInfo> loList) {

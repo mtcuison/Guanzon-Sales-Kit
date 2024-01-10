@@ -13,6 +13,7 @@
         android:layout_marginTop="-15dp"
         app:cardElevation="20dp"
         app:cardCornerRadius="20dp"
+        app:circularflow_radiusInDP=""
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHeight_percent=".3">
 

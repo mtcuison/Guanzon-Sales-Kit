@@ -1,6 +1,7 @@
 package org.rmj.guanzongroup.agent.Activities;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,8 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
 import org.rmj.guanzongroup.agent.ViewModel.VMSelectUpLine;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
+import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 
 import java.util.Objects;
 
@@ -31,58 +34,29 @@ public class Activity_SelectUpLine extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(Activity_SelectUpLine.this).get(VMSelectUpLine.class);
         setContentView(R.layout.activity_select_up_line);
-        initView();
-        btnCancel.setOnClickListener(v ->{
+
+        poLoading = new LoadDialog(Activity_SelectUpLine.this);
+        poMessage = new MessageBox(Activity_SelectUpLine.this);
+
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", (view, dialog) -> {
+            dialog.dismiss();
+
+            Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
+            startActivity(loIntent);
             finish();
         });
-        btnSubmit.setOnClickListener(v ->{
-            mViewModel.SubmitUpLine(txtUpline.getText().toString(), new VMAgentList.OnTaskExecute() {
-                @Override
-                public void OnExecute() {
 
-                    poLoading.initDialog("Agent Upline", "Saving upline. Please wait...", false);
-                    poLoading.show();
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == false){
+            poMessage.setMessage("Must complete account to use this feature");
+            poMessage.show();
+        }
 
-                }
+        mViewModel = new ViewModelProvider(Activity_SelectUpLine.this).get(VMSelectUpLine.class);
 
-                @Override
-                public void OnSuccess() {
-                    poLoading.dismiss();
-                    poMessage.initDialog();
-                    poMessage.setTitle("Agent Upline");
-                    poMessage.setMessage("Agent Upline user id successfully submitted.");
-                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
-                        dialog.dismiss();
-                        finish();
-                    });
-                    poMessage.show();
-                }
-
-                @Override
-                public void OnFailed(String message) {
-                    poLoading.dismiss();
-
-                    poMessage = new MessageBox(Activity_SelectUpLine.this);
-                    poMessage.initDialog();
-                    poMessage.setTitle("Agent Upline");
-                    poMessage.setMessage(message);
-                    poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
-                        @Override
-                        public void OnButtonClick(View view, AlertDialog dialog) {
-                            dialog.dismiss();
-                        }
-                    });
-                    poMessage.show();
-
-                }
-            });
-        });
-
-
-    }
-    private void initView(){
         txtUpline = findViewById(R.id.txt_upLine);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnCancel = findViewById(R.id.btnCancel);
@@ -93,6 +67,39 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        btnCancel.setOnClickListener(v ->{
+            finish();
+        });
+        btnSubmit.setOnClickListener(v ->{
+            mViewModel.SubmitUpLine(txtUpline.getText().toString(), new VMAgentList.OnTaskExecute() {
+                @Override
+                public void OnExecute() {
+                    poLoading.initDialog("Agent Upline", "Saving upline. Please wait...", false);
+                    poLoading.show();
+
+                }
+
+                @Override
+                public void OnSuccess() {
+                    poLoading.dismiss();
+
+                    poMessage.setMessage("Agent Upline user id successfully submitted.");
+                    poMessage.show();
+                }
+
+                @Override
+                public void OnFailed(String message) {
+                    poLoading.dismiss();
+
+                    poMessage.setMessage(message);
+                    poMessage.show();
+
+                }
+            });
+        });
+
+
     }
     @Override
     public void finish() {
