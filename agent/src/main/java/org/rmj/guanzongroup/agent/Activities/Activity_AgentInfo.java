@@ -3,16 +3,16 @@ package org.rmj.guanzongroup.agent.Activities;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.rmj.guanzongroup.agent.Adapter.Adapter_Fragment;
+import org.rmj.guanzongroup.agent.Fragment.Fragment_AgentPerformance;
 import org.rmj.guanzongroup.agent.Fragment.Fragment_SubAgentInquiry;
 import org.rmj.guanzongroup.agent.Fragment.Fragment_SubAgents;
-import org.rmj.guanzongroup.agent.Fragment.Fragment_AgentPerformance;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
 
@@ -24,7 +24,7 @@ public class Activity_AgentInfo extends AppCompatActivity {
     private ViewPager mPager;
     private TabLayout tablayout_agentInfo;
     private ViewPager viewPager;
-    private Toolbar toolbar;
+    private MaterialToolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

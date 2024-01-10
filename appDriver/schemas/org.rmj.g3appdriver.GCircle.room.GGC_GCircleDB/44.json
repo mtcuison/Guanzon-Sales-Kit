@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 44,
-    "identityHash": "0ce2595f9b82c3749914f63cb88d64c8",
+    "identityHash": "a3b9de3a5271b89e3c371f0758c7ade3",
     "entities": [
       {
         "tableName": "Branch_Info",
@@ -5793,13 +5793,19 @@
       },
       {
         "tableName": "KPOP_Agent_Role",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `sEnrollBy` TEXT, `dEnrolled` TEXT, `nRoleIDxx` TEXT, `sUpprNdID` TEXT, `sRoleDesc` TEXT, `sEmailAdd` TEXT, `sMobileNo` TEXT, `sUserName` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sUserIDxx`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sUserIDxx` TEXT, `sEnrollBy` TEXT, `dEnrolled` TEXT, `nRoleIDxx` TEXT, `sUpprNdID` TEXT, `sRoleDesc` TEXT, `sEmailAdd` TEXT, `sMobileNo` TEXT, `sUserName` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`))",
         "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
           {
             "fieldPath": "UserIDxx",
             "columnName": "sUserIDxx",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "EnrollBy",
@@ -5865,7 +5871,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "sUserIDxx"
+            "sTransNox"
           ]
         },
         "indices": [],
@@ -6137,7 +6143,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ce2595f9b82c3749914f63cb88d64c8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a3b9de3a5271b89e3c371f0758c7ade3')"
     ]
   }
 }
