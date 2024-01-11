@@ -3,6 +3,8 @@ package org.rmj.guanzongroup.agent.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +16,9 @@ import com.google.android.material.textview.MaterialTextView;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
+import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.R;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialToolbar toolbar;
@@ -32,11 +36,32 @@ public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialCardView mcv_totallost;
     private SalesKit poSalesKit;
     private EmployeeSession poSession;
+    private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_performance);
+
+        poMessage = new MessageBox(this);
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+            @Override
+            public void OnButtonClick(View view, AlertDialog dialog) {
+                dialog.dismiss();
+
+                Intent loIntent = new Intent(Activity_UserPerformance.this, Activity_Settings.class);
+                startActivity(loIntent);
+                finish();
+            }
+        });
+
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == false){
+            poMessage.setMessage("Must complete account to use this feature");
+            poMessage.show();
+        }
 
         poSalesKit = new SalesKit(getApplication());
         poSession = EmployeeSession.getInstance(this);
@@ -50,6 +75,7 @@ public class Activity_UserPerformance extends AppCompatActivity {
         totalsold = findViewById(R.id.totalsold);
         totaleng = findViewById(R.id.totaleng);
         totallost = findViewById(R.id.totallost);
+        totalsales = findViewById(R.id.totalsales);
 
         mcv_totalopen = findViewById(R.id.mcv_totalopen);
         mcv_totalextr = findViewById(R.id.mcv_totalextr);
@@ -73,13 +99,21 @@ public class Activity_UserPerformance extends AppCompatActivity {
         poSalesKit.GetCountEntries().observe(this, new Observer<DGanadoOnline.CountEntries>() {
             @Override
             public void onChanged(DGanadoOnline.CountEntries countEntries) {
-                Log.d("User Performance", String.valueOf(poSession.getUserName()));
 
-                totalopen.setText(String.valueOf(countEntries.nOpen));
-                totalextr.setText(String.valueOf(countEntries.nExtracted));
-                totalsold.setText(String.valueOf(countEntries.nSold));
-                totaleng.setText(String.valueOf(countEntries.nEngaged));
-                totallost.setText(String.valueOf(countEntries.nLost));
+                int nOpen = countEntries.nOpen;
+                int nExtracted = countEntries.nExtracted;
+                int nSold = countEntries.nSold;
+                int nEngaged = countEntries.nEngaged;
+                int nLost = countEntries.nLost;
+
+                int totalEntries = nOpen + nExtracted + nSold + nEngaged + nLost;
+
+                totalopen.setText(String.valueOf(nOpen));
+                totalextr.setText(String.valueOf(nExtracted));
+                totalsold.setText(String.valueOf(nSold));
+                totaleng.setText(String.valueOf(nEngaged));
+                totallost.setText(String.valueOf(nLost));
+                totalsales.setText(String.valueOf(totalEntries));
 
                 username.setText(poSession.getUserName());
             }

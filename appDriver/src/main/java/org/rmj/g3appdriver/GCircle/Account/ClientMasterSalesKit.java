@@ -36,6 +36,66 @@ public class ClientMasterSalesKit {
     public String getMessage() {
         return message;
     }
+    public void SaveLocalProfile(EClientInfoSalesKit foClient){
+        poDao.insert(foClient);
+    }
+    public boolean ImportClientProfile(String sUserIDxx){
+        try {
+            //REQUEST TO SERVER
+            String lsResponse = WebClient.sendRequest(
+                    poApiConnect.getImportAccountInfoAPI(),
+                    new JSONObject().toString(),
+                    poHeaders.getHeaders());
+
+            if(lsResponse == null){
+                message = SERVER_NO_RESPONSE;
+                return false;
+            }
+
+            JSONObject loResponse = new JSONObject(lsResponse);
+            String lsResult = loResponse.getString("result");
+            if(!lsResult.equalsIgnoreCase("success")){
+                JSONObject loError = loResponse.getJSONObject("error");
+                message = getErrorMessage(loError);
+                return false;
+            }
+
+            //SAVE TO LOCAL DEVICE
+            EClientInfoSalesKit foClient = new EClientInfoSalesKit();
+            foClient.setUserIDxx(loResponse.get("sUserIDxx").toString());
+            foClient.setClientID(loResponse.get("sClientID").toString());
+            foClient.setEmailAdd(loResponse.get("sEmailAdd").toString());
+            foClient.setMobileNo(loResponse.get("sMobileNo").toString());
+            foClient.setUserName(loResponse.get("sLastName").toString() + " " + loResponse.get("sSuffixNm").toString() + ", " +
+                    loResponse.get("sFrstName").toString() + " " + loResponse.get("sMiddName").toString());
+            foClient.setLastName(loResponse.get("sLastName").toString());
+            foClient.setFrstName(loResponse.get("sFrstName").toString());
+            foClient.setMiddName(loResponse.get("sMiddName").toString());
+            foClient.setSuffixNm(loResponse.get("sSuffixNm").toString());
+            foClient.setMaidenNm(loResponse.get("sMaidenNm").toString());
+            foClient.setGenderCd(loResponse.get("cGenderCd").toString());
+            foClient.setCvilStat(loResponse.get("cCvilStat").toString());
+            foClient.setBirthDte(loResponse.get("dBirthDte").toString());
+            foClient.setBirthPlc(loResponse.get("sBirthPlc").toString());
+            foClient.setHouseNo1(loResponse.get("sHouseNo1").toString());
+            foClient.setAddress1(loResponse.get("sAddress1").toString());
+            foClient.setBrgyIDx1(loResponse.get("sBrgyIDx1").toString());
+            foClient.setTownIDx1(loResponse.get("sTownIDx1").toString());
+            foClient.setHouseNo2(loResponse.get("sHouseNo2").toString());
+            foClient.setAddress2(loResponse.get("sAddress2").toString());
+            foClient.setBrgyIDx2(loResponse.get("sBrgyIDx2").toString());
+            foClient.setTownIDx2(loResponse.get("sTownIDx2").toString());
+            foClient.setVerified(Integer.valueOf(loResponse.get("cVerified").toString()));
+
+            poDao.insert(foClient);
+
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            message = getLocalMessage(e);
+            return false;
+        }
+    }
     public boolean CompleteClientInfo(EClientInfoSalesKit foClient){
         try {
             JSONObject param = new JSONObject();
@@ -89,69 +149,10 @@ public class ClientMasterSalesKit {
             return false;
         }
     }
-    public boolean ImportClientProfile(String sUserIDxx){
-        try {
-            //REQUEST TO SERVER
-            String lsResponse = WebClient.sendRequest(
-                    poApiConnect.getImportAccountInfoAPI(),
-                    new JSONObject().toString(),
-                    poHeaders.getHeaders());
-
-            if(lsResponse == null){
-                message = SERVER_NO_RESPONSE;
-                return false;
-            }
-
-            JSONObject loResponse = new JSONObject(lsResponse);
-            String lsResult = loResponse.getString("result");
-            if(!lsResult.equalsIgnoreCase("success")){
-                JSONObject loError = loResponse.getJSONObject("error");
-                message = getErrorMessage(loError);
-                return false;
-            }
-
-            //SAVE TO LOCAL DEVICE
-            EClientInfoSalesKit foClient = new EClientInfoSalesKit();
-            foClient.setUserIDxx(loResponse.get("sUserIDxx").toString());
-            foClient.setClientID(loResponse.get("sClientID").toString());
-            foClient.setEmailAdd(loResponse.get("sEmailAdd").toString());
-            foClient.setMobileNo(loResponse.get("sMobileNo").toString());
-            foClient.setUserName(loResponse.get("sLastName").toString() + " " + loResponse.get("sSuffixNm").toString() + ", " +
-                    loResponse.get("sFrstName").toString() + " " + loResponse.get("sMiddName").toString());
-            foClient.setLastName(loResponse.get("sLastName").toString());
-            foClient.setFrstName(loResponse.get("sFrstName").toString());
-            foClient.setMiddName(loResponse.get("sMiddName").toString());
-            foClient.setSuffixNm(loResponse.get("sSuffixNm").toString());
-            foClient.setMaidenNm(loResponse.get("sMaidenNm").toString());
-            foClient.setGenderCd(loResponse.get("cGenderCd").toString());
-            foClient.setCvilStat(loResponse.get("cCvilStat").toString());
-            foClient.setBirthDte(loResponse.get("dBirthDte").toString());
-            foClient.setBirthPlc(loResponse.get("sBirthPlc").toString());
-            foClient.setHouseNo1(loResponse.get("sHouseNo1").toString());
-            foClient.setAddress1(loResponse.get("sAddress1").toString());
-            foClient.setBrgyIDx1(loResponse.get("sBrgyIDx1").toString());
-            foClient.setTownIDx1(loResponse.get("sTownIDx1").toString());
-            foClient.setHouseNo2(loResponse.get("sHouseNo2").toString());
-            foClient.setAddress2(loResponse.get("sAddress2").toString());
-            foClient.setBrgyIDx2(loResponse.get("sBrgyIDx2").toString());
-            foClient.setTownIDx2(loResponse.get("sTownIDx2").toString());
-            foClient.setVerified(Integer.valueOf(loResponse.get("cVerified").toString()));
-
-
-            poDao.insert(foClient);
-
-
-            return true;
-        } catch (Exception e){
-            e.printStackTrace();
-            message = getLocalMessage(e);
-            return false;
-        }
+    public void RemoveProfileSession(){
+        poDao.DeleteProfile();
     }
     public LiveData<EClientInfoSalesKit> GetProfileAccount(){
         return poDao.getClientInfo();
-    }
-    public void RemoveProfileSession(){
-        poDao.DeleteProfile();
     }
 }

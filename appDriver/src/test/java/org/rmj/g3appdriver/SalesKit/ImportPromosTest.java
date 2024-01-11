@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RunWith(JUnit4.class)
-public class ImportKpopAgentsTest {
+public class ImportPromosTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
@@ -41,19 +41,16 @@ public class ImportKpopAgentsTest {
         headers.put("g-api-user", "GAP0190004"); //USER ID
         headers.put("g-api-mobile", "09260375777"); //USER MOBILE
         headers.put("g-api-token", "12312312"); //USER TOKEN
-
     }
     @Test
-    public void TestUpdateAddress(){
-        String sURL = "http://192.168.10.68:8080/saleskit/importagents.php";
+    public void TestImportPromos(){
+        String sURL = "http://192.168.10.68:8080/saleskit/import_promo_link.php";
         try {
             JSONObject loParams = new JSONObject();
 
-            /**TABLE: kpop_agent_role, agent_role, app_user_master
-             * RUN QUERY: SELECT * FROM kpop_agent_role a
-             * LEFT JOIN agent_role b ON (a.nRoleIDxx = b.nRoleIDxx)
-             * LEFT JOIN app_user_master c ON (a.sUserIDxx = c.sUserIDxx)
-             * ACTION: MATCH RETURNED ROWS FROM --> TABLE VS. RESULT*/
+            /**TABLE: G_Card_Promo_Link
+            RUN QUERY: SELECT * FROM G_Card_Promo_Link WHERE dDateThru > NOW() ORDER BY dTransact DESC LIMIT 5
+            ACTION: MATCH RETURNED ROWS FROM --> TABLE VS. RESULT*/
 
             String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
@@ -61,15 +58,41 @@ public class ImportKpopAgentsTest {
             JSONObject loRes = new JSONObject(response);
             assertEquals("success", loRes.get("result")); //result should be success
 
-            JSONArray loArr = loRes.getJSONArray("initagents");
+            JSONArray loArr = loRes.getJSONArray("detail");
             assertTrue(loArr.length() > 0); //result should be greater than 0
 
             for (int i = 0; i < loArr.length(); i++){
-                JSONObject loObj = loArr.getJSONObject(i).getJSONObject("agents");
+                JSONObject loObj = loArr.getJSONObject(i);
                 System.out.println(loObj);
                 assertNotNull(loObj); //result should not be null
             }
-        } catch (Exception e) {
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    @Test
+    public void TestImportEvents(){
+        /*API HAS STATIC VALUES. NO SQL QUERIES EXECUTED*/
+
+        String sURL = "http://192.168.10.68:8080/saleskit/import_events.php";
+        try {
+            JSONObject loParams = new JSONObject();
+
+            String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
+            System.out.println(response);
+
+            JSONObject loRes = new JSONObject(response);
+            assertEquals("success", loRes.get("result")); //result should be success
+
+            JSONArray loArr = loRes.getJSONArray("detail");
+            assertTrue(loArr.length() > 0); //result should be greater than 0
+
+            for (int i = 0; i < loArr.length(); i++){
+                JSONObject loObj = loArr.getJSONObject(i);
+                System.out.println(loObj);
+                assertNotNull(loObj); //result should not be null
+            }
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }

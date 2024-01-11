@@ -20,13 +20,14 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
-import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
-import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
 import org.rmj.guanzon.guanzonsaleskit.databinding.ActivityHomeBinding;
 import org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll;
 import org.rmj.guanzongroup.agent.Activities.Activity_AgentList;
+import org.rmj.guanzongroup.agent.Activities.Activity_SelectUpLine;
+import org.rmj.guanzongroup.agent.Activities.Activity_UserPerformance;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 
@@ -36,11 +37,6 @@ public class Activity_Home extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
     private NavigationView navigationView;
-    private MessageBox poMessage;
-
-    public Boolean IsCompleteAccount(){
-        return isCompleteAccount;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +50,12 @@ public class Activity_Home extends AppCompatActivity {
                 if (eClientInfoSalesKit == null){
                     isCompleteAccount = false;
                 }else {
-                    isCompleteAccount = true;
+                    if (eClientInfoSalesKit.getClientID().isEmpty()){
+                        isCompleteAccount = false;
+                    }else {
+                        isCompleteAccount = true;
+                    }
                 }
-            }
-        });
-
-        poMessage = new MessageBox(this);
-        poMessage.initDialog();
-        poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-            @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
             }
         });
 
@@ -80,7 +70,8 @@ public class Activity_Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_inquiry, R.id.nav_agent_enroll, R.id.nav_agent_list,R.id.nav_profile)
+                R.id.nav_home, R.id.nav_inquiry, R.id.nav_agent_enroll, R.id.nav_agent_list,R.id.nav_profile,
+                R.id.nav_setupline, R.id.nav_userperform, R.id.nav_log_out)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -98,27 +89,38 @@ public class Activity_Home extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (isCompleteAccount){
-            Intent loIntent;
-            if(item.getItemId() == android.R.id.home){
+        Intent loIntent;
 
-            } else if (item.getItemId() == R.id.nav_agent_list) {
-                loIntent = new Intent(Activity_Home.this, Activity_AgentList.class);
-                startActivity(loIntent);
-            }else if (item.getItemId() == R.id.nav_agent_enroll) {
-                loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);
-                startActivity(loIntent);
-            }else if (item.getItemId() == R.id.nav_profile) {
-                loIntent = new Intent(Activity_Home.this, Activity_Settings.class);
-                startActivity(loIntent);
-            }
-            else if (item.getItemId() == R.id.nav_inquiry) {
-                loIntent = new Intent(Activity_Home.this, Activity_Inquiries.class);
-                startActivity(loIntent);
-            }
-        }else {
-            poMessage.setMessage(String.valueOf(isCompleteAccount));
-            poMessage.show();
+        if(item.getItemId() == android.R.id.home) {
+
+        } else if (item.getItemId() == R.id.nav_inquiry) {
+            loIntent = new Intent(Activity_Home.this, Activity_Inquiries.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_setupline) {
+            loIntent = new Intent(Activity_Home.this, Activity_SelectUpLine.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_agent_enroll) {
+            loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        } else if (item.getItemId() == R.id.nav_agent_list) {
+            loIntent = new Intent(Activity_Home.this, Activity_AgentList.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_profile) {
+            loIntent = new Intent(Activity_Home.this, Activity_Settings.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_userperform) {
+            loIntent = new Intent(Activity_Home.this, Activity_UserPerformance.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
+        }else if (item.getItemId() == R.id.nav_log_out) {
+            loIntent = new Intent(Activity_Home.this, Activity_Login.class);
+            loIntent.putExtra("isComplete", isCompleteAccount);
+            startActivity(loIntent);
         }
 
         return super.onOptionsItemSelected(item);

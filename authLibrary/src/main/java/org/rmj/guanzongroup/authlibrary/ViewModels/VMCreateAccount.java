@@ -18,6 +18,10 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.lib.Account.AccountMaster;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
@@ -40,7 +44,6 @@ public class VMCreateAccount extends AndroidViewModel{
         this.poSys = new AccountMaster(instance).initGuanzonApp().getInstance(Auth.CREATE_ACCOUNT);
         this.poConn = new ConnectionUtil(instance);
     }
-
     public void SubmitInfo(AccountInfo accountInfo, CreateAccountCallBack callBack){
         TaskExecutor.Execute(accountInfo, new OnTaskExecuteListener() {
             @Override
@@ -62,6 +65,7 @@ public class VMCreateAccount extends AndroidViewModel{
                         message = poSys.getMessage();
                         return false;
                     }
+
                     return true;
                 } catch (Exception e){
                     e.printStackTrace();

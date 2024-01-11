@@ -21,14 +21,12 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
-import org.rmj.g3appdriver.GConnect.room.Entities.EClientInfo;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMCompleteAccount;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Activity_CompleteAccount extends AppCompatActivity {
@@ -57,7 +55,6 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_account);
 
-        mViewModel = new ViewModelProvider(this).get(VMCompleteAccount.class);
         poDialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
@@ -69,6 +66,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
             @Override
             public void OnButtonClick(View view, AlertDialog dialog) {
                 dialog.dismiss();
+                finish();
             }
         });
 
@@ -96,6 +94,26 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
+        mViewModel = new ViewModelProvider(this).get(VMCompleteAccount.class);
+        mViewModel.GetCompleteProfile().observe(this, new Observer<EClientInfoSalesKit>() {
+            @Override
+            public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
+                if (eClientInfoSalesKit == null){
+                    poMessage.setMessage("User profile not found");
+                    poMessage.show();
+                }else {
+                    String fstname = eClientInfoSalesKit.getFrstName();
+                    String midname = eClientInfoSalesKit.getMiddName();
+                    String lstname = eClientInfoSalesKit.getLastName();
+                    String suffix = eClientInfoSalesKit.getSuffixNm();
+
+                    tie_ca_fname.setText(fstname);
+                    tie_ca_mname.setText(midname);
+                    tie_ca_lname.setText(lstname);
+                    tie_ca_suffix.setText(suffix);
+                }
+            }
+        });
         mViewModel.GetTownProvinceList().observe(Activity_CompleteAccount.this, new Observer<List<DTownInfo.TownProvinceInfo>>() {
             @Override
             public void onChanged(List<DTownInfo.TownProvinceInfo> loList) {

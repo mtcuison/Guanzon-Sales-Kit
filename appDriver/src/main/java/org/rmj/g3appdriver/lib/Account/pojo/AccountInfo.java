@@ -64,6 +64,22 @@ public class AccountInfo {
         Suffix = suffix;
     }
 
+    public String getLastName() {
+        return LastName;
+    }
+
+    public String getFrstName() {
+        return FrstName;
+    }
+
+    public String getMiddName() {
+        return MiddName;
+    }
+
+    public String getSuffix() {
+        return Suffix;
+    }
+
     public String getEmail() {
         return Email;
     }

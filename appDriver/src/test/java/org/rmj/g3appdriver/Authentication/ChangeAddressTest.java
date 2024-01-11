@@ -25,7 +25,7 @@ public class ChangeAddressTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
-        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+        /**NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
          * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
          * REQUIRED: Change 'dLogInxxx' column date to current date.*/
 
@@ -68,7 +68,7 @@ public class ChangeAddressTest {
             loParams.put("sSourceCD", "NULL");
             loParams.put("sSourceNo", "NULL");
 
-            /*IF SUCCESSFUL, SEARCH RETURNED TRANSACTION NO TO TABLE--> ADDRESS_UPDATE_REQUEST*/
+            /**IF SUCCESSFUL, SEARCH RETURNED TRANSACTION NO TO TABLE--> ADDRESS_UPDATE_REQUEST*/
             String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
 

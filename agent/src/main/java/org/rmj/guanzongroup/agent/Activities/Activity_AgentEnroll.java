@@ -1,6 +1,7 @@
 package org.rmj.guanzongroup.agent.Activities;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +18,13 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.Adapter.AgentListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 import java.util.Objects;
 
 public class Activity_AgentEnroll extends AppCompatActivity {
     private VMAgentList mViewModel;
+    private MaterialToolbar toolbar;
     private RecyclerView rvAgentList;
     private AgentListAdapter adapter;
     private LoadDialog poLoading;
@@ -29,9 +32,35 @@ public class Activity_AgentEnroll extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(Activity_AgentEnroll.this).get(VMAgentList.class);
         setContentView(R.layout.activity_agent_enroll);
-        initView();
+
+        poLoading = new LoadDialog(Activity_AgentEnroll.this);
+        poMessage = new MessageBox(Activity_AgentEnroll.this);
+
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", (view, dialog) -> {
+            dialog.dismiss();
+
+            Intent loIntent = new Intent(Activity_AgentEnroll.this, Activity_Settings.class);
+            startActivity(loIntent);
+            finish();
+        });
+
+        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+        if (isComplete == false){
+            poMessage.setMessage("Must complete account to use this feature");
+            poMessage.show();
+        }
+
+        mViewModel = new ViewModelProvider(Activity_AgentEnroll.this).get(VMAgentList.class);
+
+        rvAgentList = findViewById(R.id.rvAgentEnroll);
+        toolbar = findViewById(R.id.toolbar_agent);
+
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mViewModel.ImportKPOPAgent(new VMAgentList.OnTaskExecute() {
             @Override
@@ -39,8 +68,6 @@ public class Activity_AgentEnroll extends AppCompatActivity {
                 poLoading = new LoadDialog(Activity_AgentEnroll.this);
                 poLoading.initDialog("Agent Enroll", "Please wait for a while.", false);
                 poLoading.show();
-
-
             }
 
             @Override
@@ -74,27 +101,15 @@ public class Activity_AgentEnroll extends AppCompatActivity {
 
                 });
                 rvAgentList.setAdapter(adapter);
-
             }
         });
 
     }
-    private void initView() {
-        rvAgentList = findViewById(R.id.rvAgentList);
-//        searchView = findViewById(R.id.searchview);
-
-        MaterialToolbar toolbar = findViewById(R.id.toolbar_agent);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-    }
-
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){

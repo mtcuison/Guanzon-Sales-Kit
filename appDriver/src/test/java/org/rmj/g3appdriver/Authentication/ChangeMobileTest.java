@@ -20,7 +20,7 @@ public class ChangeMobileTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
-        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+        /**NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
          * EXECUTE SQL: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
          * ACTION: Change 'dLogInxxx' column date to current date.*/
 
@@ -55,7 +55,7 @@ public class ChangeMobileTest {
             loParams.put("sSourceCD", "NULL");
             loParams.put("sSourceNo", "NULL");
 
-            /*IF SUCCESSFUL REQUEST, SEARCH RETURNED TRANSACTION NO TO TABLE--> MOBILE_UPDATE_REQUEST*/
+            /**IF SUCCESSFUL REQUEST, SEARCH RETURNED TRANSACTION NO TO TABLE--> MOBILE_UPDATE_REQUEST*/
             String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
 

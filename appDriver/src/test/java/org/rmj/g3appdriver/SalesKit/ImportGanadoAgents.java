@@ -22,9 +22,9 @@ public class ImportGanadoAgents {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
-        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+        /**NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
          * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
-         * REQUIRED: Change 'dLogInxxx' column date to current date.*/
+         * REQUIRED: Change 'dLogInxxx' column date to current date and time.*/
 
         Calendar calendar = Calendar.getInstance();
         //Create the header section needed by the API
@@ -49,7 +49,10 @@ public class ImportGanadoAgents {
         try {
             JSONObject loParams = new JSONObject();
 
-            /*IF SUCCESSFUL, SEARCH RETURNED TRANSACTION NO TO TABLE--> ADDRESS_UPDATE_REQUEST*/
+            /**TABLE: Ganado_Online
+             * RUN QUERY: SELECT * FROM Ganado_Online
+             * ACTION: MATCH RETURNED ROWS FROM --> TABLE VS. RESULT*/
+
             String response = WebClient.sendRequest(sURL, loParams.toString(), (HashMap<String, String>) headers);
             System.out.println(response);
 
@@ -57,12 +60,12 @@ public class ImportGanadoAgents {
             assertEquals("success", loRes.get("result")); //result should be success
 
             JSONArray loArr = loRes.getJSONArray("detail");
-            assertTrue(loArr.length() > 0);
+            assertTrue(loArr.length() > 0); //result should be greater than 0
 
             for (int i = 0; i < loArr.length(); i++){
                 JSONObject loObj = loArr.getJSONObject(i);
                 System.out.println(loObj);
-                assertNotNull(loObj);
+                assertNotNull(loObj); //result should not be null
             }
         }catch (Exception e){
             System.out.println(e.getMessage());

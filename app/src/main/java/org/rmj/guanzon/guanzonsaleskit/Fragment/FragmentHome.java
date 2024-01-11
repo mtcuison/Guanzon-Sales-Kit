@@ -12,19 +12,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Promotions.Adapter_ImageSlider;
 import org.rmj.g3appdriver.lib.Promotions.model.HomeImageSliderModel;
 import org.rmj.guanzon.guanzonsaleskit.Activities.Activity_Home;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
+import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.Activities.Activity_BrandSelection;
 
 import java.util.ArrayList;
@@ -33,37 +37,42 @@ import java.util.List;
 public class FragmentHome extends Fragment {
     private static final String TAG = FragmentHome.class.getSimpleName();
     private VMHome mViewModel;
+    private Boolean isCompleteAccount;
+    private MaterialTextView textView1;
     private SliderView poSliderx;
     private MaterialCardView selectAuto;
     private MaterialCardView selectMC;
     private MessageBox loMessage;
-    public FragmentHome() {}
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(requireActivity()).get(VMHome.class);
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         loMessage = new MessageBox(getActivity());
         loMessage.initDialog();
         loMessage.setTitle("Under Development");
-        loMessage.setPositiveButton("Dismiss", new MessageBox.DialogButton() {
+
+        mViewModel = new ViewModelProvider(requireActivity()).get(VMHome.class);
+        mViewModel.GetCompleteProfile().observe(requireActivity(), new Observer<EClientInfoSalesKit>() {
             @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
+            public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
+                if (eClientInfoSalesKit == null){
+                    isCompleteAccount = false;
+                }else {
+                    if (eClientInfoSalesKit.getClientID().isEmpty()){
+                        isCompleteAccount = false;
+                    }else {
+                        isCompleteAccount = true;
+                    }
+                }
             }
         });
 
-        initViews(view);
-        displayData();
+        textView1 = view.findViewById(R.id.textView1);
+        poSliderx = view.findViewById(R.id.imgSlider);
 
-        return view;
-    }
-
-    private void initViews(View v) {
-        poSliderx = v.findViewById(R.id.imgSlider);
         poSliderx.setIndicatorAnimation(IndicatorAnimationType.WORM);
         poSliderx.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         poSliderx.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
@@ -72,24 +81,33 @@ public class FragmentHome extends Fragment {
         poSliderx.setScrollTimeInSec(5);
         poSliderx.startAutoCycle();
 
-        selectAuto = v.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView) ;
-        selectMC =  v.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView1);
-
-    }
-
-    private void displayData() {
-        Activity_Home parent = (Activity_Home) getActivity();
-        Boolean isComplete = parent.IsCompleteAccount();
+        selectAuto = view.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView) ;
+        selectMC =  view.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView1);
 
         setSliderImages();
         selectAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isComplete){ //allow to use feature
+                if (isCompleteAccount){ //allow to use feature
                     loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
+                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                        @Override
+                        public void OnButtonClick(View view, AlertDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    });
                     loMessage.show();
                 }else { //must complete first account
                     loMessage.setMessage("Must complete account to access this feature");
+                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                        @Override
+                        public void OnButtonClick(View view, AlertDialog dialog) {
+                            dialog.dismiss();
+
+                            Intent loIntent = new Intent(requireActivity(), Activity_Settings.class);
+                            startActivity(loIntent);
+                        }
+                    });
                     loMessage.show();
                 }
             }
@@ -97,16 +115,27 @@ public class FragmentHome extends Fragment {
         selectMC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isComplete){ //allow to use feature
+                if (isCompleteAccount){ //allow to use feature
                     Intent intent = new Intent(requireActivity(), Activity_BrandSelection.class);
                     intent.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
                     startActivity(intent);
                 }else { //must complete first account
                     loMessage.setMessage("Must complete account to access this feature");
+                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                        @Override
+                        public void OnButtonClick(View view, AlertDialog dialog) {
+                            dialog.dismiss();
+
+                            Intent loIntent = new Intent(requireActivity(), Activity_Settings.class);
+                            startActivity(loIntent);
+                        }
+                    });
                     loMessage.show();
                 }
             }
         });
+
+        return view;
     }
 
     private void setSliderImages() {
@@ -117,20 +146,28 @@ public class FragmentHome extends Fragment {
                     Log.e(TAG, ePromos.get(x).getImageUrl());
                     loSliders.add(new HomeImageSliderModel(ePromos.get(x).getImageUrl()));
                 }
-                Log.e(TAG, String.valueOf(ePromos.size()));
-                Adapter_ImageSlider adapter = new Adapter_ImageSlider(loSliders, args -> {
-                    try{
-                        Log.e(TAG,  ePromos.get(args).getPromoUrl());
-                        Intent intent = new Intent("android.intent.action.SUCCESS_LOGIN");
-                        intent.putExtra("url_link", ePromos.get(args).getPromoUrl());
-                        intent.putExtra("browser_args", "1");
-                        intent.putExtra("args", "promo");
-                        requireActivity().sendBroadcast(intent);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                });
-                poSliderx.setSliderAdapter(adapter);
+                if (ePromos.size() > 0){
+                    //set visibility if there is current promos and events
+                    textView1.setVisibility(View.VISIBLE);
+                    poSliderx.setVisibility(View.VISIBLE);
+
+                    Adapter_ImageSlider adapter = new Adapter_ImageSlider(loSliders, args -> {
+                        try{
+                            Intent intent = new Intent("android.intent.action.SUCCESS_LOGIN");
+                            intent.putExtra("url_link", ePromos.get(args).getPromoUrl());
+                            intent.putExtra("browser_args", "1");
+                            intent.putExtra("args", "promo");
+                            requireActivity().sendBroadcast(intent);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    });
+                    poSliderx.setSliderAdapter(adapter);
+                }else {
+                    //set visibility if there is current promos and events
+                    textView1.setVisibility(View.GONE);
+                    poSliderx.setVisibility(View.GONE);
+                }
 
             } catch (Exception e){
                 e.printStackTrace();

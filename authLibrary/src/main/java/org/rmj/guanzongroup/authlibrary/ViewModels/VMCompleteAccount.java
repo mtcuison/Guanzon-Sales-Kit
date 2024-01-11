@@ -32,6 +32,9 @@ public class VMCompleteAccount extends AndroidViewModel {
         this.poTown = new Town(application);
         this.poBrgy = new Barangay(application);
     }
+    public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
+        return poClMaster.GetProfileAccount();
+    }
     public LiveData<List<DTownInfo.TownProvinceInfo>> GetTownProvinceList() {
         return poTown.getTownProvinceInfo();
     }
