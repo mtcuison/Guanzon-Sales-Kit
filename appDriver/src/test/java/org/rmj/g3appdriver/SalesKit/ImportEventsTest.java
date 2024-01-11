@@ -1,5 +1,10 @@
 package org.rmj.g3appdriver.SalesKit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,14 +18,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RunWith(JUnit4.class)
-public class ImportPromosEvents {
-
+public class ImportEventsTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
-        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+        /**NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
          * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
-         * REQUIRED: Change 'dLogInxxx' column date to current date.*/
+         * REQUIRED: Change 'dLogInxxx' column date to current date and time.*/
 
         Calendar calendar = Calendar.getInstance();
         //Create the header section needed by the API
@@ -37,11 +41,12 @@ public class ImportPromosEvents {
         headers.put("g-api-user", "GAP0190004"); //USER ID
         headers.put("g-api-mobile", "09260375777"); //USER MOBILE
         headers.put("g-api-token", "12312312"); //USER TOKEN
-
     }
     @Test
-    public void TestImportPromosEvents(){
-        String sURL = "http://192.168.10.68:8080/gcard/import_promo_link.php";
+    public void TestImportEvents(){
+        /*API HAS STATIC VALUES. NO SQL QUERIES EXECUTED*/
+
+        String sURL = "http://192.168.10.68:8080/saleskit/import_events.php";
         try {
             JSONObject loParams = new JSONObject();
 
@@ -53,3 +58,4 @@ public class ImportPromosEvents {
         }
     }
 }
+

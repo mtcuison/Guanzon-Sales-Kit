@@ -37,7 +37,7 @@ public class RequestOTPTest {
     private Map<String, String> headers;
     @Before
     public void SetUp(){
-        /*NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
+        /**NOTE: RUN THIS ON 192.168.10.224 (TEST DATABASE) TO INITIALIZE HEADERS PROPERLY
          * RUN: SELECT * FROM xxxSysUserLog WHERE  sUserIDxx = 'GAP0190004' AND sLogNoxxx = "GAP023110901" AND sProdctID = "gRider";
          * REQUIRED: Change 'dLogInxxx' column date to current date.*/
 
@@ -59,6 +59,10 @@ public class RequestOTPTest {
     }
     @Test
     public void TestOTP(){
+        /**TABLE: App_User_Master (Column Affected: sOTPasswd), HotLine_Outgoing
+         RUN QUERY: SELECT * FROM HotLine_Outgoing, SELECT * FROM App_User_Master
+         ACTION: CHECK AFFECTED COLUMNS AND TABLES*/
+
         String sURL = "http://192.168.10.68:8080/security/OTPGenerator.php";
         try {
             JSONObject params = new JSONObject();

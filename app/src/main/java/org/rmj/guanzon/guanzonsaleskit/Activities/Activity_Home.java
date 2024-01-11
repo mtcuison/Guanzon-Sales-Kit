@@ -47,10 +47,14 @@ public class Activity_Home extends AppCompatActivity {
         mviewModel.GetCompleteProfile().observe(Activity_Home.this, new Observer<EClientInfoSalesKit>() {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
-                if (eClientInfoSalesKit.getClientID().isEmpty()){
+                if (eClientInfoSalesKit == null){
                     isCompleteAccount = false;
                 }else {
-                    isCompleteAccount = true;
+                    if (eClientInfoSalesKit.getClientID().isEmpty()){
+                        isCompleteAccount = false;
+                    }else {
+                        isCompleteAccount = true;
+                    }
                 }
             }
         });

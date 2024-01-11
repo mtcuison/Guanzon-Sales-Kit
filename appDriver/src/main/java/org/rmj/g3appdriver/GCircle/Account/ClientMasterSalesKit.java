@@ -36,6 +36,9 @@ public class ClientMasterSalesKit {
     public String getMessage() {
         return message;
     }
+    public void SaveLocalProfile(EClientInfoSalesKit foClient){
+        poDao.insert(foClient);
+    }
     public boolean ImportClientProfile(String sUserIDxx){
         try {
             //REQUEST TO SERVER

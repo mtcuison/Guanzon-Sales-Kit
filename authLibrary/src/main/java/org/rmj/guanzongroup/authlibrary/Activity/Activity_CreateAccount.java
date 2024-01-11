@@ -3,6 +3,7 @@ package org.rmj.guanzongroup.authlibrary.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,6 +12,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -68,6 +70,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
 
         lbl_versionInfo.setText(poConfigx.getVersionInfo());
         btn_createAccount.setOnClickListener(view -> {
+
             AccountInfo accountInfo = new AccountInfo();
             accountInfo.setLastName(Objects.requireNonNull(tieLastname.getText()).toString());
             accountInfo.setFrstName(Objects.requireNonNull(tieFirstname.getText()).toString());
@@ -96,8 +99,11 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
         loMessage.initDialog();
         loMessage.setTitle("Create Account");
         loMessage.setMessage("A verification email has been sent to your email account. Please check your inbox or spam folder.");
-        loMessage.setPositiveButton("Okay", (view, msgDialog) -> msgDialog.dismiss());
+        loMessage.setPositiveButton("Close", (view, msgDialog) -> msgDialog.dismiss());
         loMessage.show();
+
+        Intent loIntent = new Intent(Activity_CreateAccount.this, Activity_Login.class);
+        startActivity(loIntent);
     }
 
     @Override
@@ -106,7 +112,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
         loMessage.initDialog();
         loMessage.setTitle("Create Account");
         loMessage.setMessage(message);
-        loMessage.setPositiveButton("Okay", (view, msgDialog) -> msgDialog.dismiss());
+        loMessage.setPositiveButton("Close", (view, msgDialog) -> msgDialog.dismiss());
         loMessage.show();
     }
 

@@ -8,7 +8,9 @@ import android.app.Application;
 import android.util.Log;
 
 import org.json.JSONObject;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
@@ -16,17 +18,17 @@ import org.rmj.g3appdriver.lib.Account.pojo.AccountInfo;
 
 public class Register implements iAuth {
     private static final String TAG = Register.class.getSimpleName();
-
     private final Application instance;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
-
+    private final ClientMasterSalesKit poClientMaster;
     private String message;
 
     public Register(Application instance) {
         this.instance = instance;
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
+        this.poClientMaster = new ClientMasterSalesKit(instance);
     }
     @Override
     public int DoAction(Object args) {
@@ -60,6 +62,19 @@ public class Register implements iAuth {
                 Log.e(TAG, message);
                 return 0;
             }
+
+            String sUserIDxx = loResponse.get("userid").toString();
+
+            EClientInfoSalesKit foClient = new EClientInfoSalesKit();
+            foClient.setUserIDxx(sUserIDxx);
+            foClient.setFrstName(loInfo.getFrstName());
+            foClient.setMiddName(loInfo.getMiddName());
+            foClient.setLastName(loInfo.getLastName());
+            foClient.setSuffixNm(loInfo.getSuffix());
+            foClient.setEmailAdd(loInfo.getEmail());
+            foClient.setMobileNo(loInfo.getMobileNo());
+
+            poClientMaster.SaveLocalProfile(foClient);
 
             message = "An email has been sent to activate your account";
             return 1;

@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -37,6 +38,7 @@ public class FragmentHome extends Fragment {
     private static final String TAG = FragmentHome.class.getSimpleName();
     private VMHome mViewModel;
     private Boolean isCompleteAccount;
+    private MaterialTextView textView1;
     private SliderView poSliderx;
     private MaterialCardView selectAuto;
     private MaterialCardView selectMC;
@@ -56,15 +58,21 @@ public class FragmentHome extends Fragment {
         mViewModel.GetCompleteProfile().observe(requireActivity(), new Observer<EClientInfoSalesKit>() {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
-                if (eClientInfoSalesKit.getClientID().isEmpty()){
+                if (eClientInfoSalesKit == null){
                     isCompleteAccount = false;
                 }else {
-                    isCompleteAccount = true;
+                    if (eClientInfoSalesKit.getClientID().isEmpty()){
+                        isCompleteAccount = false;
+                    }else {
+                        isCompleteAccount = true;
+                    }
                 }
             }
         });
 
+        textView1 = view.findViewById(R.id.textView1);
         poSliderx = view.findViewById(R.id.imgSlider);
+
         poSliderx.setIndicatorAnimation(IndicatorAnimationType.WORM);
         poSliderx.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         poSliderx.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
@@ -138,20 +146,28 @@ public class FragmentHome extends Fragment {
                     Log.e(TAG, ePromos.get(x).getImageUrl());
                     loSliders.add(new HomeImageSliderModel(ePromos.get(x).getImageUrl()));
                 }
-                Log.e(TAG, String.valueOf(ePromos.size()));
-                Adapter_ImageSlider adapter = new Adapter_ImageSlider(loSliders, args -> {
-                    try{
-                        Log.e(TAG,  ePromos.get(args).getPromoUrl());
-                        Intent intent = new Intent("android.intent.action.SUCCESS_LOGIN");
-                        intent.putExtra("url_link", ePromos.get(args).getPromoUrl());
-                        intent.putExtra("browser_args", "1");
-                        intent.putExtra("args", "promo");
-                        requireActivity().sendBroadcast(intent);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                });
-                poSliderx.setSliderAdapter(adapter);
+                if (ePromos.size() > 0){
+                    //set visibility if there is current promos and events
+                    textView1.setVisibility(View.VISIBLE);
+                    poSliderx.setVisibility(View.VISIBLE);
+
+                    Adapter_ImageSlider adapter = new Adapter_ImageSlider(loSliders, args -> {
+                        try{
+                            Intent intent = new Intent("android.intent.action.SUCCESS_LOGIN");
+                            intent.putExtra("url_link", ePromos.get(args).getPromoUrl());
+                            intent.putExtra("browser_args", "1");
+                            intent.putExtra("args", "promo");
+                            requireActivity().sendBroadcast(intent);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    });
+                    poSliderx.setSliderAdapter(adapter);
+                }else {
+                    //set visibility if there is current promos and events
+                    textView1.setVisibility(View.GONE);
+                    poSliderx.setVisibility(View.GONE);
+                }
 
             } catch (Exception e){
                 e.printStackTrace();
