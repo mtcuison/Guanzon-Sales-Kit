@@ -17,6 +17,8 @@ import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.GConnect.room.Entities.EEvents;
 import org.rmj.g3appdriver.GConnect.room.Entities.EPromo;
+import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
+import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.lib.Promotions.GPromos;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
@@ -34,6 +36,8 @@ public class VMHome extends AndroidViewModel {
     private final ConnectionUtil poConn;
     private final GPromos poPromoEvent;
     private final ClientMasterSalesKit poClientSK;
+    private final SalesKit poSaleskit;
+    private final EmployeeSession poSession;
 
     public VMHome(@NonNull Application application) {
         super(application);
@@ -41,9 +45,14 @@ public class VMHome extends AndroidViewModel {
         this.poConn = new ConnectionUtil(application);
         this.poPromoEvent = new GPromos(application);
         this.poClientSK = new ClientMasterSalesKit(application);
+        this.poSaleskit = new SalesKit(application);
+        this.poSession = EmployeeSession.getInstance(application);
 
         this.poConfig = AppConfigPreference.getInstance(application);
         this.poConfig.setIsAppFirstLaunch(false);
+    }
+    public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(){
+        return poSaleskit.GetKPOPAgentInfo(poSession.getUserID());
     }
     public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
         return poClientSK.GetProfileAccount();
