@@ -20,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
 import org.rmj.guanzon.guanzonsaleskit.databinding.ActivityHomeBinding;
@@ -34,6 +35,7 @@ import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 public class Activity_Home extends AppCompatActivity {
     private VMHome mviewModel;
     private Boolean isCompleteAccount;
+    private Boolean hasUpline;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
     private NavigationView navigationView;
@@ -44,6 +46,16 @@ public class Activity_Home extends AppCompatActivity {
 
         /*VERIFY FIRST USER IF COMPLETED ITS ACCOUNT*/
         mviewModel = new ViewModelProvider(this).get(VMHome.class);
+        mviewModel.GetKPOPAgentInfo().observe(this, new Observer<EKPOPAgentRole>() {
+            @Override
+            public void onChanged(EKPOPAgentRole ekpopAgentRole) {
+                if (ekpopAgentRole == null){
+                    hasUpline = false;
+                }else {
+                    hasUpline = true;
+                }
+            }
+        });
         mviewModel.GetCompleteProfile().observe(Activity_Home.this, new Observer<EClientInfoSalesKit>() {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
@@ -100,6 +112,7 @@ public class Activity_Home extends AppCompatActivity {
         }else if (item.getItemId() == R.id.nav_setupline) {
             loIntent = new Intent(Activity_Home.this, Activity_SelectUpLine.class);
             loIntent.putExtra("isComplete", isCompleteAccount);
+            loIntent.putExtra("hasUpline", hasUpline);
             startActivity(loIntent);
         }else if (item.getItemId() == R.id.nav_agent_enroll) {
             loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);

@@ -41,16 +41,28 @@ public class Activity_SelectUpLine extends AppCompatActivity {
 
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", (view, dialog) -> {
-            dialog.dismiss();
 
-            Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
-            startActivity(loIntent);
-            finish();
-        });
+        Boolean hasUpline = getIntent().getBooleanExtra("hasUpline", false);
+        if (hasUpline == false){
+            poMessage.setPositiveButton("Close", (view, dialog) -> {
+                dialog.dismiss();
+                finish();
+            });
+
+            poMessage.setMessage("Found entry for upline. User must have 1 upline only.");
+            poMessage.show();
+        }
 
         Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
         if (isComplete == false){
+            poMessage.setPositiveButton("Close", (view, dialog) -> {
+                dialog.dismiss();
+
+                Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
+                startActivity(loIntent);
+                finish();
+            });
+
             poMessage.setMessage("Must complete account to use this feature");
             poMessage.show();
         }

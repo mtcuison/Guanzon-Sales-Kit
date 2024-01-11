@@ -64,7 +64,7 @@
                 app:cardCornerRadius="10dp"
                 app:cardPreventCornerOverlap="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".21"
+                app:layout_constraintHeight_percent=".25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView0"
                 app:layout_constraintWidth_percent=".92">
@@ -101,10 +101,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/auto"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="100dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -119,7 +117,7 @@
                 app:cardCornerRadius="10dp"
                 app:cardPreventCornerOverlap="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent=".21"
+                app:layout_constraintHeight_percent=".25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView"
                 app:layout_constraintWidth_percent=".92">
@@ -156,10 +154,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/motorcycle"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="100dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
