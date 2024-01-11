@@ -70,6 +70,9 @@ public class SalesKit {
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserID){
         return poDao.GetKPOPAgent(UserID);
     }
+    public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(String UserID){
+        return poDao.GetKPOPAgentInfo(UserID);
+    }
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(){
         return poDao.GetKPOPAgent();
     }
@@ -80,6 +83,10 @@ public class SalesKit {
     public LiveData<DGanadoOnline.CountEntries> GetCountEntries(){
         return poGanadoDao.GetEntryCounts(poSession.getUserID());
     }
+    public LiveData<DGanadoOnline.CountEntries> GetCountEntries(String UserID){
+        return poGanadoDao.GetEntryCounts(UserID);
+    }
+
     public boolean ImportAgent(){
         try{
             JSONObject params = new JSONObject();

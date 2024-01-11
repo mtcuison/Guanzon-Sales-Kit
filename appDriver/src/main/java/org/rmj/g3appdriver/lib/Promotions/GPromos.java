@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
-import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
 import org.rmj.g3appdriver.GConnect.room.DataAccessObject.DEvents;
 import org.rmj.g3appdriver.GConnect.room.DataAccessObject.DPromo;
 import org.rmj.g3appdriver.GConnect.room.Entities.EEvents;
@@ -31,7 +31,7 @@ public class GPromos {
 
     private final HttpHeaders poHeaders;
     private final AppConfigPreference poConfig;
-    private final GConnectApi poAPI;
+    private final GCircleApi poAPI;
 
     private String message;
 
@@ -41,13 +41,13 @@ public class GPromos {
         this.poEvents = GGC_GCircleDB.getInstance(instance).EventsDao();
         this.poHeaders = HttpHeaders.getInstance(context);
         this.poConfig = AppConfigPreference.getInstance(context);
-        this.poAPI = new GConnectApi(context);
+        this.poAPI = new GCircleApi(context);
     }
 
     public boolean ImportPromosLinks(){
         try{
             JSONObject params = new JSONObject();
-            String lsResponse = WebClient.sendRequest(poAPI.getImportPromosAPI(), params.toString(), poHeaders.getHeaders());
+            String lsResponse = WebClient.sendRequest(poAPI.getUrlImportPromolink(), params.toString(), poHeaders.getHeaders());
             if(lsResponse == null){
                 message = "Server no response.";
                 Log.d(TAG, "Unable to retrieve data from server. Server no response.");
@@ -127,7 +127,7 @@ public class GPromos {
     public boolean ImportEventsLinks(){
         try{
             JSONObject params = new JSONObject();
-            String lsResponse = WebClient.sendRequest(poAPI.getImportEventsAPI(), params.toString(), poHeaders.getHeaders());
+            String lsResponse = WebClient.sendRequest(poAPI.getUrlImportEvents(), params.toString(), poHeaders.getHeaders());
             if(lsResponse == null){
                 message = "Server no response.";
                 Log.d(TAG, "Unable to retrieve data from server. Server no response.");

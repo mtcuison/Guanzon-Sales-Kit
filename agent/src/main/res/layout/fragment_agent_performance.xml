@@ -1,15 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/GhostRiderMaterialTheme.NoActionBar"
     tools:context=".Fragment.Fragment_AgentPerformance">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/totalsales"
+                        style="@style/PrimaryHeaderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="0" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/lbl_total"
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Total Entries"
+                        app:layout_constraintTop_toBottomOf="@+id/totalsales" />
+
+                    <View
+                        android:id="@+id/vline"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/guanzon_digital_grey"
+                        app:layout_constraintHeight_percent=".015"
+                        app:layout_constraintTop_toBottomOf="@+id/lbl_total" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/username"
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text=""
+                        app:layout_constraintTop_toBottomOf="@+id/vline" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_totalopen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/mcv_total"
+                app:layout_constraintWidth_percent=".5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/PrimaryHeaderStyle"
+                        android:id="@+id/totalopen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:gravity="center"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Open"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/baseline_accessibility_new_24"
+                        android:drawablePadding="5dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totalopen"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_totalextr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/mcv_totalopen"
+                app:layout_constraintWidth_percent=".5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/PrimaryHeaderStyle"
+                        android:id="@+id/totalextr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:gravity="center"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Extracted"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/baseline_person_pin_24"
+                        android:drawablePadding="5dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totalextr"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_totaleng"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/mcv_total"
+                app:layout_constraintStart_toEndOf="@+id/mcv_totalopen"
+                app:layout_constraintWidth_percent=".5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/PrimaryHeaderStyle"
+                        android:id="@+id/totaleng"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:gravity="center"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Engaged"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/baseline_phone_callback_24"
+                        android:drawablePadding="5dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totaleng"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_totallost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/mcv_totaleng"
+                app:layout_constraintStart_toEndOf="@+id/mcv_totalextr"
+                app:layout_constraintWidth_percent=".5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/PrimaryHeaderStyle"
+                        android:id="@+id/totallost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:gravity="center"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Lost"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/baseline_person_off_24"
+                        android:drawablePadding="5dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totallost"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mcv_totalsold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="true"
+                app:layout_constraintTop_toBottomOf="@+id/mcv_totalextr"
+                app:layout_constraintWidth_percent=".5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/PrimaryHeaderStyle"
+                        android:id="@+id/totalsold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:gravity="center"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/DescriptionHeaderStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Sold"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/baseline_handshake_24"
+                        android:drawablePadding="5dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/totalsold"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>

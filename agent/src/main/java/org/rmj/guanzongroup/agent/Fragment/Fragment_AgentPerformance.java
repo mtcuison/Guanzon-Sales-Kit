@@ -5,9 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
+
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.guanzongroup.agent.R;
+import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,51 +24,72 @@ import org.rmj.guanzongroup.agent.R;
  * create an instance of this fragment.
  */
 public class Fragment_AgentPerformance extends Fragment {
+    private static final String TAG = Fragment_AgentPerformance.class.getSimpleName();
+    private VMAgentInfo mViewModel;
+    private MaterialTextView totalsales;
+    private MaterialTextView username;
+    private MaterialTextView totalopen;
+    private MaterialTextView totalextr;
+    private MaterialTextView totalsold;
+    private MaterialTextView totaleng;
+    private MaterialTextView totallost;
+    private MaterialCardView mcv_totalopen;
+    private MaterialCardView mcv_totalextr;
+    private MaterialCardView mcv_totalsold;
+    private MaterialCardView mcv_totaleng;
+    private MaterialCardView mcv_totallost;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public Fragment_AgentPerformance() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_AgentPerformance.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment_AgentPerformance newInstance(String param1, String param2) {
-        Fragment_AgentPerformance fragment = new Fragment_AgentPerformance();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        mViewModel = new ViewModelProvider(requireActivity()).get(VMAgentInfo.class);
+        View view = inflater.inflate(R.layout.fragment_agent_performance, container, false);
+
+        initViews(view);
+
+        mViewModel.GetCountEntries().observe(requireActivity(), new Observer<DGanadoOnline.CountEntries>() {
+            @Override
+            public void onChanged(DGanadoOnline.CountEntries countEntries) {
+
+                totalopen.setText(String.valueOf(countEntries.nOpen));
+                totalextr.setText(String.valueOf(countEntries.nExtracted));
+                totalsold.setText(String.valueOf(countEntries.nSold));
+                totaleng.setText(String.valueOf(countEntries.nEngaged));
+                totallost.setText(String.valueOf(countEntries.nLost));
+                totalsales.setText(String.valueOf(countEntries.nEntries));
+
+//                username.setText(poSession.getUserName());
+            }
+        });
+        mViewModel.GetKPOPAgentInfo().observe(requireActivity(),agentInfo ->{
+            if(agentInfo != null){
+                username.setText(agentInfo.getsUserName());
+            }
+        });
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_agent_performance, container, false);
+    private void initViews(View v) {
+
+        username = v.findViewById(R.id.username);
+        totalsales = v.findViewById(R.id.totalsales);
+        totalopen = v.findViewById(R.id.totalopen);
+        totalextr = v.findViewById(R.id.totalextr);
+        totalsold = v.findViewById(R.id.totalsold);
+        totaleng = v.findViewById(R.id.totaleng);
+        totallost = v.findViewById(R.id.totallost);
+
+        mcv_totalopen = v.findViewById(R.id.mcv_totalopen);
+        mcv_totalextr = v.findViewById(R.id.mcv_totalextr);
+        mcv_totalsold = v.findViewById(R.id.mcv_totalsold);
+        mcv_totaleng = v.findViewById(R.id.mcv_totaleng);
+        mcv_totallost = v.findViewById(R.id.mcv_totallost);
     }
+
 }

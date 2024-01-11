@@ -23,6 +23,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.squareup.picasso.BuildConfig;
 
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
 import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.Entities.ETokenInfo;
@@ -234,17 +235,23 @@ public class VMSplashScreen extends AndroidViewModel {
 //                            loTask.publishProgress(94);
 //                            Thread.sleep(500);
                         if (poSession.isLoggedIn()){
+                            if (new ClientMasterSalesKit(instance).ImportClientProfile(poSession.getUserID())) {
+                                Log.d(TAG, "Client Profile imported successfully...");
+                            }
+                            loTask.publishProgress(88);
+                            Thread.sleep(500);
+
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
                             loTask.publishProgress(90);
                             Thread.sleep(500);
 
-                        if (!new SalesKit(instance).ImportKPOPAgent()) {
-                            Log.d(TAG, "KPOP Agent imported successfully...");
-                        }
-                        loTask.publishProgress(99);
-                        Thread.sleep(500);
+                            if (!new SalesKit(instance).ImportKPOPAgent()) {
+                                Log.d(TAG, "KPOP Agent imported successfully...");
+                            }
+                            loTask.publishProgress(99);
+                            Thread.sleep(500);
                         }
 //                        if (new RClient(instance).ImportClientInfo()) {
 //                            Log.d(TAG, "Client Info imported successfully...");
