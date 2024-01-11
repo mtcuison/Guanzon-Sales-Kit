@@ -112,6 +112,8 @@ public class GCircleApi extends WebApi {
     private static final String URL_IMPORT_SKAGENTS = "saleskit/importagents.php";
     private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline.php";
     private static final String URL_SKAGENTS_PERFORMANCE = "saleskit/importagentinq.php";
+    private static final String URL_IMPORT_PROMOLINK = "saleskit/import_promo_link.php";
+    private static final String URL_IMPORT_EVENTS = "saleskit/import_events.php";
 
     public GCircleApi(Application instance) {
         super(instance);
@@ -944,4 +946,22 @@ public class GCircleApi extends WebApi {
         Log.d(TAG, "Initialize api:" + LIVE + URL_SKAGENTS_PERFORMANCE);
         return LIVE + URL_SKAGENTS_PERFORMANCE;
     }
+
+    public String getUrlImportPromolink(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_PROMOLINK);
+            return LOCAL + URL_IMPORT_PROMOLINK;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_PROMOLINK);
+        return LIVE + URL_IMPORT_PROMOLINK;
+    }
+    public String getUrlImportEvents(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_EVENTS);
+            return LOCAL + URL_IMPORT_EVENTS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_EVENTS);
+        return LIVE + URL_IMPORT_EVENTS;
+    }
+
 }

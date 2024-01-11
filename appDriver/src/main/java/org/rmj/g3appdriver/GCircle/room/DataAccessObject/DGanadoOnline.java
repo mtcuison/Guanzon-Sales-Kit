@@ -110,7 +110,8 @@ public interface DGanadoOnline {
             "COUNT(CASE WHEN cTranStat = '1' THEN sTransNox END) AS nExtracted, " +
             "COUNT(CASE WHEN cTranStat = '2' THEN sTransNox END) AS nEngaged, " +
             "COUNT(CASE WHEN cTranStat = '3' THEN sTransNox END) AS nLost, " +
-            "COUNT(CASE WHEN cTranStat = '4' THEN sTransNox END) AS nSold " +
+            "COUNT(CASE WHEN cTranStat = '4' THEN sTransNox END) AS nSold, " +
+            "COUNT(sTransNox) AS nEntries " +
             "FROM Ganado_Online " +
             "WHERE sReferdBy= :sUserIDxx")
     LiveData<CountEntries> GetEntryCounts(String sUserIDxx);
@@ -155,5 +156,6 @@ public interface DGanadoOnline {
         public int nEngaged;
         public int nLost;
         public int nSold;
+        public int nEntries;
     }
 }

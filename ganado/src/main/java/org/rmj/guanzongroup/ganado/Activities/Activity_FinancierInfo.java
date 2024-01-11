@@ -138,16 +138,17 @@ public class Activity_FinancierInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-                    poMessage.initDialog();
-                    poMessage.setTitle("Ganado");
-                    poMessage.setMessage(args);
-                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
-                        dialog.dismiss();
-                        finish();
-                    });
-                    poMessage.show();
+//                    poMessage.initDialog();
+//                    poMessage.setTitle("Ganado");
+//                    poMessage.setMessage(args);
+//                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
+//                        dialog.dismiss();
+//                        finish();
+//                    });
+//                    poMessage.show();
 
                     Intent intent = new Intent(Activity_FinancierInfo.this, Activity_ClientInfo.class);
+                    intent.putExtra("sTransNox",args);
                     startActivity(intent);
                 }
 

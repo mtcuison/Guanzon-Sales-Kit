@@ -186,8 +186,8 @@ public class Activity_ClientInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-                    Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_FinancierInfo.class);
-                    loIntent.putExtra("sTransNox", args);
+                    Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_BrandSelection.class);
+
                     startActivity(loIntent);
                     overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
 

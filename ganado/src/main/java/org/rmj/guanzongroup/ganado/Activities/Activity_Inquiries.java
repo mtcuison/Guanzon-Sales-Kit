@@ -88,6 +88,8 @@ public class Activity_Inquiries extends AppCompatActivity {
             }
         });
 
+        LoadInquiries();
+
     }
     private void LoadInquiries(){
         mViewModel.GetByAgentInquiries().observe(Activity_Inquiries.this, inquiries ->{

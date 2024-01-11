@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
@@ -52,6 +53,12 @@ public class VMAgentInfo extends AndroidViewModel {
 
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserIDxx){
         return poSys.GetKPOPAgent(UserIDxx);
+    }
+    public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(){
+        return poSys.GetKPOPAgentInfo(lsUserID);
+    }
+    public LiveData<DGanadoOnline.CountEntries> GetCountEntries(){
+        return poSys.GetCountEntries(lsUserID);
     }
 
     public void ImportKPOPAgent(VMAgentInfo.OnTaskExecute listener){
