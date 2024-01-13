@@ -1,13 +1,10 @@
 package org.rmj.guanzongroup.agent.Activities;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
@@ -18,7 +15,6 @@ import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.R;
-import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialToolbar toolbar;
@@ -46,22 +42,22 @@ public class Activity_UserPerformance extends AppCompatActivity {
         poMessage = new MessageBox(this);
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-            @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
-
-                Intent loIntent = new Intent(Activity_UserPerformance.this, Activity_Settings.class);
-                startActivity(loIntent);
-                finish();
-            }
-        });
-
-        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-        if (isComplete == false){
-            poMessage.setMessage("Must complete account to use this feature");
-            poMessage.show();
-        }
+//        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+//            @Override
+//            public void OnButtonClick(View view, AlertDialog dialog) {
+//                dialog.dismiss();
+//
+//                Intent loIntent = new Intent(Activity_UserPerformance.this, Activity_Settings.class);
+//                startActivity(loIntent);
+//                finish();
+//            }
+//        });
+//
+//        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+//        if (isComplete == false){
+//            poMessage.setMessage("Must complete account to use this feature");
+//            poMessage.show();
+//        }
 
         poSalesKit = new SalesKit(getApplication());
         poSession = EmployeeSession.getInstance(this);

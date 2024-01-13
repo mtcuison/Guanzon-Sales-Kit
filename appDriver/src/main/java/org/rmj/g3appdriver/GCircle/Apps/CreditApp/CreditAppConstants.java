@@ -13,17 +13,11 @@ package org.rmj.g3appdriver.GCircle.Apps.CreditApp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-
-import org.rmj.g3appdriver.R;
 
 
 public class CreditAppConstants {
@@ -72,6 +66,7 @@ public class CreditAppConstants {
 
     public static String[] MOBILE_NO_TYPE = {"Prepaid", "Postpaid"};
 
+    public static String[] GENDER = {"Male", "Female", "LGBTQ"};
     public static String[] CIVIL_STATUS = {
             "Single",
             "Married",

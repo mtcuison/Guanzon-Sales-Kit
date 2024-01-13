@@ -4,6 +4,7 @@ import static org.rmj.g3appdriver.dev.Api.ApiResult.SERVER_NO_RESPONSE;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -41,10 +42,13 @@ public class ClientMasterSalesKit {
     }
     public boolean ImportClientProfile(String sUserIDxx){
         try {
+
+            JSONObject params = new JSONObject();
+            params.put("sUserIDxx",sUserIDxx);
             //REQUEST TO SERVER
             String lsResponse = WebClient.sendRequest(
                     poApiConnect.getImportAccountInfoAPI(),
-                    new JSONObject().toString(),
+                    params.toString(),
                     poHeaders.getHeaders());
 
             if(lsResponse == null){
@@ -52,8 +56,11 @@ public class ClientMasterSalesKit {
                 return false;
             }
 
+            Log.d(TAG, lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
+
+
             if(!lsResult.equalsIgnoreCase("success")){
                 JSONObject loError = loResponse.getJSONObject("error");
                 message = getErrorMessage(loError);
@@ -88,6 +95,8 @@ public class ClientMasterSalesKit {
             foClient.setVerified(Integer.valueOf(loResponse.get("cVerified").toString()));
 
             poDao.insert(foClient);
+
+            Log.d(TAG, "Client Profile record save!");
 
             return true;
         } catch (Exception e){

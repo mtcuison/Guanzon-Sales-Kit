@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -18,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.rmj.g3appdriver.GCircle.Apps.CreditApp.CreditAppConstants;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
@@ -35,11 +35,9 @@ public class Activity_CompleteAccount extends AppCompatActivity {
     private TextInputEditText tie_ca_mname;
     private TextInputEditText tie_ca_suffix;
     private TextInputEditText tie_ca_bdate;
-    private TextInputEditText tie_ca_bplace;
-    private TextInputEditText tie_ca_gender;
-    private TextInputEditText tie_ca_status;
+    private MaterialAutoCompleteTextView tie_ca_bplace;
+    private MaterialAutoCompleteTextView tie_ca_status, tie_ca_citizen, tie_ca_gender;
     private TextInputEditText til_ca_maiden;
-    private TextInputEditText tie_ca_citizen;
     private TextInputEditText tie_ca_houseno;
     private TextInputEditText tie_ca_street;
     private MaterialAutoCompleteTextView tie_ca_town;
@@ -62,13 +60,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
 
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-            @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
-                finish();
-            }
-        });
+
 
         toolbar = findViewById(R.id.toolbar);
         tie_ca_fname = findViewById(R.id.tie_ca_fname);
@@ -80,7 +72,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         tie_ca_gender = findViewById(R.id.tie_ca_gender);
         tie_ca_status = findViewById(R.id.tie_ca_status);
         til_ca_maiden = findViewById(R.id.tie_ca_maiden);
-        tie_ca_citizen = findViewById(R.id.tie_ca_citizen);
+//        tie_ca_citizen = findViewById(R.id.tie_ca_citizen);
         tie_ca_houseno = findViewById(R.id.tie_ca_houseno);
         tie_ca_street = findViewById(R.id.tie_ca_street);
         tie_ca_town = findViewById(R.id.tie_ca_town);
@@ -99,6 +91,12 @@ public class Activity_CompleteAccount extends AppCompatActivity {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
                 if (eClientInfoSalesKit == null){
+                    poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                        @Override
+                        public void OnButtonClick(View view, AlertDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    });
                     poMessage.setMessage("User profile not found");
                     poMessage.show();
                 }else {
@@ -135,40 +133,80 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                                 break;
                             }
                         }
+
+                        mViewModel.GetBarangayList(eClientInfo.getTownIDx1()).observe(Activity_CompleteAccount.this, new Observer<List<EBarangayInfo>>() {
+                            @Override
+                            public void onChanged(List<EBarangayInfo> BrgyList) {
+                                ArrayList<String> string1 = new ArrayList<>();
+                                for (int x = 0; x < BrgyList.size(); x++) {
+                                    String lsBrgy = BrgyList.get(x).getBrgyName();
+                                    string1.add(lsBrgy);
+                                }
+                                ArrayAdapter<String> adapters = new ArrayAdapter<>(Activity_CompleteAccount.this,
+                                        android.R.layout.simple_spinner_dropdown_item, string1.toArray(new String[0]));
+                                tie_ca_brgy.setAdapter(adapters);
+                                tie_ca_brgy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                        for (int x = 0; x < BrgyList.size(); x++) {
+                                            String lsLabel = BrgyList.get(x).getBrgyName();
+                                            String lsSlctd = tie_ca_brgy.getText().toString().trim();
+                                            if (lsSlctd.equalsIgnoreCase(lsLabel)) {
+                                                eClientInfo.setBrgyIDx1(BrgyList.get(x).getBrgyIDxx());
+                                                eClientInfo.setBrgyIDx2(BrgyList.get(x).getBrgyIDxx());
+                                            }
+                                        }
+
+                                    }
+                                });
+                            }
+                        });
                     });
 
-                    mViewModel.GetBarangayList(eClientInfo.getTownIDx1()).observe(Activity_CompleteAccount.this, new Observer<List<EBarangayInfo>>() {
-                        @Override
-                        public void onChanged(List<EBarangayInfo> BrgyList) {
-                            ArrayList<String> string1 = new ArrayList<>();
-                            for (int x = 0; x < BrgyList.size(); x++) {
-                                String lsBrgy = BrgyList.get(x).getBrgyName();
-                                string1.add(lsBrgy);
+                    ArrayAdapter<String> loAdapter = new ArrayAdapter<>(Activity_CompleteAccount.this, android.R.layout.simple_spinner_dropdown_item, string.toArray(new String[0]));
+                    tie_ca_bplace.setAdapter(loAdapter);
+                    tie_ca_bplace.setOnItemClickListener((parent, view, position, id) -> {
+                        for (int x = 0; x < loList.size(); x++) {
+                            String lsLabel = loList.get(x).sTownName + ", " + loList.get(x).sProvName;
+                            String lsSlctd = tie_ca_bplace.getText().toString().trim();
+                            if (lsSlctd.equalsIgnoreCase(lsLabel)) {
+                                eClientInfo.setBirthPlc(loList.get(x).sTownIDxx);
+                                break;
                             }
-                            ArrayAdapter<String> adapters = new ArrayAdapter<>(Activity_CompleteAccount.this,
-                                    android.R.layout.simple_spinner_dropdown_item, string1.toArray(new String[0]));
-                            tie_ca_brgy.setAdapter(adapters);
-                            tie_ca_brgy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    for (int x = 0; x < BrgyList.size(); x++) {
-                                        String lsLabel = BrgyList.get(x).getBrgyName();
-                                        String lsSlctd = tie_ca_brgy.getText().toString().trim();
-                                        if (lsSlctd.equalsIgnoreCase(lsLabel)) {
-                                            eClientInfo.setBrgyIDx1(BrgyList.get(x).getBrgyIDxx());
-                                            eClientInfo.setBrgyIDx2(BrgyList.get(x).getBrgyIDxx());
-                                        }
-                                    }
-                                }
-                            });
                         }
                     });
+
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
+        ArrayAdapter<String> loAdapter = new ArrayAdapter<>(Activity_CompleteAccount.this,
+                android.R.layout.simple_spinner_dropdown_item, CreditAppConstants.CIVIL_STATUS);
+        tie_ca_status.setAdapter(loAdapter);
+        tie_ca_status.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                eClientInfo.setCvilStat(String.valueOf(position));
+            }
+        });
+
+        ArrayAdapter<String> loGender = new ArrayAdapter<>(Activity_CompleteAccount.this,
+                android.R.layout.simple_spinner_dropdown_item, CreditAppConstants.GENDER);
+        tie_ca_gender.setAdapter(loGender);
+        tie_ca_gender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                eClientInfo.setGenderCd(String.valueOf(position));
+            }
+        });
+
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,10 +218,8 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                 eClientInfo.setSuffixNm(tie_ca_suffix.getText().toString());
                 eClientInfo.setBirthDte(tie_ca_bdate.getText().toString());
                 eClientInfo.setBirthPlc(tie_ca_bplace.getText().toString());
-                eClientInfo.setGenderCd(tie_ca_gender.getText().toString());
-                eClientInfo.setCvilStat(tie_ca_status.getText().toString());
                 eClientInfo.setMaidenNm(til_ca_maiden.getText().toString());
-                eClientInfo.setCitizenx(tie_ca_citizen.getText().toString());
+//                eClientInfo.setCitizenx(tie_ca_citizen.getText().toString());
 
                 //Address Info
                 eClientInfo.setHouseNo1(tie_ca_houseno.getText().toString());
@@ -203,6 +239,13 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                         poDialog.dismiss();
 
                         poMessage.setMessage("Account request successfully sent to server");
+                        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
                         poMessage.show();
                     }
 
@@ -211,6 +254,12 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                         poDialog.dismiss();
 
                         poMessage.setMessage(result);
+                        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        });
                         poMessage.show();
                     }
                 });
@@ -233,4 +282,5 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

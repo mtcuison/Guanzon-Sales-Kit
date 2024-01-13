@@ -86,23 +86,23 @@ public class GPromos {
                     poPromo.insert(info);
                     Log.d(TAG, "New record save!");
 //                }
-//            } else {
+            } else {
 //                Date ldDate1 = SQLUtil.toDate(loPromo.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
 //                Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
 //
 //                if(!ldDate1.equals(ldDate2)){
-//                    poPromo.UpdatePromoInfo(loJson.getString("dTransact"),
-//                            loJson.getString("dDateFrom"),
-//                            loJson.getString("dDateThru"),
-//                            loJson.getString("sCaptionx"),
-//                            loJson.getString("sImageURL"),
-//                            loJson.getString("cRecdStat"),
-//                            loJson.getString("sImageNme"),
-//                            loJson.getString("dTimeStmp"),
-//                            loJson.getString("sPromoUrl"),
-//                            loJson.getString("cDivision"),
-//                            loJson.getString("sTransNox"));
-//                    Log.d(TAG, "A record has been updated!");
+                    poPromo.UpdatePromoInfo(loJson.getString("dTransact"),
+                            loJson.getString("dDateFrom"),
+                            loJson.getString("dDateThru"),
+                            loJson.getString("sCaptionx"),
+                            loJson.getString("sImageURL"),
+                            loJson.getString("cRecdStat"),
+                            loJson.getString("sImageNme"),
+                            loJson.getString("dTimeStmp"),
+                            loJson.getString("sPromoURL"),
+                            loJson.getString("cDivision"),
+                            loJson.getString("sTransNox"));
+                    Log.d(TAG, "A record has been updated!");
 //                }
                 }
             }

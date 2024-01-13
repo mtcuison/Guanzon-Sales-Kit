@@ -14,10 +14,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
-import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMAccountSettings;
 
@@ -51,17 +48,19 @@ public class Activity_Settings extends AppCompatActivity {
         tvUpdateAddr = findViewById(R.id.tvUpdateAddr);
         btn_back = findViewById(R.id.btn_back);
 
-        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-        if (isComplete == true){
-            tvChangePass.setVisibility(View.VISIBLE);
-            tvUpdateMobile.setVisibility(View.VISIBLE);
-            tvUpdateAddr.setVisibility(View.VISIBLE);
-        }else {
-            tvChangePass.setVisibility(View.GONE);
-            tvUpdateMobile.setVisibility(View.GONE);
-            tvUpdateAddr.setVisibility(View.GONE);
-        }
-
+        mviewModel.GetCompleteProfile().observe(Activity_Settings.this, eclient ->{
+            if (eclient == null){
+                tvChangePass.setVisibility(View.GONE);
+                tvUpdateMobile.setVisibility(View.GONE);
+                tvUpdateAddr.setVisibility(View.GONE);
+                tvCompleteAcc.setVisibility(View.VISIBLE);
+            }else {
+                tvChangePass.setVisibility(View.VISIBLE);
+                tvUpdateMobile.setVisibility(View.VISIBLE);
+                tvUpdateAddr.setVisibility(View.VISIBLE);
+                tvCompleteAcc.setVisibility(View.GONE);
+            }
+        });
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
