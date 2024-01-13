@@ -146,6 +146,8 @@ public class FragmentHome extends Fragment {
                     Log.e(TAG, ePromos.get(x).getImageUrl());
                     loSliders.add(new HomeImageSliderModel(ePromos.get(x).getImageUrl()));
                 }
+
+                Log.d(TAG, String.valueOf(ePromos.size()));
                 if (ePromos.size() > 0){
                     //set visibility if there is current promos and events
                     textView1.setVisibility(View.VISIBLE);

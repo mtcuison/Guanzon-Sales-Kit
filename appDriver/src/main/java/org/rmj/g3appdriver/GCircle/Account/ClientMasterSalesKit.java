@@ -96,53 +96,97 @@ public class ClientMasterSalesKit {
             return false;
         }
     }
+    public Boolean isDataValid(EClientInfoSalesKit foClient){
+        if (foClient.getUserIDxx() == null) {
+            message = "User ID is empty";
+            return false;
+        }else if (foClient.getFrstName() == null) {
+            message = "Firstname is empty";
+            return false;
+        }else if (foClient.getLastName() == null) {
+            message = "Lastname is empty";
+            return false;
+        }else if (foClient.getGenderCd() == null) {
+            message = "Gender is empty";
+            return false;
+        }else if (foClient.getCvilStat() == null) {
+            message = "Civil Status is empty";
+            return false;
+        }else if (foClient.getCitizenx() == null) {
+            message = "Citizenship is empty";
+            return false;
+        }else if (foClient.getBirthDte() == null) {
+            message = "Birthdate is empty";
+            return false;
+        }else if (foClient.getBirthPlc() == null) {
+            message = "Birthplace is empty";
+            return false;
+        }else if (foClient.getHouseNo1() == null) {
+            message = "House No is empty";
+            return false;
+        }else if (foClient.getAddress1() == null) {
+            message = "Street Address is empty";
+            return false;
+        }else if (foClient.getBrgyIDx1() == null) {
+            message = "Baranggay is empty";
+            return false;
+        }else if (foClient.getTownIDx1() == null) {
+            message = "Town is empty";
+            return false;
+        }
+
+        return true;
+    }
     public boolean CompleteClientInfo(EClientInfoSalesKit foClient){
         try {
-            JSONObject param = new JSONObject();
-            param.put("sUserIDxx", foClient.getUserIDxx());
-            param.put("dTransact", new AppConstants().DATE_MODIFIED);
-            param.put("sLastName", foClient.getLastName());
-            param.put("sFrstName", foClient.getFrstName());
-            param.put("sMiddName", foClient.getMiddName());
-            param.put("sMaidenNm", foClient.getMaidenNm());
-            param.put("sSuffixNm", foClient.getSuffixNm());
-            param.put("cGenderCd", foClient.getGenderCd());
-            param.put("cCvilStat", foClient.getCvilStat());
-            param.put("sCitizenx", foClient.getCitizenx());
-            param.put("dBirthDte", foClient.getBirthDte());
-            param.put("sBirthPlc", foClient.getBirthPlc());
-            param.put("sHouseNo1", foClient.getHouseNo1());
-            param.put("sAddress1", foClient.getAddress1());
-            param.put("sBrgyIDx1", foClient.getBrgyIDx1());
-            param.put("sTownIDx1", foClient.getTownIDx1());
-            param.put("sHouseNo2", foClient.getHouseNo2());
-            param.put("sAddress2", foClient.getAddress2());
-            param.put("sBrgyIDx2", foClient.getBrgyIDx2());
-            param.put("sTownIDx2", foClient.getTownIDx2());
+            if (isDataValid(foClient)) {
+                JSONObject param = new JSONObject();
+                param.put("sUserIDxx", foClient.getUserIDxx());
+                param.put("dTransact", new AppConstants().DATE_MODIFIED);
+                param.put("sLastName", foClient.getLastName());
+                param.put("sFrstName", foClient.getFrstName());
+                param.put("sMiddName", foClient.getMiddName());
+                param.put("sMaidenNm", foClient.getMaidenNm());
+                param.put("sSuffixNm", foClient.getSuffixNm());
+                param.put("cGenderCd", foClient.getGenderCd());
+                param.put("cCvilStat", foClient.getCvilStat());
+                param.put("sCitizenx", foClient.getCitizenx());
+                param.put("dBirthDte", foClient.getBirthDte());
+                param.put("sBirthPlc", foClient.getBirthPlc());
+                param.put("sHouseNo1", foClient.getHouseNo1());
+                param.put("sAddress1", foClient.getAddress1());
+                param.put("sBrgyIDx1", foClient.getBrgyIDx1());
+                param.put("sTownIDx1", foClient.getTownIDx1());
+                param.put("sHouseNo2", foClient.getHouseNo2());
+                param.put("sAddress2", foClient.getAddress2());
+                param.put("sBrgyIDx2", foClient.getBrgyIDx2());
+                param.put("sTownIDx2", foClient.getTownIDx2());
 
-            //SAVE TO LOCAL DEVICE
-            poDao.insert(foClient);
+                //SAVE TO LOCAL DEVICE
+                poDao.insert(foClient);
 
-            //SEND TO SERVER
-            String lsResponse = WebClient.sendRequest(
-                    poApi.getUrlCompleteAccount(),
-                    param.toString(),
-                    poHeaders.getHeaders());
+                //SEND TO SERVER
+                String lsResponse = WebClient.sendRequest(
+                        poApi.getUrlCompleteAccount(),
+                        param.toString(),
+                        poHeaders.getHeaders());
 
-            if(lsResponse == null){
-                message = SERVER_NO_RESPONSE;
+                if (lsResponse == null) {
+                    message = SERVER_NO_RESPONSE;
+                    return false;
+                }
+
+                JSONObject loResponse = new JSONObject(lsResponse);
+                String lsResult = loResponse.getString("result");
+                if (!lsResult.equalsIgnoreCase("success")) {
+                    JSONObject loError = loResponse.getJSONObject("error");
+                    message = getErrorMessage(loError);
+                    return false;
+                }
+                return true;
+            }else {
                 return false;
             }
-
-            JSONObject loResponse = new JSONObject(lsResponse);
-            String lsResult = loResponse.getString("result");
-            if(!lsResult.equalsIgnoreCase("success")){
-                JSONObject loError = loResponse.getJSONObject("error");
-                message = getErrorMessage(loError);
-                return false;
-            }
-
-            return true;
         } catch (Exception e){
             e.printStackTrace();
             message = getLocalMessage(e);
