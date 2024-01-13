@@ -25,7 +25,7 @@ import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Promotions.Adapter_ImageSlider;
 import org.rmj.g3appdriver.lib.Promotions.model.HomeImageSliderModel;
-import org.rmj.guanzon.guanzonsaleskit.Activities.Activity_Home;
+import org.rmj.guanzon.guanzonsaleskit.Activities.Activity_Browser;
 import org.rmj.guanzon.guanzonsaleskit.R;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
@@ -153,11 +153,10 @@ public class FragmentHome extends Fragment {
 
                     Adapter_ImageSlider adapter = new Adapter_ImageSlider(loSliders, args -> {
                         try{
-                            Intent intent = new Intent("android.intent.action.SUCCESS_LOGIN");
+                            Intent intent = new Intent(requireActivity(), Activity_Browser.class);
                             intent.putExtra("url_link", ePromos.get(args).getPromoUrl());
-                            intent.putExtra("browser_args", "1");
-                            intent.putExtra("args", "promo");
-                            requireActivity().sendBroadcast(intent);
+                            intent.putExtra("args", "1");
+                            startActivity(intent);
                         } catch (Exception e){
                             e.printStackTrace();
                         }

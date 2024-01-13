@@ -1,10 +1,7 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +14,6 @@ import com.google.android.material.appbar.MaterialToolbar;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
-import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.R;
 import org.rmj.guanzongroup.ganado.ViewModel.VMInquiry;
 
@@ -38,24 +34,6 @@ public class Activity_Inquiries extends AppCompatActivity {
         poLoad = new LoadDialog(Activity_Inquiries.this);
         poMessage = new MessageBox(Activity_Inquiries.this);
 
-        poMessage.initDialog();
-        poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-            @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
-
-                Intent loIntent = new Intent(Activity_Inquiries.this, Activity_Settings.class);
-                startActivity(loIntent);
-                finish();
-            }
-        });
-
-        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-        if (isComplete == false){
-            poMessage.setMessage("Must complete account to use this feature");
-            poMessage.show();
-        }
 
         toolbar = findViewById(R.id.toolbar);
         rvInquiries = findViewById(R.id.rvInquiries);

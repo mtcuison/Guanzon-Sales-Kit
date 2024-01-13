@@ -19,7 +19,6 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.Adapter.AgentListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
-import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 
 import java.util.Objects;
 
@@ -37,24 +36,6 @@ public class Activity_AgentList extends AppCompatActivity {
         setContentView(R.layout.activity_agent_list);
 
         poMessage = new MessageBox(Activity_AgentList.this);
-        poMessage.initDialog();
-        poMessage.setTitle("Guanzon Sales Kit");
-        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-            @Override
-            public void OnButtonClick(View view, AlertDialog dialog) {
-                dialog.dismiss();
-
-                Intent loIntent = new Intent(Activity_AgentList.this, Activity_Settings.class);
-                startActivity(loIntent);
-                finish();
-            }
-        });
-
-        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-        if (isComplete == false){
-            poMessage.setMessage("Must complete account to use this feature");
-            poMessage.show();
-        }
 
         rvAgentList = findViewById(R.id.rvAgentList);
         toolbar = findViewById(R.id.toolbar);
@@ -80,7 +61,14 @@ public class Activity_AgentList extends AppCompatActivity {
             @Override
             public void OnFailed(String message) {
                 poLoading.dismiss();
-
+                poMessage.initDialog();
+                poMessage.setTitle("Guanzon Sales Kit");
+                poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
+                    @Override
+                    public void OnButtonClick(View view, AlertDialog dialog) {
+                        dialog.dismiss();
+                    }
+                });
                 poMessage.setMessage(message);
                 poMessage.show();
             }

@@ -7,10 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.lib.Etc.Barangay;
+import org.rmj.g3appdriver.lib.Etc.Country;
 import org.rmj.g3appdriver.lib.Etc.Town;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
@@ -24,6 +26,8 @@ public class VMCompleteAccount extends AndroidViewModel {
     private final ClientMasterSalesKit poClMaster;
     private final Town poTown;
     private final Barangay poBrgy;
+    private final Country poCountry;
+    private final EmployeeSession poSession;
     public VMCompleteAccount(@NonNull Application application) {
         super(application);
 
@@ -31,6 +35,8 @@ public class VMCompleteAccount extends AndroidViewModel {
         this.poClMaster = new ClientMasterSalesKit(application);
         this.poTown = new Town(application);
         this.poBrgy = new Barangay(application);
+        this.poCountry = new Country(application);
+        this.poSession = EmployeeSession.getInstance(application);
     }
     public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
         return poClMaster.GetProfileAccount();
@@ -45,6 +51,7 @@ public class VMCompleteAccount extends AndroidViewModel {
         return message;
     }
     public void CompleteAccount(EClientInfoSalesKit foClient, SubmitCallback callback){
+        foClient.setUserIDxx(poSession.getUserID());
         TaskExecutor.Execute(foClient, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {

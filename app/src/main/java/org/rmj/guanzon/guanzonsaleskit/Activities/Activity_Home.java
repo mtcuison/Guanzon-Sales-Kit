@@ -1,11 +1,9 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,11 +47,18 @@ public class Activity_Home extends AppCompatActivity {
         mviewModel.GetKPOPAgentInfo().observe(this, new Observer<EKPOPAgentRole>() {
             @Override
             public void onChanged(EKPOPAgentRole ekpopAgentRole) {
-                if (ekpopAgentRole == null){
-                    hasUpline = false;
-                }else {
-                    hasUpline = true;
+                navigationView = findViewById(R.id.nav_view);
+                Menu nav_Menu = navigationView.getMenu();
+                try {
+                    if(ekpopAgentRole != null){
+                        nav_Menu.findItem(R.id.nav_setupline).setVisible(false);
+                    } else {
+                        nav_Menu.findItem(R.id.nav_setupline).setVisible(true);
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
                 }
+
             }
         });
         mviewModel.GetCompleteProfile().observe(Activity_Home.this, new Observer<EClientInfoSalesKit>() {
@@ -107,12 +112,10 @@ public class Activity_Home extends AppCompatActivity {
 
         } else if (item.getItemId() == R.id.nav_inquiry) {
             loIntent = new Intent(Activity_Home.this, Activity_Inquiries.class);
-            loIntent.putExtra("isComplete", isCompleteAccount);
             startActivity(loIntent);
         }else if (item.getItemId() == R.id.nav_setupline) {
             loIntent = new Intent(Activity_Home.this, Activity_SelectUpLine.class);
             loIntent.putExtra("isComplete", isCompleteAccount);
-            loIntent.putExtra("hasUpline", hasUpline);
             startActivity(loIntent);
         }else if (item.getItemId() == R.id.nav_agent_enroll) {
             loIntent = new Intent(Activity_Home.this, Activity_AgentEnroll.class);
@@ -120,7 +123,6 @@ public class Activity_Home extends AppCompatActivity {
             startActivity(loIntent);
         } else if (item.getItemId() == R.id.nav_agent_list) {
             loIntent = new Intent(Activity_Home.this, Activity_AgentList.class);
-            loIntent.putExtra("isComplete", isCompleteAccount);
             startActivity(loIntent);
         }else if (item.getItemId() == R.id.nav_profile) {
             loIntent = new Intent(Activity_Home.this, Activity_Settings.class);

@@ -1,10 +1,8 @@
 package org.rmj.guanzongroup.agent.Activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +18,6 @@ import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentList;
 import org.rmj.guanzongroup.agent.ViewModel.VMSelectUpLine;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
-import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 
 import java.util.Objects;
 
@@ -42,16 +39,6 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
 
-        Boolean hasUpline = getIntent().getBooleanExtra("hasUpline", false);
-        if (hasUpline == false){
-            poMessage.setPositiveButton("Close", (view, dialog) -> {
-                dialog.dismiss();
-                finish();
-            });
-
-            poMessage.setMessage("Found entry for upline. User must have 1 upline only.");
-            poMessage.show();
-        }
 
         Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
         if (isComplete == false){
