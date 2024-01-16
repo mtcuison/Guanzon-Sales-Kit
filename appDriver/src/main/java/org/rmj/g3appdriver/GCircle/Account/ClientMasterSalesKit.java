@@ -37,6 +37,9 @@ public class ClientMasterSalesKit {
     public String getMessage() {
         return message;
     }
+    public void RemoveProfile(){
+        poDao.DeleteProfile();
+    }
     public void SaveLocalProfile(EClientInfoSalesKit foClient){
         poDao.insert(foClient);
     }
@@ -106,41 +109,27 @@ public class ClientMasterSalesKit {
         }
     }
     public Boolean isDataValid(EClientInfoSalesKit foClient){
-        if (foClient.getUserIDxx() == null) {
+
+        if (foClient.getUserIDxx().isEmpty()) {
             message = "User ID is empty";
             return false;
-        }else if (foClient.getFrstName() == null) {
+        }else if (foClient.getFrstName().isEmpty()) {
             message = "Firstname is empty";
             return false;
-        }else if (foClient.getLastName() == null) {
+        }else if (foClient.getLastName().isEmpty()) {
             message = "Lastname is empty";
             return false;
-        }else if (foClient.getGenderCd() == null) {
+        }else if (foClient.getGenderCd().isEmpty()) {
             message = "Gender is empty";
             return false;
-        }else if (foClient.getCvilStat() == null) {
+        }else if (foClient.getCvilStat().isEmpty()) {
             message = "Civil Status is empty";
-            return false;
-        }else if (foClient.getCitizenx() == null) {
-            message = "Citizenship is empty";
             return false;
         }else if (foClient.getBirthDte() == null) {
             message = "Birthdate is empty";
             return false;
         }else if (foClient.getBirthPlc() == null) {
             message = "Birthplace is empty";
-            return false;
-        }else if (foClient.getHouseNo1() == null) {
-            message = "House No is empty";
-            return false;
-        }else if (foClient.getAddress1() == null) {
-            message = "Street Address is empty";
-            return false;
-        }else if (foClient.getBrgyIDx1() == null) {
-            message = "Baranggay is empty";
-            return false;
-        }else if (foClient.getTownIDx1() == null) {
-            message = "Town is empty";
             return false;
         }
 

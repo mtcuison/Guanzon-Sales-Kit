@@ -54,6 +54,7 @@ public class EmployeeMaster {
     private final HttpHeaders headers;
     private final AppConfigPreference poConfig;
     private final Telephony poDevID;
+    private final ClientMasterSalesKit poProfile;
     
     private String message;
 
@@ -67,6 +68,7 @@ public class EmployeeMaster {
         this.webApi = new GCircleApi(application);
         this.headers = HttpHeaders.getInstance(instance);
         this.poDevID = new Telephony(instance);
+        this.poProfile = new ClientMasterSalesKit(instance);
     }
     
     public String getMessage(){
@@ -118,6 +120,7 @@ public class EmployeeMaster {
     public void LogoutUserSession(){
         poDao.LogoutUser();
         poDao.ClearAuthorizeFeatures();
+        poProfile.RemoveProfile();
         poSession.initUserLogout();
     }
     

@@ -244,7 +244,10 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
+    <style name="Drawer_Design">
+        <item name="android:background">@drawable/bg_header_light</item>
+    </style>
     <style name="Orange_Bg_Light">
-        <item name="android:src">@drawable/orange_bg_light</item>
+        <item name="android:background">@drawable/rounded_bottom_cardview</item>
     </style>
 </resources>

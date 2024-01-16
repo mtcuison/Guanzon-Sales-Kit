@@ -46,10 +46,10 @@
         android:label="Agent List"
         tools:layout="@layout/activity_settings" />
 
-    <activity
-        android:id="@+id/nav_log_out"
-        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Login"
-        android:label="Sign Out"
-        tools:layout="@layout/activity_login" />
+<!--    <activity-->
+<!--        android:id="@+id/nav_log_out"-->
+<!--        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Login"-->
+<!--        android:label="Sign Out"-->
+<!--        tools:layout="@layout/activity_login" />-->
 
 </navigation>

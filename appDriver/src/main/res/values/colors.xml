@@ -21,6 +21,13 @@
     <color name="colorPrimaryLight">#F88222</color>
     <color name="colorSecondaryLight">#F47422</color>
 
+    <color name="colorNavTop">#DF6939</color>
+    <color name="colorNavBottom">#C68F72</color>.
+
+    <color name="colorNavTopDark">#DF6939</color>
+    <color name="colorNavBottomDark">#7E3915</color>
+
+
     <color name="colorPrimaryVariantLight">#F47422</color>
     <color name="colorSecondaryVariantLight">#F47422</color>
 

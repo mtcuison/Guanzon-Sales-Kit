@@ -1,7 +1,10 @@
 package org.rmj.guanzongroup.authlibrary.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +29,10 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMCompleteAccount;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Activity_CompleteAccount extends AppCompatActivity {
@@ -207,6 +213,29 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         });
 
 
+        tie_ca_bdate.setOnClickListener(v -> {
+            final Calendar newCalendar = Calendar.getInstance();
+            @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
+            final DatePickerDialog StartTime = new DatePickerDialog(Activity_CompleteAccount.this,
+                    android.R.style.Theme_Holo_Dialog, (view131, year, monthOfYear, dayOfMonth) -> {
+                try {
+                    Calendar newDate = Calendar.getInstance();
+                    newDate.set(year, monthOfYear, dayOfMonth);
+                    String lsDate = dateFormatter.format(newDate.getTime());
+                    tie_ca_bdate.setText(lsDate);
+                    Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
+                    lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
+                    Log.d("ActivityCompleteAccount", "Save formatted time: " + lsDate);
+//                    mViewModel.getModel().setBrthDate(lsDate);
+                    eClientInfo.setBirthDte(lsDate);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+            StartTime.getDatePicker().setMaxDate(new Date().getTime());
+            StartTime.show();
+        });
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,8 +245,8 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                 eClientInfo.setLastName(tie_ca_lname.getText().toString());
                 eClientInfo.setMiddName(tie_ca_mname.getText().toString());
                 eClientInfo.setSuffixNm(tie_ca_suffix.getText().toString());
-                eClientInfo.setBirthDte(tie_ca_bdate.getText().toString());
-                eClientInfo.setBirthPlc(tie_ca_bplace.getText().toString());
+//                eClientInfo.setBirthDte(tie_ca_bdate.getText().toString());
+//                eClientInfo.setBirthPlc(tie_ca_bplace.getText().toString());
                 eClientInfo.setMaidenNm(til_ca_maiden.getText().toString());
 //                eClientInfo.setCitizenx(tie_ca_citizen.getText().toString());
 
