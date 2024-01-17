@@ -88,7 +88,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:src="@drawable/bg_category_layout"
+                        android:background="@drawable/bg_category_layout"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +99,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
                         android:text="@string/auto"
                         android:layout_marginStart="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +125,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_category_layout">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imagecat1"
@@ -141,7 +143,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:src="@drawable/bg_category_layout"
+                        android:background="@drawable/bg_category_layout"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -150,6 +152,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/HeaderLabelBlack"
                         android:id="@+id/textView3"
+                        android:textColor="@color/material_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/motorcycle"

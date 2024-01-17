@@ -61,7 +61,7 @@ public class FragmentHome extends Fragment {
                 if (eClientInfoSalesKit == null){
                     isCompleteAccount = false;
                 }else {
-                    if (eClientInfoSalesKit.getClientID().isEmpty()){
+                    if (eClientInfoSalesKit.getClientID()==null){
                         isCompleteAccount = false;
                     }else {
                         isCompleteAccount = true;

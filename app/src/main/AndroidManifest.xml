@@ -43,6 +43,7 @@
         android:name="android.permission.WRITE_SYNC_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

@@ -12,14 +12,12 @@ package org.rmj.guanzongroup.authlibrary.ViewModels;
 
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import org.rmj.g3appdriver.dev.Device.Telephony;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.lib.Account.AccountMaster;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
@@ -35,11 +33,13 @@ public class VMLogin extends AndroidViewModel {
     private final iAuth poSys;
 
     private String message;
+    private final ClientMasterSalesKit poProfile;
 
     public VMLogin(@NonNull Application application) {
         super(application);
         this.poSys = new AccountMaster(application).initGuanzonApp().getInstance(Auth.AUTHENTICATE);
         this.poConfig = AppConfigPreference.getInstance(application);
+        this.poProfile = new ClientMasterSalesKit(application);
     }
 
     public void setAgreedOnTerms(boolean isAgreed){
