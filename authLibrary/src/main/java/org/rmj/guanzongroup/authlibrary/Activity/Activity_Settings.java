@@ -14,7 +14,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMAccountSettings;
 
@@ -65,12 +65,12 @@ public class Activity_Settings extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        mviewModel.GetPoEmpInfo().observe(Activity_Settings.this, new Observer<EEmployeeInfo>() {
+        mviewModel.GetPoEmpInfo().observe(Activity_Settings.this, new Observer<EClientInfo>() {
             @Override
-            public void onChanged(EEmployeeInfo eEmployeeInfo) {
-                tvUsername.setText(eEmployeeInfo.getUserName());
-                tvEmail.setText(eEmployeeInfo.getEmailAdd());
-                tvMobile.setText(eEmployeeInfo.getMobileNo());
+            public void onChanged(EClientInfo client) {
+                tvUsername.setText(client.getUserName());
+                tvEmail.setText(client.getEmailAdd());
+                tvMobile.setText(client.getMobileNo());
             }
         });
 

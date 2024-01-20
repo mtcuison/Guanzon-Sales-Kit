@@ -24,6 +24,8 @@ import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.lib.Notifications.NOTIFICATION_STATUS;
 import org.rmj.g3appdriver.lib.Notifications.model.NMM;
 import org.rmj.g3appdriver.lib.Notifications.model.iNotification;
+import org.rmj.guanzongroup.ghostrider.notifications.Etc.NotificationUI;
+import org.rmj.guanzongroup.ghostrider.notifications.Etc.iNotificationUI;
 //import org.rmj.guanzongroup.ghostrider.notifications.Etc.NotificationUI;
 //import org.rmj.guanzongroup.ghostrider.notifications.Etc.iNotificationUI;
 
@@ -57,7 +59,7 @@ public class GMessagingService extends FirebaseMessagingService {
             return;
         }
 
-//        iNotificationUI loUI = new NotificationUI(GMessagingService.this).getInstance(loMaster);
-//        loUI.CreateNotification();
+        iNotificationUI loUI = new NotificationUI(GMessagingService.this).getInstance(loMaster);
+        loUI.CreateNotification();
     }
 }

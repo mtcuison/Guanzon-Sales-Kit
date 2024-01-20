@@ -17,8 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
-import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.GConnect.Account.ClientMaster;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -108,7 +108,8 @@ public class Activity_Home extends AppCompatActivity {
             loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
             loMessage.setPositiveButton("Yes", (view, dialog) -> {
                 dialog.dismiss();
-                new EmployeeMaster(getApplication()).LogoutUserSession();
+//                new EmployeeMaster(getApplication()).LogoutUserSession();
+                new ClientMaster(getApplication()).LogoutUserSession();
                 AppConfigPreference.getInstance(Activity_Home.this).setIsAppFirstLaunch(false);
                 startActivity(new Intent(Activity_Home.this, Activity_SplashScreen.class));
                 finish();

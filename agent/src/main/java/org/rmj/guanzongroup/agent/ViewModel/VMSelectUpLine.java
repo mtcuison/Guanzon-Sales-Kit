@@ -4,7 +4,10 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
@@ -15,6 +18,7 @@ public class VMSelectUpLine extends AndroidViewModel {
 
     private final SalesKit poSys;
     private final ConnectionUtil poConn;
+    private final ClientMasterSalesKit poSalesKit;
 
     private String message;
 
@@ -28,6 +32,11 @@ public class VMSelectUpLine extends AndroidViewModel {
         super(application);
         poSys = new SalesKit(application);
         poConn = new ConnectionUtil(application);
+        this.poSalesKit = new ClientMasterSalesKit(application);
+    }
+
+    public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
+        return poSalesKit.GetProfileAccount();
     }
 
     public void SubmitUpLine(String UserID, VMAgentList.OnTaskExecute listener){

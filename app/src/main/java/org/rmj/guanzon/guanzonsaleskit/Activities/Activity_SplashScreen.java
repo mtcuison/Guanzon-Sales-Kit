@@ -161,6 +161,41 @@ public class Activity_SplashScreen extends AppCompatActivity {
         });
     }
 
+    private void InitializeData(){
+        mViewModel.InitUserData(new VMSplashScreen.OnInitializeCallback() {
+            @Override
+            public void OnProgress(String args, int progress) {
+                prgrssBar.setProgress(progress);
+            }
+
+            @Override
+            public void OnHasDCP() {
+            }
+
+            @Override
+            public void OnSuccess() {
+                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+                finish();
+            }
+
+            @Override
+            public void OnNoSession() {
+            }
+
+            @Override
+            public void OnFailed(String message) {
+                poDialog.initDialog();
+                poDialog.setTitle("Guanzon Circle");
+                poDialog.setMessage(message);
+                poDialog.setPositiveButton("Okay", (view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                });
+                poDialog.show();
+            }
+        });
+    }
+
     private void InitActivityResultLaunchers(){
         poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
             InitializeAppData();
@@ -168,9 +203,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
         poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                InitializeAppData();
-                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
-                finish();
+                InitializeData();
+//                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+//                finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
                 finish();
             }

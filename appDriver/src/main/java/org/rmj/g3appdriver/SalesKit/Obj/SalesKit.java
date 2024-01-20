@@ -76,6 +76,9 @@ public class SalesKit {
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(){
         return poDao.GetKPOPAgent();
     }
+    public LiveData<EKPOPAgentRole> GetIsKPOPAgentInfo(String UserID){
+        return poDao.GetIsKPOPAgentInfo(UserID);
+    }
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgentRole(){
         return poDao.getKPopAgentRole();
     }

@@ -1,14 +1,13 @@
 package org.rmj.guanzongroup.authlibrary.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -19,8 +18,8 @@ import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.UserAuthInfo;
-import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.Callbacks.LoginCallback;
+import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMLogin;
 
 import java.util.Objects;
@@ -47,7 +46,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         podialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
-        poConfigx.setProductID("gRider");
+        poConfigx.setProductID("GuanzonApp");
         poConfigx.setTestCase(true);
 
         poMessage.initDialog();

@@ -1,7 +1,9 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,8 +62,15 @@ public class Activity_Inquiries extends AppCompatActivity {
             @Override
             public void OnFailed(String message) {
                 poLoad.dismiss();
-
+                poMessage.initDialog();
+                poMessage.setTitle("Guanzon Sales Kit");
                 poMessage.setMessage(message);
+                poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
+                    @Override
+                    public void OnButtonClick(View view, AlertDialog dialog) {
+                        dialog.dismiss();
+                    }
+                });
                 poMessage.show();
             }
         });

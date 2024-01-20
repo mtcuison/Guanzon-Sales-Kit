@@ -1,20 +1,14 @@
 package org.rmj.guanzon.guanzonsaleskit.ViewModel;
 
 import android.app.Application;
-import android.content.Context;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeMaster;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
-import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DEmployeeInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
-import org.rmj.g3appdriver.GCircle.room.Entities.EEmployeeInfo;
-import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.room.Entities.EEvents;
 import org.rmj.g3appdriver.GConnect.room.Entities.EPromo;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
@@ -23,7 +17,6 @@ import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.lib.Promotions.GPromos;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
-import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
 
 import java.util.List;
@@ -37,7 +30,7 @@ public class VMHome extends AndroidViewModel {
     private final GPromos poPromoEvent;
     private final ClientMasterSalesKit poClientSK;
     private final SalesKit poSaleskit;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
 
     public VMHome(@NonNull Application application) {
         super(application);
@@ -46,13 +39,13 @@ public class VMHome extends AndroidViewModel {
         this.poPromoEvent = new GPromos(application);
         this.poClientSK = new ClientMasterSalesKit(application);
         this.poSaleskit = new SalesKit(application);
-        this.poSession = EmployeeSession.getInstance(application);
+        this.poSession = ClientSession.getInstance(application);
 
         this.poConfig = AppConfigPreference.getInstance(application);
         this.poConfig.setIsAppFirstLaunch(false);
     }
     public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(){
-        return poSaleskit.GetKPOPAgentInfo(poSession.getUserID());
+        return poSaleskit.GetIsKPOPAgentInfo(poSession.getUserID());
     }
     public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
         return poClientSK.GetProfileAccount();

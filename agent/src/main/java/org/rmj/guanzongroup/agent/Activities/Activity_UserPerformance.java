@@ -1,20 +1,23 @@
 package org.rmj.guanzongroup.agent.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.agent.R;
+import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
 
 public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialToolbar toolbar;
@@ -31,12 +34,15 @@ public class Activity_UserPerformance extends AppCompatActivity {
     private MaterialCardView mcv_totaleng;
     private MaterialCardView mcv_totallost;
     private SalesKit poSalesKit;
-    private EmployeeSession poSession;
+
+    private VMAgentInfo mViewModel;
+    private ClientSession poSession;
     private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProvider(Activity_UserPerformance.this).get(VMAgentInfo.class);
         setContentView(R.layout.activity_user_performance);
 
         poMessage = new MessageBox(this);
@@ -60,7 +66,7 @@ public class Activity_UserPerformance extends AppCompatActivity {
 //        }
 
         poSalesKit = new SalesKit(getApplication());
-        poSession = EmployeeSession.getInstance(this);
+        poSession = ClientSession.getInstance(this);
 
         toolbar = findViewById(R.id.toolbar);
 
@@ -91,28 +97,26 @@ public class Activity_UserPerformance extends AppCompatActivity {
                 finish();
             }
         });
-
-        poSalesKit.GetCountEntries().observe(this, new Observer<DGanadoOnline.CountEntries>() {
+        mViewModel.GetUserCountEntries().observe(Activity_UserPerformance.this, new Observer<DGanadoOnline.CountEntries>() {
             @Override
             public void onChanged(DGanadoOnline.CountEntries countEntries) {
+                Log.e("nOpen", String.valueOf(countEntries.nOpen));
+                Log.e("nExtracted", String.valueOf(countEntries.nExtracted));
+                Log.e("nSold", String.valueOf(countEntries.nSold));
+                Log.e("nEngaged", String.valueOf(countEntries.nEngaged));
+                Log.e("nLost", String.valueOf(countEntries.nLost));
+                Log.e("nEntries", String.valueOf(countEntries.nEntries));
 
-                int nOpen = countEntries.nOpen;
-                int nExtracted = countEntries.nExtracted;
-                int nSold = countEntries.nSold;
-                int nEngaged = countEntries.nEngaged;
-                int nLost = countEntries.nLost;
+                totalopen.setText(String.valueOf(countEntries.nOpen));
+                totalextr.setText(String.valueOf(countEntries.nExtracted));
+                totalsold.setText(String.valueOf(countEntries.nSold));
+                totaleng.setText(String.valueOf(countEntries.nEngaged));
+                totallost.setText(String.valueOf(countEntries.nLost));
+                totalsales.setText(String.valueOf(countEntries.nEntries));
 
-                int totalEntries = nOpen + nExtracted + nSold + nEngaged + nLost;
-
-                totalopen.setText(String.valueOf(nOpen));
-                totalextr.setText(String.valueOf(nExtracted));
-                totalsold.setText(String.valueOf(nSold));
-                totaleng.setText(String.valueOf(nEngaged));
-                totallost.setText(String.valueOf(nLost));
-                totalsales.setText(String.valueOf(totalEntries));
-
-                username.setText(poSession.getUserName());
+                username.setText(poSession.getFullName());
             }
         });
+
     }
 }

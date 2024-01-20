@@ -7,11 +7,12 @@ import android.app.Application;
 import android.util.Log;
 
 import org.json.JSONObject;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
+import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
-import org.rmj.g3appdriver.GConnect.room.DataAccessObject.DClientInfo;
-import org.rmj.g3appdriver.GConnect.room.Entities.EClientInfo;
-import org.rmj.g3appdriver.GConnect.room.GGC_GConnectDB;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
@@ -26,15 +27,19 @@ public class SignIn implements iAuth {
     private final GConnectApi poApi;
     private final HttpHeaders poHeaders;
     private final AppConfigPreference poConfig;
+    private final ClientMasterSalesKit poClientSK;
+    private final ClientSession poSession;
 
     private String message;
 
     public SignIn(Application instance) {
         this.instance = instance;
-        this.poDao = GGC_GConnectDB.getInstance(instance).EClientDao();
+        this.poDao = GGC_GCircleDB.getInstance(instance).ClientDao();
         this.poApi = new GConnectApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poConfig = AppConfigPreference.getInstance(instance);
+        this.poClientSK = new ClientMasterSalesKit(instance);
+        this.poSession = ClientSession.getInstance(instance);
     }
 
     @Override
@@ -76,14 +81,17 @@ public class SignIn implements iAuth {
                 message = getErrorMessage(loError);
                 return 0;
             }
-
-            ClientSession loAccount = ClientSession.getInstance(instance);
-            loAccount.setUserID(loResponse.getString("sUserIDxx"));
-            loAccount.setFullName(loResponse.getString("sUserName"));
+//
+//            ClientSession loAccount = ClientSession.getInstance(instance);
+            poSession.setUserID(loResponse.getString("sUserIDxx"));
+            poSession.setFullName(loResponse.getString("sUserName"));
 //                    loInfo.setEmailAdd(loResponse.getString("sEmailAdd"));
-            loAccount.setMobileNo(loInfo.getMobileNo());
-            loAccount.setLoginStatus(true);
+            poSession.setMobileNo(loInfo.getMobileNo());
 
+            poSession.setLoginStatus(true);
+
+            poClientSK.RemoveProfileSession();
+            poConfig.setMobileNo(loResponse.getString("sMobileNo"));
             EClientInfo loClient = new EClientInfo();
 
             loClient.setDateMmbr(loResponse.getString("dCreatedx"));
@@ -91,6 +99,9 @@ public class SignIn implements iAuth {
             loClient.setUserName(loResponse.getString("sUserName"));
             loClient.setMobileNo(loResponse.getString("sMobileNo"));
             loClient.setUserIDxx(loResponse.getString("sUserIDxx"));
+            poSession.setVerifiedStatus(1);
+
+
             poDao.RemoveSessions();
             poDao.insert(loClient);
             return 1;

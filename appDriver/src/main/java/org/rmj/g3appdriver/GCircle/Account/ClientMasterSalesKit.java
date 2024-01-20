@@ -13,6 +13,7 @@ import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
@@ -24,7 +25,7 @@ public class ClientMasterSalesKit {
     private final HttpHeaders poHeaders;
     private final GCircleApi poApi;
     private final GConnectApi poApiConnect;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
     private String message;
 
     public ClientMasterSalesKit(Application instance) {
@@ -32,7 +33,7 @@ public class ClientMasterSalesKit {
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poApi = new GCircleApi(instance);
         this.poApiConnect = new GConnectApi(instance);
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
     }
     public String getMessage() {
         return message;

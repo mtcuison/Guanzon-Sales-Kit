@@ -36,26 +36,40 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         poLoading = new LoadDialog(Activity_SelectUpLine.this);
         poMessage = new MessageBox(Activity_SelectUpLine.this);
 
-        poMessage.initDialog();
-        poMessage.setTitle("Guanzon Sales Kit");
 
-
-        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-        if (isComplete == false){
-            poMessage.setPositiveButton("Close", (view, dialog) -> {
-                dialog.dismiss();
-
-                Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
-                startActivity(loIntent);
-                finish();
-            });
-
-            poMessage.setMessage("Must complete account to use this feature");
-            poMessage.show();
-        }
+//        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
+//        if (isComplete == false){
+//            poMessage.setPositiveButton("Close", (view, dialog) -> {
+//                dialog.dismiss();
+//
+//                Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
+//                startActivity(loIntent);
+//                finish();
+//            });
+//
+//            poMessage.setMessage("Must complete account to use this feature");
+//            poMessage.show();
+//        }
 
         mViewModel = new ViewModelProvider(Activity_SelectUpLine.this).get(VMSelectUpLine.class);
+        mViewModel.GetCompleteProfile().observe(Activity_SelectUpLine.this, eclient ->{
+            if (eclient == null){
 
+
+                poMessage.initDialog();
+                poMessage.setTitle("Guanzon Sales Kit");
+                poMessage.setMessage("Must complete account to use this feature");
+                poMessage.setPositiveButton("Close", (view, dialog) -> {
+                    dialog.dismiss();
+
+                    Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
+                    startActivity(loIntent);
+                    finish();
+                });
+
+                poMessage.show();
+            }
+        });
         txtUpline = findViewById(R.id.txt_upLine);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnCancel = findViewById(R.id.btnCancel);
