@@ -99,6 +99,11 @@ dependencies {
     //data loading manager for splashscreen
     implementation "androidx.startup:startup-runtime:1.1.1"
     implementation ("androidx.webkit:webkit:1.8.0")
+    implementation 'com.mikepenz:actionitembadge:3.3.2'
+
+    implementation 'com.mikepenz:iconics-core:2.9.3'
+    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.2@aar'
+    implementation('com.mikepenz:aboutlibraries:5.9.4') { transitive = true }
 
     implementation 'commons-io:commons-io:2.6'
     implementation project(path: ':authLibrary')

@@ -1,12 +1,18 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +21,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
@@ -23,6 +31,7 @@ import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzon.guanzonsaleskit.R;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataSyncService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMHome;
 import org.rmj.guanzon.guanzonsaleskit.databinding.ActivityHomeBinding;
 import org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll;
@@ -31,8 +40,11 @@ import org.rmj.guanzongroup.agent.Activities.Activity_SelectUpLine;
 import org.rmj.guanzongroup.agent.Activities.Activity_UserPerformance;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
+import org.rmj.guanzongroup.ghostrider.notifications.Activity.Activity_NotificationList;
 
 public class Activity_Home extends AppCompatActivity {
+
+    private static final String TAG = "Sales Kit Home Activity";
     private VMHome mviewModel;
     private Boolean isCompleteAccount;
     private Boolean hasUpline;
@@ -40,8 +52,14 @@ public class Activity_Home extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private NavigationView navigationView;
     private MessageBox loMessage;
+    private DataSyncService poNetRecvr;
+    private DrawerLayout drawer;
+    private BadgeDrawable loBadge;
+    private Toolbar toolbar;
 
 //    @Override (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+
+    @SuppressLint("UnsafeOptInUsageError")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +68,13 @@ public class Activity_Home extends AppCompatActivity {
         /*VERIFY FIRST USER IF COMPLETED ITS ACCOUNT*/
         mviewModel = new ViewModelProvider(this).get(VMHome.class);
 
+        poNetRecvr = mviewModel.getInternetReceiver();
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarActivityHome.toolbar);
 
-        DrawerLayout drawer = binding.drawerLayout;
+        drawer = binding.drawerLayout;
         navigationView = binding.navView;
 
         // Passing each menu ID as a set of Ids because each
@@ -69,6 +88,23 @@ public class Activity_Home extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        initReceiver();
+
+            mviewModel.GetUnreadMessagesCount().observe(Activity_Home.this, count -> {
+                try{
+                    toolbar = findViewById(R.id.toolbar);
+                    if(count > 0) {
+                        loBadge = BadgeDrawable.create(Activity_Home.this);
+                        loBadge.setNumber(count);
+                        BadgeUtils.attachBadgeDrawable(loBadge, toolbar, R.id.item_notifications);
+                    } else {
+                        BadgeUtils.detachBadgeDrawable(loBadge, toolbar, R.id.item_notifications);
+                        supportInvalidateOptionsMenu();
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
             mviewModel.GetKPOPAgentInfo().observe(this, new Observer<EKPOPAgentRole>() {
                 @Override
                 public void onChanged(EKPOPAgentRole ekpopAgentRole) {
@@ -151,7 +187,26 @@ public class Activity_Home extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity__home, menu);
+//        getMenuInflater().inflate(R.menu.activity__home, menu);
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity__home, menu);
+        mviewModel.GetCompleteProfile().observe(Activity_Home.this, eClientinfo -> {
+
+            //This area of code has been commented to avoid users from accessing
+            // the marketplace cart while the marketplace has not yet fully develop yet.
+            try {
+                if(eClientinfo != null){
+                    menu.findItem(R.id.item_notifications).setVisible(true);
+//                    menu.findItem(R.id.item_cart).setVisible(true);
+                } else {
+                    menu.findItem(R.id.item_notifications).setVisible(false);
+//                    menu.findItem(R.id.item_cart).setVisible(false);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        });
         return true;
     }
 
@@ -183,28 +238,9 @@ public class Activity_Home extends AppCompatActivity {
             loIntent = new Intent(Activity_Home.this, Activity_UserPerformance.class);
             loIntent.putExtra("isComplete", isCompleteAccount);
             startActivity(loIntent);
+        }else {
+            startActivity(new Intent(Activity_Home.this, Activity_NotificationList.class));
         }
-//        else if (item.getItemId() == R.id.nav_log_out) {
-//
-//
-//            loMessage = new MessageBox(Activity_Home.this);
-//            loMessage.initDialog();
-//            loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
-//            loMessage.setPositiveButton("Yes", (view, dialog) -> {
-//                dialog.dismiss();
-//                new EmployeeMaster(getApplication()).LogoutUserSession();
-//                AppConfigPreference.getInstance(Activity_Home.this).setIsAppFirstLaunch(false);
-//                startActivity(new Intent(Activity_Home.this, Activity_SplashScreen.class));
-//                finish();
-//            });
-//            loMessage.setTitle("Account Session");
-//            loMessage.setMessage("Are you sure you want to end session/logout?");
-//            loMessage.show();
-//            loIntent = new Intent(Activity_Home.this, Activity_Login.class);
-//            loIntent.putExtra("isComplete", isCompleteAccount);
-//            startActivity(loIntent);
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -214,4 +250,38 @@ public class Activity_Home extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            loMessage.initDialog();
+            loMessage.setPositiveButton("Yes", (view, dialog) -> {
+                dialog.dismiss();
+                finish();
+            });
+            loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+            loMessage.setTitle("Guanzon Circle");
+            loMessage.setMessage("Exit Guanzon Circle app?");
+            loMessage.show();
+        }
+    }
+    private void initReceiver(){
+        IntentFilter loFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(poNetRecvr, loFilter);
+        AppConfigPreference.getInstance(Activity_Home.this).setIsMainActive(true);
+        Log.e(TAG, "Internet status receiver has been registered.");
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(poNetRecvr);
+        Log.e(TAG, "Internet status receiver has been unregistered.");
+        AppConfigPreference.getInstance(Activity_Home.this).setIsMainActive(false);
+        super.onDestroy();
+    }
+
+
 }

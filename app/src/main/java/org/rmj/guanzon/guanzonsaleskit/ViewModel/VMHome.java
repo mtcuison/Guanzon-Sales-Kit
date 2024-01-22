@@ -14,10 +14,12 @@ import org.rmj.g3appdriver.GConnect.room.Entities.EPromo;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
+import org.rmj.g3appdriver.lib.Notifications.Obj.Notification;
 import org.rmj.g3appdriver.lib.Promotions.GPromos;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataSyncService;
 
 import java.util.List;
 
@@ -31,18 +33,28 @@ public class VMHome extends AndroidViewModel {
     private final ClientMasterSalesKit poClientSK;
     private final SalesKit poSaleskit;
     private final ClientSession poSession;
+    private final DataSyncService poNetRecvr;
 
+    private final Notification poNotif;
     public VMHome(@NonNull Application application) {
         super(application);
 
+        this.poNetRecvr = new DataSyncService(application);
         this.poConn = new ConnectionUtil(application);
         this.poPromoEvent = new GPromos(application);
         this.poClientSK = new ClientMasterSalesKit(application);
         this.poSaleskit = new SalesKit(application);
         this.poSession = ClientSession.getInstance(application);
-
+        this.poNotif = new Notification(application);
         this.poConfig = AppConfigPreference.getInstance(application);
         this.poConfig.setIsAppFirstLaunch(false);
+    }
+
+    public LiveData<Integer> GetUnreadMessagesCount(){
+        return poNotif.GetUnreadNotificationCount();
+    }
+    public DataSyncService getInternetReceiver() {
+        return poNetRecvr;
     }
     public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(){
         return poSaleskit.GetIsKPOPAgentInfo(poSession.getUserID());

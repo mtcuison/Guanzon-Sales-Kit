@@ -1,7 +1,11 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
+import static org.rmj.g3appdriver.utils.ServiceScheduler.FIFTEEN_MINUTE_PERIODIC;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -19,10 +23,14 @@ import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.BuildConfig;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
+import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.etc.TransparentToolbar;
 import org.rmj.g3appdriver.utils.AppDirectoryCreator;
+import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
+import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 
@@ -55,7 +63,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
         prgrssBar = findViewById(R.id.progress_splashscreen);
         lblVrsion = findViewById(R.id.lbl_versionInfo);
         lblVrsion.setText(BuildConfig.VERSION_NAME);
-
+        if (!isMyServiceRunning(GMessagingService.class)) {
+            startService(new Intent(Activity_SplashScreen.this, GMessagingService.class));
+        }
         InitializeAppContentDisclosure();
 
         AppDirectoryCreator loCreator = new AppDirectoryCreator();
@@ -200,15 +210,34 @@ public class Activity_SplashScreen extends AppCompatActivity {
         poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
             InitializeAppData();
         });
-
         poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
                 InitializeData();
-//                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
-//                finish();
+                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+                finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
                 finish();
             }
         });
+//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//            if (result.getResultCode() == RESULT_OK) {
+//                InitializeData();
+////                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+////                finish();
+//            } else if (result.getResultCode() == RESULT_CANCELED) {
+//                finish();
+//            }
+//        });
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
