@@ -3,6 +3,7 @@ package org.rmj.g3appdriver.GCircle.Account;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.SERVER_NO_RESPONSE;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -97,9 +98,8 @@ public class ClientMasterSalesKit {
             foClient.setBrgyIDx2(loResponse.get("sBrgyIDx2").toString());
             foClient.setTownIDx2(loResponse.get("sTownIDx2").toString());
             foClient.setVerified(Integer.valueOf(loResponse.get("cVerified").toString()));
-
+            poDao.DeleteProfile();
             poDao.insert(foClient);
-
             Log.d(TAG, "Client Profile record save!");
 
             return true;

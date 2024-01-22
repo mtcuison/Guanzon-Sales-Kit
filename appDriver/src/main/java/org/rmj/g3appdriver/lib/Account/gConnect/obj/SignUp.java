@@ -5,13 +5,14 @@ import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
 import android.app.Application;
+import android.util.Log;
 
 import org.json.JSONObject;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
-import org.rmj.g3appdriver.lib.Account.pojo.AccountCredentials;
+import org.rmj.g3appdriver.lib.Account.pojo.AccountInfo;
 
 public class SignUp implements iAuth {
     private static final String TAG = SignUp.class.getSimpleName();
@@ -31,18 +32,18 @@ public class SignUp implements iAuth {
     @Override
     public int DoAction(Object args) {
         try{
-            AccountCredentials loInfo = (AccountCredentials) args;
-            if(!loInfo.isDataValid()){
+            AccountInfo loInfo = (AccountInfo) args;
+            if(!loInfo.isAccountInfoValid()){
                 message = loInfo.getMessage();
                 return 0;
             }
 
             JSONObject params = new JSONObject();
-            params.put("name", loInfo.getsUserName());
-            params.put("mail", loInfo.getsEmailAdd());
-            params.put("pswd", loInfo.getsPassword());
-            params.put("mobile", loInfo.getsMobileNo());
-            params.put("cAgreeTnC", loInfo.getcAgreeTnC());
+            params.put("name", loInfo.getFullName());
+            params.put("mail", loInfo.getEmail());
+            params.put("pswd", loInfo.getPassword());
+            params.put("mobile", loInfo.getMobileNo());
+//            params.put("cAgreeTnC", loInfo.getcAgreeTnC());
 
             String lsResponse = WebClient.sendRequest(
                     poApi.getRegisterAcountAPI(),
@@ -53,7 +54,7 @@ public class SignUp implements iAuth {
                 message = SERVER_NO_RESPONSE;
                 return 0;
             }
-
+            Log.e(TAG, lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(!lsResult.equalsIgnoreCase("success")){

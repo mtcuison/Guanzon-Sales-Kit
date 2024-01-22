@@ -153,25 +153,6 @@ public class Activity_Home extends AppCompatActivity {
             loMessage.setTitle("Account Session");
             loMessage.setMessage("Are you sure you want to end session/logout?");
             loMessage.show();
-//
-//            Dialog_DoubleButton loDialog = new Dialog_DoubleButton(Activity_Dashboard.this);
-//            loDialog.setButtonText("YES", "NO");
-//            loDialog.initDialog("Confirm Logout", "Do you want to log out?", new Dialog_DoubleButton.OnDialogConfirmation() {
-//                @Override
-//                public void onConfirm(AlertDialog dialog) {
-//                    mViewModel.LogoutUserSession(() -> {
-//                        Intent loIntent = new Intent(Activity_Dashboard.this, Activity_Dashboard.class);
-//                        startActivity(loIntent);
-//                    });
-//                    dialog.dismiss();
-//                }
-//
-//                @Override
-//                public void onCancel(AlertDialog dialog) {
-//                    dialog.dismiss();
-//                }
-//            });
-//            loDialog.show();
             return false;
         });
         } catch (NullPointerException e) {
@@ -181,7 +162,7 @@ public class Activity_Home extends AppCompatActivity {
          catch (Exception e) {
         e.printStackTrace();
         // Handle or log the exception
-    }
+        }
     }
 
     @Override
@@ -282,6 +263,4 @@ public class Activity_Home extends AppCompatActivity {
         AppConfigPreference.getInstance(Activity_Home.this).setIsMainActive(false);
         super.onDestroy();
     }
-
-
 }

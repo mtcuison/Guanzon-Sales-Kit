@@ -131,25 +131,25 @@ public class VMSplashScreen extends AndroidViewModel {
                                 Log.e(TAG, "Unable to import relationship");
                             }
 
-                            loTask.publishProgress(0);
+                            loTask.publishProgress(1);
 
                             Thread.sleep(500);
                             if (new ClientMasterSalesKit(instance).ImportClientProfile(poSession.getUserID())) {
                                 Log.d(TAG, "Client Profile imported successfully...");
                             }
-                            loTask.publishProgress(88);
+                            loTask.publishProgress(10);
                             Thread.sleep(500);
 
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
-                            loTask.publishProgress(90);
+                            loTask.publishProgress(20);
                             Thread.sleep(500);
 
                             if (!new SalesKit(instance).ImportKPOPAgent()) {
                                 Log.d(TAG, "KPOP Agent imported successfully...");
                             }
-                            loTask.publishProgress(99);
+                            loTask.publishProgress(30);
                             Thread.sleep(500);
                         }
                         if (poConfig.isAppFirstLaunch()){
@@ -165,28 +165,28 @@ public class VMSplashScreen extends AndroidViewModel {
                             if(!new Province(instance).ImportProvince()){
                                 Log.e(TAG, "Unable to import province");
                             }
-                            loTask.publishProgress(2);
+                            loTask.publishProgress(5);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing town data.");
                             if(!new Town(instance).ImportTown()){
                                 Log.e(TAG, "Unable to import town");
                             }
-                            loTask.publishProgress(3);
+                            loTask.publishProgress(15);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing barangay data.");
                             if(!new Barangay(instance).ImportBarangay()){
                                 Log.e(TAG, "Unable to import barangay");
                             }
-                            loTask.publishProgress(4);
+                            loTask.publishProgress(25);
                             Thread.sleep(1000);
 
                             Log.d(TAG, "Initializing country data.");
                             if(!new Country(instance).ImportCountry()){
                                 Log.e(TAG, "Unable to import country");
                             }
-                            loTask.publishProgress(4);
+                            loTask.publishProgress(30);
                             Thread.sleep(1000);
 
                         }
@@ -195,42 +195,42 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (!poPromoEvents.ImportPromosLinks()){
                             Log.d(TAG, "Unable to import promo links");
                         }
-                        loTask.publishProgress(10);
+                        loTask.publishProgress(35);
                         Thread.sleep(1000);
 
                         Log.d(TAG, "Importing Event Links");
                         if (!poPromoEvents.ImportEventsLinks()){
                             Log.d(TAG, "Unable to import events link");
                         }
-                        loTask.publishProgress(15);
+                        loTask.publishProgress(39);
                         Thread.sleep(1000);
 
                         if (new RMcModel(instance).ImportMCModel()) {
                             Log.d(TAG, "MC Model imported successfully...");
                         }
-                        loTask.publishProgress(25);
+                        loTask.publishProgress(45);
                         Thread.sleep(500);
                         if (new RMcModel(instance).ImportCashPrices()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
-                        loTask.publishProgress(35);
+                        loTask.publishProgress(55);
                         Thread.sleep(500);
                         if (new RMcModel(instance).ImportModelColor()) {
                             Log.d(TAG, "MC Model Color imported successfully...");
                         }
-                        loTask.publishProgress(45);
+                        loTask.publishProgress(65);
                         Thread.sleep(500);
 
                         if (new RMcBrand(instance).ImportMCBrands()) {
                             Log.d(TAG, "MC Brand imported successfully...");
                         }
-                        loTask.publishProgress(55);
+                        loTask.publishProgress(75);
                         Thread.sleep(500);
                         if (new RMcModelPrice(instance).ImportMcModelPrice()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
 
-                        loTask.publishProgress(65);
+                        loTask.publishProgress(85);
                         Thread.sleep(500);
 
 
@@ -238,13 +238,13 @@ public class VMSplashScreen extends AndroidViewModel {
                             Log.d(TAG, "MC Category imported successfully...");
                         }
 
-                        loTask.publishProgress(75);
+                        loTask.publishProgress(92);
                         Thread.sleep(500);
 
                         if (new RMcTermCategory(instance).ImportMcTermCategory()) {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
-                        loTask.publishProgress(85);
+                        loTask.publishProgress(98);
                         Thread.sleep(500);
 
 
