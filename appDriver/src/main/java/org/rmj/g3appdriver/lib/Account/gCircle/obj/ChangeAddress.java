@@ -8,11 +8,11 @@ import android.app.Application;
 import android.util.Log;
 
 import org.json.JSONObject;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DAddressRequest;
 import org.rmj.g3appdriver.GCircle.room.Entities.EAddressUpdate;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
@@ -28,14 +28,14 @@ public class ChangeAddress implements iAuth {
     private final Application instance;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
-    private EmployeeSession poSession;
+    private ClientSession poSession;
     private DAddressRequest poDao;
     private String message;
     public ChangeAddress(Application instance){
         this.instance = instance;
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
         this.poDao = GGC_GCircleDB.getInstance(instance).AddressRequestDao();
     }
     @Override
@@ -52,7 +52,7 @@ public class ChangeAddress implements iAuth {
             /*INSERT TO LOCAL*/
             EAddressUpdate addressUpdate = new EAddressUpdate();
             addressUpdate.setTransNox(sTransNox);
-            addressUpdate.setClientID(poSession.getClientId());
+            addressUpdate.setClientID(poSession.getClientID());
             addressUpdate.setReqstCDe(poUserAddress.getsRqstCd());
             addressUpdate.setAddrssTp(poUserAddress.getcAddrssTp());
             addressUpdate.setHouseNox(poUserAddress.getsHouseNox());
@@ -74,7 +74,7 @@ public class ChangeAddress implements iAuth {
             /*UPLOAD TO SERVER*/
             JSONObject loParams = new JSONObject();
             loParams.put("sTransNox", sTransNox);
-            loParams.put("sClientID", poSession.getClientId());
+            loParams.put("sClientID", poSession.getClientID());
             loParams.put("cReqstCDe", poUserAddress.getsRqstCd());
             loParams.put("cAddrssTp", poUserAddress.getcAddrssTp());
             loParams.put("sHouseNox", poUserAddress.getsHouseNox());
