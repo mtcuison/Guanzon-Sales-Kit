@@ -12,12 +12,12 @@ import androidx.lifecycle.LiveData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.rmj.apprdiver.util.SQLUtil;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.SalesKit.DataAccessObject.DAgentRole;
 import org.rmj.g3appdriver.SalesKit.DataAccessObject.DKPOPAgentRole;
 import org.rmj.g3appdriver.SalesKit.Entities.EAgentRole;
@@ -38,7 +38,7 @@ public class SalesKit {
     private final DKPOPAgentRole poDao;
     private final DAgentRole poAgentDao;
     private final DGanadoOnline poGanadoDao;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
@@ -50,7 +50,7 @@ public class SalesKit {
         this.poDao = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
         this.poAgentDao = GGC_GCircleDB.getInstance(instance).AgentDao();
         this.poGanadoDao = GGC_GCircleDB.getInstance(instance).ganadoDao();
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
@@ -268,7 +268,7 @@ public class SalesKit {
     }
     public boolean SubmitUpLine(String UserIDxx){
         try{
-
+            Log.e(TAG, UserIDxx);
             JSONObject params = new JSONObject();
             params.put("sUserIDxx", poSession.getUserID());
             params.put("nRoleIdxx", "0");

@@ -21,15 +21,10 @@ import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportBrand;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportBrandModel;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportCategory;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportCountry;
-import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportFileCode;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportMcModelPrice;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportMcTermCategory;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportProvinces;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.ImportTown;
-import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_AreaPerformance;
-import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_BankList;
-import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_BranchAccounts;
-import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_BranchPerformance;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_MCCashPrice;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_McColors;
 import org.rmj.g3appdriver.GCircle.ImportData.Obj.Import_Occupations;
@@ -62,26 +57,21 @@ public class DataDownloadService extends JobService {
 
     private void doBackgroundTask(JobParameters params) {
         ImportInstance[]  importInstances = {
-                new Import_BranchAccounts(getApplication()),
-                new Import_BankList(getApplication()),
-                new ImportFileCode(getApplication()),
                 new ImportBrand(getApplication()),
                 new ImportBrandModel(getApplication()),
                 new Import_McColors(getApplication()),
                 new Import_MCCashPrice(getApplication()),
+                new ImportMcModelPrice(getApplication()),
                 new ImportCategory(getApplication()),
                 new Import_Relation(getApplication()),
                 new ImportProvinces(getApplication()),
-                new ImportMcModelPrice(getApplication()),
                 new ImportTown(getApplication()),
                 new ImportBarangay(getApplication()),
                 new ImportMcTermCategory(getApplication()),
                 new ImportCountry(getApplication()),
                 new Import_Occupations(getApplication()),
                 new Import_SysConfig(getApplication()),
-                new Import_SCARequest(getApplication()),
-                new Import_AreaPerformance(getApplication()),
-                new Import_BranchPerformance(getApplication())};
+                new Import_SCARequest(getApplication())};
         new Thread(() -> {
             for (ImportInstance importInstance : importInstances) {
                 importInstance.ImportData(new ImportDataCallback() {

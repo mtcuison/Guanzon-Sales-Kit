@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
     private MaterialAutoCompleteTextView spn_color, spnPayment, spnAcctTerm;
     private MaterialButton btnContinue,btnCalculate;
     private ShapeableImageView imgMC;
+    private LinearLayout lnInstallment;
     private String lsModelID, lsBrandID, lsImgLink, lsBrandNm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +157,11 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spnPayment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position==0){
+                    lnInstallment.setVisibility(View.GONE);
+                }else{
+                    lnInstallment.setVisibility(View.VISIBLE);
+                }
                 mViewModel.getModel().setPaymForm(String.valueOf(position));
 //                mViewModel.getModel().setPaymForm(GConstants.PAYMENT_FORM[position]);
             }
@@ -223,6 +230,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spnAcctTerm = findViewById(R.id.spn_installmentTerm);
         spn_color = findViewById(R.id.spn_color);
         imgMC = findViewById(R.id.imgMC);
+        lnInstallment = findViewById(R.id.ln_installment);
 
         btnContinue = findViewById(R.id.btnContinue);
         btnCalculate = findViewById(R.id.btnCalculate);

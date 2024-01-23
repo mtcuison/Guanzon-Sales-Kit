@@ -36,6 +36,8 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         poLoading = new LoadDialog(Activity_SelectUpLine.this);
         poMessage = new MessageBox(Activity_SelectUpLine.this);
 
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
 
 //        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
 //        if (isComplete == false){
@@ -56,8 +58,6 @@ public class Activity_SelectUpLine extends AppCompatActivity {
             if (eclient == null){
 
 
-                poMessage.initDialog();
-                poMessage.setTitle("Guanzon Sales Kit");
                 poMessage.setMessage("Must complete account to use this feature");
                 poMessage.setPositiveButton("Close", (view, dialog) -> {
                     dialog.dismiss();
@@ -73,9 +73,6 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         txtUpline = findViewById(R.id.txt_upLine);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnCancel = findViewById(R.id.btnCancel);
-        poMessage = new MessageBox(Activity_SelectUpLine.this);
-        poLoading = new LoadDialog(Activity_SelectUpLine.this);
-
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -98,6 +95,11 @@ public class Activity_SelectUpLine extends AppCompatActivity {
                     poLoading.dismiss();
 
                     poMessage.setMessage("Agent Upline user id successfully submitted.");
+                    poMessage.setPositiveButton("Close", (view, dialog) -> {
+                        dialog.dismiss();
+                        finish();
+                    });
+
                     poMessage.show();
                 }
 
@@ -106,6 +108,9 @@ public class Activity_SelectUpLine extends AppCompatActivity {
                     poLoading.dismiss();
 
                     poMessage.setMessage(message);
+                    poMessage.setPositiveButton("Close", (view, dialog) -> {
+                        dialog.dismiss();
+                    });
                     poMessage.show();
 
                 }
@@ -126,5 +131,8 @@ public class Activity_SelectUpLine extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void initDialog(){
+
     }
 }

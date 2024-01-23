@@ -57,7 +57,7 @@ public class VMHome extends AndroidViewModel {
         return poNetRecvr;
     }
     public LiveData<EKPOPAgentRole> GetKPOPAgentInfo(){
-        return poSaleskit.GetIsKPOPAgentInfo(poSession.getUserID());
+        return poSaleskit.GetKPOPAgentInfo(poSession.getUserID());
     }
     public LiveData<EClientInfoSalesKit> GetCompleteProfile(){
         return poClientSK.GetProfileAccount();

@@ -107,4 +107,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mcv_header" />
 
+    <TextView
+        android:id="@+id/lbl_InquiryNoData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:gravity="center"
+        android:padding="80dp"
+        android:text="No data found."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mcv_header" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class Activity_Inquiries extends AppCompatActivity {
     private VMInquiry mViewModel;
     private MaterialToolbar toolbar;
     private RecyclerView rvInquiries;
+    private TextView lblNoData;
     private LoadDialog poLoad;
     private MessageBox poMessage;
 
@@ -39,6 +41,7 @@ public class Activity_Inquiries extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         rvInquiries = findViewById(R.id.rvInquiries);
+        lblNoData = findViewById(R.id.lbl_InquiryNoData);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(" ");
@@ -81,6 +84,7 @@ public class Activity_Inquiries extends AppCompatActivity {
     private void LoadInquiries(){
         mViewModel.GetByAgentInquiries().observe(Activity_Inquiries.this, inquiries ->{
             if (inquiries.size() > 0){
+                lblNoData.setVisibility(View.GONE);
                 InquiryListAdapter adapter= new InquiryListAdapter(getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
@@ -92,6 +96,9 @@ public class Activity_Inquiries extends AppCompatActivity {
                 rvInquiries.setAdapter(adapter);
                 rvInquiries.setLayoutManager(new LinearLayoutManager(Activity_Inquiries.this,RecyclerView.VERTICAL,false));
 
+            }else{
+
+                lblNoData.setVisibility(View.VISIBLE);
             }
         });
     }

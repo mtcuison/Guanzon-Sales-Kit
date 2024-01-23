@@ -186,12 +186,21 @@ public class Activity_ClientInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-                    Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_BrandSelection.class);
 
-                    startActivity(loIntent);
-                    overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+                    poMessage.initDialog();
+                    poMessage.setTitle("Ganado");
+                    poMessage.setMessage("Transaction successfully saved.");
+                    poMessage.setPositiveButton("Okay", (view1, dialog) -> {
+                        dialog.dismiss();
+                        Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_BrandSelection.class);
+                        loIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                    finish();
+                        startActivity(loIntent);
+                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+
+                        finish();
+                    });
+                    poMessage.show();
                 }
 
 
