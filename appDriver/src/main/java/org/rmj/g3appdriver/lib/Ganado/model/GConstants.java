@@ -9,11 +9,6 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
-import org.rmj.g3appdriver.GCircle.room.Entities.EMCColor;
-
-import java.util.Collections;
-import java.util.List;
-
 public class GConstants {
     public static String[] CATEGORY = {
             "AUTO",
@@ -47,11 +42,13 @@ public class GConstants {
             "6 Months"
     };
     public static String[] INQUIRY_STATUS = {
-            "Open",
-            "Extracted",
-            "Engaged",
-            "Lost Sales",
-            "Bought"};
+            "Pending",
+            "Verified",
+            "Unable to Verify",
+            "Expired",
+            "Bought",
+            "Pending Inc. Release",
+            "Incentive Released"};
     public static String[] PAYMENT_FORM = {"Cash", "Installment"};
 
     public static ArrayAdapter<String> getAdapter(Context mContext, String[] data) {

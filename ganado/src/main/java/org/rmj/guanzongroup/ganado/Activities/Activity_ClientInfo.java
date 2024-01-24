@@ -189,7 +189,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
 
                     poMessage.initDialog();
                     poMessage.setTitle("Ganado");
-                    poMessage.setMessage("Transaction successfully saved.");
+                    poMessage.setMessage(args);
                     poMessage.setPositiveButton("Okay", (view1, dialog) -> {
                         dialog.dismiss();
                         Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_BrandSelection.class);

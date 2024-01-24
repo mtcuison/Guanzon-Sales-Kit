@@ -124,7 +124,8 @@ public class AccountInfo {
         if(!isPasswordValid()){
             return false;
         }
-        return isMobileValid();
+        return true;
+//        return isMobileValid();
     }
 
     private boolean isLastNameValid(){

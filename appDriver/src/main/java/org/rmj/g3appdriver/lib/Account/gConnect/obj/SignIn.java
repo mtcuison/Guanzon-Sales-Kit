@@ -87,9 +87,10 @@ public class SignIn implements iAuth {
             poSession.setFullName(loResponse.getString("sUserName"));
 //                    loInfo.setEmailAdd(loResponse.getString("sEmailAdd"));
             poSession.setMobileNo(loInfo.getMobileNo());
-            poSession.setClientID(loResponse.getString("sMPlaceID"));
+//            poSession.setClientID(loResponse.getString("sMPlaceID"));
 
             poSession.setLoginStatus(true);
+            poSession.setVerifiedStatus(1);
 
             poClientSK.RemoveProfileSession();
             poConfig.setMobileNo(loResponse.getString("sMobileNo"));
@@ -100,7 +101,6 @@ public class SignIn implements iAuth {
             loClient.setUserName(loResponse.getString("sUserName"));
             loClient.setMobileNo(loResponse.getString("sMobileNo"));
             loClient.setUserIDxx(loResponse.getString("sUserIDxx"));
-            poSession.setVerifiedStatus(1);
 
 
             poDao.RemoveSessions();

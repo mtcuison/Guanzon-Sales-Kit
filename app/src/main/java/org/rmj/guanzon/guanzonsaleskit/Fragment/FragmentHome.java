@@ -52,7 +52,7 @@ public class FragmentHome extends Fragment {
 
         loMessage = new MessageBox(getActivity());
         loMessage.initDialog();
-        loMessage.setTitle("Under Development");
+
 
         mViewModel = new ViewModelProvider(requireActivity()).get(VMHome.class);
         mViewModel.GetCompleteProfile().observe(requireActivity(), new Observer<EClientInfoSalesKit>() {
@@ -83,6 +83,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isCompleteAccount){ //allow to use feature
+                    loMessage.setTitle("Under Development");
                     loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
                     loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                         @Override
@@ -92,6 +93,7 @@ public class FragmentHome extends Fragment {
                     });
                     loMessage.show();
                 }else { //must complete first account
+                    loMessage.setTitle("Under Development");
                     loMessage.setMessage("Must complete account to access this feature");
                     loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                         @Override
@@ -114,6 +116,7 @@ public class FragmentHome extends Fragment {
                     intent.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
                     startActivity(intent);
                 }else { //must complete first account
+                    loMessage.setTitle("Guanzon Sales Kit");
                     loMessage.setMessage("Must complete account to access this feature");
                     loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                         @Override

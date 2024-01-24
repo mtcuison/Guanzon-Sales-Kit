@@ -242,6 +242,7 @@ public class Ganado {
             params.put("sFinancex", loDetail.getFinancex());
             params.put("sProdInfo", loDetail.getProdInfo());
             params.put("sPaymInfo", loDetail.getPaymInfo());
+            params.put("cSourcexx", "2");
 
             String lsResponse = WebClient.sendRequest(
                     poApi.getSubmitInquiry(),
@@ -277,7 +278,8 @@ public class Ganado {
     public boolean ImportInquiries(){
         try{
             JSONObject params = new JSONObject();
-            EGanadoOnline loGanado = poDao.GetLatestData();
+            params.put("cSourcexx", "2");
+//            EGanadoOnline loGanado = poDao.GetLatestData();
 
             /*if(loGanado != null){
                 params.put("timestamp", loGanado.getTimeStmp());
@@ -287,6 +289,7 @@ public class Ganado {
 //                    poApi.getDownloadInquiries(),
 //                    params.toString(),
 //                    poHeaders.getHeaders());
+
             String lsResponse = WebClient.sendRequest(
                     poApi.getUrlImportSKPerformance(),
                     params.toString(),
