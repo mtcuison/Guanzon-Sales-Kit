@@ -226,6 +226,21 @@ public class ClientInfo {
             return false;
         }
 
+        return isMobileValid();
+    }
+
+
+    private boolean isMobileValid(){
+        if(sMobileNo.trim().isEmpty()){
+            message = "Please enter mobile number";
+            return false;
+        } else if(sMobileNo.length()!=11){
+            message = "Mobile number must be 11 characters";
+            return false;
+        } else if(!sMobileNo.substring(0, 2).equalsIgnoreCase("09")){
+            message = "Mobile number must start with '09'";
+            return false;
+        }
         return true;
     }
 }
