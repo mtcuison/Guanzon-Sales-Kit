@@ -111,7 +111,7 @@
         android:id="@+id/lbl_InquiryNoData"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="center"
         android:padding="80dp"
         android:text="No data found."
