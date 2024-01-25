@@ -270,7 +270,6 @@ public class Activity_ClientInfo extends AppCompatActivity {
             if(loView == spinner_relation){
                 mViewModel.getRelation().observe(Activity_ClientInfo.this, relations->{
                     mViewModel.getModel().setsReltionx(relations.get(i).getRelatnID());
-
                 });
             }
         }
