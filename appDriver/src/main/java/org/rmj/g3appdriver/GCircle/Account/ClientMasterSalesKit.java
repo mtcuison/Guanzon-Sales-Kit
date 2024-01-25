@@ -162,8 +162,6 @@ public class ClientMasterSalesKit {
                 param.put("sTownIDx2", foClient.getTownIDx2());
                 param.put("sGCashNox", "");
 
-                //SAVE TO LOCAL DEVICE
-                poDao.insert(foClient);
 
                 //SEND TO SERVER
                 String lsResponse = WebClient.sendRequest(
@@ -175,7 +173,7 @@ public class ClientMasterSalesKit {
                     message = SERVER_NO_RESPONSE;
                     return false;
                 }
-
+                Log.e(TAG, lsResponse);
                 JSONObject loResponse = new JSONObject(lsResponse);
                 String lsResult = loResponse.getString("result");
                 if (!lsResult.equalsIgnoreCase("success")) {
@@ -183,6 +181,9 @@ public class ClientMasterSalesKit {
                     message = getErrorMessage(loError);
                     return false;
                 }
+
+                //SAVE TO LOCAL DEVICE
+                poDao.insert(foClient);
                 return true;
             }else {
                 return false;
