@@ -175,14 +175,11 @@ public class Activity_Home extends AppCompatActivity {
         mviewModel.GetCompleteProfile().observe(Activity_Home.this, eClientinfo -> {
 
             //This area of code has been commented to avoid users from accessing
-            // the marketplace cart while the marketplace has not yet fully develop yet.
             try {
                 if(eClientinfo != null){
                     menu.findItem(R.id.item_notifications).setVisible(true);
-//                    menu.findItem(R.id.item_cart).setVisible(true);
                 } else {
                     menu.findItem(R.id.item_notifications).setVisible(false);
-//                    menu.findItem(R.id.item_cart).setVisible(false);
                 }
             } catch(Exception e) {
                 e.printStackTrace();

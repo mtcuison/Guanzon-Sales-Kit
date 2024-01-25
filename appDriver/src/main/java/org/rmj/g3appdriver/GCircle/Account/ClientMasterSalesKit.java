@@ -160,6 +160,7 @@ public class ClientMasterSalesKit {
                 param.put("sAddress2", foClient.getAddress2());
                 param.put("sBrgyIDx2", foClient.getBrgyIDx2());
                 param.put("sTownIDx2", foClient.getTownIDx2());
+                param.put("sGCashNox", "");
 
                 //SAVE TO LOCAL DEVICE
                 poDao.insert(foClient);
