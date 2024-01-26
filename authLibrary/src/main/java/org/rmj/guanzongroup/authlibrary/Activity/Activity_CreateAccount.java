@@ -66,7 +66,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
             }
         });
 
-        lbl_versionInfo.setText(poConfigx.getVersionInfo());
+//        lbl_versionInfo.setText(poConfigx.getVersionInfo());
         btn_createAccount.setOnClickListener(view -> {
 
             AccountInfo accountInfo = new AccountInfo();

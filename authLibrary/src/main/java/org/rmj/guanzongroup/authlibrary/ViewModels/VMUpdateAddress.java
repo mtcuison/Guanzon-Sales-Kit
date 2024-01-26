@@ -13,7 +13,6 @@ import org.rmj.g3appdriver.GCircle.room.Entities.EBarangayInfo;
 import org.rmj.g3appdriver.lib.Account.AccountMaster;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
-import org.rmj.g3appdriver.lib.Account.OTPSender;
 import org.rmj.g3appdriver.lib.Account.pojo.ChangeUserAddress;
 import org.rmj.g3appdriver.lib.Etc.Barangay;
 import org.rmj.g3appdriver.lib.Etc.Town;
@@ -27,7 +26,6 @@ public class VMUpdateAddress extends AndroidViewModel {
     public static final String TAG =  VMLogin.class.getSimpleName();
     private final iAuth poSys;
     private final ConnectionUtil poConn;
-    private OTPSender poOTPRqst;
     private String message;
     private final Town poTown;
     private final Barangay poBrgy;
@@ -36,7 +34,6 @@ public class VMUpdateAddress extends AndroidViewModel {
 
         this.poSys = new AccountMaster(application).initGuanzonApp().getInstance(Auth.CHANGE_ADDRESS);
         this.poConn = new ConnectionUtil(application);
-        this.poOTPRqst = new OTPSender(application);
         this.poTown = new Town(application);
         this.poBrgy = new Barangay(application);
     }
@@ -82,7 +79,6 @@ public class VMUpdateAddress extends AndroidViewModel {
                     callback.onFailed(message);
                     return;
                 }
-
                 callback.onSuccess();
             }
         });
@@ -93,78 +89,4 @@ public class VMUpdateAddress extends AndroidViewModel {
         void onFailed(String result);
     }
 
-    public void OTPRequest(RequestOTP callback){
-        TaskExecutor.Execute(null, new OnTaskExecuteListener() {
-            @Override
-            public void OnPreExecute() {
-                callback.onRequest("Guanzon Sales Kit", "Requesting OTP");
-            }
-
-            @Override
-            public Object DoInBackground(Object args) {
-                if(!poConn.isDeviceConnected()){
-                    message = poConn.getMessage();
-                    return false;
-                }
-                if (!poOTPRqst.SendOTP()){
-                    message = poOTPRqst.getMessage();
-                    return false;
-                }
-
-                return true;
-            }
-
-            @Override
-            public void OnPostExecute(Object object) {
-                Boolean isSuccess = (Boolean) object;
-                if (!isSuccess){
-                    callback.onFailed(message);
-                }
-
-                callback.onSuccess();
-            }
-        });
-    }
-    public interface RequestOTP{
-        void onRequest(String title, String message);
-        void onSuccess();
-        void onFailed(String result);
-    }
-
-    public void OTPVerification(String OTP, VerifyOTP callback){
-        TaskExecutor.Execute(OTP, new OnTaskExecuteListener() {
-            @Override
-            public void OnPreExecute() {
-                callback.onVerify("Guanzon Sales Kit", "Verifying OTP");
-            }
-
-            @Override
-            public Object DoInBackground(Object args) {
-                if(!poConn.isDeviceConnected()){
-                    message = poConn.getMessage();
-                    return false;
-                }
-                if (!poOTPRqst.VerifyOTP((String) args)){
-                    message = poOTPRqst.getMessage();
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public void OnPostExecute(Object object) {
-                Boolean isSuccess = (Boolean) object;
-                if (!isSuccess){
-                    callback.onFailed(message);
-                }
-
-                callback.onSuccess();
-            }
-        });
-    }
-    public interface VerifyOTP{
-        void onVerify(String title, String message);
-        void onSuccess();
-        void onFailed(String result);
-    }
 }

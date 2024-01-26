@@ -65,6 +65,9 @@ public class VMHome extends AndroidViewModel {
     public LiveData<List<EPromo>> GetPromoLinkList(){
         return poPromoEvent.GetPromotions();
     }
+    public EKPOPAgentRole GetUpline(){
+        return poClientSK.GetUpline();
+    }
     public void CheckPromotions(OnCheckPromotions listener){
         TaskExecutor.Execute(listener, new OnDoBackgroundTaskListener() {
             @Override

@@ -56,6 +56,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         tie_username = findViewById(R.id.username);
         tie_password = findViewById(R.id.password);
         lblVersion = findViewById(R.id.lbl_versionInfo);
+//        lblVersion.setText(BuildConfig.);
         mtv_createaccount = findViewById(R.id.mtv_createaccount);
         cbAgree = findViewById(R.id.cbAgree);
         btn_log = findViewById(R.id.btn_log);
@@ -90,7 +91,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
             }
         });
 
-        lblVersion.setText(poConfigx.getVersionInfo());
+//        lblVersion.setText(poConfigx.getVersionInfo());
 
         mtv_createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
