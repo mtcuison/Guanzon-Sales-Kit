@@ -212,9 +212,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
         });
         poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                InitializeData();
-                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
                 ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+//                InitializeData();
+                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
                 finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
                 finish();

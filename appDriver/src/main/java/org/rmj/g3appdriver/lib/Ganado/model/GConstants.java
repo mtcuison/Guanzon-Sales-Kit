@@ -37,9 +37,7 @@ public class GConstants {
     public static String[] INSTALLMENT_TERM = {
             "36 Months/3 Years",
             "24 Months/2 Years",
-            "18 Months",
-            "12 Months/1 Year",
-            "6 Months"
+            "12 Months/1 Year"
     };
     public static String[] INQUIRY_STATUS = {
             "Pending",
