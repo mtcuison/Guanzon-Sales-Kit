@@ -7,9 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
-import org.rmj.g3appdriver.GConnect.room.Entities.EClientInfo;
-import org.rmj.g3appdriver.GConnect.room.Entities.EEmailInfo;
-import org.rmj.g3appdriver.GConnect.room.Entities.EMobileInfo;
 
 @Dao
 public interface DClientInfoSalesKit {
@@ -18,6 +15,9 @@ public interface DClientInfoSalesKit {
     void insert(EClientInfoSalesKit eClientInfo);
     @Update
     void update(EClientInfoSalesKit eClientInfo);
+
+    @Query("SELECT * FROM Client_Profile_Info ORDER BY dTimeStmp DESC LIMIT 1")
+    EClientInfoSalesKit GetLatestUserInfo();
     @Query("SELECT * FROM Client_Profile_Info")
     EClientInfoSalesKit GetUserInfo();
     @Query("SELECT * FROM Client_Profile_Info")

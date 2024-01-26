@@ -1,24 +1,22 @@
 package org.rmj.guanzongroup.authlibrary.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.AccountInfo;
-import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.Callbacks.CreateAccountCallBack;
+import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMCreateAccount;
 
 import java.util.Objects;
@@ -68,7 +66,7 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
             }
         });
 
-        lbl_versionInfo.setText(poConfigx.getVersionInfo());
+//        lbl_versionInfo.setText(poConfigx.getVersionInfo());
         btn_createAccount.setOnClickListener(view -> {
 
             AccountInfo accountInfo = new AccountInfo();
@@ -99,11 +97,12 @@ public class Activity_CreateAccount extends AppCompatActivity implements CreateA
         loMessage.initDialog();
         loMessage.setTitle("Create Account");
         loMessage.setMessage("A verification email has been sent to your email account. Please check your inbox or spam folder.");
-        loMessage.setPositiveButton("Close", (view, msgDialog) -> msgDialog.dismiss());
+        loMessage.setPositiveButton("Close", (view, msgDialog) -> {
+            msgDialog.dismiss();
+            finish();
+        });
         loMessage.show();
 
-        Intent loIntent = new Intent(Activity_CreateAccount.this, Activity_Login.class);
-        startActivity(loIntent);
     }
 
     @Override

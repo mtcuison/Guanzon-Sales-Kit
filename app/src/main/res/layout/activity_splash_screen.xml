@@ -39,6 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent=".5"
         app:layout_constraintHeight_percent=".250" />
+
     <com.google.android.material.textview.MaterialTextView
         style="@style/PrimaryHeaderStyle"
         android:id="@+id/splashtitle"

@@ -96,16 +96,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
         mViewModel.GetCompleteProfile().observe(this, new Observer<EClientInfoSalesKit>() {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
-                if (eClientInfoSalesKit == null){
-                    poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-                        @Override
-                        public void OnButtonClick(View view, AlertDialog dialog) {
-                            dialog.dismiss();
-                        }
-                    });
-                    poMessage.setMessage("User profile not found");
-                    poMessage.show();
-                }else {
+                if (eClientInfoSalesKit != null){
                     String fstname = eClientInfoSalesKit.getFrstName();
                     String midname = eClientInfoSalesKit.getMiddName();
                     String lstname = eClientInfoSalesKit.getLastName();
@@ -267,7 +258,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Account request successfully sent to server");
+                        poMessage.setMessage("Complete Account request successfully sent to server");
                         poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                             @Override
                             public void OnButtonClick(View view, AlertDialog dialog) {

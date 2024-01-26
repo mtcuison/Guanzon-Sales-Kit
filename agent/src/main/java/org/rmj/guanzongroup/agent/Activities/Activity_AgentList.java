@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class Activity_AgentList extends AppCompatActivity {
     private AgentListAdapter adapter;
     private LoadDialog poLoading;
     private MessageBox poMessage;
+    private TextView lblNoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class Activity_AgentList extends AppCompatActivity {
 
         rvAgentList = findViewById(R.id.rvAgentList);
         toolbar = findViewById(R.id.toolbar);
+        lblNoData = findViewById(R.id.lbl_InquiryNoData);
 
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -75,6 +78,7 @@ public class Activity_AgentList extends AppCompatActivity {
         });
         mViewModel.GetKPOPAgentRole().observe(Activity_AgentList.this, ekpopAgentRoles -> {
             if (ekpopAgentRoles.size() > 0){
+                lblNoData.setVisibility(View.GONE);
                 adapter = new AgentListAdapter(ekpopAgentRoles, new AgentListAdapter.OnAgentClickListener() {
                     @Override
                     public void OnClick(String sUserIDxx) {
@@ -89,6 +93,8 @@ public class Activity_AgentList extends AppCompatActivity {
                 rvAgentList.setAdapter(adapter);
                 rvAgentList.setLayoutManager(new LinearLayoutManager(Activity_AgentList.this,  RecyclerView.VERTICAL, false));
 
+            }else{
+                lblNoData.setVisibility(View.VISIBLE);
             }
         });
 

@@ -46,7 +46,7 @@ public interface DGanadoOnline {
     LiveData<List<EMCColor>> GetModelColors(String ModelID);
 
     @Query("SELECT * FROM Ganado_Online " +
-            "WHERE sReferdBy = (SELECT sUserIDxx FROM User_Info_Master)")
+            "WHERE sReferdBy = (SELECT sUserIDxx FROM Client_Info_Master)")
     LiveData<List<EGanadoOnline>> GetInquiries();
     @Query("SELECT * FROM Ganado_Online " +
             "WHERE sReferdBy =:UserIDxx")

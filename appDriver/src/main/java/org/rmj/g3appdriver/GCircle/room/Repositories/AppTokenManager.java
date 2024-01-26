@@ -19,10 +19,10 @@ import android.util.Log;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DToken;
 import org.rmj.g3appdriver.GCircle.room.Entities.ETokenInfo;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
+import org.rmj.g3appdriver.dev.Api.WebFileServer;
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.AppConstants;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
-import org.rmj.g3appdriver.dev.Api.WebFileServer;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,13 +35,13 @@ public class AppTokenManager {
     private final DToken poDao;
 
     private final AppConfigPreference poConfig;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
     private String message;
 
     public AppTokenManager(Application instance){
         this.poDao = GGC_GCircleDB.getInstance(instance).dToken();
         this.poConfig = AppConfigPreference.getInstance(instance);
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
     }
 
     public String getMessage() {

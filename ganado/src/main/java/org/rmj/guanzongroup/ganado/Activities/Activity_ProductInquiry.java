@@ -1,10 +1,5 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -13,6 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -21,7 +21,6 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
-import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.etc.FormatUIText;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.model.GConstants;
@@ -45,6 +44,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
     private MaterialAutoCompleteTextView spn_color, spnPayment, spnAcctTerm;
     private MaterialButton btnContinue,btnCalculate;
     private ShapeableImageView imgMC;
+    private LinearLayout lnInstallment;
     private String lsModelID, lsBrandID, lsImgLink, lsBrandNm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +157,11 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spnPayment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position==0){
+                    lnInstallment.setVisibility(View.GONE);
+                }else{
+                    lnInstallment.setVisibility(View.VISIBLE);
+                }
                 mViewModel.getModel().setPaymForm(String.valueOf(position));
 //                mViewModel.getModel().setPaymForm(GConstants.PAYMENT_FORM[position]);
             }
@@ -225,6 +230,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spnAcctTerm = findViewById(R.id.spn_installmentTerm);
         spn_color = findViewById(R.id.spn_color);
         imgMC = findViewById(R.id.imgMC);
+        lnInstallment = findViewById(R.id.ln_installment);
 
         btnContinue = findViewById(R.id.btnContinue);
         btnCalculate = findViewById(R.id.btnCalculate);
@@ -240,6 +246,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
 
     @Override
     public void onBackPressed () {
+        super.onBackPressed();
         finish();
     }
 

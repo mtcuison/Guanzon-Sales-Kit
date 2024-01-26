@@ -36,8 +36,6 @@ public class Activity_UpdateAddress extends AppCompatActivity {
     private MaterialAutoCompleteTextView tie_ca_town;
     private MaterialAutoCompleteTextView tie_ca_brgy;
     private MaterialAutoCompleteTextView tie_ca_prov;
-    private TextInputEditText tie_ca_otp;
-    private MaterialButton btn_sendotp;
     private MaterialButton btn_submit;
     private MaterialToolbar toolbar;
     private EAddressUpdate loAddrUpdate;
@@ -67,8 +65,6 @@ public class Activity_UpdateAddress extends AppCompatActivity {
         tie_ca_prov = findViewById(R.id.tie_ca_prov);
         tie_ca_town = findViewById(R.id.tie_ca_town);
         tie_ca_brgy = findViewById(R.id.tie_ca_brgy);
-        tie_ca_otp = findViewById(R.id.tie_ca_otp);
-        btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
 
         setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
@@ -154,76 +150,6 @@ public class Activity_UpdateAddress extends AppCompatActivity {
                 }
             }
         });
-
-        btn_sendotp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String btnText = btn_sendotp.getText().toString();
-                if (btnText == "Request OTP"){
-                    mViewModel.OTPRequest(new VMUpdateAddress.RequestOTP() {
-                        @Override
-                        public void onRequest(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP was successfully sent to your mobile number.");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Verify OTP"); //change text to verify otp after receiving
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Request OTP"); //set text to primary when request failed
-                        }
-                    });
-                }
-
-                if (btnText == "Verify OTP"){
-                    mViewModel.OTPVerification(tie_ca_otp.getText().toString(), new VMUpdateAddress.VerifyOTP() {
-                        @Override
-                        public void onVerify(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP Verified");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(true); //enable when otp is verified
-                            btn_sendotp.setText("Request OTP"); //change text to request otp after verifying
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable when otp is not verified
-                            btn_sendotp.setText("Verify OTP"); //retain text to verify otp
-                        }
-                    });
-                }
-            }
-        });
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -253,7 +179,7 @@ public class Activity_UpdateAddress extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Address changed successfully");
+                        poMessage.setMessage("Request sent. Please verify new address sent to your email.");
                         poMessage.show();
                     }
 
@@ -261,7 +187,7 @@ public class Activity_UpdateAddress extends AppCompatActivity {
                     public void onFailed(String result) {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Address failed to update");
+                        poMessage.setMessage(result);
                         poMessage.show();
                     }
                 });

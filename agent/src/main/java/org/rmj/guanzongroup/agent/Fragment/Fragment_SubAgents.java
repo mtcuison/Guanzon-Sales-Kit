@@ -1,6 +1,7 @@
 package org.rmj.guanzongroup.agent.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -75,6 +77,7 @@ public class Fragment_SubAgents extends Fragment {
     }
     private void LoadSubAgents(){
         mViewModel.GetKPOPAgent(mViewModel.GetUserID()).observe(requireActivity(), ekpopAgentRoles -> {
+            Log.e(TAG, String.valueOf(ekpopAgentRoles.size()));
             if (ekpopAgentRoles.size() > 0){
 
                 lblNoData.setVisibility(View.GONE);
@@ -90,6 +93,8 @@ public class Fragment_SubAgents extends Fragment {
                 });
 
                 rvAgents.setAdapter(adapter);
+                rvAgents.setLayoutManager(new LinearLayoutManager(requireActivity(),  RecyclerView.VERTICAL, false));
+
 
             }else{
                 lblNoData.setVisibility(View.VISIBLE);

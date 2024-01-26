@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.SalesKit.Obj.SalesKit;
 import org.rmj.g3appdriver.lib.Ganado.Obj.Ganado;
@@ -23,9 +24,11 @@ public class VMAgentInfo extends AndroidViewModel {
     private final SalesKit poSys;
 
     private final ConnectionUtil poConn;
+    private final ClientSession poSession;
 
     private String message;
     private String lsUserID;
+
 
     public interface OnTaskExecute{
         void OnExecute();
@@ -38,6 +41,7 @@ public class VMAgentInfo extends AndroidViewModel {
         this.poGanado = new Ganado(application);
         this.poSys = new SalesKit(application);
         this.poConn = new ConnectionUtil(application);
+        this.poSession =  ClientSession.getInstance(application);
     }
     // TODO: Implement the ViewModel
 
@@ -59,6 +63,9 @@ public class VMAgentInfo extends AndroidViewModel {
     }
     public LiveData<DGanadoOnline.CountEntries> GetCountEntries(){
         return poSys.GetCountEntries(lsUserID);
+    }
+    public LiveData<DGanadoOnline.CountEntries> GetUserCountEntries(){
+        return poSys.GetCountEntries(poSession.getUserID());
     }
 
     public void ImportKPOPAgent(VMAgentInfo.OnTaskExecute listener){

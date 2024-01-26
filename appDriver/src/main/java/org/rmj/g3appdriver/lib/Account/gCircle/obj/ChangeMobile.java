@@ -8,10 +8,11 @@ import android.app.Application;
 import android.util.Log;
 
 import org.json.JSONObject;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
-import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfo;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DMobileRequest;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
+import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
@@ -23,17 +24,19 @@ import java.util.Locale;
 public class ChangeMobile implements iAuth {
     private static final String TAG = ChangePassword.class.getSimpleName();
     private final Application instance;
-    private final GCircleApi poApi;
+    private final GConnectApi poApi;
     private final HttpHeaders poHeaders;
-    private EmployeeSession poSession;
+    private ClientSession poSession;
     private DMobileRequest poDao;
+    private DClientInfo poUser;
     private String message;
     public ChangeMobile(Application instance){
         this.instance = instance;
-        this.poApi = new GCircleApi(instance);
+        this.poApi = new GConnectApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
         this.poDao = GGC_GCircleDB.getInstance(instance).MobileRequestDao();
+        this.poUser = GGC_GCircleDB.getInstance(instance).ClientDao();
     }
 
     @Override
@@ -41,14 +44,14 @@ public class ChangeMobile implements iAuth {
         try{
             JSONObject loParams = new JSONObject();
             loParams.put("sTransNox", CreateUniqueID());
-            loParams.put("sClientID", poSession.getClientId());
-            loParams.put("cReqstCDe", "");
+            loParams.put("sClientID", poSession.getClientID());
             loParams.put("cReqstCDe", "");
             loParams.put("sMobileNo", params.toString());
             loParams.put("cPrimaryx", "");
             loParams.put("sRemarksx", "");
             loParams.put("sSourceCD", "");
             loParams.put("sSourceNo", "");
+            loParams.put("mail", poUser.GetClientInfo().getEmailAdd());
 
             String sResponse = WebClient.sendRequest(poApi.getUrlNewChangeMobile(), loParams.toString(), poHeaders.getHeaders());
             if(sResponse == null){

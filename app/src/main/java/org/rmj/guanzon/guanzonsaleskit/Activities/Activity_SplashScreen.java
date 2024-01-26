@@ -1,7 +1,11 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
+import static org.rmj.g3appdriver.utils.ServiceScheduler.FIFTEEN_MINUTE_PERIODIC;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,13 +20,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.squareup.picasso.BuildConfig;
-
 import org.rmj.g3appdriver.etc.AppConfigPreference;
+import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.etc.TransparentToolbar;
 import org.rmj.g3appdriver.utils.AppDirectoryCreator;
+import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
+//import org.rmj.guanzon.guanzonsaleskit.BuildConfig;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
+import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 
@@ -54,8 +61,10 @@ public class Activity_SplashScreen extends AppCompatActivity {
         new TransparentToolbar(Activity_SplashScreen.this).SetupActionbar();
         prgrssBar = findViewById(R.id.progress_splashscreen);
         lblVrsion = findViewById(R.id.lbl_versionInfo);
-        lblVrsion.setText(BuildConfig.VERSION_NAME);
-
+//        lblVrsion.setText(BuildConfig.VERSION_NAME);
+        if (!isMyServiceRunning(GMessagingService.class)) {
+            startService(new Intent(Activity_SplashScreen.this, GMessagingService.class));
+        }
         InitializeAppContentDisclosure();
 
         AppDirectoryCreator loCreator = new AppDirectoryCreator();
@@ -161,19 +170,73 @@ public class Activity_SplashScreen extends AppCompatActivity {
         });
     }
 
+    private void InitializeData(){
+        mViewModel.InitUserData(new VMSplashScreen.OnInitializeCallback() {
+            @Override
+            public void OnProgress(String args, int progress) {
+                prgrssBar.setProgress(progress);
+            }
+
+            @Override
+            public void OnHasDCP() {
+            }
+
+            @Override
+            public void OnSuccess() {
+                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+                finish();
+            }
+
+            @Override
+            public void OnNoSession() {
+            }
+
+            @Override
+            public void OnFailed(String message) {
+                poDialog.initDialog();
+                poDialog.setTitle("Guanzon Circle");
+                poDialog.setMessage(message);
+                poDialog.setPositiveButton("Okay", (view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                });
+                poDialog.show();
+            }
+        });
+    }
+
     private void InitActivityResultLaunchers(){
         poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
             InitializeAppData();
         });
-
         poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                InitializeAppData();
+                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+//                InitializeData();
                 startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
                 finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
                 finish();
             }
         });
+//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//            if (result.getResultCode() == RESULT_OK) {
+//                InitializeData();
+////                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
+////                finish();
+//            } else if (result.getResultCode() == RESULT_CANCELED) {
+//                finish();
+//            }
+//        });
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

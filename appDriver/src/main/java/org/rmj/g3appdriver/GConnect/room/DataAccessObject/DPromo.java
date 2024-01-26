@@ -15,9 +15,14 @@ public interface DPromo {
     @Insert
     void insert(EPromo ePromo);
 
+//    @Query("SELECT * FROM Promo_Link_Info " +
+//            "WHERE strftime('%Y-%m-%d %H:%H:%S', datetime('now', 'localtime'))  BETWEEN dDateFrom AND dDateThru")
+//    LiveData<List<EPromo>> getAllPromo();
+
     @Query("SELECT * FROM Promo_Link_Info " +
-            "WHERE strftime('%Y-%m-%d %H:%H:%S', datetime('now', 'localtime'))  BETWEEN dDateFrom AND dDateThru")
+            "WHERE strftime('%Y-%m-%d', datetime('now', 'localtime'))  BETWEEN dDateFrom AND dDateThru")
     LiveData<List<EPromo>> getAllPromo();
+
 
     @Query("SELECT * FROM Promo_Link_Info")
     List<EPromo> getAllPromoForDownloadImg();

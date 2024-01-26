@@ -28,8 +28,14 @@ public interface DClientInfo {
     @Update
     void update(EClientInfo clientInfo);
 
+    @Query("DELETE FROM Client_Info_Master")
+    void RemoveSessions();
+
     @Query("SELECT * FROM Client_Info_Master")
     LiveData<EClientInfo> getClientInfo();
+
+    @Query("SELECT * FROM Client_Info_Master")
+    EClientInfo GetClientInfo();
 
     @Query("SELECT sUserIDxx FROM Client_Info_Master")
     String getUserID();

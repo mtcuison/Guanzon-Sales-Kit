@@ -3,6 +3,7 @@ package org.rmj.g3appdriver.GCircle.Account;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.SERVER_NO_RESPONSE;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -13,7 +14,10 @@ import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
+import org.rmj.g3appdriver.SalesKit.DataAccessObject.DKPOPAgentRole;
+import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
@@ -24,7 +28,8 @@ public class ClientMasterSalesKit {
     private final HttpHeaders poHeaders;
     private final GCircleApi poApi;
     private final GConnectApi poApiConnect;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
+    private final DKPOPAgentRole dkpopAgentRole;
     private String message;
 
     public ClientMasterSalesKit(Application instance) {
@@ -32,7 +37,8 @@ public class ClientMasterSalesKit {
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poApi = new GCircleApi(instance);
         this.poApiConnect = new GConnectApi(instance);
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
+        this.dkpopAgentRole = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
     }
     public String getMessage() {
         return message;
@@ -96,9 +102,8 @@ public class ClientMasterSalesKit {
             foClient.setBrgyIDx2(loResponse.get("sBrgyIDx2").toString());
             foClient.setTownIDx2(loResponse.get("sTownIDx2").toString());
             foClient.setVerified(Integer.valueOf(loResponse.get("cVerified").toString()));
-
+            poDao.DeleteProfile();
             poDao.insert(foClient);
-
             Log.d(TAG, "Client Profile record save!");
 
             return true;
@@ -159,9 +164,8 @@ public class ClientMasterSalesKit {
                 param.put("sAddress2", foClient.getAddress2());
                 param.put("sBrgyIDx2", foClient.getBrgyIDx2());
                 param.put("sTownIDx2", foClient.getTownIDx2());
+                param.put("sGCashNox", "");
 
-                //SAVE TO LOCAL DEVICE
-                poDao.insert(foClient);
 
                 //SEND TO SERVER
                 String lsResponse = WebClient.sendRequest(
@@ -173,7 +177,7 @@ public class ClientMasterSalesKit {
                     message = SERVER_NO_RESPONSE;
                     return false;
                 }
-
+                Log.e(TAG, lsResponse);
                 JSONObject loResponse = new JSONObject(lsResponse);
                 String lsResult = loResponse.getString("result");
                 if (!lsResult.equalsIgnoreCase("success")) {
@@ -181,6 +185,9 @@ public class ClientMasterSalesKit {
                     message = getErrorMessage(loError);
                     return false;
                 }
+
+                //SAVE TO LOCAL DEVICE
+                poDao.insert(foClient);
                 return true;
             }else {
                 return false;
@@ -193,6 +200,9 @@ public class ClientMasterSalesKit {
     }
     public void RemoveProfileSession(){
         poDao.DeleteProfile();
+    }
+    public EKPOPAgentRole GetUpline(){
+        return dkpopAgentRole.GetKPOPAget(poSession.getUserID());
     }
     public LiveData<EClientInfoSalesKit> GetProfileAccount(){
         return poDao.getClientInfo();

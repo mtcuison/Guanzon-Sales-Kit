@@ -11,13 +11,13 @@ import androidx.lifecycle.LiveData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.rmj.g3appdriver.GCircle.Account.EmployeeSession;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ECountryInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
 import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
+import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
@@ -37,7 +37,7 @@ public class Ganado {
 
     private final Application instance;
     private final DGanadoOnline poDao;
-    private final EmployeeSession poSession;
+    private final ClientSession poSession;
     private final GCircleApi poApi;
     private final HttpHeaders poHeaders;
     private final Relation poRelate;
@@ -48,7 +48,7 @@ public class Ganado {
     public Ganado(Application instance) {
         this.instance = instance;
         this.poDao = GGC_GCircleDB.getInstance(instance).ganadoDao();
-        this.poSession = EmployeeSession.getInstance(instance);
+        this.poSession = ClientSession.getInstance(instance);
         this.poApi = new GCircleApi(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
@@ -113,7 +113,7 @@ public class Ganado {
             loDetail.setSendStat("");
             loDetail.setModified(AppConstants.DATE_MODIFIED());
             loDetail.setLastUpdt("");
-            loDetail.setBranchCD(poSession.getBranchCode());
+            loDetail.setBranchCD("");
             poDao.Save(loDetail);
 
             return lsTransNo;
@@ -242,6 +242,7 @@ public class Ganado {
             params.put("sFinancex", loDetail.getFinancex());
             params.put("sProdInfo", loDetail.getProdInfo());
             params.put("sPaymInfo", loDetail.getPaymInfo());
+            params.put("cSourcexx", "2");
 
             String lsResponse = WebClient.sendRequest(
                     poApi.getSubmitInquiry(),
@@ -277,7 +278,8 @@ public class Ganado {
     public boolean ImportInquiries(){
         try{
             JSONObject params = new JSONObject();
-            EGanadoOnline loGanado = poDao.GetLatestData();
+            params.put("cSourcexx", "2");
+//            EGanadoOnline loGanado = poDao.GetLatestData();
 
             /*if(loGanado != null){
                 params.put("timestamp", loGanado.getTimeStmp());
@@ -287,6 +289,7 @@ public class Ganado {
 //                    poApi.getDownloadInquiries(),
 //                    params.toString(),
 //                    poHeaders.getHeaders());
+
             String lsResponse = WebClient.sendRequest(
                     poApi.getUrlImportSKPerformance(),
                     params.toString(),

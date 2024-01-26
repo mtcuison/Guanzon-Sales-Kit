@@ -15,7 +15,6 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -322,7 +321,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            Log.e(TAG, "Local database has been created.");
+            Log.e(TAG, "Local gcircle database has been created.");
         }
     };
 

@@ -1,5 +1,6 @@
 package org.rmj.guanzongroup.authlibrary.Activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,8 +21,6 @@ public class Activity_UpdateMobile extends AppCompatActivity {
     private LoadDialog poDialog;
     private MessageBox poMessage;
     private TextInputEditText tie_ca_mobileNumber;
-    private TextInputEditText tie_ca_otp;
-    private MaterialButton btn_sendotp;
     private MaterialButton btn_submit;
     private MaterialToolbar toolbar;
 
@@ -34,10 +33,17 @@ public class Activity_UpdateMobile extends AppCompatActivity {
         poDialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
+        poMessage.initDialog();
+        poMessage.setTitle("Guanzon Sales Kit");
+        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+            @Override
+            public void OnButtonClick(View view, AlertDialog dialog) {
+                dialog.dismiss();
+            }
+        });
+
         toolbar = findViewById(R.id.toolbar);
         tie_ca_mobileNumber = findViewById(R.id.tie_ca_mobileNumber);
-        tie_ca_otp = findViewById(R.id.tie_ca_otp);
-        btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
 
         setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
@@ -50,76 +56,6 @@ public class Activity_UpdateMobile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        btn_sendotp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String btnText = btn_sendotp.getText().toString();
-                if (btnText == "Request OTP"){
-                    mViewModel.OTPRequest(new VMUpdateMobile.RequestOTP() {
-                        @Override
-                        public void onRequest(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP was successfully sent to your mobile number.");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Verify OTP"); //change text to verify otp after receiving
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Request OTP"); //set text to primary when request failed
-                        }
-                    });
-                }
-
-                if (btnText == "Verify OTP"){
-                    mViewModel.OTPVerification(tie_ca_otp.getText().toString(), new VMUpdateMobile.VerifyOTP() {
-                        @Override
-                        public void onVerify(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP Verified");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(true); //enable when otp is verified
-                            btn_sendotp.setText("Request OTP"); //change text to request otp after verifying
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable when otp is not verified
-                            btn_sendotp.setText("Verify OTP"); //retain text to verify otp
-                        }
-                    });
-                }
             }
         });
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +72,7 @@ public class Activity_UpdateMobile extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Mobile changed successfully");
+                        poMessage.setMessage("Request sent. Please verify new mobile sent to your email.");
                         poMessage.show();
                     }
 
@@ -144,7 +80,7 @@ public class Activity_UpdateMobile extends AppCompatActivity {
                     public void onFailed(String result) {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Mobile failed to update");
+                        poMessage.setMessage(result);
                         poMessage.show();
                     }
                 });
