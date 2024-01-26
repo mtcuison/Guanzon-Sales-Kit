@@ -1,0 +1,2533 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "9bdf560978746035bed3e24a898cd8f5",
+    "entities": [
+      {
+        "tableName": "App_Event_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sBranchNm` TEXT, `dEvntFrom` TEXT, `dEvntThru` TEXT, `sEventTle` TEXT, `sAddressx` TEXT, `sEventURL` TEXT, `sImageURL` TEXT, `cNotified` TEXT, `dModified` TEXT, `sDirectoryFolder` TEXT, `sImagePath` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchNm",
+            "columnName": "sBranchNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EvntFrom",
+            "columnName": "dEvntFrom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EvntThru",
+            "columnName": "dEvntThru",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EventTle",
+            "columnName": "sEventTle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Addressx",
+            "columnName": "sAddressx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EventURL",
+            "columnName": "sEventURL",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImageURL",
+            "columnName": "sImageURL",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notified",
+            "columnName": "cNotified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DirectoryFolder",
+            "columnName": "sDirectoryFolder",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImagePath",
+            "columnName": "sImagePath",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "BranchInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sBranchCd` TEXT NOT NULL, `sBranchNm` TEXT, `sDescript` TEXT, `sAddressx` TEXT, `sTownIDxx` TEXT, `sTownName` TEXT, `sProvName` TEXT, `nLatitude` REAL NOT NULL, `nLongtude` REAL NOT NULL, `sContactx` TEXT, `sTelNumbr` TEXT, `sEmailAdd` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sBranchCd`))",
+        "fields": [
+          {
+            "fieldPath": "BranchCd",
+            "columnName": "sBranchCd",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchNm",
+            "columnName": "sBranchNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Descript",
+            "columnName": "sDescript",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Addressx",
+            "columnName": "sAddressx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownIDxx",
+            "columnName": "sTownIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownName",
+            "columnName": "sTownName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProvName",
+            "columnName": "sProvName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Latitude",
+            "columnName": "nLatitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Longtude",
+            "columnName": "nLongtude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Contactx",
+            "columnName": "sContactx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TelNumbr",
+            "columnName": "sTelNumbr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmailAdd",
+            "columnName": "sEmailAdd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sBranchCd"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Client_Profile_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `sClientID` TEXT, `sEmailAdd` TEXT, `sUserName` TEXT, `sLastName` TEXT, `sFrstName` TEXT, `sMiddName` TEXT, `sSuffixNm` TEXT, `sMaidenNm` TEXT, `cGenderCd` TEXT, `cCvilStat` TEXT, `sCitizenx` TEXT, `dBirthDte` TEXT, `sBirthPlc` TEXT, `sHouseNo1` TEXT, `sAddress1` TEXT, `sBrgyIDx1` TEXT, `sTownIDx1` TEXT, `sHouseNo2` TEXT, `sAddress2` TEXT, `sBrgyIDx2` TEXT, `sTownIDx2` TEXT, `sTaxIDNox` TEXT, `cRecdStat` INTEGER NOT NULL, `sMobileNo` TEXT, `cVerified` INTEGER NOT NULL, `dVerified` TEXT, `cAgreeTnC` INTEGER NOT NULL, `dDateMmbr` TEXT, `sImagePth` TEXT, `dImgeDate` TEXT, `cImgeStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sUserIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ClientID",
+            "columnName": "sClientID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmailAdd",
+            "columnName": "sEmailAdd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserName",
+            "columnName": "sUserName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastName",
+            "columnName": "sLastName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FrstName",
+            "columnName": "sFrstName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MiddName",
+            "columnName": "sMiddName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SuffixNm",
+            "columnName": "sSuffixNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MaidenNm",
+            "columnName": "sMaidenNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "GenderCd",
+            "columnName": "cGenderCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CvilStat",
+            "columnName": "cCvilStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Citizenx",
+            "columnName": "sCitizenx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BirthDte",
+            "columnName": "dBirthDte",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BirthPlc",
+            "columnName": "sBirthPlc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "HouseNo1",
+            "columnName": "sHouseNo1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Address1",
+            "columnName": "sAddress1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BrgyIDx1",
+            "columnName": "sBrgyIDx1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownIDx1",
+            "columnName": "sTownIDx1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "HouseNo2",
+            "columnName": "sHouseNo2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Address2",
+            "columnName": "sAddress2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BrgyIDx2",
+            "columnName": "sBrgyIDx2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownIDx2",
+            "columnName": "sTownIDx2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TaxIDNox",
+            "columnName": "sTaxIDNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "MobileNo",
+            "columnName": "sMobileNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Verified",
+            "columnName": "cVerified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DateVrfd",
+            "columnName": "dVerified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AgreeTnC",
+            "columnName": "cAgreeTnC",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DateMmbr",
+            "columnName": "dDateMmbr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImagePth",
+            "columnName": "sImagePth",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImgeDate",
+            "columnName": "dImgeDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImgeStat",
+            "columnName": "cImgeStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "GCard_App_Master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sGCardNox` TEXT NOT NULL, `sCardNmbr` TEXT, `sUserIDxx` TEXT, `sNmOnCard` TEXT, `dMemberxx` TEXT, `cCardType` TEXT, `sTotPoint` TEXT, `sAvlPoint` TEXT, `cTranStat` TEXT, `cActvStat` TEXT, `dModified` TEXT, `cNotified` TEXT, PRIMARY KEY(`sGCardNox`))",
+        "fields": [
+          {
+            "fieldPath": "GCardNox",
+            "columnName": "sGCardNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CardNmbr",
+            "columnName": "sCardNmbr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "NmOnCard",
+            "columnName": "sNmOnCard",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Memberxx",
+            "columnName": "dMemberxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CardType",
+            "columnName": "cCardType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TotPoint",
+            "columnName": "sTotPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AvlPoint",
+            "columnName": "sAvlPoint",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ActvStat",
+            "columnName": "cActvStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notified",
+            "columnName": "cNotified",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sGCardNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "G_Card_Transaction_Ledger",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sReferNox` TEXT NOT NULL, `sGCardNox` TEXT, `nEntryNox` INTEGER NOT NULL, `dTransact` TEXT, `sSourceDs` TEXT, `sTranType` TEXT, `sTranDesc` TEXT, `sSourceNo` TEXT, `nPointsxx` REAL NOT NULL, `cQRCodexx` TEXT, `cReceived` TEXT, PRIMARY KEY(`sReferNox`))",
+        "fields": [
+          {
+            "fieldPath": "ReferNox",
+            "columnName": "sReferNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "GCardNox",
+            "columnName": "sGCardNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EntryNox",
+            "columnName": "nEntryNox",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceDs",
+            "columnName": "sSourceDs",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranType",
+            "columnName": "sTranType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranDesc",
+            "columnName": "sTranDesc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceNo",
+            "columnName": "sSourceNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Pointsxx",
+            "columnName": "nPointsxx",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "QRCodexx",
+            "columnName": "cQRCodexx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Received",
+            "columnName": "cReceived",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sReferNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MC_Serial_Registration",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sSerialID` TEXT NOT NULL, `sGCardNox` TEXT, `sEngineNo` TEXT, `sFrameNox` TEXT, `sModelNme` TEXT, `sFSEPStat` TEXT, `cRegStatx` TEXT, PRIMARY KEY(`sSerialID`))",
+        "fields": [
+          {
+            "fieldPath": "SerialID",
+            "columnName": "sSerialID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "GCardNox",
+            "columnName": "sGCardNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EngineNo",
+            "columnName": "sEngineNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FrameNox",
+            "columnName": "sFrameNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ModelNme",
+            "columnName": "sModelNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FSEPStat",
+            "columnName": "sFSEPStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RegStatx",
+            "columnName": "cRegStatx",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sSerialID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Promo_Link_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `dTransact` TEXT, `dDateFrom` TEXT, `dDateThru` TEXT, `sCaptionx` TEXT, `sImageUrl` TEXT, `sImageSld` TEXT, `sImgeByte` TEXT, `sPromoUrl` TEXT, `cNotified` TEXT, `cDivision` INTEGER NOT NULL, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateFrom",
+            "columnName": "dDateFrom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateThru",
+            "columnName": "dDateThru",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Captionx",
+            "columnName": "sCaptionx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImageUrl",
+            "columnName": "sImageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImageSld",
+            "columnName": "sImageSld",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ImgeByte",
+            "columnName": "sImgeByte",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PromoUrl",
+            "columnName": "sPromoUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notified",
+            "columnName": "cNotified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Division",
+            "columnName": "cDivision",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Notification_Info_Master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sMesgIDxx` TEXT, `sParentxx` TEXT, `dCreatedx` TEXT, `sAppSrcex` TEXT, `sCreatrID` TEXT, `sCreatrNm` TEXT, `sMsgTitle` TEXT, `sMessagex` TEXT, `sURLxxxxx` TEXT, `sDataSndx` TEXT, `sMsgTypex` TEXT, `cSentxxxx` TEXT, `dSentxxxx` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "MesgIDxx",
+            "columnName": "sMesgIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Parentxx",
+            "columnName": "sParentxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Createdx",
+            "columnName": "dCreatedx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AppSrcex",
+            "columnName": "sAppSrcex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreatrID",
+            "columnName": "sCreatrID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreatrNm",
+            "columnName": "sCreatrNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MsgTitle",
+            "columnName": "sMsgTitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Messagex",
+            "columnName": "sMessagex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "URLxxxxx",
+            "columnName": "sURLxxxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DataSndx",
+            "columnName": "sDataSndx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MsgTypex",
+            "columnName": "sMsgTypex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sentcxxx",
+            "columnName": "cSentxxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sentdxxx",
+            "columnName": "dSentxxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Notification_Info_Recepient",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sAppRcptx` TEXT, `sRecpntID` TEXT, `sRecpntNm` TEXT, `sGroupIDx` TEXT, `sGroupNmx` TEXT, `cMonitorx` TEXT, `cMesgStat` TEXT, `cStatSent` TEXT, `dSentxxxx` TEXT, `dReceived` TEXT, `dReadxxxx` TEXT, `dLastUpdt` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "AppRcptx",
+            "columnName": "sAppRcptx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecpntID",
+            "columnName": "sRecpntID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecpntNm",
+            "columnName": "sRecpntNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "GroupIDx",
+            "columnName": "sGroupIDx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "GroupNmx",
+            "columnName": "sGroupNmx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Monitorx",
+            "columnName": "cMonitorx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MesgStat",
+            "columnName": "cMesgStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StatSent",
+            "columnName": "cStatSent",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sentxxxx",
+            "columnName": "dSentxxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Received",
+            "columnName": "dReceived",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Readxxxx",
+            "columnName": "dReadxxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastUpdt",
+            "columnName": "dLastUpdt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Notification_User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `sUserName` TEXT, PRIMARY KEY(`sUserIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UserName",
+            "columnName": "sUserName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Redeemables",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sPromoCde` TEXT, `sPromoDsc` TEXT, `nPointsxx` REAL NOT NULL, `sImageUrl` TEXT, `cPreOrder` TEXT, `dDateFrom` TEXT, `dDateThru` TEXT, `cNotified` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "PromoCde",
+            "columnName": "sPromoCde",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PromoDsc",
+            "columnName": "sPromoDsc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Pointsxx",
+            "columnName": "nPointsxx",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ImageUrl",
+            "columnName": "sImageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PreOrder",
+            "columnName": "cPreOrder",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateFrom",
+            "columnName": "dDateFrom",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DateThru",
+            "columnName": "dDateThru",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notified",
+            "columnName": "cNotified",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Redeem_Item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sPromoIDx` TEXT NOT NULL, `sBatchNox` TEXT, `sTransNox` TEXT, `sGCardNox` TEXT, `nItemQtyx` INTEGER NOT NULL, `nPointsxx` REAL NOT NULL, `sBranchCd` TEXT, `sReferNox` TEXT, `dOrderedx` TEXT, `dPlacOrdr` TEXT, `dPickupxx` TEXT, `cTranStat` TEXT, `cPlcOrder` TEXT, `cNotified` TEXT, PRIMARY KEY(`sPromoIDx`))",
+        "fields": [
+          {
+            "fieldPath": "PromoIDx",
+            "columnName": "sPromoIDx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BatchNox",
+            "columnName": "sBatchNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "GCardNox",
+            "columnName": "sGCardNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ItemQtyx",
+            "columnName": "nItemQtyx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Pointsxx",
+            "columnName": "nPointsxx",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchCd",
+            "columnName": "sBranchCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ReferNox",
+            "columnName": "sReferNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Orderedx",
+            "columnName": "dOrderedx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PlacOrdr",
+            "columnName": "dPlacOrdr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Pickupxx",
+            "columnName": "dPickupxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PlcOrder",
+            "columnName": "cPlcOrder",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notified",
+            "columnName": "cNotified",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sPromoIDx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MC_Service",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sGCardNox` TEXT NOT NULL, `sSerialID` TEXT, `sEngineNo` TEXT, `sFrameNox` TEXT, `sBrandNme` TEXT, `sModelNme` TEXT, `cFSEPStat` TEXT, `dPurchase` TEXT, `nYellowxx` INTEGER NOT NULL, `nWhitexxx` INTEGER NOT NULL, `nYlwCtrxx` INTEGER NOT NULL, `nWhtCtrxx` INTEGER NOT NULL, `dLastSrvc` TEXT, `nMIlAgexx` INTEGER NOT NULL, `dNxtRmnds` TEXT, PRIMARY KEY(`sGCardNox`))",
+        "fields": [
+          {
+            "fieldPath": "GCardNox",
+            "columnName": "sGCardNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "SerialID",
+            "columnName": "sSerialID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EngineNo",
+            "columnName": "sEngineNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FrameNox",
+            "columnName": "sFrameNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BrandNme",
+            "columnName": "sBrandNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ModelNme",
+            "columnName": "sModelNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "FSEPStat",
+            "columnName": "cFSEPStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Purchase",
+            "columnName": "dPurchase",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Yellowxx",
+            "columnName": "nYellowxx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Whitexxx",
+            "columnName": "nWhitexxx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "YlwCtrxx",
+            "columnName": "nYlwCtrxx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "WhtCtrxx",
+            "columnName": "nWhtCtrxx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LastSrvc",
+            "columnName": "dLastSrvc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MIlAgexx",
+            "columnName": "nMIlAgexx",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "NxtRmnds",
+            "columnName": "dNxtRmnds",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sGCardNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "User_Info_Master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sClientID` TEXT NOT NULL, `sBranchCD` TEXT, `sBranchNm` TEXT, `sLogNoxxx` TEXT, `sUserIDxx` TEXT, `sEmailAdd` TEXT, `sUserName` TEXT, `nUserLevl` TEXT, `sDeptIDxx` TEXT, `sPositnID` TEXT, `sEmpLevID` TEXT, `cAllowUpd` TEXT, `dLoginxxx` TEXT, `sMobileNo` TEXT, `dSessionx` TEXT, `sEmployID` TEXT, PRIMARY KEY(`sClientID`))",
+        "fields": [
+          {
+            "fieldPath": "ClientID",
+            "columnName": "sClientID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchCD",
+            "columnName": "sBranchCD",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BranchNm",
+            "columnName": "sBranchNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LogNoxxx",
+            "columnName": "sLogNoxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmailAdd",
+            "columnName": "sEmailAdd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserName",
+            "columnName": "sUserName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserLevl",
+            "columnName": "nUserLevl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DeptIDxx",
+            "columnName": "sDeptIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PositnID",
+            "columnName": "sPositnID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmpLevID",
+            "columnName": "sEmpLevID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AllowUpd",
+            "columnName": "cAllowUpd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Loginxxx",
+            "columnName": "dLoginxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MobileNo",
+            "columnName": "sMobileNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Sessionx",
+            "columnName": "dSessionx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "EmployID",
+            "columnName": "sEmployID",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sClientID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tbl_user",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `gcard_number` TEXT, `avl_points` REAL NOT NULL, `d_modified` TEXT, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gcard_number",
+            "columnName": "gcard_number",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avl_points",
+            "columnName": "avl_points",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "d_modified",
+            "columnName": "d_modified",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "name"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "App_Token_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sAppToken` TEXT NOT NULL, PRIMARY KEY(`sAppToken`))",
+        "fields": [
+          {
+            "fieldPath": "TokenInf",
+            "columnName": "sAppToken",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sAppToken"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Barangay_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sBrgyIDxx` TEXT NOT NULL, `sBrgyName` TEXT, `sTownIDxx` TEXT, `cHasRoute` TEXT, `cBlackLst` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sBrgyIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "BrgyIDxx",
+            "columnName": "sBrgyIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BrgyName",
+            "columnName": "sBrgyName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownIDxx",
+            "columnName": "sTownIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "HasRoute",
+            "columnName": "cHasRoute",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BlackLst",
+            "columnName": "cBlackLst",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sBrgyIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Town_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTownIDxx` TEXT NOT NULL, `sTownName` TEXT, `sZippCode` TEXT, `sProvIDxx` TEXT, `sProvCode` TEXT, `sMuncplCd` TEXT, `cHasRoute` TEXT, `cBlackLst` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTownIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "TownIDxx",
+            "columnName": "sTownIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "TownName",
+            "columnName": "sTownName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ZippCode",
+            "columnName": "sZippCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProvIDxx",
+            "columnName": "sProvIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProvCode",
+            "columnName": "sProvCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "MuncplCd",
+            "columnName": "sMuncplCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "HasRoute",
+            "columnName": "cHasRoute",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BlackLst",
+            "columnName": "cBlackLst",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTownIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Province_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sProvIDxx` TEXT NOT NULL, `sProvName` TEXT, `cRecdStat` INTEGER NOT NULL, `dTimeStmp` TEXT, `dLstUpdte` TEXT, PRIMARY KEY(`sProvIDxx`))",
+        "fields": [
+          {
+            "fieldPath": "ProvIDxx",
+            "columnName": "sProvIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ProvName",
+            "columnName": "sProvName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LstUpdte",
+            "columnName": "dLstUpdte",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sProvIDxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Country_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sCntryCde` TEXT NOT NULL, `sCntryNme` TEXT, `sNational` TEXT, `cRecdStat` TEXT, `dTimeStmp` TEXT, `dLstUpdte` TEXT, PRIMARY KEY(`sCntryCde`))",
+        "fields": [
+          {
+            "fieldPath": "CntryCde",
+            "columnName": "sCntryCde",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CntryNme",
+            "columnName": "sCntryNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "National",
+            "columnName": "sNational",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LstUpdte",
+            "columnName": "dLstUpdte",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sCntryCde"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "App_User_Mobile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `dTransact` TEXT NOT NULL, `sMobileNo` TEXT, `cUserVrfd` INTEGER NOT NULL, `dUserVrfd` TEXT, `dVerified` TEXT, `cRecdStat` INTEGER NOT NULL, `dTimeStmp` TEXT, PRIMARY KEY(`sUserIDxx`, `dTransact`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "MobileNo",
+            "columnName": "sMobileNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserVrfd",
+            "columnName": "cUserVrfd",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DateVrfd",
+            "columnName": "dUserVrfd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Verified",
+            "columnName": "dVerified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx",
+            "dTransact"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Address_Update_Request",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sClientID` TEXT, `cReqstCDe` TEXT, `cAddrssTp` TEXT, `sHouseNox` TEXT, `sAddressx` TEXT, `sTownIDxx` TEXT, `sBrgyIDxx` TEXT, `cPrimaryx` TEXT, `sSourceCD` TEXT, `sSourceNo` TEXT, `nLatitude` TEXT, `nLongitud` TEXT, `sRemarksx` TEXT, `cTranStat` TEXT, `cSendStat` TEXT, `dSendDate` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ClientID",
+            "columnName": "sClientID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ReqstCDe",
+            "columnName": "cReqstCDe",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AddrssTp",
+            "columnName": "cAddrssTp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "HouseNox",
+            "columnName": "sHouseNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Addressx",
+            "columnName": "sAddressx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TownIDxx",
+            "columnName": "sTownIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BrgyIDxx",
+            "columnName": "sBrgyIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Primaryx",
+            "columnName": "cPrimaryx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceCD",
+            "columnName": "sSourceCD",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceNo",
+            "columnName": "sSourceNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Latitude",
+            "columnName": "nLatitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Longitud",
+            "columnName": "nLongitud",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remarksx",
+            "columnName": "sRemarksx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SendStat",
+            "columnName": "cSendStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SendDate",
+            "columnName": "dSendDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Product_Inventory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sListngID` TEXT NOT NULL, `sBriefDsc` TEXT, `sDescript` TEXT, `sStockIDx` TEXT, `xBarCodex` TEXT, `xDescript` TEXT, `nRatingxx` TEXT, `xBrandNme` TEXT, `sModelIDx` TEXT, `xModelNme` TEXT, `sImagesxx` TEXT, `xColorNme` TEXT, `xCategrNm` TEXT, `nTotalQty` TEXT, `nQtyOnHnd` TEXT, `nResvOrdr` TEXT, `nSoldQtyx` TEXT, `nUnitPrce` TEXT, `dListStrt` TEXT, `dListEndx` TEXT, `cAllwCrdt` TEXT, `cTranStat` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sListngID`))",
+        "fields": [
+          {
+            "fieldPath": "ListngID",
+            "columnName": "sListngID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BriefDsc",
+            "columnName": "sBriefDsc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Descript",
+            "columnName": "sDescript",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StockIDx",
+            "columnName": "sStockIDx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BarCodex",
+            "columnName": "xBarCodex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Descrptx",
+            "columnName": "xDescript",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Ratingxx",
+            "columnName": "nRatingxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BrandNme",
+            "columnName": "xBrandNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ModelIDx",
+            "columnName": "sModelIDx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ModelNme",
+            "columnName": "xModelNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Imagesxx",
+            "columnName": "sImagesxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ColorNme",
+            "columnName": "xColorNme",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CategrNm",
+            "columnName": "xCategrNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TotalQty",
+            "columnName": "nTotalQty",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "QtyOnHnd",
+            "columnName": "nQtyOnHnd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ResvOrdr",
+            "columnName": "nResvOrdr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SoldQtyx",
+            "columnName": "nSoldQtyx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UnitPrce",
+            "columnName": "nUnitPrce",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ListStrt",
+            "columnName": "dListStrt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ListEndx",
+            "columnName": "dListEndx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AllwCrdt",
+            "columnName": "cAllwCrdt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sListngID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MarketPlace_Cart",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `sListIDxx` TEXT NOT NULL, `cBuyNowxx` TEXT NOT NULL, `nQuantity` INTEGER, `nAvlQtyxx` INTEGER, `dCreatedx` TEXT, `cTranStat` TEXT, `cCheckOut` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sUserIDxx`, `sListIDxx`, `cBuyNowxx`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ListIDxx",
+            "columnName": "sListIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BuyNowxx",
+            "columnName": "cBuyNowxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Quantity",
+            "columnName": "nQuantity",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AvlQtyxx",
+            "columnName": "nAvlQtyxx",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Createdx",
+            "columnName": "dCreatedx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CheckOut",
+            "columnName": "cCheckOut",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx",
+            "sListIDxx",
+            "cBuyNowxx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MarketPlace_Order_Detail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `nEntryNox` TEXT NOT NULL, `sStockIDx` TEXT, `nQuantity` TEXT, `nUnitPrce` TEXT, `nDiscount` TEXT, `nAddDiscx` TEXT, `nApproved` TEXT, `nIssuedxx` TEXT, `nCancelld` TEXT, `sReferNox` TEXT, `sNotesxxx` TEXT, `cReviewed` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`, `nEntryNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "EntryNox",
+            "columnName": "nEntryNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "StockIDx",
+            "columnName": "sStockIDx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Quantity",
+            "columnName": "nQuantity",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UnitPrce",
+            "columnName": "nUnitPrce",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Discount",
+            "columnName": "nDiscount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AddDiscx",
+            "columnName": "nAddDiscx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Approved",
+            "columnName": "nApproved",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Issuedxx",
+            "columnName": "nIssuedxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Cancelld",
+            "columnName": "nCancelld",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ReferNox",
+            "columnName": "sReferNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Notesxxx",
+            "columnName": "sNotesxxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Reviewed",
+            "columnName": "cReviewed",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox",
+            "nEntryNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MarketPlace_Order_Master",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sTransNox` TEXT NOT NULL, `sBranchCd` TEXT, `dTransact` TEXT, `dExpected` TEXT, `sClientID` TEXT, `sAppUsrID` TEXT, `sReferNox` TEXT, `sRemarksx` TEXT, `nTranTotl` REAL, `nVATRatex` REAL, `nDiscount` REAL, `nAddDiscx` REAL, `nFreightx` REAL, `nProcPaym` REAL, `nAmtPaidx` REAL, `dDueDatex` TEXT, `sTermCode` TEXT, `sSourceNo` TEXT, `sSourceCd` TEXT, `cTranStat` TEXT, `dWaybillx` TEXT, `sWaybilNo` TEXT, `sBatchNox` TEXT, `dPickedUp` TEXT, `cPaymPstd` TEXT, `cPaymType` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sTransNox`))",
+        "fields": [
+          {
+            "fieldPath": "TransNox",
+            "columnName": "sTransNox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "BranchCd",
+            "columnName": "sBranchCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Expected",
+            "columnName": "dExpected",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ClientID",
+            "columnName": "sClientID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AppUsrID",
+            "columnName": "sAppUsrID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ReferNox",
+            "columnName": "sReferNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remarksx",
+            "columnName": "sRemarksx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranTotl",
+            "columnName": "nTranTotl",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "VATRatex",
+            "columnName": "nVATRatex",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Discount",
+            "columnName": "nDiscount",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AddDiscx",
+            "columnName": "nAddDiscx",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Freightx",
+            "columnName": "nFreightx",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProcPaym",
+            "columnName": "nProcPaym",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AmtPaidx",
+            "columnName": "nAmtPaidx",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DueDatex",
+            "columnName": "dDueDatex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TermCode",
+            "columnName": "sTermCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceNo",
+            "columnName": "sSourceNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SourceCd",
+            "columnName": "sSourceCd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Waybillx",
+            "columnName": "dWaybillx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "WaybilNo",
+            "columnName": "sWaybilNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BatchNox",
+            "columnName": "sBatchNox",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PickedUp",
+            "columnName": "dPickedUp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PaymPstd",
+            "columnName": "cPaymPstd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PaymType",
+            "columnName": "cPaymType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sTransNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Mkt_Search_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nEntryNox` INTEGER NOT NULL, `sSearchxx` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`nEntryNox`))",
+        "fields": [
+          {
+            "fieldPath": "EntryNox",
+            "columnName": "nEntryNox",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Searchxx",
+            "columnName": "sSearchxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "nEntryNox"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Client_Email_Info",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sUserIDxx` TEXT NOT NULL, `dTransact` TEXT NOT NULL, `sEmailAdd` TEXT, `cVerified` INTEGER NOT NULL, `dVerified` TEXT, `cRecdStat` INTEGER NOT NULL, `dTimeStmp` TEXT, PRIMARY KEY(`sUserIDxx`, `dTransact`))",
+        "fields": [
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "EmailAdd",
+            "columnName": "sEmailAdd",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "IsVerifd",
+            "columnName": "cVerified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DateVrfd",
+            "columnName": "dVerified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RecdStat",
+            "columnName": "cRecdStat",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sUserIDxx",
+            "dTransact"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Panalo_Reward",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sPanaloCD` TEXT NOT NULL, `cTranStat` TEXT, `dModified` TEXT, `dTimeStmp` TEXT, PRIMARY KEY(`sPanaloCD`))",
+        "fields": [
+          {
+            "fieldPath": "PanaloCD",
+            "columnName": "sPanaloCD",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Modified",
+            "columnName": "dModified",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TimeStmp",
+            "columnName": "dTimeStmp",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sPanaloCD"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Guanzon_Panalo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sPanaloQC` TEXT NOT NULL, `dTransact` TEXT, `sUserIDxx` TEXT, `sPanaloCD` TEXT, `sPanaloDs` TEXT, `sAcctNmbr` TEXT, `nAmountxx` REAL, `sItemCode` TEXT, `sItemDesc` TEXT, `nItemQtyx` INTEGER, `nRedeemxx` REAL, `dExpiryDt` TEXT, `sBranchNm` TEXT, `dRedeemxx` TEXT, `cTranStat` TEXT, PRIMARY KEY(`sPanaloQC`))",
+        "fields": [
+          {
+            "fieldPath": "PanaloQC",
+            "columnName": "sPanaloQC",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Transact",
+            "columnName": "dTransact",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "UserIDxx",
+            "columnName": "sUserIDxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PanaloCD",
+            "columnName": "sPanaloCD",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PanaloDs",
+            "columnName": "sPanaloDs",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AcctNmbr",
+            "columnName": "sAcctNmbr",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Amountxx",
+            "columnName": "nAmountxx",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ItemCode",
+            "columnName": "sItemCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ItemDesc",
+            "columnName": "sItemDesc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ItemQtyx",
+            "columnName": "nItemQtyx",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Redeemxx",
+            "columnName": "nRedeemxx",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ExpiryDt",
+            "columnName": "dExpiryDt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "BranchNm",
+            "columnName": "sBranchNm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Redeemed",
+            "columnName": "dRedeemxx",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "TranStat",
+            "columnName": "cTranStat",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sPanaloQC"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9bdf560978746035bed3e24a898cd8f5')"
+    ]
+  }
+}

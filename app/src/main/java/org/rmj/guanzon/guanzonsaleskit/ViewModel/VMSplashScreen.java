@@ -71,7 +71,7 @@ public class VMSplashScreen extends AndroidViewModel {
         this.poPromoEvents = new GPromos(instance);
         this.poSession = EmployeeSession.getInstance(instance);
         this.poConfig.setPackageName(BuildConfig.APPLICATION_ID);
-        this.poConfig.setProductID("gRider");
+        this.poConfig.setProductID("GuanzonApp");
         this.poConfig.setUpdateLocally(true);
         this.poConfig.setTestCase(true);
         this.poConfig.setupAppVersionInfo(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME, "");
