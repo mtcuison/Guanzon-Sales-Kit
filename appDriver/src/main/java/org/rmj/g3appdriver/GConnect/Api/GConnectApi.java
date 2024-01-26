@@ -101,6 +101,10 @@ public class GConnectApi extends WebApi {
     private static final String SEND_REQUEST = "https://restgk.guanzongroup.com.ph/notification/send_request.php";
     private static final String CHECK_UPDATE_URL = "https://restgk.guanzongroup.com.ph/gcard/ms/version_checker.php";
 
+    private static final String URL_NEWCHANGE_PASSWORD = "security/changepassword.php";
+    private static final String URL_NEWCHANGE_ADDRESS = "security/request_address_update.php";
+    private static final String URL_NEWCHANGE_MOBILE = "security/request_mobile_update.php";
+
     public GConnectApi(Application instance) {
         super(instance);
     }
@@ -845,5 +849,29 @@ public class GConnectApi extends WebApi {
         }
         Log.d(TAG, "Initialize api:" + LIVE + VERIFY_CLIENT_MOBILE_NO);
         return LIVE + VERIFY_CLIENT_MOBILE_NO;
+    }
+    public String getUrlNewChangePassword() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_PASSWORD);
+            return LOCAL + URL_NEWCHANGE_PASSWORD;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_PASSWORD);
+        return LIVE + URL_NEWCHANGE_PASSWORD;
+    }
+    public String getUrlNewChangeAddress() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_ADDRESS);
+            return LOCAL + URL_NEWCHANGE_ADDRESS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_ADDRESS);
+        return LIVE + URL_NEWCHANGE_ADDRESS;
+    }
+    public String getUrlNewChangeMobile() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_MOBILE);
+            return LOCAL + URL_NEWCHANGE_MOBILE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_MOBILE);
+        return LIVE + URL_NEWCHANGE_MOBILE;
     }
 }

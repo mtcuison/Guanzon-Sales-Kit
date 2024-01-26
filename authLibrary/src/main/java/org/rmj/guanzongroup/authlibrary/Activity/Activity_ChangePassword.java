@@ -10,15 +10,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Account.pojo.PasswordChange;
-import org.rmj.g3appdriver.lib.Account.pojo.PasswordUpdate;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMChangePassword;
-import org.w3c.dom.Text;
 
 public class Activity_ChangePassword extends AppCompatActivity {
     private VMChangePassword mViewModel;
@@ -26,8 +23,6 @@ public class Activity_ChangePassword extends AppCompatActivity {
     private MessageBox poMessage;
     private TextInputEditText password;
     private TextInputEditText conf_password;
-    private TextInputEditText tie_ca_otp;
-    private MaterialButton btn_sendotp;
     private  MaterialButton btn_submit;
     private MaterialToolbar toolbar;
     @Override
@@ -51,8 +46,6 @@ public class Activity_ChangePassword extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         password = findViewById(R.id.password);
         conf_password = findViewById(R.id.conf_password);
-        tie_ca_otp = findViewById(R.id.tie_ca_otp);
-        btn_sendotp = findViewById(R.id.btn_sendotp);
         btn_submit = findViewById(R.id.btn_submit);
 
         setSupportActionBar(toolbar); //set object toolbar as default action bar for activity
@@ -65,76 +58,6 @@ public class Activity_ChangePassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        btn_sendotp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String btnText = btn_sendotp.getText().toString();
-                if (btnText == "Request OTP"){
-                    mViewModel.OTPRequest(new VMChangePassword.RequestOTP() {
-                        @Override
-                        public void onRequest(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP was successfully sent to your mobile number.");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Verify OTP"); //change text to verify otp after receiving
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable until otp is verified
-                            btn_sendotp.setText("Request OTP"); //set text to primary when request failed
-                        }
-                    });
-                }
-
-                if (btnText == "Verify OTP"){
-                    mViewModel.OTPVerification(tie_ca_otp.getText().toString(), new VMChangePassword.VerifyOTP() {
-                        @Override
-                        public void onVerify(String title, String message) {
-                            poDialog.initDialog(title, message, false);
-                            poDialog.show();
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage("OTP Verified");
-                            poMessage.show();
-
-                            btn_submit.setEnabled(true); //enable when otp is verified
-                            btn_sendotp.setText("Request OTP"); //change text to request otp after verifying
-                        }
-
-                        @Override
-                        public void onFailed(String result) {
-                            poDialog.dismiss();
-
-                            poMessage.setMessage(result);
-                            poMessage.show();
-
-                            btn_submit.setEnabled(false); //disable when otp is not verified
-                            btn_sendotp.setText("Verify OTP"); //retain text to verify otp
-                        }
-                    });
-                }
             }
         });
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +78,7 @@ public class Activity_ChangePassword extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Password changed successfully");
+                        poMessage.setMessage("Request sent. Please verify new password sent to your email.");
                         poMessage.show();
                     }
 
@@ -163,7 +86,7 @@ public class Activity_ChangePassword extends AppCompatActivity {
                     public void onFailed(String result) {
                         poDialog.dismiss();
 
-                        poMessage.setMessage("Password change failed");
+                        poMessage.setMessage(result);
                         poMessage.show();
                     }
                 });

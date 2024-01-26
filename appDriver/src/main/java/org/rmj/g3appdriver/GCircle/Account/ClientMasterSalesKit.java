@@ -16,6 +16,8 @@ import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
+import org.rmj.g3appdriver.SalesKit.DataAccessObject.DKPOPAgentRole;
+import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
 import org.rmj.g3appdriver.etc.AppConstants;
@@ -27,6 +29,7 @@ public class ClientMasterSalesKit {
     private final GCircleApi poApi;
     private final GConnectApi poApiConnect;
     private final ClientSession poSession;
+    private final DKPOPAgentRole dkpopAgentRole;
     private String message;
 
     public ClientMasterSalesKit(Application instance) {
@@ -35,6 +38,7 @@ public class ClientMasterSalesKit {
         this.poApi = new GCircleApi(instance);
         this.poApiConnect = new GConnectApi(instance);
         this.poSession = ClientSession.getInstance(instance);
+        this.dkpopAgentRole = GGC_GCircleDB.getInstance(instance).kpopAgentDao();
     }
     public String getMessage() {
         return message;
@@ -196,6 +200,9 @@ public class ClientMasterSalesKit {
     }
     public void RemoveProfileSession(){
         poDao.DeleteProfile();
+    }
+    public EKPOPAgentRole GetUpline(){
+        return dkpopAgentRole.GetKPOPAget(poSession.getUserID());
     }
     public LiveData<EClientInfoSalesKit> GetProfileAccount(){
         return poDao.getClientInfo();

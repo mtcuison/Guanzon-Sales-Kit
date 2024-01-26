@@ -20,8 +20,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textview.MaterialTextView;
-import com.squareup.picasso.BuildConfig;
-
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -29,6 +27,7 @@ import org.rmj.g3appdriver.etc.TransparentToolbar;
 import org.rmj.g3appdriver.utils.AppDirectoryCreator;
 import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
+//import org.rmj.guanzon.guanzonsaleskit.BuildConfig;
 import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
 import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
@@ -62,7 +61,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
         new TransparentToolbar(Activity_SplashScreen.this).SetupActionbar();
         prgrssBar = findViewById(R.id.progress_splashscreen);
         lblVrsion = findViewById(R.id.lbl_versionInfo);
-        lblVrsion.setText(BuildConfig.VERSION_NAME);
+//        lblVrsion.setText(BuildConfig.VERSION_NAME);
         if (!isMyServiceRunning(GMessagingService.class)) {
             startService(new Intent(Activity_SplashScreen.this, GMessagingService.class));
         }

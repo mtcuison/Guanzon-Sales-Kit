@@ -58,7 +58,7 @@ public class FragmentHome extends Fragment {
         mViewModel.GetCompleteProfile().observe(requireActivity(), new Observer<EClientInfoSalesKit>() {
             @Override
             public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
-                if (eClientInfoSalesKit == null){
+                if (eClientInfoSalesKit == null) {
                     isCompleteAccount = false;
                 }else {
                     if (eClientInfoSalesKit.getClientID()==null){
@@ -73,8 +73,6 @@ public class FragmentHome extends Fragment {
         textView1 = view.findViewById(R.id.textView1);
         poSliderx = view.findViewById(R.id.imgSlider);
 
-
-
         selectAuto = view.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView) ;
         selectMC =  view.findViewById(org.rmj.guanzongroup.ganado.R.id.materialCardView1);
 
@@ -83,6 +81,20 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isCompleteAccount){ //allow to use feature
+
+                    //REQUIRE UPLINE BEFORE INQUIRY
+                    if (mViewModel.GetUpline() == null){
+                        loMessage.setTitle("Sub Agent");
+                        loMessage.setMessage("Please submit your upline first");
+                        loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        });
+                        loMessage.show();
+                    }
+
                     loMessage.setTitle("Under Development");
                     loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
                     loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
@@ -93,7 +105,7 @@ public class FragmentHome extends Fragment {
                     });
                     loMessage.show();
                 }else { //must complete first account
-                    loMessage.setTitle("Under Development");
+                    loMessage.setTitle("Guanzon Sales Kit");
                     loMessage.setMessage("Must complete account to access this feature");
                     loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                         @Override
@@ -112,9 +124,23 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isCompleteAccount){ //allow to use feature
+
+                //REQUIRE UPLINE BEFORE INQUIRY
+                if (mViewModel.GetUpline() == null) {
+                    loMessage.setTitle("Sub Agent");
+                    loMessage.setMessage("Please submit your upline first");
+                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                        @Override
+                        public void OnButtonClick(View view, AlertDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    });
+                    loMessage.show();
+                }else {
                     Intent intent = new Intent(requireActivity(), Activity_BrandSelection.class);
                     intent.putExtra("background", org.rmj.guanzongroup.ganado.R.drawable.img_category_mc);
                     startActivity(intent);
+                }
                 }else { //must complete first account
                     loMessage.setTitle("Guanzon Sales Kit");
                     loMessage.setMessage("Must complete account to access this feature");
