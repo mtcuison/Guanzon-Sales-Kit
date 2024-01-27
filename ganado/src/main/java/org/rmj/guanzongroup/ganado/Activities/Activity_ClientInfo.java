@@ -20,6 +20,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
 import org.rmj.g3appdriver.etc.LoadDialog;
@@ -40,9 +41,9 @@ public class Activity_ClientInfo extends AppCompatActivity {
     private MessageBox poMessage;
     private LoadDialog poDialogx;
 
-    private TextInputEditText txtLastNm, txtFrstNm, txtMiddNm, txtSuffixx,  txtBirthDt,
+    private TextInputEditText txtLastNm, txtFrstNm, txtMiddNm,txtMaidNm, txtSuffixx,  txtBirthDt,
             txtEmailAdd, txtMobileNo,  txtHouseNox, txtAddress;
-
+    private TextInputLayout tilMaidNm;
     private MaterialAutoCompleteTextView txtMunicipl,txtBPlace;
     private RadioGroup rgGender;
     private MaterialAutoCompleteTextView spinner_relation;
@@ -160,9 +161,12 @@ public class Activity_ClientInfo extends AppCompatActivity {
         rgGender.setOnCheckedChangeListener((radioGroup, i) -> {
             if (i == R.id.rb_male) {
                 mViewModel.getModel().setGenderCd("0");
+                tilMaidNm.setVisibility(View.GONE);
+                txtMaidNm.setText("");
             }
             if (i == R.id.rb_female) {
                 mViewModel.getModel().setGenderCd("1");
+                tilMaidNm.setVisibility(View.VISIBLE);
             }
         });
 
@@ -238,7 +242,8 @@ public class Activity_ClientInfo extends AppCompatActivity {
         txtAddress = findViewById(R.id.txt_address);
         txtMunicipl = findViewById(R.id.txt_town);
         spinner_relation = findViewById(R.id.spinner_relation);
-
+        txtMaidNm = findViewById(R.id.txt_maiden);
+        tilMaidNm = findViewById(R.id.til_maiden);
         btnContinue = findViewById(R.id.btnContinue);
     }
 

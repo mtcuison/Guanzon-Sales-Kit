@@ -1,21 +1,23 @@
 package org.rmj.guanzongroup.agent.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.rmj.g3appdriver.etc.MessageBox;
+import org.rmj.guanzongroup.agent.Activities.Activity_AgentInfo2;
 import org.rmj.guanzongroup.agent.Adapter.AgentListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
@@ -25,7 +27,7 @@ public class Fragment_SubAgents extends Fragment {
     private VMAgentInfo mViewModel;
     private RecyclerView rvAgents;
     private TextView lblNoData;
-    private LinearLayout lnLoading;
+    private ConstraintLayout lnLoading;
     private MessageBox loMessage;
 
     public Fragment_SubAgents() {
@@ -58,6 +60,8 @@ public class Fragment_SubAgents extends Fragment {
             public void OnExecute() {
 //                hideInquiries();
 //                hideAgents();
+
+                rvAgents.setVisibility(View.GONE);
                 lnLoading.setVisibility(View.VISIBLE);
             }
 
@@ -81,13 +85,15 @@ public class Fragment_SubAgents extends Fragment {
             if (ekpopAgentRoles.size() > 0){
 
                 lblNoData.setVisibility(View.GONE);
+                rvAgents.setVisibility(View.VISIBLE);
+
                 AgentListAdapter adapter= new AgentListAdapter(ekpopAgentRoles, new AgentListAdapter.OnAgentClickListener() {
                     @Override
                     public void OnClick(String sUserIDxx) {
-//                        Intent intent = new Intent(Activity_AgentInfo.this, Activity_AgentInfo.class);
-//                        intent.putExtra("sUserIDxx", sUserIDxx);
-//                        startActivity(intent);
-//                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+                        Intent intent = new Intent(requireActivity(), Activity_AgentInfo2.class);
+                        intent.putExtra("sUserIDxx", sUserIDxx);
+                        startActivity(intent);
+                        requireActivity().overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
                     }
 
                 });
@@ -98,6 +104,7 @@ public class Fragment_SubAgents extends Fragment {
 
             }else{
                 lblNoData.setVisibility(View.VISIBLE);
+                rvAgents.setVisibility(View.GONE);
             }
         });
     }

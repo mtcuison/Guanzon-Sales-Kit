@@ -15,11 +15,10 @@ import com.google.android.material.textview.MaterialTextView;
 import org.rmj.guanzongroup.agent.Adapter.Adapter_Fragment;
 import org.rmj.guanzongroup.agent.Fragment.Fragment_AgentPerformance;
 import org.rmj.guanzongroup.agent.Fragment.Fragment_SubAgentInquiry;
-import org.rmj.guanzongroup.agent.Fragment.Fragment_SubAgents;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
 
-public class Activity_AgentInfo extends AppCompatActivity {
+public class Activity_AgentInfo2 extends AppCompatActivity {
 
     private VMAgentInfo mViewModel;
 
@@ -31,27 +30,28 @@ public class Activity_AgentInfo extends AppCompatActivity {
     private MaterialTextView tvUsername;
     private MaterialTextView tvEmail;
     private MaterialTextView tvMobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(VMAgentInfo.class);
-        setContentView(R.layout.activity_agent_info);
+        setContentView(R.layout.activity_agent_info2);
         mViewModel.setUserID(getIntent().getStringExtra("sUserIDxx"));
-        mViewModel.setUserLvl("1");
+        mViewModel.setUserLvl("2");
         initViews();
 
         mAdapter = new Adapter_Fragment(getSupportFragmentManager());
         mAdapter.addFragment(new Fragment_AgentPerformance());
         mAdapter.addFragment(new Fragment_SubAgentInquiry());
-        mAdapter.addFragment(new Fragment_SubAgents());
+//        mAdapter.addFragment(new Fragment_SubAgents());
         mAdapter.addTitle("Performance");
         mAdapter.addTitle("Transactions");
-        mAdapter.addTitle("Agents");
+//        mAdapter.addTitle("Agents");
 
         viewPager.setAdapter(mAdapter);
         tablayout_agentInfo.setupWithViewPager(viewPager);
 
-        mViewModel.GetKPOPAgentInfo().observe(Activity_AgentInfo.this,agentInfo ->{
+        mViewModel.GetKPOPAgentInfo().observe(Activity_AgentInfo2.this,agentInfo ->{
             if(agentInfo != null){
                 tvUsername.setText(agentInfo.getsUserName());
                 tvEmail.setText(agentInfo.getsEmailAdd());
@@ -77,7 +77,6 @@ public class Activity_AgentInfo extends AppCompatActivity {
         getSupportActionBar().setTitle(" "); //set default title for action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
-
 
 
 
