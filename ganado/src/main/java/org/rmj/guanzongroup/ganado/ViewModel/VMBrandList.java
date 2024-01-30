@@ -7,8 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import org.rmj.g3appdriver.GCircle.room.Entities.EBranchInfo;
-import org.rmj.g3appdriver.GCircle.Apps.GawadPacita.Obj.Pacita;
 import org.rmj.g3appdriver.GCircle.room.Entities.EMcBrand;
 import org.rmj.g3appdriver.lib.Ganado.Obj.ProductInquiry;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
@@ -52,8 +50,9 @@ public class VMBrandList extends AndroidViewModel {
                 }
 
                 @Override
-                public void OnPostExecute(Object object) {
+                public double OnPostExecute(Object object) {
                     Log.d(TAG, object.toString());
+                    return 0;
                 }
             });
         }

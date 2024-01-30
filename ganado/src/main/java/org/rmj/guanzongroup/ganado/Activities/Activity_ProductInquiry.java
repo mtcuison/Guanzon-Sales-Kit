@@ -171,10 +171,13 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             String lsInput = txtDownPymnt.getText().toString().trim();
 //
             Double lnInput = FormatUIText.getParseDouble(lsInput);
+
+            mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
             mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
                 @Override
                 public void OnCalculate(double lnResult) {
                     txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                    mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
                 }
 
                 @Override
@@ -293,12 +296,14 @@ public class Activity_ProductInquiry extends AppCompatActivity {
 
                 String lsInput = txtDownPymnt.getText().toString().trim();
                 Double lnInput = FormatUIText.getParseDouble(lsInput);
+                mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
                 double lnMonthly = mViewModel.GetMonthlyAmortization(Integer.parseInt(mViewModel.getModel().getTermIDxx()));
                 txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnMonthly)));
                 mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
                     @Override
                     public void OnCalculate(double lnResult) {
                         txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                        mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
                     }
 
                     @Override

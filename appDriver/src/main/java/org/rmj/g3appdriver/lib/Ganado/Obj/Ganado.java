@@ -66,6 +66,10 @@ public class Ganado {
         return poCountry.getAllCountryInfo();
     }
 
+    public EGanadoOnline GetInquiry(String TransNox){
+        return poDao.GetInquiry(TransNox);
+    }
+
     public String CreateInquiry(InquiryInfo loInfo){
         try{
             InquiryInfo.InquiryInfoValidator loValid = new InquiryInfo.InquiryInfoValidator();
@@ -93,6 +97,7 @@ public class Ganado {
             JSONObject joPayment = new JSONObject();
             joPayment.put("sTermIDxx", loInfo.getTermIDxx());
             joPayment.put("nDownPaym", loInfo.getDownPaym());
+            joPayment.put("nMonthAmr", loInfo.getnMonthAmr());
             loDetail.setPaymInfo(joPayment.toString());
 
             JSONArray laJson = new JSONArray();
@@ -197,7 +202,7 @@ public class Ganado {
             joFinancier.put("sMiddName", loInfo.getMiddName());
             joFinancier.put("sSuffixNm", loInfo.getSuffixNm());
             joFinancier.put("sAddressx", loInfo.getAddressx());
-            joFinancier.put("sCntryCde", loInfo.getAddressx());
+            joFinancier.put("sCntryCde", loInfo.getCountryCode());
             joFinancier.put("sMobileNo", loInfo.getMobileNo());
             joFinancier.put("sWhatsApp", loInfo.getsWhatsApp());
             joFinancier.put("sWChatApp", loInfo.getsWeChatApp());

@@ -89,7 +89,8 @@ public class VMSplashScreen extends AndroidViewModel {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
+                return 0;
             }
         });
     }
@@ -107,13 +108,14 @@ public class VMSplashScreen extends AndroidViewModel {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
                 boolean isSuccess = (boolean) object;
                 if(isSuccess){
                     Toast.makeText(instance, "Device connected", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(instance, "Offline mode", Toast.LENGTH_LONG).show();
                 }
+                return 0;
             }
         });
     }

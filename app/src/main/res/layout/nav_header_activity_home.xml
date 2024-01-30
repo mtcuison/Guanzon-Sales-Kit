@@ -25,26 +25,40 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/kay_wave"
-        app:layout_constraintDimensionRatio="13:4"
+        app:layout_constraintBottom_toTopOf="@+id/lnNavLabel"
+        app:layout_constraintDimensionRatio="12:4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".200"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logoBg"
-        app:layout_constraintBottom_toBottomOf="@+id/logoBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_percent=".5" />
 
-    <TextView
-        style="@style/HeaderLabelBlack"
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/lnNavLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            style="@style/HeaderLabel"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_marginBottom="-5dp"
+            android:textAlignment="center"/>
+        <TextView
+            style="@style/HeaderLabel"
+            android:id="@+id/lsUserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User ID"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

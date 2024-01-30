@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
 
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GConnect.Account.ClientMaster;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
@@ -56,6 +59,7 @@ public class Activity_Home extends AppCompatActivity {
     private DrawerLayout drawer;
     private BadgeDrawable loBadge;
     private Toolbar toolbar;
+    private TextView lblUserIDxx;
 
 //    @Override (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
 
@@ -88,7 +92,20 @@ public class Activity_Home extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View nav_header_view = navigationView.getHeaderView(0);
+        lblUserIDxx = nav_header_view.findViewById(R.id.lsUserID);
         initReceiver();
+        mviewModel.GetPoEmpInfo().observe(Activity_Home.this, new Observer<EClientInfo>() {
+            @Override
+            public void onChanged(EClientInfo client) {
+                if(client != null){
+
+                    Log.e(TAG, client.getUserIDxx());
+                    lblUserIDxx.setText("User ID : " + client.getUserIDxx());
+                }
+            }
+        });
 
             mviewModel.GetUnreadMessagesCount().observe(Activity_Home.this, count -> {
                 try{

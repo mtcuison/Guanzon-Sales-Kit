@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.GConnect.Account.ClientMaster;
 import org.rmj.g3appdriver.GConnect.Account.ClientSession;
 import org.rmj.g3appdriver.GConnect.room.Entities.EEvents;
 import org.rmj.g3appdriver.GConnect.room.Entities.EPromo;
@@ -33,6 +35,7 @@ public class VMHome extends AndroidViewModel {
     private final ClientMasterSalesKit poClientSK;
     private final SalesKit poSaleskit;
     private final ClientSession poSession;
+    private final ClientMaster poClient;
     private final DataSyncService poNetRecvr;
 
     private final Notification poNotif;
@@ -45,9 +48,13 @@ public class VMHome extends AndroidViewModel {
         this.poClientSK = new ClientMasterSalesKit(application);
         this.poSaleskit = new SalesKit(application);
         this.poSession = ClientSession.getInstance(application);
+        this.poClient = new ClientMaster(application);
         this.poNotif = new Notification(application);
         this.poConfig = AppConfigPreference.getInstance(application);
         this.poConfig.setIsAppFirstLaunch(false);
+    }
+    public LiveData<EClientInfo> GetPoEmpInfo(){
+        return poClient.GetClientInfo();
     }
 
     public LiveData<Integer> GetUnreadMessagesCount(){
@@ -87,7 +94,7 @@ public class VMHome extends AndroidViewModel {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
                 if(lsPromo != null) {
                     listener.OnCheckPromos(lsPromo, lsPmUrl);
                 }
@@ -98,6 +105,7 @@ public class VMHome extends AndroidViewModel {
                     listener.NoPromos();
                 }
 
+                return 0;
             }
         });
     }

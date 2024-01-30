@@ -132,6 +132,12 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="HeaderLabel">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
     <!-- MASTER VIEW SCAN GROUP -->
 
     <!-- TEXT INPUT -->
