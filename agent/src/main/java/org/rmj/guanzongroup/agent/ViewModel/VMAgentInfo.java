@@ -49,6 +49,10 @@ public class VMAgentInfo extends AndroidViewModel {
     public LiveData<List<EGanadoOnline>> GetInquiries(String UserID){
         return poGanado.GetByAgentInquiries(UserID);
     }
+
+    public EGanadoOnline GetInquiry(String TransNox){
+        return poGanado.GetInquiry(TransNox);
+    }
     public String GetUserID(){
         return lsUserID;
     }

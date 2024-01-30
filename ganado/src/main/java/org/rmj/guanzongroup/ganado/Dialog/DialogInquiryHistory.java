@@ -40,9 +40,9 @@ import org.rmj.guanzongroup.ganado.R;
 
 import java.util.Objects;
 
-public class DialogIquiryHistory {
+public class DialogInquiryHistory {
 
-    private static final String TAG = DialogIquiryHistory.class.getSimpleName();
+    private static final String TAG = DialogInquiryHistory.class.getSimpleName();
     private AlertDialog poDialogx;
     private MaterialButton btnPositive;
     private MaterialButton btnClose;
@@ -57,7 +57,7 @@ public class DialogIquiryHistory {
     private final Context context;
     private String message = "";
     private String nMAort = "";
-    public DialogIquiryHistory(Context context){
+    public DialogInquiryHistory(Context context){
         // Must be, at all times, pass Activity Context.
         this.context = Objects.requireNonNull(context);
     }

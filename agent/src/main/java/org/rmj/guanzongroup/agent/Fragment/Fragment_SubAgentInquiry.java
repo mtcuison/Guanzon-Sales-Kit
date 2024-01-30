@@ -1,5 +1,6 @@
 package org.rmj.guanzongroup.agent.Fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
+import org.rmj.guanzongroup.ganado.Dialog.DialogInquiryHistory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,6 +94,16 @@ public class Fragment_SubAgentInquiry extends Fragment {
                 InquiryListAdapter adapter= new InquiryListAdapter(requireActivity().getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
+
+                        DialogInquiryHistory dHistory = new DialogInquiryHistory(requireActivity());
+                        dHistory.initDialog(getActivity().getApplication(), mViewModel.GetInquiry(TransNox));
+                        dHistory.setPositiveButton("Close", new DialogInquiryHistory.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dHistory.show();
 //                        Intent intent = new Intent(Activity_Inquiries.this, Activity_ProductSelection.class);
 //                        intent.putExtra("TransNox",TransNox);
 //                        startActivity(intent);
