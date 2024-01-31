@@ -15,7 +15,6 @@ import org.rmj.g3appdriver.GCircle.room.Entities.ERelation;
 import org.rmj.g3appdriver.lib.Etc.Town;
 import org.rmj.g3appdriver.lib.Ganado.Obj.Ganado;
 import org.rmj.g3appdriver.lib.Ganado.pojo.ClientInfo;
-import org.rmj.g3appdriver.lib.Location.LocationRetriever;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
 
@@ -35,7 +34,6 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
     private final Town poTown;
     private String lsLat = "", lsLong = "";
 
-    private LocationRetriever loLocation;
     public interface OnSaveInquiry {
         void OnSave();
 
