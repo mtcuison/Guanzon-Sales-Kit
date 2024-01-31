@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -132,27 +133,61 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
         txtDTarget.setOnClickListener(v -> {
             final Calendar newCalendar = Calendar.getInstance();
             @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
+
+            // Set the maximum date to one month from the current date
+            newCalendar.add(Calendar.MONTH, 1);
+            long maxDateInMillis = newCalendar.getTimeInMillis();
+
             final DatePickerDialog StartTime = new DatePickerDialog(Activity_ProductInquiry.this,
                     android.R.style.Theme_Holo_Dialog, (view131, year, monthOfYear, dayOfMonth) -> {
                 try {
                     Calendar newDate = Calendar.getInstance();
                     newDate.set(year, monthOfYear, dayOfMonth);
-                    String lsDate = dateFormatter.format(newDate.getTime());
-                    txtDTarget.setText(lsDate);
-                    Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
-                    lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
-                    mViewModel.getModel().setTargetxx(lsDate);
+
+                    // Check if the selected date is within one month from the current date
+                    if (newDate.getTimeInMillis() <= maxDateInMillis) {
+                        String lsDate = dateFormatter.format(newDate.getTime());
+                        txtDTarget.setText(lsDate);
+                        Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
+                        lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
+                        mViewModel.getModel().setTargetxx(lsDate);
+                    } else {
+                        // Show an error message or handle the case when the selected date is outside the allowed range
+                        Toast.makeText(Activity_ProductInquiry.this, "Please select a date within one month from the current date", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
             StartTime.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            StartTime.getDatePicker().setMaxDate(maxDateInMillis); // Set the maximum date
+
             StartTime.show();
         });
+//        txtDTarget.setOnClickListener(v -> {
+//            final Calendar newCalendar = Calendar.getInstance();
+//            @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
+//            final DatePickerDialog StartTime = new DatePickerDialog(Activity_ProductInquiry.this,
+//                    android.R.style.Theme_Holo_Dialog, (view131, year, monthOfYear, dayOfMonth) -> {
+//                try {
+//                    Calendar newDate = Calendar.getInstance();
+//                    newDate.set(year, monthOfYear, dayOfMonth);
+//                    String lsDate = dateFormatter.format(newDate.getTime());
+//                    txtDTarget.setText(lsDate);
+//                    Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
+//                    lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
+//                    mViewModel.getModel().setTargetxx(lsDate);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//            StartTime.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+//            StartTime.show();
+//        });
 
         spnPayment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
