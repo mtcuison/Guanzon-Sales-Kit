@@ -46,7 +46,7 @@ public class DialogInquiryHistory {
     private AlertDialog poDialogx;
     private MaterialButton btnPositive;
     private MaterialButton btnClose;
-    private MaterialTextView lblDate, lblStatus, lblclientName,
+    private MaterialTextView lblDate,lblTargetDate, lblStatus, lblclientName,
             lblclientMbilNo, lblfinancierName, lblfinancierCountry,
             lblModelNme, lblInquiryType, lblCashAmount , lblTerm,
             lblDownPayment, lblMonthAmrt;
@@ -80,16 +80,16 @@ public class DialogInquiryHistory {
             JSONObject joProduct = new JSONObject(foDetail.getProdInfo());
             String financier_name = joFinancier.getString("sLastName") + ", " + joFinancier.getString("sFrstName") + " " + joFinancier.getString("sMiddName");
             lblStatus.setText(GConstants.INQUIRY_STATUS[Integer.parseInt(foDetail.getTranStat())]);
+//            lblStatus.setText("Pending Inc. Release");
             lblclientName.setText(foDetail.getClientNm());
             lblclientMbilNo.setText(joClient.getString("sMobileNo"));
             lblfinancierName.setText(financier_name);
 
+            lblDate.setText(FormatUIText.formatGOCasBirthdate(foDetail.getTransact()));
+            lblTargetDate.setText(FormatUIText.formatGOCasBirthdate(foDetail.getTargetxx()));
+
             ECountryInfo eCountry = poCountry.getCountryInfo(joFinancier.getString("sCntryCde"));
-//            lblclientMbilNo.setText(joClient.getString("sCntryCde"));
             lblfinancierCountry.setText(eCountry.getCntryNme());
-            Log.e("sBrandIDx", joProduct.getString("sBrandIDx"));
-            Log.e("sModelIDx", joProduct.getString("sModelIDx"));
-            Log.e("sColorIDx", joProduct.getString("sColorIDx"));
             DGanadoOnline.McInfo mcInfo = poInq.GetMCInfo(joProduct.getString("sModelIDx"),joProduct.getString("sBrandIDx"), joProduct.getString("sColorIDx"));
             lblModelNme.setText(mcInfo.ModelNme);
             lblInquiryType.setText(GConstants.PAYMENT_FORM[Integer.parseInt(foDetail.getPaymForm())]);
@@ -125,7 +125,7 @@ public class DialogInquiryHistory {
 
     private void initView(View v){
 
-
+        lblTargetDate = v.findViewById(R.id.lblTargetDate);
         lblDate = v.findViewById(R.id.lblDate);
         lblStatus = v.findViewById(R.id.lblStatus);
         lblclientName = v.findViewById(R.id.lbl_clientName);
