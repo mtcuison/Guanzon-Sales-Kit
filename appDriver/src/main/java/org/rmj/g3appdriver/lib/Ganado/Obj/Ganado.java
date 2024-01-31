@@ -4,9 +4,15 @@ import static org.rmj.g3appdriver.dev.Api.ApiResult.SERVER_NO_RESPONSE;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
+import android.Manifest;
 import android.app.Application;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 
 import org.json.JSONArray;
@@ -43,7 +49,11 @@ public class Ganado {
     private final Relation poRelate;
     private final Country poCountry;
 
+
     private String message;
+
+
+    private String nLatitude, nLongitude;
 
     public Ganado(Application instance) {
         this.instance = instance;
@@ -239,8 +249,10 @@ public class Ganado {
             params.put("dCreatedx", loDetail.getCreatedx());
             params.put("dTargetxx", loDetail.getTargetxx());
             params.put("sRelatnID", loDetail.getRelatnID());
-            params.put("nLatitude", 1.00);
-            params.put("nLongitud", 2.00);
+//            params.put("nLatitude", 1.00);
+//            params.put("nLongitud", 2.00);
+            params.put("nLatitude", nLatitude);
+            params.put("nLongitud", nLongitude);
 
             params.put("sReferdBy", poSession.getUserID());
             params.put("sClntInfo", loDetail.getClntInfo());
@@ -425,5 +437,23 @@ public class Ganado {
         Log.d(TAG, lsUniqIDx);
         return lsUniqIDx;
     }
+    public void InitGeoLocation(){
+        int LOCATION_REFRESH_TIME = 2000; // 15 seconds to update
+        int LOCATION_REFRESH_DISTANCE = 500; // 500 meters to update
 
+        if (ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            LocationManager locManager = (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
+            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+                    LOCATION_REFRESH_DISTANCE, mLocationListener);
+        }
+    }
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            nLatitude = String.valueOf(location.getLatitude());
+            nLongitude = String.valueOf(location.getLongitude());
+        }
+    };
 }
