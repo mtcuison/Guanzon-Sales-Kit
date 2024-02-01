@@ -180,6 +180,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
             mViewModel.getModel().setAddressx(txtAddress.getText().toString());
             mViewModel.getModel().setEmailAdd(txtEmailAdd.getText().toString());
             mViewModel.getModel().setMobileNo(txtMobileNo.getText().toString());
+            mViewModel.getModel().setMaidenNm(txtMaidNm.getText().toString());
             mViewModel.SaveData(new VMPersonalInfo.OnSaveInquiry() {
                 @Override
                 public void OnSave() {
