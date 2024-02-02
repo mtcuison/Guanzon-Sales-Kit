@@ -214,6 +214,8 @@ public class Activity_ClientInfo extends AppCompatActivity {
                 @Override
                 public void OnFailed(String message) {
                     poDialogx.dismiss();
+
+                    mViewModel.InitGeoLocation(Activity_ClientInfo.this);
                     poMessage.initDialog();
                     poMessage.setTitle("Ganado");
                     poMessage.setMessage(message);
