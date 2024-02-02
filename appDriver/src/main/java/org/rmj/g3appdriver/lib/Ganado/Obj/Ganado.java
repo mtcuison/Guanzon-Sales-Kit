@@ -5,6 +5,7 @@ import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -55,6 +56,8 @@ public class Ganado {
 
 
     private String nLatitude, nLongitude;
+
+    private static final int REQUEST_LOCATION = 1;
     private LocationManager locManager;
     public Ganado(Application instance) {
         this.instance = instance;
@@ -255,6 +258,8 @@ public class Ganado {
 //            params.put("nLongitud", 2.00);
             params.put("nLatitude", nLatitude);
             params.put("nLongitud", nLongitude);
+            Log.e("nLatitude", String.valueOf(nLatitude));
+            Log.e("nLongitud", String.valueOf(nLongitude));
 
             params.put("sReferdBy", poSession.getUserID());
             params.put("sClntInfo", loDetail.getClntInfo());
@@ -272,13 +277,13 @@ public class Ganado {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
-            message = lsResponse;
+//            message = lsResponse;
             Log.e("lsResponse", lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){
                 JSONObject loError = loResponse.getJSONObject("error");
-                message += getErrorMessage(loError);
+                message = getErrorMessage(loError);
                 return false;
             }
 
@@ -290,7 +295,7 @@ public class Ganado {
             return true;
         } catch (Exception e){
             e.printStackTrace();
-//            message = getLocalMessage(e) + message;
+            message = getLocalMessage(e) + message;
             return false;
         }
     }
@@ -440,17 +445,40 @@ public class Ganado {
         Log.d(TAG, lsUniqIDx);
         return lsUniqIDx;
     }
-    public void InitGeoLocation(){
+    public void InitGeoLocation(Activity poActivty){
         int LOCATION_REFRESH_TIME = 2000; // 15 seconds to update
         int LOCATION_REFRESH_DISTANCE = 500; // 500 meters to update
 
         if (ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            locManager= (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
-            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
-                    LOCATION_REFRESH_DISTANCE, mLocationListener);
 
+            locManager= (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
+
+            Location location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            Location location1 = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            Location location2 = locManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
+            if (location != null) {
+                nLatitude = String.valueOf(location.getLatitude());
+                nLongitude = String.valueOf(location.getLongitude());
+            } else  if (location1 != null) {
+                nLatitude = String.valueOf(location1.getLatitude());
+                nLongitude = String.valueOf(location1.getLongitude());
+            } else  if (location2 != null) {
+                nLatitude = String.valueOf(location2.getLatitude());
+                nLongitude = String.valueOf(location2.getLongitude());
+            }else{
+                message = "Unable to Trace your location";
+//                listner.OnFailedRetrieve("Unable to Trace your location");
+            }
+//            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+//                    LOCATION_REFRESH_DISTANCE, mLocationListener);
+
+        }else {
+
+            ActivityCompat.requestPermissions(poActivty, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
     }
     // Stop location updates
@@ -464,6 +492,8 @@ public class Ganado {
         public void onLocationChanged(final Location location) {
             nLatitude = String.valueOf(location.getLatitude());
             nLongitude = String.valueOf(location.getLongitude());
+            Log.e("nLatitude",nLatitude);
+            Log.e("nLongitude",nLongitude);
         }
     };
 }

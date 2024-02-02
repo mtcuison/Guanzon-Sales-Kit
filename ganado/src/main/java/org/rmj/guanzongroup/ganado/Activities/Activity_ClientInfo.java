@@ -61,6 +61,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
         setContentView(R.layout.activity_client_info);
         initWidgets();
         mViewModel.InitializeApplication(getIntent());
+        mViewModel.InitGeoLocation(Activity_ClientInfo.this);
 
         mViewModel.getRelation().observe(Activity_ClientInfo.this, eRelations->{
             try {

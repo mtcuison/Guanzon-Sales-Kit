@@ -1,5 +1,6 @@
 package org.rmj.guanzongroup.ganado.ViewModel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.location.Location;
@@ -56,7 +57,10 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
         this.poApp = new Ganado(application);
         this.poModel = new ClientInfo();
         this.poTown = new Town(application);
-        this.poApp.InitGeoLocation();
+    }
+    public void InitGeoLocation(Activity activity){
+
+        this.poApp.InitGeoLocation(activity);
     }
 
     public ClientInfo getModel() {
