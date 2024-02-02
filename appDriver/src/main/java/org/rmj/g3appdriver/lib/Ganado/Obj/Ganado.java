@@ -6,6 +6,7 @@ import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -54,7 +55,7 @@ public class Ganado {
 
 
     private String nLatitude, nLongitude;
-
+    private LocationManager locManager;
     public Ganado(Application instance) {
         this.instance = instance;
         this.poDao = GGC_GCircleDB.getInstance(instance).ganadoDao();
@@ -63,6 +64,7 @@ public class Ganado {
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
         this.poCountry = new Country(instance);
+        locManager = (LocationManager) instance.getSystemService(Context.LOCATION_SERVICE);
     }
 
     public String getMessage() {
@@ -270,12 +272,13 @@ public class Ganado {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
+            message = lsResponse;
             Log.e("lsResponse", lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){
                 JSONObject loError = loResponse.getJSONObject("error");
-                message = getErrorMessage(loError);
+                message += getErrorMessage(loError);
                 return false;
             }
 
@@ -287,7 +290,7 @@ public class Ganado {
             return true;
         } catch (Exception e){
             e.printStackTrace();
-            message = getLocalMessage(e);
+//            message = getLocalMessage(e) + message;
             return false;
         }
     }
@@ -444,9 +447,16 @@ public class Ganado {
         if (ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            LocationManager locManager = (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
+            locManager= (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
             locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
                     LOCATION_REFRESH_DISTANCE, mLocationListener);
+
+        }
+    }
+    // Stop location updates
+    public void stopLocationUpdates() {
+        if (locManager != null) {
+            locManager.removeUpdates(mLocationListener);
         }
     }
     private final LocationListener mLocationListener = new LocationListener() {

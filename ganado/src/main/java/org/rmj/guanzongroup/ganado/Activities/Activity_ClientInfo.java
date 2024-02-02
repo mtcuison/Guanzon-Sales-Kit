@@ -197,6 +197,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
                     poMessage.setMessage(args);
                     poMessage.setPositiveButton("Okay", (view1, dialog) -> {
                         dialog.dismiss();
+                        mViewModel.initStopLocation();
                         Intent loIntent = new Intent(Activity_ClientInfo.this, Activity_BrandSelection.class);
                         loIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -251,12 +252,14 @@ public class Activity_ClientInfo extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        mViewModel.initStopLocation();
         overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
+            mViewModel.initStopLocation();
             finish();
         }
         return super.onOptionsItemSelected(item);

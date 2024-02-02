@@ -63,6 +63,10 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
         return poModel;
     }
 
+    public void initStopLocation(){
+        poApp.stopLocationUpdates();
+    }
+
     public LiveData<List<ERelation>> getRelation() {
         return poApp.GetRelations();
     }
