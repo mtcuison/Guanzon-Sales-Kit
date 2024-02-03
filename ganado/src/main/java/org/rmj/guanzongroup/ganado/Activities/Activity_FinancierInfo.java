@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -189,18 +190,36 @@ public class Activity_FinancierInfo extends AppCompatActivity {
         spinner_relation = findViewById(R.id.spinner_relation);
 
         btnContinue = findViewById(R.id.btnContinue);
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showConfirmationDialog();
+//                finish();
+            }
+        });
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
-    }
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        mViewModel.RemoveInquiry();
+//
+////        mViewModel.RemoveInquiry();
+//        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+//    }
+//    @MainThread
+//    @Override
+//    public void onBackPressed() {
+//
+//        showConfirmationDialog();
+//        super.onBackPressed();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
-            finish();
+            showConfirmationDialog();
+//            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -222,6 +241,20 @@ public class Activity_FinancierInfo extends AppCompatActivity {
                 });
             }
         }
+    }
+    private void showConfirmationDialog(){
+        poMessage.initDialog();
+        poMessage.setPositiveButton("Yes", (view, dialog) -> {
+            dialog.dismiss();
+            mViewModel.RemoveInquiry();
+            finish();
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+
+        });
+        poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+        poMessage.setTitle("Ganado");
+        poMessage.setMessage("Do you really want to close the finance information module? Every detail entered will be removed.");
+        poMessage.show();
     }
 
 }

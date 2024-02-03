@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -250,20 +251,39 @@ public class Activity_ClientInfo extends AppCompatActivity {
         txtMaidNm = findViewById(R.id.txt_maiden);
         tilMaidNm = findViewById(R.id.til_maiden);
         btnContinue = findViewById(R.id.btnContinue);
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showConfirmationDialog();
+//                finish();
+            }
+        });
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        mViewModel.initStopLocation();
-        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
-    }
+//    @Override
+//    public void finish() {
+//        super.finish();
+//
+//
+//        poMessage.initDialog();
+//        poMessage.setPositiveButton("Yes", (view, dialog) -> {
+//            dialog.dismiss();
+//            mViewModel.initStopLocation();
+//            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+//
+//            finish();
+//        });
+//        poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+//        poMessage.setTitle("Ganado");
+//        poMessage.setMessage("Do you really want to close the client information module? Every detail entered will be removed.");
+//        poMessage.show();
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
-            mViewModel.initStopLocation();
-            finish();
+            showConfirmationDialog();
+//            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -287,4 +307,18 @@ public class Activity_ClientInfo extends AppCompatActivity {
         }
     }
 
+    private void showConfirmationDialog(){
+        poMessage.initDialog();
+        poMessage.setPositiveButton("Yes", (view, dialog) -> {
+            dialog.dismiss();
+            mViewModel.initStopLocation();
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+
+            finish();
+        });
+        poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+        poMessage.setTitle("Ganado");
+        poMessage.setMessage("Do you really want to close the client information module? Every detail entered will be removed.");
+        poMessage.show();
+    }
 }

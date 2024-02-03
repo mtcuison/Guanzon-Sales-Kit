@@ -47,7 +47,7 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:enableOnBackInvokedCallback="true"
+        android:enableOnBackInvokedCallback="false"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/kay"
         android:label="@string/app_name"
@@ -65,6 +65,7 @@
             android:name=".Activities.Activity_Home"
             android:exported="true"
             android:label="@string/title_activity_home"
+            android:enableOnBackInvokedCallback="true"
             android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_Main"

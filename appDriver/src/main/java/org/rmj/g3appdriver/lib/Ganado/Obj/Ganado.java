@@ -84,6 +84,9 @@ public class Ganado {
     public EGanadoOnline GetInquiry(String TransNox){
         return poDao.GetInquiry(TransNox);
     }
+    public void RemoveInquiry(String TransNox){
+        poDao.RemoveInquiry(TransNox);
+    }
 
     public String CreateInquiry(InquiryInfo loInfo){
         try{

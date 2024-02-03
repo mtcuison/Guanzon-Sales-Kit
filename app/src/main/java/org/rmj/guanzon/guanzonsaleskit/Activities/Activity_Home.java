@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -45,6 +47,8 @@ import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 import org.rmj.guanzongroup.ghostrider.notifications.Activity.Activity_NotificationList;
 
+import kotlin.Suppress;
+
 public class Activity_Home extends AppCompatActivity {
 
     private static final String TAG = "Sales Kit Home Activity";
@@ -68,6 +72,7 @@ public class Activity_Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+        loMessage = new MessageBox(Activity_Home.this);
 
         /*VERIFY FIRST USER IF COMPLETED ITS ACCOUNT*/
         mviewModel = new ViewModelProvider(this).get(VMHome.class);
@@ -76,10 +81,12 @@ public class Activity_Home extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarActivityHome.toolbar);
 
         drawer = binding.drawerLayout;
         navigationView = binding.navView;
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -95,6 +102,7 @@ public class Activity_Home extends AppCompatActivity {
 
         View nav_header_view = navigationView.getHeaderView(0);
         lblUserIDxx = nav_header_view.findViewById(R.id.lsUserID);
+
         initReceiver();
         mviewModel.GetPoEmpInfo().observe(Activity_Home.this, new Observer<EClientInfo>() {
             @Override
@@ -156,7 +164,6 @@ public class Activity_Home extends AppCompatActivity {
 
         navigationView.getMenu().findItem(R.id.nav_log_out).setOnMenuItemClickListener(menuItem -> {
 
-            loMessage = new MessageBox(Activity_Home.this);
             loMessage.initDialog();
             loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
             loMessage.setPositiveButton("Yes", (view, dialog) -> {
@@ -171,6 +178,21 @@ public class Activity_Home extends AppCompatActivity {
             loMessage.setMessage("Are you sure you want to end session/logout?");
             loMessage.show();
             return false;
+        });
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                loMessage.initDialog();
+                loMessage.setPositiveButton("Yes", (view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                });
+                loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+                loMessage.setTitle("Guanzon Sales Kit");
+                loMessage.setMessage("Exit Guanzon Sales Kit app?");
+                loMessage.show();
+//                finish();
+            }
         });
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -246,21 +268,13 @@ public class Activity_Home extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @MainThread
+    @Suppress(names = "DEPRECATION")
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            loMessage.initDialog();
-            loMessage.setPositiveButton("Yes", (view, dialog) -> {
-                dialog.dismiss();
-                finish();
-            });
-            loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
-            loMessage.setTitle("Guanzon Circle");
-            loMessage.setMessage("Exit Guanzon Circle app?");
-            loMessage.show();
         }
     }
     private void initReceiver(){
