@@ -72,7 +72,7 @@ public class VMSplashScreen extends AndroidViewModel {
         this.poSession = ClientSession.getInstance(instance);
         this.poConfig.setPackageName(BuildConfig.APPLICATION_ID);
         this.poConfig.setProductID("GuanzonApp");
-        this.poConfig.setUpdateLocally(true);
+        this.poConfig.setUpdateLocally(false);
         this.poConfig.setTestCase(false);
         this.poConfig.setupAppVersionInfo(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME, "");
         ETokenInfo loToken = new ETokenInfo();
