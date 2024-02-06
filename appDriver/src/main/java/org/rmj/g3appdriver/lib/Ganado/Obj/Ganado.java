@@ -476,6 +476,7 @@ public class Ganado {
                 message = "Unable to Trace your location";
 //                listner.OnFailedRetrieve("Unable to Trace your location");
             }
+
 //            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
 //                    LOCATION_REFRESH_DISTANCE, mLocationListener);
 

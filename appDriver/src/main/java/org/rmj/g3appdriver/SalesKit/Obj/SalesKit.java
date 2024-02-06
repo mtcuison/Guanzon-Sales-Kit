@@ -221,23 +221,6 @@ public class SalesKit {
                         Log.d(TAG, "KPOP Agent record has been updated!");
                     }
 
-//                    Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
-//                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
-//                    if (!ldDate1.equals(ldDate2)) {
-//                        loDetail.setUserIDxx(loJson.getString("sUserIDxx"));
-//                        loDetail.setEnrollBy(loJson.getString("sEnrollBy"));
-//                        loDetail.setEnrolled(loJson.getString("dEnrolled"));
-//                        loDetail.setRoleIDxx(loJson.getString("nRoleIDxx"));
-//                        loDetail.setUpprNdID(loJson.getString("sUpprNdID"));
-//                        loDetail.setsRoleDesc(loJson.getString("sRoleDesc"));
-//                        loDetail.setsEmailAdd(loJson.getString("sEmailAdd"));
-//                        loDetail.setsMobileNo(loJson.getString("sMobileNo"));
-//                        loDetail.setsUserName(loJson.getString("sUserName"));
-//                        loDetail.setRecdStat(loJson.getString("cRecdStat"));
-//                        loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
-//                        poDao.Update(loDetail);
-//                        Log.d(TAG, "KPOP Agent record has been updated!");
-//                    }
                 }
             }
 
