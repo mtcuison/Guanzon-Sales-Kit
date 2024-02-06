@@ -46,8 +46,8 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         podialog = new LoadDialog(this);
         poMessage = new MessageBox(this);
 
-        poConfigx.setProductID("GuanzonApp");
-        poConfigx.setTestCase(true);
+//        poConfigx.setProductID("GuanzonApp");
+//        poConfigx.setTestCase(true);
 
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");

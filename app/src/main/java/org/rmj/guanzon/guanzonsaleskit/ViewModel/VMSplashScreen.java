@@ -74,11 +74,13 @@ public class VMSplashScreen extends AndroidViewModel {
         this.poConfig.setProductID("GuanzonApp");
         this.poConfig.setUpdateLocally(false);
         this.poConfig.setTestCase(false);
+//        this.poConfig.isTesting_Phase();
         this.poConfig.setupAppVersionInfo(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME, "");
         ETokenInfo loToken = new ETokenInfo();
         loToken.setTokenInf("temp_token");
         CheckConnection();
         Log.e("userid",poSession.getUserID());
+        Log.e("isTesting_Phase", String.valueOf(poConfig.getTestStatus()));
     }
 
     public void SaveFirebaseToken(String fsVal){

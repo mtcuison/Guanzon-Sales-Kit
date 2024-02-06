@@ -18,10 +18,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
-import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
-import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
-import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.lib.Account.AccountMaster;
 import org.rmj.g3appdriver.lib.Account.Model.Auth;
 import org.rmj.g3appdriver.lib.Account.Model.iAuth;
@@ -45,10 +41,11 @@ public class VMCreateAccount extends AndroidViewModel{
         this.poConn = new ConnectionUtil(instance);
     }
     public void SubmitInfo(AccountInfo accountInfo, CreateAccountCallBack callBack){
+
         TaskExecutor.Execute(accountInfo, new OnTaskExecuteListener() {
             @Override
             public void OnPreExecute() {
-                callBack.OnAccountLoad("Guanzon Circle", "Creating Account. Please wait...");
+                callBack.OnAccountLoad("Guanzon Sales Kit", "Creating Account. Please wait...");
             }
 
             @Override
