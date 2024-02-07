@@ -21,6 +21,13 @@
     <color name="colorPrimaryLight">#F88222</color>
     <color name="colorSecondaryLight">#F47422</color>
 
+    <color name="colorNavTop">#DF6939</color>
+    <color name="colorNavBottom">#C68F72</color>.
+
+    <color name="colorNavTopDark">#DF6939</color>
+    <color name="colorNavBottomDark">#7E3915</color>
+
+
     <color name="colorPrimaryVariantLight">#F47422</color>
     <color name="colorSecondaryVariantLight">#F47422</color>
 
@@ -29,6 +36,10 @@
 
     <color name="colorPrimaryDark">#F47422</color>
     <color name="colorPrimaryVariantDark">#F47422</color>
+
+    <color name="guanzon_digital_light_orange">#FF7F32</color>
+    <color name="guanzon_digital_grey">#616161</color>
+    <color name="guanzon_digital_light_grey">#f0f0f5</color>
 
     <color name="guanzon_orange">#F88222</color>
     <color name="textColor_Black">#000</color>

@@ -23,6 +23,7 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
         <item name="android:statusBarColor">@color/statusBarColorDark</item>
+        
 <!--        <item name="android:colorBackground">@color/background_dark</item>-->
         <item name="android:textColor">@color/material_white</item>
         <item name="android:windowBackground">@drawable/app_background_dark</item>
@@ -182,5 +183,11 @@
         <item name="android:paddingRight">12dp</item>
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
+    </style>
+    <style name="Drawer_Design">
+        <item name="android:background">@drawable/bg_header_dark</item>
+    </style>
+    <style name="Orange_Bg_Light">
+        <item name="android:background">@drawable/rounded_bottom_cardview_dark</item>
     </style>
 </resources>

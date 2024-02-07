@@ -22,11 +22,13 @@ import java.util.List;
 
 @Dao
 public interface DMobileRequest {
+    @Query("SELECT COUNT(*) FROM Mobile_Update_Request")
+    int GetRowsCountForID();
 
     @Insert
     void insert(EMobileUpdate mobileUpdate);
 
-    @Query("UPDATE Address_Update_Request " +
+    @Query("UPDATE Mobile_Update_Request " +
             "SET sTransNox =:TransNox " +
             ",cSendStat = '1', " +
             "dSendDate =:DateEntry, " +

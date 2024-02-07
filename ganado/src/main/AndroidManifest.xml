@@ -3,40 +3,44 @@
 
     <application>
         <activity
+            android:name=".Activities.Activity_FinancierInfo"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true" />
+        <activity
             android:name=".Activities.Activity_Inquiries"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_ProductInquiry"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_ContactInfo"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_ClientInfo"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_CategorySelection"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_BrandSelection"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_ProductSelection"
+            android:exported="true"
             android:screenOrientation="userPortrait"
-            android:theme="@style/GhostRiderMaterialTheme"
-            android:exported="false" />
+            android:theme="@style/GhostRiderMaterialTheme" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.rmj.apprdiver.util.SQLUtil;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
 import org.rmj.g3appdriver.lib.Account.pojo.UserAuthInfo;
 import org.rmj.g3appdriver.GCircle.Api.GCircleApi;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
@@ -40,7 +41,7 @@ public class EmployeeAuthentication implements iAuth {
     private final AppConfigPreference poConfig;
     private final Telephony poDevID;
     private final AppVersion poVersion;
-
+    private final ClientMasterSalesKit poClientSK;
     private String message;
 
     public EmployeeAuthentication(Application instance) {
@@ -52,6 +53,7 @@ public class EmployeeAuthentication implements iAuth {
         this.poVersion = new AppVersion(instance);
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poDevID = new Telephony(instance);
+        this.poClientSK = new ClientMasterSalesKit(instance);
     }
 
     @Override
@@ -109,6 +111,10 @@ public class EmployeeAuthentication implements iAuth {
             employeeInfo.setMobileNo(poConfig.getMobileNo());
             employeeInfo.setLoginxxx(AppConstants.DATE_MODIFIED());
             employeeInfo.setSessionx(AppConstants.CURRENT_DATE());
+
+            //Remove Client Profile on local
+            poClientSK.RemoveProfileSession();
+
             poDao.RemoveSessions();
             poDao.SaveNewEmployeeSession(employeeInfo);
 
@@ -122,6 +128,7 @@ public class EmployeeAuthentication implements iAuth {
             String lsEmpIDxx = loResponse.getString("sEmployID");
             String lsPostIDx = loResponse.getString("sPositnID");
             String lsEmpLvlx = loResponse.getString("sEmpLevID");
+
             poSession.initUserSession(lsUserIDx, lsUserNme, lsClientx, lsLogNoxx, lsBranchx, lsBranchN, lsDeptIDx, lsEmpIDxx, lsPostIDx, lsEmpLvlx, "1");
             message = "Login success";
 

@@ -28,8 +28,6 @@ public class Activity_BrandSelection extends AppCompatActivity {
     private RecyclerView rvc_brandlist;
     private ShapeableImageView brandcatimg;
     private RecyclerViewAdapter_BrandSelection rec_brandList;
-    private LoadDialog poLoad;
-    private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,8 @@ public class Activity_BrandSelection extends AppCompatActivity {
         rvc_brandlist = findViewById(R.id.rv_brands);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_brand);
-        toolbar.setTitle("Brand Selection");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" ");
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 

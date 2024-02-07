@@ -25,7 +25,7 @@
     <string name="sLblSamsungKnox_Pin_Offline">Get Offline PIN</string>
     <string name="sLblSamsungKnox_Status">Show Status</string>
     <string name="sLblAddApplication">Add Application</string>
-    <string name="lblBuildVersion">GhostRider Build v.1.0.1 - 01122021</string>
+    <string name="lblBuildVersion">Guanzon Sales Kit Build v.1.0.02 - 12272023</string>
     <string name="create_account">Create Account</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="agree">I agree</string>
@@ -56,5 +56,10 @@
     <string name="location_off_summary">Location Permission Disabled</string>
     <string name="peso_sign">₱</string>
 
+    <string name="drwaer_open">Opem</string>
+    <string name="drwaer_close">Close</string>
+
     <string name="summary_settings_dMode">Use by developers and implementors for testing phase. Only MIS-SEG are able to use this mode.</string>
+    <string name="first_launch_message">Welcome to Guanzon Circle! Please note that during the first launch, the app may take slightly longer to load as it initializes and prepares necessary data. We appreciate your patience and assure you subsequent launches will be faster.\n Thank you for understanding!</string>
+
 </resources>

@@ -16,12 +16,12 @@ import android.util.Log;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 
-public abstract class WebApi {
+public  class WebApi {
     private static final String TAG = WebApi.class.getSimpleName();
 
     private final AppConfigPreference poConfig;
 
-    protected static final String LOCAL = "http://192.168.10.64/";
+    protected static final String LOCAL = "http://192.168.10.68:8080/";
 
     private static final String PRIMARY_LIVE = "https://restgk.guanzongroup.com.ph/";
     private static final String SECONDARY_LIVE = "https://restgk1.guanzongroup.com.ph/";

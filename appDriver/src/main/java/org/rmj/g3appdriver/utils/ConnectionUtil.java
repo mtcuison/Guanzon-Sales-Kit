@@ -20,6 +20,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
+import android.util.Log;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
 
@@ -41,12 +42,15 @@ public class ConnectionUtil {
     private final Context context;
     private String message;
 
-    private static final String LOCAL = "http://192.168.10.64";
+    private static final String LOCAL = "http://192.168.10.68:8080";
     private static final String PRIMARY_LIVE = "https://restgk.guanzongroup.com.ph";
 //    private static final String SECONDARY_LIVE = "restgk1.guanzongroup.com.ph";
+    private final AppConfigPreference poConfig;
 
     public ConnectionUtil(Context context){
+
         this.context = context;
+        this.poConfig = AppConfigPreference.getInstance(context);
     }
 
     public String getMessage() {
@@ -61,8 +65,8 @@ public class ConnectionUtil {
             }
 
             String lsAddress;
-            AppConfigPreference loConfig = AppConfigPreference.getInstance(context);
-            boolean isTestCase = loConfig.getTestStatus();
+            boolean isTestCase = poConfig.getTestStatus();
+            Log.e("isTestCase", String.valueOf(poConfig.getTestStatus()));
             if (isTestCase) {
                 lsAddress = LOCAL;
                 if (!isReachable(lsAddress)) {

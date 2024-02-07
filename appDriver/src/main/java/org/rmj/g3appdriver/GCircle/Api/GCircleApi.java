@@ -102,9 +102,17 @@ public class GCircleApi extends WebApi {
     private static final String GET_PACITA_RULES = "gcircle/pacita/import_pacita_rules.php";
     private static final String GET_PACITA_EVALUATIONS = "gcircle/pacita/import_pacita_evaluations.php";
     private static final String SUBMIT_PACITA_RESULT = "gcircle/pacita/submit_pacita_result.php";
-
     private static final String URL_SUBMIT_INQUIRY = "gcircle/ganado/submit_inquiry.php";
     private static final String URL_DOWNLOAD_INQUIRIES = "gcircle/ganado/import_inquiries.php";
+    private static final String URL_NEWCHANGE_PASSWORD = "security/changepassword.php";
+    private static final String URL_NEWCHANGE_ADDRESS = "security/request_address_update.php";
+    private static final String URL_NEWCHANGE_MOBILE = "security/request_mobile_update.php";
+    private static final String URL_COMPLETE_ACCOUNT = "integsys/marketplace/complete_account_detail.php";
+    private static final String URL_IMPORT_SKAGENTS = "saleskit/importagents.php";
+    private static final String URL_SUBMIT_UPLINE = "saleskit/submit_upline.php";
+    private static final String URL_SKAGENTS_PERFORMANCE = "saleskit/importagentinq.php";
+    private static final String URL_IMPORT_PROMOLINK = "saleskit/import_promo_link.php";
+    private static final String URL_IMPORT_EVENTS = "saleskit/import_events.php";
 
     public GCircleApi(Application instance) {
         super(instance);
@@ -872,6 +880,79 @@ public class GCircleApi extends WebApi {
         }
         Log.d(TAG, "Initialize api:" + LIVE + URL_DOWNLOAD_INQUIRIES);
         return LIVE + URL_DOWNLOAD_INQUIRIES;
+    }
+    public String getUrlNewChangePassword() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_PASSWORD);
+            return LOCAL + URL_NEWCHANGE_PASSWORD;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_PASSWORD);
+        return LIVE + URL_NEWCHANGE_PASSWORD;
+    }
+    public String getUrlNewChangeMobile() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_MOBILE);
+            return LOCAL + URL_NEWCHANGE_MOBILE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_MOBILE);
+        return LIVE + URL_NEWCHANGE_MOBILE;
+    }
+    public String getUrlNewChangeAddress() {
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_NEWCHANGE_ADDRESS);
+            return LOCAL + URL_NEWCHANGE_ADDRESS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_NEWCHANGE_ADDRESS);
+        return LIVE + URL_NEWCHANGE_ADDRESS;
+    }
+    public String getUrlCompleteAccount(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_COMPLETE_ACCOUNT);
+            return LOCAL + URL_COMPLETE_ACCOUNT;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_COMPLETE_ACCOUNT);
+        return LIVE + URL_COMPLETE_ACCOUNT;
+    }
+    public String getUrlImportSKAgents(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_SKAGENTS);
+            return LOCAL + URL_IMPORT_SKAGENTS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_SKAGENTS);
+        return LIVE + URL_IMPORT_SKAGENTS;
+    }
+    public String getUrlSubmitSKUpline(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_SUBMIT_UPLINE);
+            return LOCAL + URL_SUBMIT_UPLINE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_SUBMIT_UPLINE);
+        return LIVE + URL_SUBMIT_UPLINE;
+    }
+    public String getUrlImportSKPerformance(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_SKAGENTS_PERFORMANCE);
+            return LOCAL + URL_SKAGENTS_PERFORMANCE;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_SKAGENTS_PERFORMANCE);
+        return LIVE + URL_SKAGENTS_PERFORMANCE;
+    }
+
+    public String getUrlImportPromolink(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_PROMOLINK);
+            return LOCAL + URL_IMPORT_PROMOLINK;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_PROMOLINK);
+        return LIVE + URL_IMPORT_PROMOLINK;
+    }
+    public String getUrlImportEvents(){
+        if(isUnitTest()) {
+            Log.d(TAG, "Initialize api:" + LOCAL + URL_IMPORT_EVENTS);
+            return LOCAL + URL_IMPORT_EVENTS;
+        }
+        Log.d(TAG, "Initialize api:" + LIVE + URL_IMPORT_EVENTS);
+        return LIVE + URL_IMPORT_EVENTS;
     }
 
 }

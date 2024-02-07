@@ -31,6 +31,9 @@ public interface DEvents {
     @Query("SELECT EXISTS(SELECT * FROM App_Event_Info WHERE sTransNox =:TransNox AND cNotified = '1')")
     boolean getEventExist(String TransNox);
 
+    @Query("SELECT * FROM App_Event_Info WHERE sTransNox =:TransNox")
+    EEvents getEventInfoExist(String TransNox);
+
     @Query("UPDATE App_Event_Info SET cNotified = '1', dModified =:date WHERE sTransNox =:transNox ")
     void updateReadEvent(String date, String transNox);
 

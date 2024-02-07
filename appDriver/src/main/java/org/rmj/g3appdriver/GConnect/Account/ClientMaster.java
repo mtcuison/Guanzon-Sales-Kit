@@ -9,41 +9,64 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import org.json.JSONObject;
+import org.rmj.g3appdriver.GCircle.Account.ClientMasterSalesKit;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfo;
+import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DClientInfoSalesKit;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
+import org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB;
 import org.rmj.g3appdriver.GConnect.Api.GConnectApi;
 import org.rmj.g3appdriver.dev.Api.HttpHeaders;
 import org.rmj.g3appdriver.dev.Api.WebClient;
-import org.rmj.g3appdriver.GConnect.room.DataAccessObject.DClientInfo;
-import org.rmj.g3appdriver.GConnect.room.Entities.EClientInfo;
-import org.rmj.g3appdriver.GConnect.room.GGC_GConnectDB;
 import org.rmj.g3appdriver.etc.AppConstants;
 
 public class ClientMaster {
     private static final String TAG = ClientMaster.class.getSimpleName();
 
-    private final DClientInfo poDao;
+    private final DClientInfoSalesKit poDao;
+    private final DClientInfo clientDao;
     private final HttpHeaders poHeaders;
     private final GConnectApi poApi;
+    private final ClientSession poSession;
+    private final ClientMasterSalesKit poSalesKit;
+
 
     private String message;
 
     public ClientMaster(Application instance) {
-        this.poDao = GGC_GConnectDB.getInstance(instance).EClientDao();
+        this.poDao = GGC_GCircleDB.getInstance(instance).ciSKDAO();
+        this.clientDao = GGC_GCircleDB.getInstance(instance).ClientDao();
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poApi = new GConnectApi(instance);
+        this.poSession = ClientSession.getInstance(instance);
+        this.poSalesKit = new ClientMasterSalesKit(instance);
     }
 
     public String getMessage() {
         return message;
     }
 
-    public LiveData<EClientInfo> GetClientDetail(){
+    public LiveData<EClientInfoSalesKit> GetClientDetail(){
         return poDao.getClientInfo();
     }
-
-    public LiveData<DClientInfo.ClientDetail> GetClientDetailForPreview(){
-        return poDao.GetClientDetailForPreview();
+    public LiveData<EClientInfo> GetClientInfo(){
+        return clientDao.getClientInfo();
     }
 
+    public EClientInfo getClientInfo(){
+        return clientDao.GetClientInfo();
+    }
+
+//    public LiveData<DClientInfo.ClientDetail> GetClientDetailForPreview(){
+//        return poDao.GetClientDetailForPreview();
+//    }
+
+    public void LogoutUserSession(){
+        poDao.DeleteProfile();
+        poSalesKit.RemoveProfile();
+        clientDao.RemoveSessions();
+        poSession.LogoutUser();
+    }
     public boolean ImportAccountInfo(){
         try{
             String lsResponse = WebClient.sendRequest(
@@ -64,7 +87,7 @@ public class ClientMaster {
                 return false;
             }
 
-            EClientInfo loDetail = poDao.GetUserInfo();
+            EClientInfoSalesKit loDetail = poDao.GetUserInfo();
             loDetail.setClientID(loResponse.getString("sClientID"));
             loDetail.setLastName(loResponse.getString("sLastName"));
             loDetail.setFrstName(loResponse.getString("sFrstName"));
@@ -85,11 +108,11 @@ public class ClientMaster {
             loDetail.setTownIDx2(loResponse.getString("sTownIDx2"));
             loDetail.setMobileNo(loResponse.getString("sMobileNo"));
             loDetail.setEmailAdd(loResponse.getString("sEmailAdd"));
+            loDetail.setVerified(loResponse.getInt("cVerified"));
+            poDao.update(loDetail);
 //                    loDetail.setImgeStat(loResponse.getString("cImgeStat"));
 //                    loDetail.setImagePth(loResponse.getString("sImagePth"));
 //                    loDetail.setImgeDate(loResponse.getString("dImgeDate"));
-            loDetail.setVerified(loResponse.getInt("cVerified"));
-            poDao.update(loDetail);
 //                    AccountInfo loAcc = new AccountInfo(mContext);
 //                    loAcc.setClientID(loResponse.getString("sClientID"));
 //                    loAcc.setLastname(loResponse.getString("sLastName"));
@@ -128,7 +151,7 @@ public class ClientMaster {
         }
     }
 
-    public boolean CompleteClientInfo(EClientInfo foClient){
+    public boolean CompleteClientInfo(EClientInfoSalesKit foClient){
         try {
             JSONObject param = new JSONObject();
             param.put("sUserIDxx", foClient.getUserIDxx());

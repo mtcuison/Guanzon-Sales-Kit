@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.rmj.guanzon.guanzonsaleskit.Fragment.FragmentHome"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+
+    <activity
+        android:id="@+id/nav_agent_enroll"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentEnroll"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_enroll" />
+
+    <activity
+        android:id="@+id/nav_setupline"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_SelectUpLine"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_enroll" />
+
+    <activity
+        android:id="@+id/nav_agent_list"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_AgentList"
+        android:label="Agent List"
+        tools:layout="@layout/activity_agent_list" />
+    <activity
+        android:id="@+id/nav_profile"
+        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings"
+        android:label="Agent List"
+        tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/nav_userperform"
+        android:name="org.rmj.guanzongroup.agent.Activities.Activity_UserPerformance"
+        android:label="User Performance"
+        tools:layout="@layout/activity_user_performance" />
+
+    <activity
+        android:id="@+id/nav_inquiry"
+        android:name="org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries"
+        android:label="Agent List"
+        tools:layout="@layout/activity_settings" />
+
+<!--    <activity-->
+<!--        android:id="@+id/nav_log_out"-->
+<!--        android:name="org.rmj.guanzongroup.authlibrary.Activity.Activity_Login"-->
+<!--        android:label="Sign Out"-->
+<!--        tools:layout="@layout/activity_login" />-->
+
+</navigation>

@@ -35,7 +35,8 @@ public class UserAuthInfo {
         if(!isPasswordValid()){
             return false;
         }
-        return isMobileNoValid();
+        return true;
+        //return isMobileNoValid();
     }
 
     private boolean isEmailValid(){

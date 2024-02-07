@@ -1,12 +1,12 @@
 package org.rmj.guanzongroup.ganado.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
@@ -70,7 +70,6 @@ public class Activity_CategorySelection extends AppCompatActivity {
     }
     private void initWidgets(){
         MaterialToolbar toolbar = findViewById(R.id.toolbar_category);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -87,6 +86,7 @@ public class Activity_CategorySelection extends AppCompatActivity {
 
     @Override
     public void onBackPressed () {
+        super.onBackPressed();
         overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
         finish();
     }

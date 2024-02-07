@@ -54,6 +54,7 @@ public class EmployeeMaster {
     private final HttpHeaders headers;
     private final AppConfigPreference poConfig;
     private final Telephony poDevID;
+    private final ClientMasterSalesKit poProfile;
     
     private String message;
 
@@ -67,6 +68,7 @@ public class EmployeeMaster {
         this.webApi = new GCircleApi(application);
         this.headers = HttpHeaders.getInstance(instance);
         this.poDevID = new Telephony(instance);
+        this.poProfile = new ClientMasterSalesKit(instance);
     }
     
     public String getMessage(){
@@ -118,6 +120,7 @@ public class EmployeeMaster {
     public void LogoutUserSession(){
         poDao.LogoutUser();
         poDao.ClearAuthorizeFeatures();
+        poProfile.RemoveProfile();
         poSession.initUserLogout();
     }
     
@@ -126,6 +129,11 @@ public class EmployeeMaster {
             JSONObject params = new JSONObject();
             params.put("user", foVal.getEmail());
             params.put("pswd", foVal.getPassword());
+
+            //added set of mobile no before authenticating, for header initialization
+            if (poConfig.getMobileNo().equals("")){
+                poConfig.setMobileNo(foVal.getMobileNo());
+            }
 
             String lsResponse = WebClient.sendRequest(
                     webApi.getUrlAuthEmployee(),
@@ -157,6 +165,7 @@ public class EmployeeMaster {
                     employeeInfo.setDeviceID(poDevID.getDeviceID());
                     employeeInfo.setModelIDx(Build.MODEL);
                     employeeInfo.setMobileNo(poConfig.getMobileNo());
+                    employeeInfo.setMobileNo(poConfig.getMobileNo());
                     employeeInfo.setLoginxxx(AppConstants.DATE_MODIFIED());
                     employeeInfo.setSessionx(AppConstants.CURRENT_DATE());
                     poDao.SaveNewEmployeeSession(employeeInfo);
@@ -171,6 +180,7 @@ public class EmployeeMaster {
                     String lsEmpIDxx = loResponse.getString("sEmployID");
                     String lsPostIDx = loResponse.getString("sPositnID");
                     String lsEmpLvlx = loResponse.getString("sEmpLevID");
+
                     poSession.initUserSession(lsUserIDx, lsUserNme, lsClientx, lsLogNoxx, lsBranchx, lsBranchN, lsDeptIDx, lsEmpIDxx, lsPostIDx, lsEmpLvlx, "1");
                     message = "Login success";
                     return true;

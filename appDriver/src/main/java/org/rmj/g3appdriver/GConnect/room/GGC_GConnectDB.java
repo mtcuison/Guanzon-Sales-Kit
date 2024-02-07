@@ -139,7 +139,7 @@ public abstract class GGC_GConnectDB extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            Log.e(TAG, "Local database has been created.");
+            Log.e(TAG, "Local gconnect database has been created.");
         }
     };
 }

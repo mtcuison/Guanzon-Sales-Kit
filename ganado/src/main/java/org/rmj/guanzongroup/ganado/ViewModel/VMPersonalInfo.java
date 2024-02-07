@@ -1,11 +1,14 @@
 package org.rmj.guanzongroup.ganado.ViewModel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import org.rmj.g3appdriver.GCircle.room.DataAccessObject.DTownInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EGanadoOnline;
@@ -20,7 +23,9 @@ import java.util.List;
 
 public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
     private static final String TAG = VMPersonalInfo.class.getSimpleName();
+    private MutableLiveData<Location> currentLocation = new MutableLiveData<>();
 
+    private final Application instance;
     private final Ganado poApp;
     private final ClientInfo poModel;
 
@@ -28,6 +33,7 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
 
     private String message;
     private final Town poTown;
+    private String lsLat = "", lsLong = "";
 
     public interface OnSaveInquiry {
         void OnSave();
@@ -37,16 +43,32 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
 
         void OnFailed(String message);
     }
+    public interface OnGetLocation {
+        void onInit();
+        void OnSuccess(String args);
+
+
+        void OnFailed(String message);
+    }
 
     public VMPersonalInfo(@NonNull Application application) {
         super(application);
+        this.instance = application;
         this.poApp = new Ganado(application);
         this.poModel = new ClientInfo();
         this.poTown = new Town(application);
     }
+    public void InitGeoLocation(Activity activity){
+
+        this.poApp.InitGeoLocation(activity);
+    }
 
     public ClientInfo getModel() {
         return poModel;
+    }
+
+    public void initStopLocation(){
+        poApp.stopLocationUpdates();
     }
 
     public LiveData<List<ERelation>> getRelation() {
@@ -102,12 +124,12 @@ public class VMPersonalInfo extends AndroidViewModel implements GanadoUI {
                     message = poApp.getMessage();
                     return null;
                 }
+
                 String lsResult1 = (poApp.SaveInquiry(lsInfo.getsTransNox())) ? "" : null;
-;                if (lsResult1 == null) {
+                if (lsResult1 == null) {
                     message = poApp.getMessage();
                     return null;
                 }
-
                 return "Motorcycle inquiry saved successfully!";
             }
 

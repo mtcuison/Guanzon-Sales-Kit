@@ -4,80 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Activity_Inquiries">
+    tools:context=".Activities.Activity_Inquiries"
+    android:theme="@style/GhostRiderMaterialTheme">
 
-    <LinearLayout
-        android:id="@+id/linear_toolbar"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="0dp"
+        android:layout_marginTop="-20dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp"
+        app:circularflow_radiusInDP=""
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent=".3">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_Inquiries"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/GhostRiderMaterialTheme.PopupOverlay" />
+            android:layout_height="match_parent"
+            style="@style/Orange_Bg_Light"
+            android:layout_marginTop="15dp">
 
-    </LinearLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/logo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/kay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent=".7"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintWidth_percent=".5" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/shapeableImageView"
+<!--            <com.google.android.material.appbar.AppBarLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintStart_toStartOf="parent">-->
+
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/toolbar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:background="@android:color/transparent" />-->
+
+<!--            </com.google.android.material.appbar.AppBarLayout>-->
+
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/HeaderLabelBlack"
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Inquiries"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/logo"
+                app:layout_constraintTop_toTopOf="@+id/logo"
+                app:layout_constraintBottom_toBottomOf="@+id/logo"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/DescriptionHeaderStyle"
+                android:id="@+id/desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="List of Transaction History"
+                android:paddingStart="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintEnd_toEndOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInquiries"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lbl_Title"
-        style="@style/PrimaryHeaderStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="INQUIRIES"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView"
+        android:padding="5dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/mcv_header"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvInquiries"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="40dp"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_Title" />
+    <TextView
+        android:id="@+id/lbl_InquiryNoData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:gravity="center"
+        android:padding="80dp"
+        android:text="No data found."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mcv_header" />
 
-<!--    <com.google.android.material.card.MaterialCardView-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginHorizontal="10dp"-->
-<!--        android:layout_marginVertical="40dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        app:cardCornerRadius="10dp"-->
-<!--        app:cardPreventCornerOverlap="true"-->
-<!--        app:cardUseCompatPadding="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/lbl_Title" >-->
-
-
-<!--    </com.google.android.material.card.MaterialCardView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

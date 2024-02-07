@@ -273,22 +273,35 @@ public class RMcModel {
                     poDao.insert(loModel);
                     Log.d(TAG, "Mc model price info has been saved.");
                 } else {
-                    Date ldDate1 = SQLUtil.toDate(loDetail.getPricexxx(), SQLUtil.FORMAT_SHORT_DATE);
-                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dPricexxx"), SQLUtil.FORMAT_SHORT_DATE);
-                    if (!ldDate1.equals(ldDate2)) {
-                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
-                        loDetail.setMCCatNme(loJson.getString("sMCCatNme"));
-                        loDetail.setModelNme(loJson.getString("sModelNme"));
-                        loDetail.setBrandNme(loJson.getString("sBrandNme"));
-                        loDetail.setSelPrice(loJson.getDouble("nSelPrice"));
-                        loDetail.setLastPrce(loJson.getDouble("nLastPrce"));
-                        loDetail.setDealrPrc(loJson.getDouble("nDealrPrc"));
-                        loDetail.setPricexxx(loJson.getString("dPricexxx"));
-                        loDetail.setBrandIDx(loJson.getString("sBrandIDx"));
-                        loDetail.setMCCatIDx(loJson.getString("sMCCatIDx"));
-                        poDao.update(loDetail);
-                        Log.d(TAG, "Mc model price info has been updated.");
-                    }
+
+                    loDetail.setModelIDx(loJson.getString("sModelIDx"));
+                    loDetail.setMCCatNme(loJson.getString("sMCCatNme"));
+                    loDetail.setModelNme(loJson.getString("sModelNme"));
+                    loDetail.setBrandNme(loJson.getString("sBrandNme"));
+                    loDetail.setSelPrice(loJson.getDouble("nSelPrice"));
+                    loDetail.setLastPrce(loJson.getDouble("nLastPrce"));
+                    loDetail.setDealrPrc(loJson.getDouble("nDealrPrc"));
+                    loDetail.setPricexxx(loJson.getString("dPricexxx"));
+                    loDetail.setBrandIDx(loJson.getString("sBrandIDx"));
+                    loDetail.setMCCatIDx(loJson.getString("sMCCatIDx"));
+                    poDao.update(loDetail);
+                    Log.d(TAG, "Mc model price info has been updated.");
+//                    Date ldDate1 = SQLUtil.toDate(loDetail.getPricexxx(), SQLUtil.FORMAT_SHORT_DATE);
+//                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dPricexxx"), SQLUtil.FORMAT_SHORT_DATE);
+//                    if (!ldDate1.equals(ldDate2)) {
+//                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
+//                        loDetail.setMCCatNme(loJson.getString("sMCCatNme"));
+//                        loDetail.setModelNme(loJson.getString("sModelNme"));
+//                        loDetail.setBrandNme(loJson.getString("sBrandNme"));
+//                        loDetail.setSelPrice(loJson.getDouble("nSelPrice"));
+//                        loDetail.setLastPrce(loJson.getDouble("nLastPrce"));
+//                        loDetail.setDealrPrc(loJson.getDouble("nDealrPrc"));
+//                        loDetail.setPricexxx(loJson.getString("dPricexxx"));
+//                        loDetail.setBrandIDx(loJson.getString("sBrandIDx"));
+//                        loDetail.setMCCatIDx(loJson.getString("sMCCatIDx"));
+//                        poDao.update(loDetail);
+//                        Log.d(TAG, "Mc model price info has been updated.");
+//                    }
                 }
             }
             return true;

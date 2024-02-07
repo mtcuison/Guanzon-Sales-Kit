@@ -23,6 +23,7 @@ import org.rmj.g3appdriver.lib.Ganado.pojo.InstallmentInfo;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
 import org.rmj.g3appdriver.utils.Task.OnTaskExecuteListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
+
 import java.util.List;
 
 public class VMProductInquiry extends AndroidViewModel implements GanadoUI {
@@ -128,14 +129,15 @@ public class VMProductInquiry extends AndroidViewModel implements GanadoUI {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
                 InstallmentInfo loResult = (InstallmentInfo) object;
                 if(loResult == null){
                     listener.OnFailed(message);
-                    return;
+                    return 0;
                 }
 
                 listener.OnRetrieve(loResult);
+                return 0;
             }
         });
     }
@@ -158,14 +160,15 @@ public class VMProductInquiry extends AndroidViewModel implements GanadoUI {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
                 double lnResult = (double) object;
                 if(lnResult == 0.0){
                     listener.OnFailed(message);
-                    return;
+                    return lnResult;
                 }
 
                 listener.OnCalculate(lnResult);
+                return lnResult;
             }
         });
 

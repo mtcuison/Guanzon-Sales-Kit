@@ -22,7 +22,8 @@ import java.util.List;
 
 @Dao
 public interface DAddressRequest {
-
+    @Query("SELECT COUNT(*) FROM Address_Update_Request")
+    int GetRowsCountForID();
     @Insert
     void insert(EAddressUpdate addressUpdate);
 

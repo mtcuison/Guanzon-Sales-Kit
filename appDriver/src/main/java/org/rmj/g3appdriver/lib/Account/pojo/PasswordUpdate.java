@@ -1,6 +1,7 @@
 package org.rmj.g3appdriver.lib.Account.pojo;
 
 public class PasswordUpdate {
+
     private final String sOldPwrdx;
     private final String sNewPwrdx;
     private final String sPwrdCfrm;
@@ -52,4 +53,5 @@ public class PasswordUpdate {
         }
         return true;
     }
+
 }

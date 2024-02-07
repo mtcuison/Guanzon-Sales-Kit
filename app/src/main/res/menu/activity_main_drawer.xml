@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/baseline_dashboard_24"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_inquiry"
+            android:icon="@drawable/baseline_collections_bookmark_24"
+            android:title="Inquiries" />
+
+        <item
+            android:title="Agents">
+            <menu>
+<!--                <item-->
+<!--                    android:id="@+id/nav_agent_enroll"-->
+<!--                    android:icon="@drawable/baseline_person_add_24"-->
+<!--                    android:title="Agent Enroll" />-->
+                <item
+                    android:id="@+id/nav_setupline"
+                    android:icon="@drawable/baseline_group_add_24"
+                    android:title="Set Upline" />
+                <item
+                    android:id="@+id/nav_agent_list"
+                    android:icon="@drawable/baseline_groups_24"
+                    android:title="Agent List" />
+            </menu>
+        </item>
+        <item
+            android:title="Account">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/baseline_person_24"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/nav_userperform"
+                    android:icon="@drawable/baseline_rate_review_24"
+                    android:title="User Performance" />
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@drawable/baseline_login_24"
+                    android:title="Sign Out" />
+            </menu>
+        </item>
+    </group>
+</menu>

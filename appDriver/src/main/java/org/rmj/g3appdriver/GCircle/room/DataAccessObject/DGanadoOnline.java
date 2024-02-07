@@ -25,6 +25,9 @@ public interface DGanadoOnline {
     @Query("SELECT * FROM Ganado_Online WHERE sTransNox =:TransNox")
     EGanadoOnline GetInquiry(String TransNox);
 
+    @Query("DELETE FROM Ganado_Online WHERE sTransNox =:TransNox")
+    void RemoveInquiry(String TransNox);
+
     @Query("SELECT * FROM Ganado_Online ORDER BY dTimeStmp DESC LIMIT 1")
     EGanadoOnline GetLatestData();
 
@@ -46,8 +49,11 @@ public interface DGanadoOnline {
     LiveData<List<EMCColor>> GetModelColors(String ModelID);
 
     @Query("SELECT * FROM Ganado_Online " +
-            "WHERE sReferdBy = (SELECT sUserIDxx FROM User_Info_Master)")
+            "WHERE sReferdBy = (SELECT sUserIDxx FROM Client_Info_Master)")
     LiveData<List<EGanadoOnline>> GetInquiries();
+    @Query("SELECT * FROM Ganado_Online " +
+            "WHERE sReferdBy =:UserIDxx")
+    LiveData<List<EGanadoOnline>> GetByAgentInquiries(String UserIDxx);
 
 
     @Query("SELECT " +
@@ -102,6 +108,17 @@ public interface DGanadoOnline {
             "FROM MC_Cash_Price WHERE sModelIDx=:ModelID")
     LiveData<CashPrice> GetCashInfo(String ModelID);
 
+    @Query("SELECT " +
+            "COUNT(CASE WHEN cTranStat = '0' THEN sTransNox END) AS nOpen, " +
+            "COUNT(CASE WHEN cTranStat = '1' THEN sTransNox END) AS nExtracted, " +
+            "COUNT(CASE WHEN cTranStat = '2' THEN sTransNox END) AS nEngaged, " +
+            "COUNT(CASE WHEN cTranStat = '3' THEN sTransNox END) AS nLost, " +
+            "COUNT(CASE WHEN cTranStat = '4' THEN sTransNox END) AS nSold, " +
+            "COUNT(sTransNox) AS nEntries " +
+            "FROM Ganado_Online " +
+            "WHERE sReferdBy= :sUserIDxx")
+    LiveData<CountEntries> GetEntryCounts(String sUserIDxx);
+
     class McDownpayment{
         public String ModelIDx;
         public String ModelNme;
@@ -134,5 +151,14 @@ public interface DGanadoOnline {
     class CashPrice{
         public Double CashPrce;
         public String Pricedxx;
+    }
+
+    class CountEntries{
+        public int nOpen;
+        public int nExtracted;
+        public int nEngaged;
+        public int nLost;
+        public int nSold;
+        public int nEntries;
     }
 }
