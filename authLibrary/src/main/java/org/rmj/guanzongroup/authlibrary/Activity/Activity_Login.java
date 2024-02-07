@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -99,6 +100,22 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_Login.this, Activity_CreateAccount.class);
                 startActivity(intent);
+            }
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                poMessage.initDialog();
+                poMessage.setPositiveButton("Yes", (view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                });
+                poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+                poMessage.setTitle("Guanzon Sales Kit");
+                poMessage.setMessage("Exit Guanzon Sales Kit app?");
+                poMessage.show();
+//                finish();
             }
         });
     }

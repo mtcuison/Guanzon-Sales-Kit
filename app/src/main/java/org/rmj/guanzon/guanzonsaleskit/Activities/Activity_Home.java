@@ -171,7 +171,10 @@ public class Activity_Home extends AppCompatActivity {
 //                new EmployeeMaster(getApplication()).LogoutUserSession();
                 new ClientMaster(getApplication()).LogoutUserSession();
                 AppConfigPreference.getInstance(Activity_Home.this).setIsAppFirstLaunch(false);
-                startActivity(new Intent(Activity_Home.this, Activity_SplashScreen.class));
+
+                Intent loIntent = new Intent(Activity_Home.this, Activity_SplashScreen.class);
+                loIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(loIntent);
                 finish();
             });
             loMessage.setTitle("Account Session");

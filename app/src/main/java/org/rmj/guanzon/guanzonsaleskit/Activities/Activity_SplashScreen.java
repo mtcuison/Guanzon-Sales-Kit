@@ -211,7 +211,10 @@ public class Activity_SplashScreen extends AppCompatActivity {
                 startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
                 finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
-                finish();
+
+                finishAffinity();
+                System.exit(0);
+//                finish();
             }
         });
 //        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

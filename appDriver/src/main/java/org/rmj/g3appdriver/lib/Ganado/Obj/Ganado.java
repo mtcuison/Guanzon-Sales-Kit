@@ -322,7 +322,7 @@ public class Ganado {
                     poApi.getUrlImportSKPerformance(),
                     params.toString(),
                     poHeaders.getHeaders());
-
+            Log.e(TAG, poApi.getUrlImportSKPerformance());
             if(lsResponse == null){
                 message = SERVER_NO_RESPONSE;
                 return false;
