@@ -4,24 +4,31 @@
     <application>
         <activity
             android:name=".Activities.Activity_AgentInfo2"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Activities.Activity_UserPerformance"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Activities.Activity_AgentPerformance"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Activities.Activity_SelectUpLine"
+            android:screenOrientation="userPortrait"
             android:exported="false" />
         <activity
             android:name=".Activities.Activity_AgentInfo"
+            android:screenOrientation="userPortrait"
             android:exported="true" />
         <activity
             android:name=".Activities.Activity_AgentList"
+            android:screenOrientation="userPortrait"
             android:exported="true" />
         <activity
             android:name=".Activities.Activity_AgentEnroll"
+            android:screenOrientation="userPortrait"
             android:exported="true"
             android:label="@string/title_activity_agent_enroll"
             android:theme="@style/GhostRiderMaterialTheme" />
