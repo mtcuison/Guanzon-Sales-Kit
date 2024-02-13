@@ -163,12 +163,12 @@ public class Activity_ClientInfo extends AppCompatActivity {
         rgGender.setOnCheckedChangeListener((radioGroup, i) -> {
             if (i == R.id.rb_male) {
                 mViewModel.getModel().setGenderCd("0");
-                tilMaidNm.setVisibility(View.GONE);
-                txtMaidNm.setText("");
+//                tilMaidNm.setVisibility(View.GONE);
+//                txtMaidNm.setText("");
             }
             if (i == R.id.rb_female) {
                 mViewModel.getModel().setGenderCd("1");
-                tilMaidNm.setVisibility(View.VISIBLE);
+//                tilMaidNm.setVisibility(View.VISIBLE);
             }
         });
 

@@ -175,6 +175,10 @@ public class FinancierInfo {
             return false;
         }
 
+        if(sCntryCde.isEmpty()){
+            message = "Please select country.";
+            return false;
+        }
         /*if(sAddressx.isEmpty()){
             message = "Please enter address.";
             return false;

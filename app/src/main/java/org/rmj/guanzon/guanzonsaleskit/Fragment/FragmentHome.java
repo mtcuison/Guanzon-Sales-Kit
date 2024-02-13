@@ -80,44 +80,87 @@ public class FragmentHome extends Fragment {
         selectAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isCompleteAccount){ //allow to use feature
+                mViewModel.GetCompleteProfile().observe(requireActivity(), new Observer<EClientInfoSalesKit>() {
+                    @Override
+                    public void onChanged(EClientInfoSalesKit eClientInfoSalesKit) {
+                        if (eClientInfoSalesKit == null) {
+//                            isCompleteAccount = false;
 
-                    //REQUIRE UPLINE BEFORE INQUIRY
-                    if (mViewModel.GetUpline() == null){
-                        loMessage.setTitle("Sub Agent");
-                        loMessage.setMessage("Please submit your upline first");
-                        loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-                            @Override
-                            public void OnButtonClick(View view, AlertDialog dialog) {
-                                dialog.dismiss();
+                            loMessage.setTitle("Guanzon Sales Kit");
+                            loMessage.setMessage("Must complete account to access this feature");
+                            loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                                @Override
+                                public void OnButtonClick(View view, AlertDialog dialog) {
+                                    dialog.dismiss();
+
+                                    Intent loIntent = new Intent(requireActivity(), Activity_Settings.class);
+                                    startActivity(loIntent);
+                                }
+                            });
+                            loMessage.show();
+                        }else {
+                            if (mViewModel.GetUpline() == null) {
+                                loMessage.setTitle("Sub Agent");
+                                loMessage.setMessage("Please submit your upline first");
+                                loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                                    @Override
+                                    public void OnButtonClick(View view, AlertDialog dialog) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                loMessage.show();
+                            }else {
+                                loMessage.setTitle("Under Development");
+                                loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
+                                loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+                                    @Override
+                                    public void OnButtonClick(View view, AlertDialog dialog) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                loMessage.show();
                             }
-                        });
-                        loMessage.show();
+                        }
                     }
-
-                    loMessage.setTitle("Under Development");
-                    loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
-                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-                        @Override
-                        public void OnButtonClick(View view, AlertDialog dialog) {
-                            dialog.dismiss();
-                        }
-                    });
-                    loMessage.show();
-                }else { //must complete first account
-                    loMessage.setTitle("Guanzon Sales Kit");
-                    loMessage.setMessage("Must complete account to access this feature");
-                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-                        @Override
-                        public void OnButtonClick(View view, AlertDialog dialog) {
-                            dialog.dismiss();
-
-                            Intent loIntent = new Intent(requireActivity(), Activity_Settings.class);
-                            startActivity(loIntent);
-                        }
-                    });
-                    loMessage.show();
-                }
+                });
+//                if (isCompleteAccount){ //allow to use feature
+//
+//                    //REQUIRE UPLINE BEFORE INQUIRY
+//                    if (mViewModel.GetUpline() == null){
+//                        loMessage.setTitle("Sub Agent");
+//                        loMessage.setMessage("Please submit your upline first");
+//                        loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+//                            @Override
+//                            public void OnButtonClick(View view, AlertDialog dialog) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                        loMessage.show();
+//                    }
+//
+//                    loMessage.setTitle("Under Development");
+//                    loMessage.setMessage("Sorry, this feature is currently under development. We're working hard to bring it to you.");
+//                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+//                        @Override
+//                        public void OnButtonClick(View view, AlertDialog dialog) {
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    loMessage.show();
+//                }else { //must complete first account
+//                    loMessage.setTitle("Guanzon Sales Kit");
+//                    loMessage.setMessage("Must complete account to access this feature");
+//                    loMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
+//                        @Override
+//                        public void OnButtonClick(View view, AlertDialog dialog) {
+//                            dialog.dismiss();
+//
+//                            Intent loIntent = new Intent(requireActivity(), Activity_Settings.class);
+//                            startActivity(loIntent);
+//                        }
+//                    });
+//                    loMessage.show();
+//                }
             }
         });
         selectMC.setOnClickListener(new View.OnClickListener() {

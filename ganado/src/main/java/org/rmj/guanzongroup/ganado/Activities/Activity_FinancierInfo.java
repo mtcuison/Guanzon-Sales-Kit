@@ -37,7 +37,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
     private LoadDialog poDialogx;
 
     private TextInputEditText txtLastNm, txtFrstNm, txtMiddNm, txtSuffixx,  txt_facebookAccount,
-            txtEmailAdd, txtMobileNo,  txt_whatsAppAccount, txtAddress, txt_income;
+            txtEmailAdd, txtMobileNo,  txt_whatsAppAccount, txtweChatAccount, txtAddress, txt_income;
 
     private MaterialAutoCompleteTextView txtCountry;
     private MaterialAutoCompleteTextView spinner_relation;
@@ -90,6 +90,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(Activity_FinancierInfo.this,
                             android.R.layout.simple_spinner_dropdown_item, strings.toArray(new String[0]));
+
                     txtCountry.setAdapter(adapter);
 
                     txtCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,6 +124,8 @@ public class Activity_FinancierInfo extends AppCompatActivity {
             mViewModel.getModel().setEmailAdd(txtEmailAdd.getText().toString());
             mViewModel.getModel().setsFbAccntx(txt_facebookAccount.getText().toString());
             mViewModel.getModel().setsWhatsApp(txt_whatsAppAccount.getText().toString());
+            mViewModel.getModel().setsWeChatApp(txtweChatAccount.getText().toString());
+
             if (txt_income.getText().toString().trim().isEmpty()) {
                 mViewModel.getModel().setRangeOfIncome(0);
             } else {
@@ -185,6 +188,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
         txtEmailAdd = findViewById(R.id.txt_emailAdd);
         txt_facebookAccount = findViewById(R.id.txt_facebookAccount);
         txt_whatsAppAccount = findViewById(R.id.txt_whatsAppAccount);
+        txtweChatAccount = findViewById(R.id.txt_weChatAccount);
         txt_income = findViewById(R.id.txt_income);
         txtAddress = findViewById(R.id.txt_address);
         spinner_relation = findViewById(R.id.spinner_relation);

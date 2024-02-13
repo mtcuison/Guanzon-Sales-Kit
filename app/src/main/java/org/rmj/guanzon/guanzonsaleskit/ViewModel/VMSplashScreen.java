@@ -129,31 +129,86 @@ public class VMSplashScreen extends AndroidViewModel {
             public Object DoInBackground() {
                 try{
                     if(poConn.isDeviceConnected()){
+                        Log.d(TAG, "Importing Promo Links");
+                        if (!poPromoEvents.ImportPromosLinks()){
+                            Log.d(TAG, "Unable to import promo links");
+                        }
+                        loTask.publishProgress(2);
+                        Thread.sleep(1000);
+
+                        Log.d(TAG, "Importing Event Links");
+                        if (!poPromoEvents.ImportEventsLinks()){
+                            Log.d(TAG, "Unable to import events link");
+                        }
+                        loTask.publishProgress(8);
+                        Thread.sleep(1000);
+
+                        if (new RMcModel(instance).ImportMCModel()) {
+                            Log.d(TAG, "MC Model imported successfully...");
+                        }
+                        loTask.publishProgress(15);
+                        Thread.sleep(500);
+                        if (new RMcModel(instance).ImportCashPrices()) {
+                            Log.d(TAG, "MC Model Cash Prices imported successfully...");
+                        }
+                        loTask.publishProgress(25);
+                        Thread.sleep(500);
+                        if (new RMcModel(instance).ImportModelColor()) {
+                            Log.d(TAG, "MC Model Color imported successfully...");
+                        }
+                        loTask.publishProgress(35);
+                        Thread.sleep(500);
+
+                        if (new RMcBrand(instance).ImportMCBrands()) {
+                            Log.d(TAG, "MC Brand imported successfully...");
+                        }
+                        loTask.publishProgress(45);
+                        Thread.sleep(500);
+                        if (new RMcModelPrice(instance).ImportMcModelPrice()) {
+                            Log.d(TAG, "MC Model Cash Prices imported successfully...");
+                        }
+
+                        loTask.publishProgress(55);
+                        Thread.sleep(500);
+
+
+                        if (new RMcCategory(instance).ImportMcCategory()) {
+                            Log.d(TAG, "MC Category imported successfully...");
+                        }
+
+                        loTask.publishProgress(60);
+                        Thread.sleep(500);
+
+                        if (new RMcTermCategory(instance).ImportMcTermCategory()) {
+                            Log.d(TAG, "MC Term Category imported successfully...");
+                        }
+                        loTask.publishProgress(68);
+                        Thread.sleep(500);
                         if (poSession.getLoginStatus()){
 
                             if(!new Relation(instance).ImportRelations()){
                                 Log.e(TAG, "Unable to import relationship");
                             }
 
-                            loTask.publishProgress(1);
+                            loTask.publishProgress(75);
 
                             Thread.sleep(500);
                             if (new ClientMasterSalesKit(instance).ImportClientProfile(poSession.getUserID())) {
                                 Log.d(TAG, "Client Profile imported successfully...");
                             }
-                            loTask.publishProgress(10);
+                            loTask.publishProgress(80);
                             Thread.sleep(500);
 
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
-                            loTask.publishProgress(20);
+                            loTask.publishProgress(85);
                             Thread.sleep(500);
 
                             if (!new SalesKit(instance).ImportKPOPAgent()) {
                                 Log.d(TAG, "KPOP Agent imported successfully...");
                             }
-                            loTask.publishProgress(30);
+                            loTask.publishProgress(98);
                             Thread.sleep(500);
                         }
                         if (poConfig.isAppFirstLaunch()){
@@ -162,94 +217,40 @@ public class VMSplashScreen extends AndroidViewModel {
                                 Log.e(TAG, "Unable to import branches");
                             }
 
-                            loTask.publishProgress(1);
+                            loTask.publishProgress(65);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing province data.");
                             if(!new Province(instance).ImportProvince()){
                                 Log.e(TAG, "Unable to import province");
                             }
-                            loTask.publishProgress(5);
+                            loTask.publishProgress(75);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing town data.");
                             if(!new Town(instance).ImportTown()){
                                 Log.e(TAG, "Unable to import town");
                             }
-                            loTask.publishProgress(15);
+                            loTask.publishProgress(85);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing barangay data.");
                             if(!new Barangay(instance).ImportBarangay()){
                                 Log.e(TAG, "Unable to import barangay");
                             }
-                            loTask.publishProgress(25);
+                            loTask.publishProgress(95);
                             Thread.sleep(1000);
 
                             Log.d(TAG, "Initializing country data.");
                             if(!new Country(instance).ImportCountry()){
                                 Log.e(TAG, "Unable to import country");
                             }
-                            loTask.publishProgress(30);
+                            loTask.publishProgress(99);
                             Thread.sleep(1000);
 
                         }
 
-                        Log.d(TAG, "Importing Promo Links");
-                        if (!poPromoEvents.ImportPromosLinks()){
-                            Log.d(TAG, "Unable to import promo links");
-                        }
-                        loTask.publishProgress(35);
-                        Thread.sleep(1000);
 
-                        Log.d(TAG, "Importing Event Links");
-                        if (!poPromoEvents.ImportEventsLinks()){
-                            Log.d(TAG, "Unable to import events link");
-                        }
-                        loTask.publishProgress(39);
-                        Thread.sleep(1000);
-
-                        if (new RMcModel(instance).ImportMCModel()) {
-                            Log.d(TAG, "MC Model imported successfully...");
-                        }
-                        loTask.publishProgress(45);
-                        Thread.sleep(500);
-                        if (new RMcModel(instance).ImportCashPrices()) {
-                            Log.d(TAG, "MC Model Cash Prices imported successfully...");
-                        }
-                        loTask.publishProgress(55);
-                        Thread.sleep(500);
-                        if (new RMcModel(instance).ImportModelColor()) {
-                            Log.d(TAG, "MC Model Color imported successfully...");
-                        }
-                        loTask.publishProgress(65);
-                        Thread.sleep(500);
-
-                        if (new RMcBrand(instance).ImportMCBrands()) {
-                            Log.d(TAG, "MC Brand imported successfully...");
-                        }
-                        loTask.publishProgress(75);
-                        Thread.sleep(500);
-                        if (new RMcModelPrice(instance).ImportMcModelPrice()) {
-                            Log.d(TAG, "MC Model Cash Prices imported successfully...");
-                        }
-
-                        loTask.publishProgress(85);
-                        Thread.sleep(500);
-
-
-                        if (new RMcCategory(instance).ImportMcCategory()) {
-                            Log.d(TAG, "MC Category imported successfully...");
-                        }
-
-                        loTask.publishProgress(92);
-                        Thread.sleep(500);
-
-                        if (new RMcTermCategory(instance).ImportMcTermCategory()) {
-                            Log.d(TAG, "MC Term Category imported successfully...");
-                        }
-                        loTask.publishProgress(98);
-                        Thread.sleep(500);
 
 
                         if(!poSession.getLoginStatus()){
