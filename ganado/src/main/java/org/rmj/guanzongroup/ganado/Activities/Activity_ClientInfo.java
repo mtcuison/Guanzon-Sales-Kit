@@ -174,6 +174,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
 
         btnContinue.setOnClickListener(v ->{
 
+            mViewModel.InitGeoLocation(Activity_ClientInfo.this);
             mViewModel.getModel().setFrstName(txtFrstNm.getText().toString());
             mViewModel.getModel().setMiddName(txtMiddNm.getText().toString());
             mViewModel.getModel().setLastName(txtLastNm.getText().toString());

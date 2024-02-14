@@ -178,6 +178,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
             @Override
             public void OnSuccess() {
+
                 startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
                 finish();
             }
@@ -208,8 +209,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
             if (result.getResultCode() == RESULT_OK) {
 //                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
                 InitializeData();
-                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
-                finish();
             } else if (result.getResultCode() == RESULT_CANCELED) {
 
                 finishAffinity();
