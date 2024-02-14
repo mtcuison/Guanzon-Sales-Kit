@@ -193,25 +193,33 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             String lsInput = txtDownPymnt.getText().toString().trim();
 //
             Double lnInput = FormatUIText.getParseDouble(lsInput);
+            if(lnInput < minDown){
+                poMessage.initDialog();
+                poMessage.setTitle("Product Inquiry");
+                poMessage.setMessage("The required minimum down payment cannot be less than " + minDown);
+                poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                poMessage.show();
+            }else {
 
-            mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
-            mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
-                @Override
-                public void OnCalculate(double lnResult) {
-                    txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
-                    mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
-                }
+                mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
+                mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
+                    @Override
+                    public void OnCalculate(double lnResult) {
+                        txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                        mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
+                    }
 
-                @Override
-                public void OnFailed(String message) {
-                    poMessage.initDialog();
-                    poMessage.setTitle("Product Inquiry");
-                    poMessage.setMessage(message);
-                    poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
-                    poMessage.show();
-                    txtAmort.setText("0");
-                }
-            });
+                    @Override
+                    public void OnFailed(String message) {
+                        poMessage.initDialog();
+                        poMessage.setTitle("Product Inquiry");
+                        poMessage.setMessage(message);
+                        poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                        poMessage.show();
+                        txtAmort.setText("0");
+                    }
+                });
+            }
         });
         btnContinue.setOnClickListener(view ->{
 
