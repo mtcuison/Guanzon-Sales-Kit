@@ -10,9 +10,9 @@ android {
         applicationId "org.rmj.guanzon.guanzonsaleskit"
         minSdkVersion  21
         targetSdkVersion 34
-        versionCode 2
+        versionCode 3
 //        versionName "1.0"
-        versionName "Guanzon Sales Kit v1.01.002 a"
+        versionName "Guanzon Sales Kit v1.01.003 a"
         multiDexEnabled true
 
         javaCompileOptions {
