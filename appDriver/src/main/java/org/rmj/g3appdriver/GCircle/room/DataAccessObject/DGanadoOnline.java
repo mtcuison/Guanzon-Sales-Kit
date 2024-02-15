@@ -22,6 +22,11 @@ public interface DGanadoOnline {
     @Update
     void Update(EGanadoOnline foVal);
 
+
+    @Query("DELETE FROM Ganado_Online WHERE (sClientNm IS NULL OR sClientNm = '') OR (sFinancex = '' OR sFinancex IS NULL)")
+    void RemoveInquiry();
+
+
     @Query("SELECT * FROM Ganado_Online WHERE sTransNox =:TransNox")
     EGanadoOnline GetInquiry(String TransNox);
 

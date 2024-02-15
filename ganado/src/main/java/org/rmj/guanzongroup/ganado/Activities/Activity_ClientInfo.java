@@ -291,10 +291,10 @@ public class Activity_ClientInfo extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
 
         mViewModel.RemoveInquiry();
         getViewModelStore().clear();
-        super.onDestroy();
     }
 
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
