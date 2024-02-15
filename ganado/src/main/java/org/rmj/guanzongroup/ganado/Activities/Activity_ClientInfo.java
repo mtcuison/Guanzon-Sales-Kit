@@ -289,6 +289,14 @@ public class Activity_ClientInfo extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+
+        mViewModel.RemoveInquiry();
+        getViewModelStore().clear();
+        super.onDestroy();
+    }
+
     private class OnItemClickListener implements AdapterView.OnItemClickListener {
 
         private final View loView;
