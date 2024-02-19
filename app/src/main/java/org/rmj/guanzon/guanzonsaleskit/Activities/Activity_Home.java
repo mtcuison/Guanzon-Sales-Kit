@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +29,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.badge.BadgeUtils;
 import com.google.android.material.navigation.NavigationView;
 
+import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfo;
 import org.rmj.g3appdriver.GCircle.room.Entities.EClientInfoSalesKit;
 import org.rmj.g3appdriver.GConnect.Account.ClientMaster;
 import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
@@ -42,6 +47,8 @@ import org.rmj.guanzongroup.authlibrary.Activity.Activity_Settings;
 import org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries;
 import org.rmj.guanzongroup.ghostrider.notifications.Activity.Activity_NotificationList;
 
+import kotlin.Suppress;
+
 public class Activity_Home extends AppCompatActivity {
 
     private static final String TAG = "Sales Kit Home Activity";
@@ -56,6 +63,7 @@ public class Activity_Home extends AppCompatActivity {
     private DrawerLayout drawer;
     private BadgeDrawable loBadge;
     private Toolbar toolbar;
+    private TextView lblUserIDxx;
 
 //    @Override (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
 
@@ -64,6 +72,7 @@ public class Activity_Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+        loMessage = new MessageBox(Activity_Home.this);
 
         /*VERIFY FIRST USER IF COMPLETED ITS ACCOUNT*/
         mviewModel = new ViewModelProvider(this).get(VMHome.class);
@@ -72,23 +81,39 @@ public class Activity_Home extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarActivityHome.toolbar);
 
         drawer = binding.drawerLayout;
         navigationView = binding.navView;
 
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_inquiry, R.id.nav_agent_enroll, R.id.nav_agent_list,R.id.nav_profile,
-                R.id.nav_setupline, R.id.nav_userperform, R.id.nav_log_out)
+                R.id.nav_setupline, R.id.nav_userperform)
                 .setOpenableLayout(drawer)
                 .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View nav_header_view = navigationView.getHeaderView(0);
+        lblUserIDxx = nav_header_view.findViewById(R.id.lsUserID);
+
         initReceiver();
+        mviewModel.GetPoEmpInfo().observe(Activity_Home.this, new Observer<EClientInfo>() {
+            @Override
+            public void onChanged(EClientInfo client) {
+                if(client != null){
+
+                    Log.e(TAG, client.getUserIDxx());
+                    lblUserIDxx.setText("User ID : " + client.getUserIDxx());
+                }
+            }
+        });
 
             mviewModel.GetUnreadMessagesCount().observe(Activity_Home.this, count -> {
                 try{
@@ -139,7 +164,6 @@ public class Activity_Home extends AppCompatActivity {
 
         navigationView.getMenu().findItem(R.id.nav_log_out).setOnMenuItemClickListener(menuItem -> {
 
-            loMessage = new MessageBox(Activity_Home.this);
             loMessage.initDialog();
             loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
             loMessage.setPositiveButton("Yes", (view, dialog) -> {
@@ -147,13 +171,31 @@ public class Activity_Home extends AppCompatActivity {
 //                new EmployeeMaster(getApplication()).LogoutUserSession();
                 new ClientMaster(getApplication()).LogoutUserSession();
                 AppConfigPreference.getInstance(Activity_Home.this).setIsAppFirstLaunch(false);
-                startActivity(new Intent(Activity_Home.this, Activity_SplashScreen.class));
+
+                Intent loIntent = new Intent(Activity_Home.this, Activity_SplashScreen.class);
+                loIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(loIntent);
                 finish();
             });
             loMessage.setTitle("Account Session");
             loMessage.setMessage("Are you sure you want to end session/logout?");
             loMessage.show();
             return false;
+        });
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                loMessage.initDialog();
+                loMessage.setPositiveButton("Yes", (view, dialog) -> {
+                    dialog.dismiss();
+                    finish();
+                });
+                loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+                loMessage.setTitle("Guanzon Sales Kit");
+                loMessage.setMessage("Exit Guanzon Sales Kit app?");
+                loMessage.show();
+//                finish();
+            }
         });
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -229,21 +271,13 @@ public class Activity_Home extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @MainThread
+    @Suppress(names = "DEPRECATION")
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            loMessage.initDialog();
-            loMessage.setPositiveButton("Yes", (view, dialog) -> {
-                dialog.dismiss();
-                finish();
-            });
-            loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
-            loMessage.setTitle("Guanzon Circle");
-            loMessage.setMessage("Exit Guanzon Circle app?");
-            loMessage.show();
         }
     }
     private void initReceiver(){

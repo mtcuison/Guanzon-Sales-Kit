@@ -237,6 +237,24 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/TextInputStyle"
+                    android:id="@+id/til_maiden"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:hint="Mother's Maiden Name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_maiden"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords|textPersonName"
+                        android:maxLength="50"
+                        android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Birth Date">

@@ -45,7 +45,9 @@ public class VMFinancierInfo extends AndroidViewModel implements GanadoUI {
         this.poModel = new FinancierInfo();
         this.poTown = new Town(application);
     }
-
+    public void RemoveInquiry(){
+        poApp.RemoveInquiry(poModel.getsTransNox());
+    }
     public FinancierInfo getModel() {
         return poModel;
     }

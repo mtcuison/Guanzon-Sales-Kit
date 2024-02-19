@@ -25,6 +25,9 @@ public interface DGanadoOnline {
     @Query("SELECT * FROM Ganado_Online WHERE sTransNox =:TransNox")
     EGanadoOnline GetInquiry(String TransNox);
 
+    @Query("DELETE FROM Ganado_Online WHERE sTransNox =:TransNox")
+    void RemoveInquiry(String TransNox);
+
     @Query("SELECT * FROM Ganado_Online ORDER BY dTimeStmp DESC LIMIT 1")
     EGanadoOnline GetLatestData();
 

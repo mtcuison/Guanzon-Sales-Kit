@@ -72,13 +72,15 @@ public class VMSplashScreen extends AndroidViewModel {
         this.poSession = ClientSession.getInstance(instance);
         this.poConfig.setPackageName(BuildConfig.APPLICATION_ID);
         this.poConfig.setProductID("GuanzonApp");
-        this.poConfig.setUpdateLocally(true);
-        this.poConfig.setTestCase(true);
+        this.poConfig.setUpdateLocally(false);
+        this.poConfig.setTestCase(false);
+//        this.poConfig.isTesting_Phase();
         this.poConfig.setupAppVersionInfo(BuildConfig.VERSION_CODE, BuildConfig.VERSION_NAME, "");
         ETokenInfo loToken = new ETokenInfo();
         loToken.setTokenInf("temp_token");
         CheckConnection();
         Log.e("userid",poSession.getUserID());
+        Log.e("isTesting_Phase", String.valueOf(poConfig.getTestStatus()));
     }
 
     public void SaveFirebaseToken(String fsVal){
@@ -89,7 +91,8 @@ public class VMSplashScreen extends AndroidViewModel {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
+                return 0;
             }
         });
     }
@@ -107,13 +110,14 @@ public class VMSplashScreen extends AndroidViewModel {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
                 boolean isSuccess = (boolean) object;
                 if(isSuccess){
                     Toast.makeText(instance, "Device connected", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(instance, "Offline mode", Toast.LENGTH_LONG).show();
                 }
+                return 0;
             }
         });
     }

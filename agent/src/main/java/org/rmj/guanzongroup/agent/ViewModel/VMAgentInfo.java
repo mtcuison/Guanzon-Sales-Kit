@@ -28,6 +28,7 @@ public class VMAgentInfo extends AndroidViewModel {
 
     private String message;
     private String lsUserID;
+    private String lsAgentLevel;
 
 
     public interface OnTaskExecute{
@@ -48,11 +49,22 @@ public class VMAgentInfo extends AndroidViewModel {
     public LiveData<List<EGanadoOnline>> GetInquiries(String UserID){
         return poGanado.GetByAgentInquiries(UserID);
     }
+
+    public EGanadoOnline GetInquiry(String TransNox){
+        return poGanado.GetInquiry(TransNox);
+    }
     public String GetUserID(){
         return lsUserID;
     }
     public void setUserID(String UserID){
-         lsUserID = UserID;
+        lsUserID = UserID;
+    }
+
+    public String GetUserLvl(){
+        return lsAgentLevel;
+    }
+    public void setUserLvl(String lsLvl){
+        lsAgentLevel = lsLvl;
     }
 
     public LiveData<List<EKPOPAgentRole>> GetKPOPAgent(String UserIDxx){

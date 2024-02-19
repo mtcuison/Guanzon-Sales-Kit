@@ -4,9 +4,17 @@ import static org.rmj.g3appdriver.dev.Api.ApiResult.SERVER_NO_RESPONSE;
 import static org.rmj.g3appdriver.dev.Api.ApiResult.getErrorMessage;
 import static org.rmj.g3appdriver.etc.AppConstants.getLocalMessage;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 
 import org.json.JSONArray;
@@ -43,8 +51,14 @@ public class Ganado {
     private final Relation poRelate;
     private final Country poCountry;
 
+
     private String message;
 
+
+    private String nLatitude, nLongitude;
+
+    private static final int REQUEST_LOCATION = 1;
+    private LocationManager locManager;
     public Ganado(Application instance) {
         this.instance = instance;
         this.poDao = GGC_GCircleDB.getInstance(instance).ganadoDao();
@@ -53,6 +67,7 @@ public class Ganado {
         this.poHeaders = HttpHeaders.getInstance(instance);
         this.poRelate = new Relation(instance);
         this.poCountry = new Country(instance);
+        locManager = (LocationManager) instance.getSystemService(Context.LOCATION_SERVICE);
     }
 
     public String getMessage() {
@@ -64,6 +79,13 @@ public class Ganado {
     }
     public LiveData<List<ECountryInfo>> GetCountry(){
         return poCountry.getAllCountryInfo();
+    }
+
+    public EGanadoOnline GetInquiry(String TransNox){
+        return poDao.GetInquiry(TransNox);
+    }
+    public void RemoveInquiry(String TransNox){
+        poDao.RemoveInquiry(TransNox);
     }
 
     public String CreateInquiry(InquiryInfo loInfo){
@@ -93,6 +115,7 @@ public class Ganado {
             JSONObject joPayment = new JSONObject();
             joPayment.put("sTermIDxx", loInfo.getTermIDxx());
             joPayment.put("nDownPaym", loInfo.getDownPaym());
+            joPayment.put("nMonthAmr", loInfo.getnMonthAmr());
             loDetail.setPaymInfo(joPayment.toString());
 
             JSONArray laJson = new JSONArray();
@@ -197,7 +220,7 @@ public class Ganado {
             joFinancier.put("sMiddName", loInfo.getMiddName());
             joFinancier.put("sSuffixNm", loInfo.getSuffixNm());
             joFinancier.put("sAddressx", loInfo.getAddressx());
-            joFinancier.put("sCntryCde", loInfo.getAddressx());
+            joFinancier.put("sCntryCde", loInfo.getCountryCode());
             joFinancier.put("sMobileNo", loInfo.getMobileNo());
             joFinancier.put("sWhatsApp", loInfo.getsWhatsApp());
             joFinancier.put("sWChatApp", loInfo.getsWeChatApp());
@@ -234,8 +257,12 @@ public class Ganado {
             params.put("dCreatedx", loDetail.getCreatedx());
             params.put("dTargetxx", loDetail.getTargetxx());
             params.put("sRelatnID", loDetail.getRelatnID());
-            params.put("nLatitude", 1.00);
-            params.put("nLongitud", 2.00);
+//            params.put("nLatitude", 1.00);
+//            params.put("nLongitud", 2.00);
+            params.put("nLatitude", nLatitude);
+            params.put("nLongitud", nLongitude);
+            Log.e("nLatitude", String.valueOf(nLatitude));
+            Log.e("nLongitud", String.valueOf(nLongitude));
 
             params.put("sReferdBy", poSession.getUserID());
             params.put("sClntInfo", loDetail.getClntInfo());
@@ -253,6 +280,7 @@ public class Ganado {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
+//            message = lsResponse;
             Log.e("lsResponse", lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
@@ -270,7 +298,7 @@ public class Ganado {
             return true;
         } catch (Exception e){
             e.printStackTrace();
-            message = getLocalMessage(e);
+            message = getLocalMessage(e) + message;
             return false;
         }
     }
@@ -294,7 +322,7 @@ public class Ganado {
                     poApi.getUrlImportSKPerformance(),
                     params.toString(),
                     poHeaders.getHeaders());
-
+            Log.e(TAG, poApi.getUrlImportSKPerformance());
             if(lsResponse == null){
                 message = SERVER_NO_RESPONSE;
                 return false;
@@ -420,5 +448,56 @@ public class Ganado {
         Log.d(TAG, lsUniqIDx);
         return lsUniqIDx;
     }
+    public void InitGeoLocation(Activity poActivty){
+        int LOCATION_REFRESH_TIME = 2000; // 15 seconds to update
+        int LOCATION_REFRESH_DISTANCE = 500; // 500 meters to update
 
+        if (ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(instance, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+
+            locManager= (LocationManager) instance.getSystemService(instance.LOCATION_SERVICE);
+
+            Location location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            Location location1 = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            Location location2 = locManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
+            if (location != null) {
+                nLatitude = String.valueOf(location.getLatitude());
+                nLongitude = String.valueOf(location.getLongitude());
+            } else  if (location1 != null) {
+                nLatitude = String.valueOf(location1.getLatitude());
+                nLongitude = String.valueOf(location1.getLongitude());
+            } else  if (location2 != null) {
+                nLatitude = String.valueOf(location2.getLatitude());
+                nLongitude = String.valueOf(location2.getLongitude());
+            }else{
+                message = "Unable to Trace your location";
+//                listner.OnFailedRetrieve("Unable to Trace your location");
+            }
+
+//            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+//                    LOCATION_REFRESH_DISTANCE, mLocationListener);
+
+        }else {
+
+            ActivityCompat.requestPermissions(poActivty, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+    }
+    // Stop location updates
+    public void stopLocationUpdates() {
+        if (locManager != null) {
+            locManager.removeUpdates(mLocationListener);
+        }
+    }
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            nLatitude = String.valueOf(location.getLatitude());
+            nLongitude = String.valueOf(location.getLongitude());
+            Log.e("nLatitude",nLatitude);
+            Log.e("nLongitude",nLongitude);
+        }
+    };
 }

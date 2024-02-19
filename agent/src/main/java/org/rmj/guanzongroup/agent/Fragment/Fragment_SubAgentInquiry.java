@@ -1,15 +1,16 @@
 package org.rmj.guanzongroup.agent.Fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
 import org.rmj.guanzongroup.agent.R;
 import org.rmj.guanzongroup.agent.ViewModel.VMAgentInfo;
+import org.rmj.guanzongroup.ganado.Dialog.DialogInquiryHistory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +32,7 @@ public class Fragment_SubAgentInquiry extends Fragment {
     private VMAgentInfo mViewModel;
     private RecyclerView rvInquiries;
     private TextView lblNoData;
-    private LinearLayout lnLoading;
+    private ConstraintLayout lnLoading;
     private MessageBox loMessage;
 
     public Fragment_SubAgentInquiry() {
@@ -63,6 +65,7 @@ public class Fragment_SubAgentInquiry extends Fragment {
             public void OnExecute() {
 //                hideInquiries();
 //                hideAgents();
+                rvInquiries.setVisibility(View.GONE);
                 lnLoading.setVisibility(View.VISIBLE);
             }
 
@@ -87,9 +90,20 @@ public class Fragment_SubAgentInquiry extends Fragment {
             if (inquiries.size() > 0){
 
                 lblNoData.setVisibility(View.GONE);
+                rvInquiries.setVisibility(View.VISIBLE);
                 InquiryListAdapter adapter= new InquiryListAdapter(requireActivity().getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
+
+                        DialogInquiryHistory dHistory = new DialogInquiryHistory(requireActivity());
+                        dHistory.initDialog(getActivity().getApplication(), mViewModel.GetInquiry(TransNox));
+                        dHistory.setPositiveButton("Close", new DialogInquiryHistory.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dHistory.show();
 //                        Intent intent = new Intent(Activity_Inquiries.this, Activity_ProductSelection.class);
 //                        intent.putExtra("TransNox",TransNox);
 //                        startActivity(intent);
@@ -105,6 +119,7 @@ public class Fragment_SubAgentInquiry extends Fragment {
 
             }else{
                 lblNoData.setVisibility(View.VISIBLE);
+                rvInquiries.setVisibility(View.GONE);
             }
         });
     }

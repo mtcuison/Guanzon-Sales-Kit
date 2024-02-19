@@ -17,6 +17,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.lib.Ganado.Obj.InquiryListAdapter;
+import org.rmj.guanzongroup.ganado.Dialog.DialogInquiryHistory;
 import org.rmj.guanzongroup.ganado.R;
 import org.rmj.guanzongroup.ganado.ViewModel.VMInquiry;
 
@@ -88,7 +89,24 @@ public class Activity_Inquiries extends AppCompatActivity {
                 InquiryListAdapter adapter= new InquiryListAdapter(getApplication(), inquiries, new InquiryListAdapter.OnModelClickListener() {
                     @Override
                     public void OnClick(String TransNox) {
-
+                        DialogInquiryHistory dHistory = new DialogInquiryHistory(Activity_Inquiries.this);
+                        dHistory.initDialog(getApplication(), mViewModel.GetInquiry(TransNox));
+                        dHistory.setPositiveButton("Close", new DialogInquiryHistory.DialogButton() {
+                            @Override
+                            public void OnButtonClick(View view, AlertDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dHistory.show();
+//                        DialogInquiryHistory dHistory = new DialogInquiryHistory(getApplication());
+//                        dHistory.initInquiryHistory(TransNox, new DialogInquiryHistory.DialogButtonClickListener() {
+//                            @Override
+//                            public void OnClick(Dialog dialog, String remarksCode) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//                        dHistory.show();
                     }
 
                 });

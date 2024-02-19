@@ -20,14 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import org.rmj.g3appdriver.GCircle.Apps.ApprovalCode.ApprovalCode;
-import org.rmj.g3appdriver.GCircle.Apps.CashCount.CashCount;
-import org.rmj.g3appdriver.GCircle.Apps.CreditApp.CreditOnlineApplication;
-import org.rmj.g3appdriver.GCircle.Apps.Itinerary.Obj.EmployeeItinerary;
-import org.rmj.g3appdriver.GCircle.Apps.PetManager.Obj.EmployeeLeave;
-import org.rmj.g3appdriver.GCircle.Apps.PetManager.Obj.EmployeeOB;
-import org.rmj.g3appdriver.GCircle.room.Repositories.DeviceLocationRecords;
-import org.rmj.g3appdriver.lib.Notifications.Obj.Payslip;
 import org.rmj.g3appdriver.utils.ConnectionUtil;
 import org.rmj.g3appdriver.utils.Task.OnDoBackgroundTaskListener;
 import org.rmj.g3appdriver.utils.Task.TaskExecutor;
@@ -163,8 +155,9 @@ public class DataSyncService extends BroadcastReceiver {
             }
 
             @Override
-            public void OnPostExecute(Object object) {
+            public double OnPostExecute(Object object) {
 
+                return 0;
             }
         });
     }

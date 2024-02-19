@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,7 +53,11 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         setContentView(R.layout.activity_product_inquiry);
         initWidgets();
 
+        spnPayment.setText(GConstants.PAYMENT_FORM[0]);
         spnPayment.setAdapter(GConstants.getAdapter(Activity_ProductInquiry.this, GConstants.PAYMENT_FORM));
+
+        // Set the selected index programmatically
+        // Replace with the desired index
         spnAcctTerm.setText(GConstants.INSTALLMENT_TERM[0]);
         spnAcctTerm.setAdapter(GConstants.getAdapter(Activity_ProductInquiry.this, GConstants.INSTALLMENT_TERM));
         mViewModel.setBrandID(getIntent().getStringExtra("lsBrandID"));
@@ -66,6 +71,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         mViewModel.getModel().setBrandIDx(lsBrandID);
         mViewModel.getModel().setModelIDx(lsModelID);
         mViewModel.getModel().setTermIDxx("36");
+        mViewModel.getModel().setPaymForm("0");
 
         mViewModel.GetModelBrand(lsBrandID, lsModelID).observe(Activity_ProductInquiry.this, eMcModel -> {
             try {
@@ -132,25 +138,39 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-
         txtDTarget.setOnClickListener(v -> {
             final Calendar newCalendar = Calendar.getInstance();
             @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM dd, yyyy");
+
+            // Set the maximum date to one month from the current date
+            newCalendar.add(Calendar.MONTH, 1);
+            long maxDateInMillis = newCalendar.getTimeInMillis();
+
             final DatePickerDialog StartTime = new DatePickerDialog(Activity_ProductInquiry.this,
                     android.R.style.Theme_Holo_Dialog, (view131, year, monthOfYear, dayOfMonth) -> {
                 try {
                     Calendar newDate = Calendar.getInstance();
                     newDate.set(year, monthOfYear, dayOfMonth);
-                    String lsDate = dateFormatter.format(newDate.getTime());
-                    txtDTarget.setText(lsDate);
-                    Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
-                    lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
-                    mViewModel.getModel().setTargetxx(lsDate);
+
+                    // Check if the selected date is within one month from the current date
+                    if (newDate.getTimeInMillis() <= maxDateInMillis) {
+                        String lsDate = dateFormatter.format(newDate.getTime());
+                        txtDTarget.setText(lsDate);
+                        Date loDate = new SimpleDateFormat("MMMM dd, yyyy").parse(lsDate);
+                        lsDate = new SimpleDateFormat("yyyy-MM-dd").format(loDate);
+                        mViewModel.getModel().setTargetxx(lsDate);
+                    } else {
+                        // Show an error message or handle the case when the selected date is outside the allowed range
+                        Toast.makeText(Activity_ProductInquiry.this, "Please select a date within one month from the current date", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
             StartTime.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            StartTime.getDatePicker().setMaxDate(maxDateInMillis); // Set the maximum date
+
             StartTime.show();
         });
 
@@ -171,10 +191,13 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             String lsInput = txtDownPymnt.getText().toString().trim();
 //
             Double lnInput = FormatUIText.getParseDouble(lsInput);
+
+            mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
             mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
                 @Override
                 public void OnCalculate(double lnResult) {
                     txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                    mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
                 }
 
                 @Override
@@ -231,6 +254,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spn_color = findViewById(R.id.spn_color);
         imgMC = findViewById(R.id.imgMC);
         lnInstallment = findViewById(R.id.ln_installment);
+        lnInstallment.setVisibility(View.GONE);
 
         btnContinue = findViewById(R.id.btnContinue);
         btnCalculate = findViewById(R.id.btnCalculate);
@@ -293,12 +317,14 @@ public class Activity_ProductInquiry extends AppCompatActivity {
 
                 String lsInput = txtDownPymnt.getText().toString().trim();
                 Double lnInput = FormatUIText.getParseDouble(lsInput);
+                mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
                 double lnMonthly = mViewModel.GetMonthlyAmortization(Integer.parseInt(mViewModel.getModel().getTermIDxx()));
                 txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnMonthly)));
                 mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
                     @Override
                     public void OnCalculate(double lnResult) {
                         txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                        mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
                     }
 
                     @Override
