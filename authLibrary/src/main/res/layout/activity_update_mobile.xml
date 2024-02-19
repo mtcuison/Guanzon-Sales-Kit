@@ -89,7 +89,7 @@
                 android:id="@+id/til_ca_mobileNumber"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_mobile_number"
+                android:hint="@string/hint_email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintWidth_percent=".900">

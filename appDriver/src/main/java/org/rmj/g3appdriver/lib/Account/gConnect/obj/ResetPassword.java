@@ -62,7 +62,7 @@ public class ResetPassword implements iAuth {
                 message = SERVER_NO_RESPONSE;
                 return 0;
             }
-
+            Log.e("lsResponse",lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if (lsResult.equalsIgnoreCase("error")) {
