@@ -2,6 +2,7 @@ package org.rmj.guanzon.guanzonsaleskit.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,7 @@ import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Activity_SplashScreen extends AppCompatActivity {
     public static final String TAG = Activity_SplashScreen.class.getSimpleName();
@@ -41,10 +45,27 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
     private MessageBox poDialog;
 
-    private ActivityResultLauncher<String[]> poRequest;
+//    private ActivityResultLauncher<String[]> poRequest;
 
-    private ActivityResultLauncher<Intent> poLogin;
+//    private ActivityResultLauncher<Intent> poLogin;
 
+
+    ActivityResultLauncher<Intent> poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        InitializeData();
+                    }else if (result.getResultCode() == RESULT_CANCELED) {
+
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                }
+            });
+    ActivityResultLauncher<String[]> poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+        InitializeAppData();
+    });
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,22 +221,22 @@ public class Activity_SplashScreen extends AppCompatActivity {
             }
         });
     }
-
     private void InitActivityResultLaunchers(){
-        poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-            InitializeAppData();
-        });
-        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-//                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
-                InitializeData();
-            } else if (result.getResultCode() == RESULT_CANCELED) {
+//        poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+//            InitializeAppData();
+//        });
 
-                finishAffinity();
-                System.exit(0);
-//                finish();
-            }
-        });
+//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//            if (result.getResultCode() == RESULT_OK) {
+////                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+//                intentHome();
+//            } else if (result.getResultCode() == RESULT_CANCELED) {
+//
+//                finishAffinity();
+//                System.exit(0);
+////                finish();
+//            }
+//        });
 //        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
 //            if (result.getResultCode() == RESULT_OK) {
 //                InitializeData();
@@ -225,6 +246,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+    }
+    private void intentHome(){
+        InitializeData();
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
