@@ -29,7 +29,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
     private TextInputEditText tie_username;
     private TextInputEditText tie_password;
     private MaterialTextView lblVersion;
-    private MaterialTextView mtv_createaccount;
+    private MaterialTextView mtv_createaccount, mtv_forgot_password;
     private MaterialCheckBox cbAgree;
     private MaterialButton btn_log;
     private VMLogin mViewModel;
@@ -59,6 +59,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         lblVersion = findViewById(R.id.lbl_versionInfo);
 //        lblVersion.setText(BuildConfig.);
         mtv_createaccount = findViewById(R.id.mtv_createaccount);
+        mtv_forgot_password = findViewById(R.id.mtv_forgot_password);
         cbAgree = findViewById(R.id.cbAgree);
         btn_log = findViewById(R.id.btn_log);
 
@@ -99,6 +100,13 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_Login.this, Activity_CreateAccount.class);
+                startActivity(intent);
+            }
+        });
+        mtv_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Login.this, Activity_ForgotPassword.class);
                 startActivity(intent);
             }
         });

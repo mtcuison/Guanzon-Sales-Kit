@@ -50,6 +50,7 @@ public class Activity_Inquiries extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mViewModel = new ViewModelProvider(this).get(VMInquiry.class);
+        mViewModel.RemoveInquiry();
         mViewModel.ImportCriteria(new VMInquiry.OnTaskExecute() {
             @Override
             public void OnExecute() {

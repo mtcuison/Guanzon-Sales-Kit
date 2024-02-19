@@ -244,7 +244,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="textCapWords"
                         android:maxLength="20"
-                        android:nextFocusForward="@+id/txt_mobile"/>
+                        android:nextFocusForward="@+id/txt_whatsAppAccount"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -303,7 +303,8 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:maxLength="50" />
+                        android:maxLength="50"
+                        android:nextFocusForward="@+id/txt_weChatAccount" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -319,7 +320,8 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:maxLength="50" />
+                        android:maxLength="50"
+                        android:nextFocusForward="@+id/txt_facebookAccount"  />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -334,7 +336,8 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:maxLength="50"/>
+                        android:maxLength="50"
+                        android:nextFocusForward="@+id/txt_mobile" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -349,7 +352,7 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="number|none"
-                        android:maxLength="11"
+                        android:maxLength="20"
                         android:nextFocusForward="@+id/txt_emailAdd" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -365,7 +368,8 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
-                        android:maxLength="50"/>
+                        android:maxLength="50"
+                        android:nextFocusForward="@+id/txt_income" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.divider.MaterialDivider
@@ -406,7 +410,8 @@
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"/>
+                        android:maxLength="10"
+                        android:nextFocusForward="@+id/btnContinue"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinue"

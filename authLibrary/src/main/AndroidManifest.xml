@@ -5,6 +5,9 @@
 
     <application>
         <activity
+            android:name=".Activity.Activity_ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Activity_CreateAccount"
             android:exported="true"
             android:screenOrientation="userPortrait"

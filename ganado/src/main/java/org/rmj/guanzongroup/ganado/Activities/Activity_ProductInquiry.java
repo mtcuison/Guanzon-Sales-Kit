@@ -47,6 +47,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
     private ShapeableImageView imgMC;
     private LinearLayout lnInstallment;
     private String lsModelID, lsBrandID, lsImgLink, lsBrandNm;
+    private double minDown = 0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +126,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                         txtDownPymnt.setText(String.valueOf(loResult.getMinimumDownpayment()));
                         mViewModel.getModel().setMonthAmr(String.valueOf(loResult.getMonthlyAmortization()));
                         txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(loResult.getMonthlyAmortization())));
+                        minDown = loResult.getMinimumDownpayment();
                     }
 
                     @Override
@@ -191,46 +193,65 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             String lsInput = txtDownPymnt.getText().toString().trim();
 //
             Double lnInput = FormatUIText.getParseDouble(lsInput);
+            if(lnInput < minDown){
+                poMessage.initDialog();
+                poMessage.setTitle("Product Inquiry");
+                poMessage.setMessage("The required minimum down payment cannot be less than " + minDown);
+                poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                poMessage.show();
+            }else {
 
-            mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
-            mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
-                @Override
-                public void OnCalculate(double lnResult) {
-                    txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
-                    mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
-                }
+                mViewModel.getModel().setDownPaym(String.valueOf(lnInput));
+                mViewModel.CalculateNewDownpayment(lsModelID, Integer.parseInt(mViewModel.getModel().getTermIDxx()), lnInput, new VMProductInquiry.OnCalculateNewDownpayment() {
+                    @Override
+                    public void OnCalculate(double lnResult) {
+                        txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(lnResult)));
+                        mViewModel.getModel().setMonthAmr(String.valueOf(lnResult));
+                    }
 
-                @Override
-                public void OnFailed(String message) {
-                    poMessage.initDialog();
-                    poMessage.setTitle("Product Inquiry");
-                    poMessage.setMessage(message);
-                    poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
-                    poMessage.show();
-                    txtAmort.setText("0");
-                }
-            });
+                    @Override
+                    public void OnFailed(String message) {
+                        poMessage.initDialog();
+                        poMessage.setTitle("Product Inquiry");
+                        poMessage.setMessage(message);
+                        poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                        poMessage.show();
+                        txtAmort.setText("0");
+                    }
+                });
+            }
         });
         btnContinue.setOnClickListener(view ->{
-            mViewModel.SaveData(new OnSaveInfoListener() {
-                @Override
-                public void OnSave(String args) {
-                    //Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_ClientInfo.class);
-                    Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_FinancierInfo.class);
-                    loIntent.putExtra("sTransNox", args);
-                    startActivity(loIntent);
-                    overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
-                }
 
-                @Override
-                public void OnFailed(String message) {
-                    poMessage.initDialog();
-                    poMessage.setTitle("Product Inquiry");
-                    poMessage.setMessage(message);
-                    poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
-                    poMessage.show();
-                }
-            });
+            String lsInput = txtDownPymnt.getText().toString().trim();
+            Double lnInput = FormatUIText.getParseDouble(lsInput);
+            if(lnInput < minDown){
+                poMessage.initDialog();
+                poMessage.setTitle("Product Inquiry");
+                poMessage.setMessage("The required minimum down payment cannot be less than " + minDown);
+                poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                poMessage.show();
+            }else{
+                mViewModel.SaveData(new OnSaveInfoListener() {
+                    @Override
+                    public void OnSave(String args) {
+                        //Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_ClientInfo.class);
+                        Intent loIntent = new Intent(Activity_ProductInquiry.this, Activity_FinancierInfo.class);
+                        loIntent.putExtra("sTransNox", args);
+                        startActivity(loIntent);
+                        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+                    }
+
+                    @Override
+                    public void OnFailed(String message) {
+                        poMessage.initDialog();
+                        poMessage.setTitle("Product Inquiry");
+                        poMessage.setMessage(message);
+                        poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
+                        poMessage.show();
+                    }
+                });
+            }
         });
     }
 

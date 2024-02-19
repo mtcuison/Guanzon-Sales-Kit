@@ -100,7 +100,16 @@
         android:text="Not Registered? Click Here"
         android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@+id/passw_layout"
-        app:layout_constraintStart_toStartOf="@+id/passw_layout"
+        app:layout_constraintStart_toStartOf="@+id/passw_layout"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/DescriptionHeaderStyle"
+        android:id="@+id/mtv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Forgot Password"
+        app:layout_constraintTop_toBottomOf="@+id/passw_layout"
         app:layout_constraintEnd_toEndOf="@+id/passw_layout"/>
 
     <LinearLayout

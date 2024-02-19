@@ -41,6 +41,9 @@ public class VMInquiry extends AndroidViewModel {
     public LiveData<List<EGanadoOnline>> GetInquiries(String UserID){
         return poSys.GetByAgentInquiries(UserID);
     }
+    public void RemoveInquiry(){
+        poSys.RemoveInquiry();
+    }
     public EGanadoOnline GetInquiry(String sTransNox){
         return poSys.GetInquiry(sTransNox);
     }
