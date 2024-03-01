@@ -92,25 +92,21 @@ public class Activity_SplashScreen extends AppCompatActivity {
     }
 
     private void InitializeAppContentDisclosure(){
-        boolean isFirstLaunch = AppConfigPreference.getInstance(Activity_SplashScreen.this).isAppFirstLaunch();
-        if(isFirstLaunch) {
-            MessageBox loMessage = new MessageBox(Activity_SplashScreen.this);
-            loMessage.initDialog();
-            loMessage.setTitle("Guanzon Sales Kit");
-            loMessage.setMessage("Guanzon  Sales Kit collects data and other major features of the app" +
-                    " even when the app is closed or not in use.");
-            loMessage.setPositiveButton("Agree", (view, dialog) -> {
-                dialog.dismiss();
-                CheckPermissions();
-            });
-            loMessage.setNegativeButton("Disagree", (view, dialog) -> {
-                dialog.dismiss();
-                finish();
-            });
-            loMessage.show();
-        } else {
+        MessageBox loMessage = new MessageBox(Activity_SplashScreen.this);
+        loMessage.initDialog();
+        loMessage.setTitle("Guanzon Sales Kit");
+        loMessage.setMessage("Guanzon Sales Kit collects and stores your phone number to provide security for any transactions made within the mobile app. " +
+                "This collection makes it easier to authenticate and verify your account in order to prevent unauthorized access. " +
+                "It also collects location information for automotive and motorcycle-related queries.");
+        loMessage.setPositiveButton("Agree", (view, dialog) -> {
+            dialog.dismiss();
             CheckPermissions();
-        }
+        });
+        loMessage.setNegativeButton("Disagree", (view, dialog) -> {
+            dialog.dismiss();
+            finish();
+        });
+        loMessage.show();
     }
 
     private void CheckPermissions(){
