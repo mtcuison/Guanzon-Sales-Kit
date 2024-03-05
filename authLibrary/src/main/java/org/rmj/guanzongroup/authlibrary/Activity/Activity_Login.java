@@ -28,7 +28,7 @@ import java.util.Objects;
 public class Activity_Login extends AppCompatActivity implements LoginCallback {
     private TextInputEditText tie_username;
     private TextInputEditText tie_password;
-    private MaterialTextView lblVersion;
+    private MaterialTextView lblVersion,mtvTerms;
     private MaterialTextView mtv_createaccount, mtv_forgot_password;
     private MaterialCheckBox cbAgree;
     private MaterialButton btn_log;
@@ -57,6 +57,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
         tie_username = findViewById(R.id.username);
         tie_password = findViewById(R.id.password);
         lblVersion = findViewById(R.id.lbl_versionInfo);
+        mtvTerms = findViewById(R.id.tvTerms);
 //        lblVersion.setText(BuildConfig.);
         mtv_createaccount = findViewById(R.id.mtv_createaccount);
         mtv_forgot_password = findViewById(R.id.mtv_forgot_password);
@@ -111,6 +112,13 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
             }
         });
 
+        mtvTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentTerms = new Intent(Activity_Login.this, Activity_TermsAndConditions.class);
+                startActivity(intentTerms);
+            }
+        });
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {

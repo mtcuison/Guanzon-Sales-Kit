@@ -1,7 +1,10 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
+import static org.rmj.g3appdriver.utils.ServiceScheduler.FIFTEEN_MINUTE_PERIODIC;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +25,20 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
+import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.etc.TransparentToolbar;
 import org.rmj.g3appdriver.utils.AppDirectoryCreator;
+import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
 import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Activity_SplashScreen extends AppCompatActivity {
     public static final String TAG = Activity_SplashScreen.class.getSimpleName();
@@ -41,10 +50,29 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
     private MessageBox poDialog;
 
-    private ActivityResultLauncher<String[]> poRequest;
+//    private ActivityResultLauncher<String[]> poRequest;
 
-    private ActivityResultLauncher<Intent> poLogin;
+//    private ActivityResultLauncher<Intent> poLogin;
 
+
+    ActivityResultLauncher<Intent> poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+
+                        InitializeData();
+                    }else if (result.getResultCode() == RESULT_CANCELED) {
+
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                }
+            });
+    ActivityResultLauncher<String[]> poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+        InitializeAppData();
+    });
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,25 +99,21 @@ public class Activity_SplashScreen extends AppCompatActivity {
     }
 
     private void InitializeAppContentDisclosure(){
-        boolean isFirstLaunch = AppConfigPreference.getInstance(Activity_SplashScreen.this).isAppFirstLaunch();
-        if(isFirstLaunch) {
-            MessageBox loMessage = new MessageBox(Activity_SplashScreen.this);
-            loMessage.initDialog();
-            loMessage.setTitle("Guanzon Sales Kit");
-            loMessage.setMessage("Guanzon  Sales Kit collects data and other major features of the app" +
-                    " even when the app is closed or not in use.");
-            loMessage.setPositiveButton("Agree", (view, dialog) -> {
-                dialog.dismiss();
-                CheckPermissions();
-            });
-            loMessage.setNegativeButton("Disagree", (view, dialog) -> {
-                dialog.dismiss();
-                finish();
-            });
-            loMessage.show();
-        } else {
+        MessageBox loMessage = new MessageBox(Activity_SplashScreen.this);
+        loMessage.initDialog();
+        loMessage.setTitle("Guanzon Sales Kit");
+        loMessage.setMessage("Guanzon Sales Kit collects and stores your phone number to provide security for any transactions made within the mobile app. " +
+                "This collection makes it easier to authenticate and verify your account in order to prevent unauthorized access. " +
+                "It also collects location information for automotive and motorcycle-related queries.");
+        loMessage.setPositiveButton("Agree", (view, dialog) -> {
+            dialog.dismiss();
             CheckPermissions();
-        }
+        });
+        loMessage.setNegativeButton("Disagree", (view, dialog) -> {
+            dialog.dismiss();
+            finish();
+        });
+        loMessage.show();
     }
 
     private void CheckPermissions(){
@@ -200,22 +224,22 @@ public class Activity_SplashScreen extends AppCompatActivity {
             }
         });
     }
-
     private void InitActivityResultLaunchers(){
-        poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-            InitializeAppData();
-        });
-        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-//                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
-                InitializeData();
-            } else if (result.getResultCode() == RESULT_CANCELED) {
+//        poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+//            InitializeAppData();
+//        });
 
-                finishAffinity();
-                System.exit(0);
-//                finish();
-            }
-        });
+//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//            if (result.getResultCode() == RESULT_OK) {
+////                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+//                intentHome();
+//            } else if (result.getResultCode() == RESULT_CANCELED) {
+//
+//                finishAffinity();
+//                System.exit(0);
+////                finish();
+//            }
+//        });
 //        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
 //            if (result.getResultCode() == RESULT_OK) {
 //                InitializeData();
@@ -225,6 +249,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+    }
+    private void intentHome(){
+        InitializeData();
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {

@@ -201,16 +201,23 @@ public class RMcModel {
                     poDao.insert(loModel);
                     Log.d(TAG, "Mc model info has been saved.");
                 } else {
-                    Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
-                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
-                    if (!ldDate1.equals(ldDate2)) {
-                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
-                        loDetail.setColorIDx(loJson.getString("sColorIDx"));
-                        loDetail.setColorNme(loJson.getString("sColorNme"));
-                        loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
-                        poDao.update(loDetail);
-                        Log.d(TAG, "Mc model info has been updated.");
-                    }
+
+                    loDetail.setModelIDx(loJson.getString("sModelIDx"));
+                    loDetail.setColorIDx(loJson.getString("sColorIDx"));
+                    loDetail.setColorNme(loJson.getString("sColorNme"));
+                    loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
+                    poDao.update(loDetail);
+                    Log.d(TAG, "Mc model info has been updated.");
+//                    Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
+//                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
+//                    if (!ldDate1.equals(ldDate2)) {
+//                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
+//                        loDetail.setColorIDx(loJson.getString("sColorIDx"));
+//                        loDetail.setColorNme(loJson.getString("sColorNme"));
+//                        loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
+//                        poDao.update(loDetail);
+//                        Log.d(TAG, "Mc model info has been updated.");
+//                    }
                 }
             }
             return true;
@@ -252,6 +259,7 @@ public class RMcModel {
             }
 
             JSONArray laJson = loResponse.getJSONArray("detail");
+            Log.e("laJson",laJson.toString());
             for(int x = 0; x < laJson.length(); x++){
                 JSONObject loJson = laJson.getJSONObject(x);
                 String lsModelID = loJson.getString("sModelIDx");

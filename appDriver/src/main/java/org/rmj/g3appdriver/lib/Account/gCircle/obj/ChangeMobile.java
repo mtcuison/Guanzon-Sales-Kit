@@ -44,21 +44,23 @@ public class ChangeMobile implements iAuth {
         try{
             JSONObject loParams = new JSONObject();
             loParams.put("sTransNox", CreateUniqueID());
-            loParams.put("sClientID", poSession.getClientID());
-            loParams.put("cReqstCDe", "");
+            loParams.put("sClientID", "");
+            loParams.put("cReqstCDe", "0");
             loParams.put("sMobileNo", params.toString());
-            loParams.put("cPrimaryx", "");
+            loParams.put("cPrimaryx", "1");
             loParams.put("sRemarksx", "");
-            loParams.put("sSourceCD", "");
-            loParams.put("sSourceNo", "");
-            loParams.put("mail", poUser.GetClientInfo().getEmailAdd());
+            loParams.put("sSourceCD", "SKit");
+            loParams.put("sSourceNo", poSession.getUserID());
+            loParams.put("sEmailAdd", poUser.GetClientInfo().getEmailAdd());
 
-            String sResponse = WebClient.sendRequest(poApi.getUrlNewChangeMobile(), loParams.toString(), poHeaders.getHeaders());
+            String sResponse = WebClient.sendRequest(
+                    poApi.getUrlNewChangeMobile(),
+                    loParams.toString(),
+                    poHeaders.getHeaders());
             if(sResponse == null){
                 message = SERVER_NO_RESPONSE;
                 return 0;
             }
-
             JSONObject loResponse = new JSONObject(sResponse);
             String lsResult = loResponse.getString("result");
             if (lsResult.equalsIgnoreCase("error")) {

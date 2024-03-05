@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+import com.squareup.picasso.Picasso;
 
 import org.rmj.g3appdriver.etc.FormatUIText;
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -68,6 +70,8 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         lsModelID = getIntent().getStringExtra("lsModelID");
         lsImgLink = getIntent().getStringExtra("lsImgLink");
         lsBrandNm = getIntent().getStringExtra("lsBrandNm");
+        Log.e("lsBrandID", lsBrandID);
+        Log.e("lsModelID", lsModelID);
 
         mViewModel.getModel().setBrandIDx(lsBrandID);
         mViewModel.getModel().setModelIDx(lsModelID);
@@ -79,13 +83,17 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                 txtBrandNm.setText("Brand: " + getIntent().getStringExtra("lsBrandNm"));
                 txtModelNm.setText("Model: " + eMcModel.getModelNme());
                 txtModelCd.setText("Code: " + eMcModel.getModelCde());
-                ImageFileManager.LoadImageToView(lsImgLink, imgMC);
+                String imgLink = (lsImgLink == null)? "": lsImgLink;
+                if(!imgLink.isEmpty()){
+                    ImageFileManager.LoadImageToView(lsImgLink, imgMC);
+                }
             }catch (NullPointerException e){
                 e.printStackTrace();
             }catch (Exception e){
                 e.printStackTrace();
             }
         });
+
         mViewModel.GetModelColor(lsModelID).observe(Activity_ProductInquiry.this, colorList->{
             try {
                 ArrayList<String> string = new ArrayList<>();
