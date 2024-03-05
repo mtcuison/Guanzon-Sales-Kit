@@ -1,5 +1,7 @@
 package org.rmj.guanzon.guanzonsaleskit.Activities;
 
+import static org.rmj.g3appdriver.utils.ServiceScheduler.FIFTEEN_MINUTE_PERIODIC;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,10 +25,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textview.MaterialTextView;
 
 import org.rmj.g3appdriver.etc.AppConfigPreference;
+import org.rmj.g3appdriver.etc.AppConstants;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.g3appdriver.etc.TransparentToolbar;
 import org.rmj.g3appdriver.utils.AppDirectoryCreator;
+import org.rmj.g3appdriver.utils.ServiceScheduler;
 import org.rmj.guanzon.guanzonsaleskit.R;
+import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
 import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
@@ -55,6 +60,8 @@ public class Activity_SplashScreen extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
+                        ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
+
                         InitializeData();
                     }else if (result.getResultCode() == RESULT_CANCELED) {
 
