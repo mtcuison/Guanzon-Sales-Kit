@@ -37,6 +37,8 @@ public class Activity_About extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 IntentSettings(Activity_TermsAndConditions.class);
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+
             }
         });
 
@@ -48,12 +50,15 @@ public class Activity_About extends AppCompatActivity {
                 intent.putExtra("url_link", "https://www.guanzongroup.com.ph/guanzon-sales-kit/");
                 intent.putExtra("args", "0");
                 startActivity(intent);
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+
             }
         });
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
                 finish();
             }
         });
@@ -63,6 +68,8 @@ public class Activity_About extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             onBackPressed();
+
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
             finish();
         }
         return super.onOptionsItemSelected(item);

@@ -259,7 +259,6 @@ public class RMcModel {
             }
 
             JSONArray laJson = loResponse.getJSONArray("detail");
-            Log.e("laJson",laJson.toString());
             for(int x = 0; x < laJson.length(); x++){
                 JSONObject loJson = laJson.getJSONObject(x);
                 String lsModelID = loJson.getString("sModelIDx");

@@ -2,8 +2,11 @@ package org.rmj.guanzongroup.agent.Activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -91,12 +94,6 @@ public class Activity_UserPerformance extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set back button to toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true); //enable the back button set on toolbar
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         mViewModel.GetUserCountEntries().observe(Activity_UserPerformance.this, new Observer<DGanadoOnline.CountEntries>() {
             @Override
             public void onChanged(DGanadoOnline.CountEntries countEntries) {
@@ -118,5 +115,25 @@ public class Activity_UserPerformance extends AppCompatActivity {
             }
         });
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+                finish();
+            }
+        });
+
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
