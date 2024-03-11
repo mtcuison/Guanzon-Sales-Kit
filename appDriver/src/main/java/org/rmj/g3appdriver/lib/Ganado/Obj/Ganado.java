@@ -260,12 +260,8 @@ public class Ganado {
             params.put("dCreatedx", loDetail.getCreatedx());
             params.put("dTargetxx", loDetail.getTargetxx());
             params.put("sRelatnID", loDetail.getRelatnID());
-//            params.put("nLatitude", 1.00);
-//            params.put("nLongitud", 2.00);
             params.put("nLatitude", nLatitude);
             params.put("nLongitud", nLongitude);
-            Log.e("nLatitude", String.valueOf(nLatitude));
-            Log.e("nLongitud", String.valueOf(nLongitude));
 
             params.put("sReferdBy", poSession.getUserID());
             params.put("sClntInfo", loDetail.getClntInfo());
@@ -283,8 +279,6 @@ public class Ganado {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
-//            message = lsResponse;
-            Log.e("lsResponse", lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){
@@ -325,7 +319,6 @@ public class Ganado {
                     poApi.getUrlImportSKPerformance(),
                     params.toString(),
                     poHeaders.getHeaders());
-            Log.e(TAG, poApi.getUrlImportSKPerformance());
             if(lsResponse == null){
                 message = SERVER_NO_RESPONSE;
                 return false;
@@ -446,7 +439,6 @@ public class Ganado {
             lsUniqIDx = loBuilder.toString();
         } catch (Exception e){
             e.printStackTrace();
-            Log.e(TAG, e.getMessage());
         }
         Log.d(TAG, lsUniqIDx);
         return lsUniqIDx;
@@ -499,8 +491,6 @@ public class Ganado {
         public void onLocationChanged(final Location location) {
             nLatitude = String.valueOf(location.getLatitude());
             nLongitude = String.valueOf(location.getLongitude());
-            Log.e("nLatitude",nLatitude);
-            Log.e("nLongitude",nLongitude);
         }
     };
 }

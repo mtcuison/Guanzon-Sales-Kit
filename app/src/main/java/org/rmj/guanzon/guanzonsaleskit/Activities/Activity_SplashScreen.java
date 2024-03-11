@@ -92,9 +92,9 @@ public class Activity_SplashScreen extends AppCompatActivity {
 
         AppDirectoryCreator loCreator = new AppDirectoryCreator();
         if(loCreator.createAppDirectory(Activity_SplashScreen.this)){
-            Log.e(TAG, loCreator.getMessage());
+            Log.d(TAG, loCreator.getMessage());
         } else {
-            Log.e(TAG, loCreator.getMessage());
+            Log.d(TAG, loCreator.getMessage());
         }
     }
 
@@ -193,6 +193,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
         mViewModel.InitUserData(new VMSplashScreen.OnInitializeCallback() {
             @Override
             public void OnProgress(String args, int progress) {
+                
                 prgrssBar.setProgress(progress);
             }
 

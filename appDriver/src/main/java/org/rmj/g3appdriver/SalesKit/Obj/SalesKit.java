@@ -175,7 +175,6 @@ public class SalesKit {
 
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
-            Log.e("TAG", lsResult);
             if(lsResult.equalsIgnoreCase("error")){
                 JSONObject loError = loResponse.getJSONObject("error");
                 message = getErrorMessage(loError);
@@ -266,7 +265,6 @@ public class SalesKit {
     }
     public boolean SubmitUpLine(String UserIDxx){
         try{
-            Log.e(TAG, UserIDxx);
             JSONObject params = new JSONObject();
             params.put("sUserIDxx", poSession.getUserID());
             params.put("nRoleIdxx", "0");
@@ -282,7 +280,6 @@ public class SalesKit {
                 message = SERVER_NO_RESPONSE;
                 return false;
             }
-            Log.e("lsResponse",lsResponse);
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if(lsResult.equalsIgnoreCase("error")){
@@ -328,7 +325,6 @@ public class SalesKit {
             lsUniqIDx = loBuilder.toString();
         } catch (Exception e){
             e.printStackTrace();
-            Log.e(TAG, e.getMessage());
         }
         Log.d(TAG, lsUniqIDx);
         return lsUniqIDx;

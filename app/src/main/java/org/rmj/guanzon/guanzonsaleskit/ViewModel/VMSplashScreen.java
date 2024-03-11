@@ -79,8 +79,8 @@ public class VMSplashScreen extends AndroidViewModel {
         ETokenInfo loToken = new ETokenInfo();
         loToken.setTokenInf("temp_token");
         CheckConnection();
-        Log.e("userid",poSession.getUserID());
-        Log.e("isTesting_Phase", String.valueOf(poConfig.getTestStatus()));
+        Log.d("userid",poSession.getUserID());
+        Log.d("isTesting_Phase", String.valueOf(poConfig.getTestStatus()));
     }
 
     public void SaveFirebaseToken(String fsVal){
@@ -133,88 +133,88 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (!poPromoEvents.ImportPromosLinks()){
                             Log.d(TAG, "Unable to import promo links");
                         }
-                        loTask.publishProgress(2);
+                        loTask.publishProgress(1);
                         Thread.sleep(1000);
 
                         Log.d(TAG, "Importing Event Links");
                         if (!poPromoEvents.ImportEventsLinks()){
                             Log.d(TAG, "Unable to import events link");
                         }
-                        loTask.publishProgress(8);
+                        loTask.publishProgress(2);
                         Thread.sleep(1000);
 
                         if (new RMcModel(instance).ImportMCModel()) {
                             Log.d(TAG, "MC Model imported successfully...");
                         }
-                        loTask.publishProgress(15);
-                        Thread.sleep(500);
+                        loTask.publishProgress(3);
+                        Thread.sleep(1000);
                         if (new RMcModel(instance).ImportCashPrices()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
-                        loTask.publishProgress(25);
-                        Thread.sleep(500);
+                        loTask.publishProgress(4);
+                        Thread.sleep(1000);
                         if (new RMcModel(instance).ImportModelColor()) {
                             Log.d(TAG, "MC Model Color imported successfully...");
                         }
-                        loTask.publishProgress(35);
-                        Thread.sleep(500);
+                        loTask.publishProgress(5);
+                        Thread.sleep(1000);
 
                         if (new RMcBrand(instance).ImportMCBrands()) {
                             Log.d(TAG, "MC Brand imported successfully...");
                         }
-                        loTask.publishProgress(45);
-                        Thread.sleep(500);
+                        loTask.publishProgress(6);
+                        Thread.sleep(1000);
                         if (new RMcModelPrice(instance).ImportMcModelPrice()) {
                             Log.d(TAG, "MC Model Cash Prices imported successfully...");
                         }
 
-                        loTask.publishProgress(55);
-                        Thread.sleep(500);
+                        loTask.publishProgress(7);
+                        Thread.sleep(1000);
 
 
                         if (new RMcCategory(instance).ImportMcCategory()) {
                             Log.d(TAG, "MC Category imported successfully...");
                         }
 
-                        loTask.publishProgress(60);
-                        Thread.sleep(500);
+                        loTask.publishProgress(8);
+                        Thread.sleep(1000);
 
                         if (new RMcTermCategory(instance).ImportMcTermCategory()) {
                             Log.d(TAG, "MC Term Category imported successfully...");
                         }
-                        loTask.publishProgress(68);
-                        Thread.sleep(500);
+                        loTask.publishProgress(9);
+                        Thread.sleep(1000);
                         if (poSession.getLoginStatus()){
 
                             if(!new Relation(instance).ImportRelations()){
-                                Log.e(TAG, "Unable to import relationship");
+                                Log.d(TAG, "Unable to import relationship");
                             }
 
-                            loTask.publishProgress(75);
+                            loTask.publishProgress(60);
 
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
                             if (new ClientMasterSalesKit(instance).ImportClientProfile(poSession.getUserID())) {
                                 Log.d(TAG, "Client Profile imported successfully...");
                             }
-                            loTask.publishProgress(80);
-                            Thread.sleep(500);
+                            loTask.publishProgress(75);
+                            Thread.sleep(1000);
 
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
-                            loTask.publishProgress(85);
-                            Thread.sleep(500);
+                            loTask.publishProgress(80);
+                            Thread.sleep(1000);
 
                             if (!new SalesKit(instance).ImportKPOPAgent()) {
                                 Log.d(TAG, "KPOP Agent imported successfully...");
                             }
-                            loTask.publishProgress(98);
-                            Thread.sleep(500);
+                            loTask.publishProgress(85);
+                            Thread.sleep(1000);
                         }
                         if (poConfig.isAppFirstLaunch()){
 
                             if(!new Branch(instance).ImportBranches()){
-                                Log.e(TAG, "Unable to import branches");
+                                Log.d(TAG, "Unable to import branches");
                             }
 
                             loTask.publishProgress(65);
@@ -222,30 +222,30 @@ public class VMSplashScreen extends AndroidViewModel {
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing province data.");
                             if(!new Province(instance).ImportProvince()){
-                                Log.e(TAG, "Unable to import province");
+                                Log.d(TAG, "Unable to import province");
                             }
                             loTask.publishProgress(75);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing town data.");
                             if(!new Town(instance).ImportTown()){
-                                Log.e(TAG, "Unable to import town");
+                                Log.d(TAG, "Unable to import town");
                             }
-                            loTask.publishProgress(85);
+                            loTask.publishProgress(80);
 
                             Thread.sleep(1000);
                             Log.d(TAG, "Initializing barangay data.");
                             if(!new Barangay(instance).ImportBarangay()){
-                                Log.e(TAG, "Unable to import barangay");
+                                Log.d(TAG, "Unable to import barangay");
                             }
-                            loTask.publishProgress(95);
+                            loTask.publishProgress(85);
                             Thread.sleep(1000);
 
                             Log.d(TAG, "Initializing country data.");
                             if(!new Country(instance).ImportCountry()){
-                                Log.e(TAG, "Unable to import country");
+                                Log.d(TAG, "Unable to import country");
                             }
-                            loTask.publishProgress(99);
+                            loTask.publishProgress(90);
                             Thread.sleep(1000);
 
                         }
@@ -282,7 +282,8 @@ public class VMSplashScreen extends AndroidViewModel {
                 } else {
                     lsArgs = "Updating Data...";
                 }
-                if(progress < 5) {
+
+                if(progress < 10) {
                     mListener.OnProgress(lsArgs, progress);
                 } else {
                     mListener.OnHasDCP();
@@ -318,7 +319,7 @@ public class VMSplashScreen extends AndroidViewModel {
                         if (poSession.getLoginStatus()){
 
                             if(!new Relation(instance).ImportRelations()){
-                                Log.e(TAG, "Unable to import relationship");
+                                Log.d(TAG, "Unable to import relationship");
                             }
 
                             loTask.publishProgress(5);
@@ -337,24 +338,24 @@ public class VMSplashScreen extends AndroidViewModel {
                             loTask.publishProgress(15);
                             Thread.sleep(1000);
 
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
                             if (new ClientMasterSalesKit(instance).ImportClientProfile(poSession.getUserID())) {
                                 Log.d(TAG, "Client Profile imported successfully...");
                             }
                             loTask.publishProgress(88);
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
 
                             if (new Ganado(instance).ImportInquiries()) {
                                 Log.d(TAG, "Inquiries imported successfully...");
                             }
                             loTask.publishProgress(90);
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
 
                             if (!new SalesKit(instance).ImportKPOPAgent()) {
                                 Log.d(TAG, "KPOP Agent imported successfully...");
                             }
                             loTask.publishProgress(99);
-                            Thread.sleep(500);
+                            Thread.sleep(1000);
                         }
 
                         if(!poSession.getLoginStatus()){
