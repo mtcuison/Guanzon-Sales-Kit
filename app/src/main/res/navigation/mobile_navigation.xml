@@ -45,6 +45,11 @@
         android:name="org.rmj.guanzongroup.ganado.Activities.Activity_Inquiries"
         android:label="Agent List"
         tools:layout="@layout/activity_settings" />
+    <activity
+        android:id="@+id/nav_about"
+        android:name="org.rmj.guanzon.guanzonsaleskit.Activities.Activity_About"
+        android:label="About"
+        tools:layout="@layout/activity_about" />
 
 <!--    <activity-->
 <!--        android:id="@+id/nav_log_out"-->

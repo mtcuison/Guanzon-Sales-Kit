@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -197,6 +198,7 @@ public class Activity_Home extends AppCompatActivity {
 //                finish();
             }
         });
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             // Handle or log the exception
@@ -227,6 +229,9 @@ public class Activity_Home extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+
+        overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_right, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_left);
+
         return true;
     }
 
@@ -239,6 +244,7 @@ public class Activity_Home extends AppCompatActivity {
         } else if (item.getItemId() == R.id.nav_inquiry) {
             loIntent = new Intent(Activity_Home.this, Activity_Inquiries.class);
             startActivity(loIntent);
+
         }else if (item.getItemId() == R.id.nav_setupline) {
             loIntent = new Intent(Activity_Home.this, Activity_SelectUpLine.class);
             loIntent.putExtra("isComplete", isCompleteAccount);
@@ -261,6 +267,8 @@ public class Activity_Home extends AppCompatActivity {
         }else {
             startActivity(new Intent(Activity_Home.this, Activity_NotificationList.class));
         }
+        Log.e("menu", String.valueOf(item.getItemId()));
+
         return super.onOptionsItemSelected(item);
     }
 

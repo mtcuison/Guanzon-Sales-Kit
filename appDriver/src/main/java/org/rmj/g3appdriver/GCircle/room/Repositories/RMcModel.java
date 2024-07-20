@@ -201,16 +201,23 @@ public class RMcModel {
                     poDao.insert(loModel);
                     Log.d(TAG, "Mc model info has been saved.");
                 } else {
-                    Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
-                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
-                    if (!ldDate1.equals(ldDate2)) {
-                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
-                        loDetail.setColorIDx(loJson.getString("sColorIDx"));
-                        loDetail.setColorNme(loJson.getString("sColorNme"));
-                        loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
-                        poDao.update(loDetail);
-                        Log.d(TAG, "Mc model info has been updated.");
-                    }
+
+                    loDetail.setModelIDx(loJson.getString("sModelIDx"));
+                    loDetail.setColorIDx(loJson.getString("sColorIDx"));
+                    loDetail.setColorNme(loJson.getString("sColorNme"));
+                    loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
+                    poDao.update(loDetail);
+                    Log.d(TAG, "Mc model info has been updated.");
+//                    Date ldDate1 = SQLUtil.toDate(loDetail.getTimeStmp(), SQLUtil.FORMAT_TIMESTAMP);
+//                    Date ldDate2 = SQLUtil.toDate((String) loJson.get("dTimeStmp"), SQLUtil.FORMAT_TIMESTAMP);
+//                    if (!ldDate1.equals(ldDate2)) {
+//                        loDetail.setModelIDx(loJson.getString("sModelIDx"));
+//                        loDetail.setColorIDx(loJson.getString("sColorIDx"));
+//                        loDetail.setColorNme(loJson.getString("sColorNme"));
+//                        loDetail.setTimeStmp(loJson.getString("dTimeStmp"));
+//                        poDao.update(loDetail);
+//                        Log.d(TAG, "Mc model info has been updated.");
+//                    }
                 }
             }
             return true;

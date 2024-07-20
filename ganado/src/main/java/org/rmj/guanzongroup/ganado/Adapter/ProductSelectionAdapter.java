@@ -24,6 +24,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.rmj.g3appdriver.GCircle.room.Entities.EMcModel;
 import org.rmj.g3appdriver.utils.ImageFileManager;
 import org.rmj.guanzongroup.ganado.R;
@@ -90,18 +91,18 @@ public class ProductSelectionAdapter extends RecyclerView.Adapter<ProductSelecti
             e.printStackTrace();
         }
 
+        String finalLsImgUrl = lsImgUrl;
         if (lsImgUrl != "") {
             ImageFileManager.LoadImageToView(lsImgUrl, holder.itemImg);
-            String finalLsImgUrl = lsImgUrl;
-            holder.itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.OnClick(
-                            loModel.getModelIDx(),
-                            loModel.getBrandIDx(),
-                            finalLsImgUrl);
-                }
-            });
         }
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.OnClick(
+                        loModel.getModelIDx(),
+                        loModel.getBrandIDx(),
+                        finalLsImgUrl);
+            }
+        });
     }
 
     @Override
@@ -140,6 +141,7 @@ public class ProductSelectionAdapter extends RecyclerView.Adapter<ProductSelecti
 
         notifyDataSetChanged();
     }
+
 
 
 

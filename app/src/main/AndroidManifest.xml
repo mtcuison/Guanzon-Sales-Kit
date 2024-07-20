@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="33" />
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -43,7 +47,6 @@
         android:name="android.permission.WRITE_SYNC_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -59,13 +62,16 @@
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.Activity_About"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Activity_Browser"
             android:exported="false" />
         <activity
             android:name=".Activities.Activity_Home"
+            android:enableOnBackInvokedCallback="true"
             android:exported="true"
             android:label="@string/title_activity_home"
-            android:enableOnBackInvokedCallback="true"
             android:theme="@style/GhostRiderMaterialTheme" />
         <activity
             android:name=".Activities.Activity_Main"
@@ -87,7 +93,6 @@
         <service
             android:name=".Service.DataDownloadService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".Service.GMessagingService"
             android:exported="true">
@@ -95,22 +100,23 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-            See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+            See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/kay" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/guanzon_digital_orange" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
-
         <meta-data
             android:name="firebase_messaging_auto_init_enabled"
             android:value="false" />

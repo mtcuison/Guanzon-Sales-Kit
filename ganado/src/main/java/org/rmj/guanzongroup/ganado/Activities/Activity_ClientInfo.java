@@ -163,17 +163,18 @@ public class Activity_ClientInfo extends AppCompatActivity {
         rgGender.setOnCheckedChangeListener((radioGroup, i) -> {
             if (i == R.id.rb_male) {
                 mViewModel.getModel().setGenderCd("0");
-                tilMaidNm.setVisibility(View.GONE);
-                txtMaidNm.setText("");
+//                tilMaidNm.setVisibility(View.GONE);
+//                txtMaidNm.setText("");
             }
             if (i == R.id.rb_female) {
                 mViewModel.getModel().setGenderCd("1");
-                tilMaidNm.setVisibility(View.VISIBLE);
+//                tilMaidNm.setVisibility(View.VISIBLE);
             }
         });
 
         btnContinue.setOnClickListener(v ->{
 
+            mViewModel.InitGeoLocation(Activity_ClientInfo.this);
             mViewModel.getModel().setFrstName(txtFrstNm.getText().toString());
             mViewModel.getModel().setMiddName(txtMiddNm.getText().toString());
             mViewModel.getModel().setLastName(txtLastNm.getText().toString());
@@ -286,6 +287,14 @@ public class Activity_ClientInfo extends AppCompatActivity {
 //            finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        mViewModel.RemoveInquiry();
+        getViewModelStore().clear();
     }
 
     private class OnItemClickListener implements AdapterView.OnItemClickListener {

@@ -70,6 +70,7 @@ public class Activity_Browser extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             onBackPressed();
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -81,6 +82,7 @@ public class Activity_Browser extends AppCompatActivity {
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
+            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
             super.onBackPressed();
         }
     }

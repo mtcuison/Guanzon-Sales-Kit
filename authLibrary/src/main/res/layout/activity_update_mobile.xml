@@ -101,6 +101,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textSize="15sp"
+                    android:maxLength="20"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 

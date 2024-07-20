@@ -194,12 +194,12 @@ public class ClientInfo {
             return false;
         }
 
-        if(cGenderCd.equalsIgnoreCase("1")) {
-            if (sMaidenNm.isEmpty()) {
-                message = "Please enter maiden name.";
-                return false;
-            }
-        }
+//        if(cGenderCd.equalsIgnoreCase("1")) {
+//            if (sMaidenNm.isEmpty()) {
+//                message = "Please enter maiden name.";
+//                return false;
+//            }
+//        }
 
         if(dBirthDte.isEmpty()){
             message = "Please enter birth date.";
