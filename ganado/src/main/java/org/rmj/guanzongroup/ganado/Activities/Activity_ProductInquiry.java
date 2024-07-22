@@ -42,7 +42,7 @@ import java.util.Objects;
 public class Activity_ProductInquiry extends AppCompatActivity {
     private VMProductInquiry mViewModel;
     private MessageBox poMessage;
-    private MaterialTextView txtBranchNm, txtBrandNm, txtModelNm, txtModelCd;
+    private MaterialTextView txtBrandNm, txtModelNm, txtModelCd, txtyourmnmdp;
     private TextInputEditText txtCashPrce, txtDownPymnt, txtAmort, txtDTarget;
     private MaterialAutoCompleteTextView spn_color, spnPayment, spnAcctTerm;
     private MaterialButton btnContinue,btnCalculate;
@@ -53,7 +53,9 @@ public class Activity_ProductInquiry extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_product_inquiry);
+
         initWidgets();
 
         spnPayment.setText(GConstants.PAYMENT_FORM[0]);
@@ -135,6 +137,8 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                         mViewModel.getModel().setMonthAmr(String.valueOf(loResult.getMonthlyAmortization()));
                         txtAmort.setText(FormatUIText.getCurrencyUIFormat(String.valueOf(loResult.getMonthlyAmortization())));
                         minDown = loResult.getMinimumDownpayment();
+
+                        txtyourmnmdp.setText("The required Minimum Down Payment is at least " + String.valueOf(loResult.getMinimumDownpayment()));
                     }
 
                     @Override
@@ -283,6 +287,8 @@ public class Activity_ProductInquiry extends AppCompatActivity {
         spn_color = findViewById(R.id.spn_color);
         imgMC = findViewById(R.id.imgMC);
         lnInstallment = findViewById(R.id.ln_installment);
+        txtyourmnmdp = findViewById(R.id.txtyourmnmdp);
+
         lnInstallment.setVisibility(View.GONE);
 
         btnContinue = findViewById(R.id.btnContinue);

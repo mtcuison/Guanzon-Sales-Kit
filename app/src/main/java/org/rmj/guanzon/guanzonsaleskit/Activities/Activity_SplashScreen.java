@@ -139,12 +139,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
         if(ActivityCompat.checkSelfPermission(Activity_SplashScreen.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             lsPermissions.add(android.Manifest.permission.CAMERA);
         }
-        if(ActivityCompat.checkSelfPermission(Activity_SplashScreen.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            lsPermissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-        if(ActivityCompat.checkSelfPermission(Activity_SplashScreen.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            lsPermissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
-        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(ActivityCompat.checkSelfPermission(Activity_SplashScreen.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
                 lsPermissions.add(Manifest.permission.POST_NOTIFICATIONS);
