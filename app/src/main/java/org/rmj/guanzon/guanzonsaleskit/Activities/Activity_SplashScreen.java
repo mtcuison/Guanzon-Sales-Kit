@@ -103,8 +103,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
         loMessage.initDialog();
         loMessage.setTitle("Guanzon Sales Kit");
         loMessage.setMessage("Guanzon Sales Kit collects and stores your phone number to provide security for any transactions made within the mobile app. " +
-                "This collection makes it easier to authenticate and verify your account in order to prevent unauthorized access. " +
-                "It also collects location information from the background for automotive and motorcycle-related queries.");
+                "This collection makes it easier to authenticate and verify your account in order to prevent unauthorized access.");
         loMessage.setPositiveButton("Agree", (view, dialog) -> {
             dialog.dismiss();
             CheckPermissions();
