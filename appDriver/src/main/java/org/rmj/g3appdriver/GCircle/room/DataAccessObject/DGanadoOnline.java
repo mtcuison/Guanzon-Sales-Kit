@@ -65,6 +65,7 @@ public interface DGanadoOnline {
             "a.sModelIDx AS ModelIDx " +
             ",a.sModelNme AS ModelNme " +
             ",a.sBrandIDx AS BrandIDx" +
+            ", '' AS sBrandNme" +
             ",c.sColorIDx AS ColorIDx" +
             ",c.sColorNme AS ColorNme " +
             "FROM MC_MODEL a " +

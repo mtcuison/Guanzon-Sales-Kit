@@ -227,7 +227,7 @@ import org.rmj.g3appdriver.SalesKit.Entities.EKPOPAgentRole;
         EMCModelCashPrice.class,
         EKPOPAgentRole.class,
         EAgentRole.class,
-        EClientInfoSalesKit.class}, version = 45, exportSchema = false)
+        EClientInfoSalesKit.class}, version = 46, exportSchema = false)
 public abstract class GGC_GCircleDB extends RoomDatabase {
     private static final String TAG = "GhostRider_DB_Manager";
     private static GGC_GCircleDB instance;
