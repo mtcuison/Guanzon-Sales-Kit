@@ -11,8 +11,6 @@
 
 package org.rmj.g3appdriver;
 
-import static org.rmj.g3appdriver.GCircle.room.GGC_GCircleDB.MIGRATION_V45;
-
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.room.testing.MigrationTestHelper;
@@ -37,7 +35,7 @@ import java.io.IOException;
 @RunWith(AndroidJUnit4.class)
 public class MigrationDBTesting {
     private static final Migration[] ALL_MIGRATIONS = new Migration[]{
-            MIGRATION_V45};
+            GGC_GCircleDB.MIGRATION_V46};
     @Rule
     public MigrationTestHelper helper;
     @Before

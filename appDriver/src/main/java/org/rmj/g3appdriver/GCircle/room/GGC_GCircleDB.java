@@ -12,6 +12,7 @@
 package org.rmj.g3appdriver.GCircle.room;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -311,7 +312,7 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
                      GGC_GCircleDB.class, "GGC_ISysDBF.db")
                     .allowMainThreadQueries()
                     .addCallback(roomCallBack)
-                    .addMigrations(MIGRATION_V45)
+                    .addMigrations(MIGRATION_V46)
                     .build();
         }
         return instance;
@@ -325,7 +326,28 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
         }
     };
 
-    public static final Migration MIGRATION_V45 = new Migration(44, 45) {
+    private static Boolean CheckColumnExists(SupportSQLiteDatabase database, String tablename, String columnName){
+        Cursor cursor = null;
+        try {
+            cursor = database.query("SELECT * FROM " + tablename + " LIMIT 0");
+            int index = cursor.getColumnIndex(columnName);
+
+            if (index < 0){
+                cursor.close();
+                return false;
+            }else {
+                cursor.close();
+                return true;
+            }
+
+        }catch (Exception e){
+            cursor.close();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static final Migration MIGRATION_V46 = new Migration(45, 46) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
             // Add the new column
@@ -336,8 +358,14 @@ public abstract class GGC_GCircleDB extends RoomDatabase {
                     "`sBrandIDx` TEXT, `sMCCatIDx` TEXT, " +
                     "PRIMARY KEY(`sModelIDx`, `sMCCatNme`, `sModelNme`))");
 
-            database.execSQL("ALTER TABLE Ganado_Online ADD COLUMN nCashPrce REAL");
-            database.execSQL("ALTER TABLE Ganado_Online ADD COLUMN dPricexxx TEXT");
+            if (!CheckColumnExists(database, "Ganado_Online", "nCashPrce")){
+                database.execSQL("ALTER TABLE Ganado_Online ADD COLUMN nCashPrce REAL");
+            }
+
+            if (!CheckColumnExists(database, "Ganado_Online", "dPricexxx")){
+                database.execSQL("ALTER TABLE Ganado_Online ADD COLUMN dPricexxx TEXT");
+            }
+
         }
     };
 }
