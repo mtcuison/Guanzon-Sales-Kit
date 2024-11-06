@@ -12,15 +12,12 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.rmj.g3appdriver.etc.AppConfigPreference;
 import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.authlibrary.R;
 import org.rmj.guanzongroup.authlibrary.ViewModels.VMForgotPassword;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Future;
 
 public class Activity_ForgotPassword extends AppCompatActivity implements VMForgotPassword.RequestPasswordCallback {
     private VMForgotPassword mViewModel;
@@ -80,6 +77,8 @@ public class Activity_ForgotPassword extends AppCompatActivity implements VMForg
                     @Override
                     public void OnSuccessRequest() {
                         poDialog.dismiss();
+
+                        poMsgBox.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
                         poMsgBox.setTitle("Result");
                         poMsgBox.setMessage("Successfully sent request.");
                         poMsgBox.setPositiveButton("OK", new MessageBox.DialogButton() {
@@ -95,6 +94,8 @@ public class Activity_ForgotPassword extends AppCompatActivity implements VMForg
                     @Override
                     public void OnFailedRequest(String message) {
                         poDialog.dismiss();
+
+                        poMsgBox.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                         poMsgBox.setTitle("Result");
                         poMsgBox.setMessage("Failed to send request: " + message);
                         poMsgBox.setPositiveButton("OK", new MessageBox.DialogButton() {
@@ -121,7 +122,9 @@ public class Activity_ForgotPassword extends AppCompatActivity implements VMForg
     @Override
     public void OnSuccessRequest() {
         poDialog.dismiss();
+
         poMsgBox.initDialog();
+        poMsgBox.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
         poMsgBox.setTitle("Forgot Password");
         poMsgBox.setMessage("You'll be receiving an email from MIS, Please check your email account");
         poMsgBox.setPositiveButton("Okay", (view, msgDialog) -> msgDialog.dismiss());
@@ -131,7 +134,9 @@ public class Activity_ForgotPassword extends AppCompatActivity implements VMForg
     @Override
     public void OnFailedRequest(String message) {
         poDialog.dismiss();
+
         poMsgBox.initDialog();
+        poMsgBox.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
         poMsgBox.setTitle("Forgot Password");
         poMsgBox.setMessage(message);
         poMsgBox.setPositiveButton("Okay", (view, msgDialog) -> msgDialog.dismiss());

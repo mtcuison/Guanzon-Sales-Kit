@@ -65,6 +65,7 @@ public class Activity_AgentList extends AppCompatActivity {
             public void OnFailed(String message) {
                 poLoading.dismiss();
                 poMessage.initDialog();
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setTitle("Guanzon Sales Kit");
                 poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
                     @Override

@@ -34,11 +34,11 @@ public class Activity_Inquiries extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_inquiries);
 
         poLoad = new LoadDialog(Activity_Inquiries.this);
         poMessage = new MessageBox(Activity_Inquiries.this);
-
 
         toolbar = findViewById(R.id.toolbar);
         rvInquiries = findViewById(R.id.rvInquiries);
@@ -68,6 +68,7 @@ public class Activity_Inquiries extends AppCompatActivity {
             public void OnFailed(String message) {
                 poLoad.dismiss();
                 poMessage.initDialog();
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setTitle("Guanzon Sales Kit");
                 poMessage.setMessage(message);
                 poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
@@ -99,15 +100,6 @@ public class Activity_Inquiries extends AppCompatActivity {
                             }
                         });
                         dHistory.show();
-//                        DialogInquiryHistory dHistory = new DialogInquiryHistory(getApplication());
-//                        dHistory.initInquiryHistory(TransNox, new DialogInquiryHistory.DialogButtonClickListener() {
-//                            @Override
-//                            public void OnClick(Dialog dialog, String remarksCode) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//
-//                        dHistory.show();
                     }
 
                 });

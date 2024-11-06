@@ -49,6 +49,7 @@ public class Activity_AgentEnroll extends AppCompatActivity {
 
         Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
         if (isComplete == false){
+            poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
             poMessage.setMessage("Must complete account to use this feature");
             poMessage.show();
         }
@@ -81,6 +82,7 @@ public class Activity_AgentEnroll extends AppCompatActivity {
 
                 poMessage = new MessageBox(Activity_AgentEnroll.this);
                 poMessage.initDialog();
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setMessage(message);
                 poMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
                     @Override

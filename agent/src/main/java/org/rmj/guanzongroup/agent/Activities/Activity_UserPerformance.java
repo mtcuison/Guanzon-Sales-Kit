@@ -40,33 +40,12 @@ public class Activity_UserPerformance extends AppCompatActivity {
 
     private VMAgentInfo mViewModel;
     private ClientSession poSession;
-    private MessageBox poMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(Activity_UserPerformance.this).get(VMAgentInfo.class);
         setContentView(R.layout.activity_user_performance);
-
-        poMessage = new MessageBox(this);
-        poMessage.initDialog();
-        poMessage.setTitle("Guanzon Sales Kit");
-//        poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
-//            @Override
-//            public void OnButtonClick(View view, AlertDialog dialog) {
-//                dialog.dismiss();
-//
-//                Intent loIntent = new Intent(Activity_UserPerformance.this, Activity_Settings.class);
-//                startActivity(loIntent);
-//                finish();
-//            }
-//        });
-//
-//        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-//        if (isComplete == false){
-//            poMessage.setMessage("Must complete account to use this feature");
-//            poMessage.show();
-//        }
 
         poSalesKit = new SalesKit(getApplication());
         poSession = ClientSession.getInstance(this);

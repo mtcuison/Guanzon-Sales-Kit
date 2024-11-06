@@ -28,7 +28,6 @@ public class Fragment_SubAgents extends Fragment {
     private RecyclerView rvAgents;
     private TextView lblNoData;
     private ConstraintLayout lnLoading;
-    private MessageBox loMessage;
 
     public Fragment_SubAgents() {
     }
@@ -40,7 +39,6 @@ public class Fragment_SubAgents extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(VMAgentInfo.class);
         View view = inflater.inflate(R.layout.fragment_sub_agents, container, false);
 
-        loMessage = new MessageBox(getActivity());
         initViews(view);
         importAgents();
         return view;

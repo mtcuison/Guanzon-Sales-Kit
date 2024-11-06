@@ -84,7 +84,9 @@ public class Fragment_PayslipList extends Fragment {
                                 @Override
                                 public void OnFailed(String message) {
                                     poLoad.dismiss();
+
                                     poDialog.initDialog();
+                                    poDialog.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                                     poDialog.setTitle("Payslip");
                                     poDialog.setMessage(message);
                                     poDialog.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());

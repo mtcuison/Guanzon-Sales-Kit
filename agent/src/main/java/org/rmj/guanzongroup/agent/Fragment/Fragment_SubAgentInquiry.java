@@ -33,7 +33,6 @@ public class Fragment_SubAgentInquiry extends Fragment {
     private RecyclerView rvInquiries;
     private TextView lblNoData;
     private ConstraintLayout lnLoading;
-    private MessageBox loMessage;
 
     public Fragment_SubAgentInquiry() {
     }
@@ -45,7 +44,6 @@ public class Fragment_SubAgentInquiry extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(VMAgentInfo.class);
         View view = inflater.inflate(R.layout.fragment_sub_agent_inquiry, container, false);
 
-        loMessage = new MessageBox(getActivity());
         initViews(view);
         importInquiries();
         return view;

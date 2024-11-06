@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -55,7 +54,6 @@ public class Activity_Home extends AppCompatActivity {
     private static final String TAG = "Sales Kit Home Activity";
     private VMHome mviewModel;
     private Boolean isCompleteAccount;
-    private Boolean hasUpline;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
     private NavigationView navigationView;
@@ -65,8 +63,6 @@ public class Activity_Home extends AppCompatActivity {
     private BadgeDrawable loBadge;
     private Toolbar toolbar;
     private TextView lblUserIDxx;
-
-//    @Override (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
 
     @SuppressLint("UnsafeOptInUsageError")
     @Override
@@ -169,7 +165,7 @@ public class Activity_Home extends AppCompatActivity {
             loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
             loMessage.setPositiveButton("Yes", (view, dialog) -> {
                 dialog.dismiss();
-//                new EmployeeMaster(getApplication()).LogoutUserSession();
+
                 new ClientMaster(getApplication()).LogoutUserSession();
                 AppConfigPreference.getInstance(Activity_Home.this).setIsAppFirstLaunch(false);
 
@@ -178,6 +174,8 @@ public class Activity_Home extends AppCompatActivity {
                 startActivity(loIntent);
                 finish();
             });
+
+            loMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_contact_support_24);
             loMessage.setTitle("Account Session");
             loMessage.setMessage("Are you sure you want to end session/logout?");
             loMessage.show();
@@ -192,10 +190,11 @@ public class Activity_Home extends AppCompatActivity {
                     finish();
                 });
                 loMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+
+                loMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_contact_support_24);
                 loMessage.setTitle("Guanzon Sales Kit");
                 loMessage.setMessage("Exit Guanzon Sales Kit app?");
                 loMessage.show();
-//                finish();
             }
         });
 

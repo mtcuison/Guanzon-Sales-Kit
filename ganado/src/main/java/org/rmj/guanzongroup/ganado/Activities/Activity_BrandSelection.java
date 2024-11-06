@@ -19,9 +19,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.imageview.ShapeableImageView;
-
-import org.rmj.g3appdriver.etc.LoadDialog;
 import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.ganado.Adapter.RecyclerViewAdapter_BrandSelection;
 import org.rmj.guanzongroup.ganado.Dialog.DialogDisclosure;
@@ -99,9 +96,10 @@ public class Activity_BrandSelection extends AppCompatActivity {
 
                 MessageBox loMessage = new MessageBox(Activity_BrandSelection.this);
                 loMessage.initDialog();
+                loMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 loMessage.setTitle("Disclosure");
                 loMessage.setMessage("Disclosure denied. Unable to retrieve product brands");
-                loMessage.setPositiveButton("Dismiss", new MessageBox.DialogButton() {
+                loMessage.setPositiveButton("Okay", new MessageBox.DialogButton() {
                     @Override
                     public void OnButtonClick(View view, AlertDialog dialog) {
                         dialog.dismiss();

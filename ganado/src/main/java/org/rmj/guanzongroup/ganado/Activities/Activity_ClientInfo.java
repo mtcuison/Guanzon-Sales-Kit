@@ -57,10 +57,14 @@ public class Activity_ClientInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_client_info);
+
         poMessage = new MessageBox(Activity_ClientInfo.this);
         poDialogx = new LoadDialog(Activity_ClientInfo.this);
-        setContentView(R.layout.activity_client_info);
+
         initWidgets();
+
         mViewModel.InitializeApplication(getIntent());
         mViewModel.InitGeoLocation(Activity_ClientInfo.this);
 
@@ -196,6 +200,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
                     poDialogx.dismiss();
 
                     poMessage.initDialog();
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
                     poMessage.setTitle("Ganado");
                     poMessage.setMessage(args);
                     poMessage.setPositiveButton("Okay", (view1, dialog) -> {
@@ -219,6 +224,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
 
                     mViewModel.InitGeoLocation(Activity_ClientInfo.this);
                     poMessage.initDialog();
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                     poMessage.setTitle("Ganado");
                     poMessage.setMessage(message);
                     poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
@@ -261,30 +267,10 @@ public class Activity_ClientInfo extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void finish() {
-//        super.finish();
-//
-//
-//        poMessage.initDialog();
-//        poMessage.setPositiveButton("Yes", (view, dialog) -> {
-//            dialog.dismiss();
-//            mViewModel.initStopLocation();
-//            overridePendingTransition(org.rmj.g3appdriver.R.anim.anim_intent_slide_in_left, org.rmj.g3appdriver.R.anim.anim_intent_slide_out_right);
-//
-//            finish();
-//        });
-//        poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
-//        poMessage.setTitle("Ganado");
-//        poMessage.setMessage("Do you really want to close the client information module? Every detail entered will be removed.");
-//        poMessage.show();
-//    }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             showConfirmationDialog();
-//            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -326,6 +312,7 @@ public class Activity_ClientInfo extends AppCompatActivity {
             finish();
         });
         poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_contact_support_24);
         poMessage.setTitle("Ganado");
         poMessage.setMessage("Do you really want to close the client information module? Every detail entered will be removed.");
         poMessage.show();

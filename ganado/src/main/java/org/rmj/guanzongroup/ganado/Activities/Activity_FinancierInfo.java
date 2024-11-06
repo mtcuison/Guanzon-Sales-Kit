@@ -51,33 +51,15 @@ public class Activity_FinancierInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_financier_info);
+
         poMessage = new MessageBox(Activity_FinancierInfo.this);
         poDialogx = new LoadDialog(Activity_FinancierInfo.this);
-        setContentView(R.layout.activity_financier_info);
+
         initWidgets();
+
         mViewModel.InitializeApplication(getIntent());
-
-        /*mViewModel.getRelation().observe(Activity_FinancierInfo.this, eRelations->{
-            try {
-                ArrayList<String> string = new ArrayList<>();
-                for (int x = 0; x < eRelations.size(); x++) {
-                    String lsColor = eRelations.get(x).getRelatnDs();
-//                        String lsTown =  loList.get(x).sProvName ;
-                    string.add(lsColor);
-
-                }
-                ArrayAdapter<String> adapters = new ArrayAdapter<>(Activity_FinancierInfo.this, android.R.layout.simple_spinner_dropdown_item, string.toArray(new String[0]));
-                spinner_relation.setText(eRelations.get(0).getRelatnDs());
-                spinner_relation.setText(eRelations.get(0).getRelatnDs());
-                mViewModel.getModel().setsReltionx(eRelations.get(0).getRelatnID());
-                spinner_relation.setAdapter(adapters);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        });
-
-        spinner_relation.setOnItemClickListener(new Activity_FinancierInfo.OnItemClickListener(spinner_relation));*/
-
 
         mViewModel.GetCountryList().observe(Activity_FinancierInfo.this, new Observer<List<ECountryInfo>>() {
             @Override
@@ -142,14 +124,6 @@ public class Activity_FinancierInfo extends AppCompatActivity {
                 @Override
                 public void OnSuccess(String args) {
                     poDialogx.dismiss();
-//                    poMessage.initDialog();
-//                    poMessage.setTitle("Ganado");
-//                    poMessage.setMessage(args);
-//                    poMessage.setPositiveButton("Okay", (view, dialog) -> {
-//                        dialog.dismiss();
-//                        finish();
-//                    });
-//                    poMessage.show();
 
                     Intent intent = new Intent(Activity_FinancierInfo.this, Activity_ClientInfo.class);
                     intent.putExtra("sTransNox",args);
@@ -160,7 +134,9 @@ public class Activity_FinancierInfo extends AppCompatActivity {
                 @Override
                 public void OnFailed(String message) {
                     poDialogx.dismiss();
+
                     poMessage.initDialog();
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                     poMessage.setTitle("Ganado");
                     poMessage.setMessage(message);
                     poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
@@ -264,6 +240,7 @@ public class Activity_FinancierInfo extends AppCompatActivity {
 
         });
         poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_contact_support_24);
         poMessage.setTitle("Ganado");
         poMessage.setMessage("Do you really want to close the finance information module? Every detail entered will be removed.");
         poMessage.show();

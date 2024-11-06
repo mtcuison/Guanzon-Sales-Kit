@@ -84,6 +84,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
                 String mobileno = poConfigx.getMobileNo();
                 
                 if (!mViewModel.isAgreed()){
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                     poMessage.setMessage("Please agree to terms and conditions");
                     poMessage.show();
                     
@@ -128,6 +129,8 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
                     finish();
                 });
                 poMessage.setNegativeButton("No", (view, dialog) -> dialog.dismiss());
+
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_contact_support_24);
                 poMessage.setTitle("Guanzon Sales Kit");
                 poMessage.setMessage("Exit Guanzon Sales Kit app?");
                 poMessage.show();
@@ -155,6 +158,7 @@ public class Activity_Login extends AppCompatActivity implements LoginCallback {
     public void OnFailedLoginResult(String message) {
         podialog.dismiss();
 
+        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
         poMessage.setMessage(message);
         poMessage.show();
     }

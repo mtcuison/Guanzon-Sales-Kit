@@ -35,6 +35,7 @@ import org.rmj.guanzon.guanzonsaleskit.Service.DataDownloadService;
 import org.rmj.guanzon.guanzonsaleskit.Service.GMessagingService;
 import org.rmj.guanzon.guanzonsaleskit.ViewModel.VMSplashScreen;
 import org.rmj.guanzongroup.authlibrary.Activity.Activity_Login;
+import org.rmj.guanzongroup.ganado.Dialog.DialogDisclosure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +50,7 @@ public class Activity_SplashScreen extends AppCompatActivity {
     private MaterialTextView lblVrsion;
 
     private MessageBox poDialog;
-
-//    private ActivityResultLauncher<String[]> poRequest;
-
-//    private ActivityResultLauncher<Intent> poLogin;
-
+    private DialogDisclosure poDisclosure;
 
     ActivityResultLauncher<Intent> poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -77,14 +74,18 @@ public class Activity_SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(VMSplashScreen.class);
+
         setContentView(R.layout.activity_splash_screen);
-        InitActivityResultLaunchers();
-        poDialog = new MessageBox(Activity_SplashScreen.this);
-        new TransparentToolbar(Activity_SplashScreen.this).SetupActionbar();
+
         prgrssBar = findViewById(R.id.progress_splashscreen);
         lblVrsion = findViewById(R.id.lbl_versionInfo);
-//        lblVrsion.setText(BuildConfig.VERSION_NAME);
+        poDialog = new MessageBox(Activity_SplashScreen.this);
+        poDisclosure = new DialogDisclosure(this);
+
+        mViewModel = new ViewModelProvider(this).get(VMSplashScreen.class);
+
+        new TransparentToolbar(Activity_SplashScreen.this).SetupActionbar();
+
         if (!isMyServiceRunning(GMessagingService.class)) {
             startService(new Intent(Activity_SplashScreen.this, GMessagingService.class));
         }
@@ -99,20 +100,25 @@ public class Activity_SplashScreen extends AppCompatActivity {
     }
 
     private void InitializeAppContentDisclosure(){
-        MessageBox loMessage = new MessageBox(Activity_SplashScreen.this);
-        loMessage.initDialog();
-        loMessage.setTitle("Guanzon Sales Kit");
-        loMessage.setMessage("Guanzon Sales Kit collects and stores your phone number to provide security for any transactions made within the mobile app. " +
+
+        poDisclosure.initDialog(new DialogDisclosure.onDisclosure() {
+            @Override
+            public void onAccept() {
+                poDisclosure.dismiss();
+                CheckPermissions();
+            }
+
+            @Override
+            public void onDecline() {
+                poDisclosure.dismiss();
+                finish();
+            }
+        });
+
+        poDisclosure.setMessage("Guanzon Sales Kit collects and stores your phone number to provide security for any transactions made within the mobile app. " +
                 "This collection makes it easier to authenticate and verify your account in order to prevent unauthorized access.");
-        loMessage.setPositiveButton("Agree", (view, dialog) -> {
-            dialog.dismiss();
-            CheckPermissions();
-        });
-        loMessage.setNegativeButton("Disagree", (view, dialog) -> {
-            dialog.dismiss();
-            finish();
-        });
-        loMessage.show();
+
+        poDisclosure.show();
     }
 
     private void CheckPermissions(){
@@ -171,7 +177,8 @@ public class Activity_SplashScreen extends AppCompatActivity {
             @Override
             public void OnFailed(String message) {
                 poDialog.initDialog();
-                poDialog.setTitle("Guanzon Circle");
+                poDialog.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
+                poDialog.setTitle("Guanzon Sales Kit");
                 poDialog.setMessage(message);
                 poDialog.setPositiveButton("Okay", (view, dialog) -> {
                     dialog.dismiss();
@@ -207,7 +214,8 @@ public class Activity_SplashScreen extends AppCompatActivity {
             @Override
             public void OnFailed(String message) {
                 poDialog.initDialog();
-                poDialog.setTitle("Guanzon Circle");
+                poDialog.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
+                poDialog.setTitle("Guanzon Sales Kit");
                 poDialog.setMessage(message);
                 poDialog.setPositiveButton("Okay", (view, dialog) -> {
                     dialog.dismiss();
@@ -216,35 +224,6 @@ public class Activity_SplashScreen extends AppCompatActivity {
                 poDialog.show();
             }
         });
-    }
-    private void InitActivityResultLaunchers(){
-//        poRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-//            InitializeAppData();
-//        });
-
-//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//            if (result.getResultCode() == RESULT_OK) {
-////                ServiceScheduler.scheduleJob(Activity_SplashScreen.this, DataDownloadService.class, FIFTEEN_MINUTE_PERIODIC, AppConstants.DataServiceID);
-//                intentHome();
-//            } else if (result.getResultCode() == RESULT_CANCELED) {
-//
-//                finishAffinity();
-//                System.exit(0);
-////                finish();
-//            }
-//        });
-//        poLogin = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//            if (result.getResultCode() == RESULT_OK) {
-//                InitializeData();
-////                startActivity(new Intent(Activity_SplashScreen.this, Activity_Home.class));
-////                finish();
-//            } else if (result.getResultCode() == RESULT_CANCELED) {
-//                finish();
-//            }
-//        });
-    }
-    private void intentHome(){
-        InitializeData();
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {

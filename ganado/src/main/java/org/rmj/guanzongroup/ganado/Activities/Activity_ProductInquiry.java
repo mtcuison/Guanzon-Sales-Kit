@@ -22,7 +22,6 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
-import com.squareup.picasso.Picasso;
 
 import org.rmj.g3appdriver.etc.FormatUIText;
 import org.rmj.g3appdriver.etc.MessageBox;
@@ -197,16 +196,15 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                     lnInstallment.setVisibility(View.VISIBLE);
                 }
                 mViewModel.getModel().setPaymForm(String.valueOf(position));
-//                mViewModel.getModel().setPaymForm(GConstants.PAYMENT_FORM[position]);
             }
         });
 
         btnCalculate.setOnClickListener(view -> {
             String lsInput = txtDownPymnt.getText().toString().trim();
-//
             Double lnInput = FormatUIText.getParseDouble(lsInput);
             if(lnInput < minDown){
                 poMessage.initDialog();
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setTitle("Product Inquiry");
                 poMessage.setMessage("The required minimum down payment cannot be less than " + minDown);
                 poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
@@ -224,6 +222,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                     @Override
                     public void OnFailed(String message) {
                         poMessage.initDialog();
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                         poMessage.setTitle("Product Inquiry");
                         poMessage.setMessage(message);
                         poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
@@ -239,6 +238,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
             Double lnInput = FormatUIText.getParseDouble(lsInput);
             if(lnInput < minDown){
                 poMessage.initDialog();
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setTitle("Product Inquiry");
                 poMessage.setMessage("The required minimum down payment cannot be less than " + minDown);
                 poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());
@@ -257,6 +257,7 @@ public class Activity_ProductInquiry extends AppCompatActivity {
                     @Override
                     public void OnFailed(String message) {
                         poMessage.initDialog();
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                         poMessage.setTitle("Product Inquiry");
                         poMessage.setMessage(message);
                         poMessage.setPositiveButton("Okay", (view1, dialog) -> dialog.dismiss());

@@ -72,6 +72,7 @@ public class Activity_UpdateMobile extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
                         poMessage.setMessage("Request sent. Please verify new mobile sent to your email.");
                         poMessage.show();
                     }
@@ -80,6 +81,7 @@ public class Activity_UpdateMobile extends AppCompatActivity {
                     public void onFailed(String result) {
                         poDialog.dismiss();
 
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                         poMessage.setMessage(result);
                         poMessage.show();
                     }

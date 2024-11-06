@@ -3,23 +3,15 @@ package org.rmj.guanzongroup.ganado.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import org.rmj.g3appdriver.etc.MessageBox;
 import org.rmj.guanzongroup.ganado.R;
 
 import java.util.Objects;
 
 public class Activity_ContactInfo extends AppCompatActivity {
-    private MessageBox poMessage;
 
     private TextInputEditText txtMobileNo, txtEmailAdd, txtHouseNox, txtAddress;
     private MaterialAutoCompleteTextView txtPMunicipl;

@@ -39,25 +39,11 @@ public class Activity_SelectUpLine extends AppCompatActivity {
         poMessage.initDialog();
         poMessage.setTitle("Guanzon Sales Kit");
 
-//        Boolean isComplete = getIntent().getBooleanExtra("isComplete", false);
-//        if (isComplete == false){
-//            poMessage.setPositiveButton("Close", (view, dialog) -> {
-//                dialog.dismiss();
-//
-//                Intent loIntent = new Intent(Activity_SelectUpLine.this, Activity_Settings.class);
-//                startActivity(loIntent);
-//                finish();
-//            });
-//
-//            poMessage.setMessage("Must complete account to use this feature");
-//            poMessage.show();
-//        }
-
         mViewModel = new ViewModelProvider(Activity_SelectUpLine.this).get(VMSelectUpLine.class);
         mViewModel.GetCompleteProfile().observe(Activity_SelectUpLine.this, eclient ->{
             if (eclient == null){
 
-
+                poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                 poMessage.setMessage("Must complete account to use this feature");
                 poMessage.setPositiveButton("Close", (view, dialog) -> {
                     dialog.dismiss();
@@ -94,6 +80,7 @@ public class Activity_SelectUpLine extends AppCompatActivity {
                 public void OnSuccess() {
                     poLoading.dismiss();
 
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
                     poMessage.setMessage("Agent Upline user id successfully submitted.");
                     poMessage.setPositiveButton("Close", (view, dialog) -> {
                         dialog.dismiss();
@@ -107,6 +94,7 @@ public class Activity_SelectUpLine extends AppCompatActivity {
                 public void OnFailed(String message) {
                     poLoading.dismiss();
 
+                    poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                     poMessage.setMessage(message);
                     poMessage.setPositiveButton("Close", (view, dialog) -> {
                         dialog.dismiss();

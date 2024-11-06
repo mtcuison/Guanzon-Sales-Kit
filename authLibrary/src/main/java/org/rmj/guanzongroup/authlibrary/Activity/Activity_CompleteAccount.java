@@ -258,6 +258,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                     public void onSuccess() {
                         poDialog.dismiss();
 
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_message_24);
                         poMessage.setMessage("Complete Account request successfully sent to server");
                         poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                             @Override
@@ -273,6 +274,7 @@ public class Activity_CompleteAccount extends AppCompatActivity {
                     public void onFailed(String result) {
                         poDialog.dismiss();
 
+                        poMessage.setIcon(org.rmj.g3appdriver.R.drawable.baseline_error_24);
                         poMessage.setMessage(result);
                         poMessage.setPositiveButton("Close", new MessageBox.DialogButton() {
                             @Override
