@@ -165,6 +165,7 @@ public class ClientMasterSalesKit {
                 param.put("sBrgyIDx2", foClient.getBrgyIDx2());
                 param.put("sTownIDx2", foClient.getTownIDx2());
                 param.put("sGCashNox", "");
+                param.put("sClientID", poSession.getClientID());
 
 
                 //SEND TO SERVER
@@ -177,9 +178,12 @@ public class ClientMasterSalesKit {
                     message = SERVER_NO_RESPONSE;
                     return false;
                 }
+
                 Log.e(TAG, lsResponse);
+
                 JSONObject loResponse = new JSONObject(lsResponse);
                 String lsResult = loResponse.getString("result");
+
                 if (!lsResult.equalsIgnoreCase("success")) {
                     JSONObject loError = loResponse.getJSONObject("error");
                     message = getErrorMessage(loError);

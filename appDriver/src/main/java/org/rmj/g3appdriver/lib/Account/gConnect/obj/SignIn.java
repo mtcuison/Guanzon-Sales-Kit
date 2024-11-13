@@ -65,6 +65,8 @@ public class SignIn implements iAuth {
                     params.toString(),
                     poHeaders.getHeaders());
 
+            Log.d(TAG, lsResponse);
+
             JSONObject loResponse = new JSONObject(lsResponse);
             String lsResult = loResponse.getString("result");
             if (lsResult.equalsIgnoreCase("error")) {
@@ -81,11 +83,9 @@ public class SignIn implements iAuth {
                 message = getErrorMessage(loError);
                 return 0;
             }
-//
-//            ClientSession loAccount = ClientSession.getInstance(instance);
+
             poSession.setUserID(loResponse.getString("sUserIDxx"));
             poSession.setFullName(loResponse.getString("sUserName"));
-//                    loInfo.setEmailAdd(loResponse.getString("sEmailAdd"));
             poSession.setMobileNo(loInfo.getMobileNo());
 //            poSession.setClientID(loResponse.getString("sMPlaceID"));
 

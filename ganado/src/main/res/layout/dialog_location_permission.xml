@@ -21,6 +21,7 @@
             android:src="@drawable/kay"/>
 
         <com.google.android.material.textview.MaterialTextView
+            style="@style/HeaderLabelBlack"
             android:id="@+id/mtv_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
