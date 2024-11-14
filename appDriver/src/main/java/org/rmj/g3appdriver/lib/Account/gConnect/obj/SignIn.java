@@ -87,7 +87,7 @@ public class SignIn implements iAuth {
             poSession.setUserID(loResponse.getString("sUserIDxx"));
             poSession.setFullName(loResponse.getString("sUserName"));
             poSession.setMobileNo(loInfo.getMobileNo());
-//            poSession.setClientID(loResponse.getString("sMPlaceID"));
+            poSession.setClientID(loResponse.getString("sClientID"));
 
             poSession.setLoginStatus(true);
             poSession.setVerifiedStatus(1);
