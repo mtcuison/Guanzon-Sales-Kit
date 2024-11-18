@@ -165,7 +165,7 @@ public class ClientMasterSalesKit {
                 param.put("sBrgyIDx2", foClient.getBrgyIDx2());
                 param.put("sTownIDx2", foClient.getTownIDx2());
                 param.put("sGCashNox", "");
-                param.put("sClientID", poSession.getClientID());
+                //param.put("sClientID", poSession.getClientID());
 
 
                 //SEND TO SERVER
